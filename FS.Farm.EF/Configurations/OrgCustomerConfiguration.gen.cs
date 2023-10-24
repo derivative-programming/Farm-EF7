@@ -19,10 +19,8 @@ namespace FS.Farm.EF.Configurations
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)
                 .IsConcurrencyToken();
-            //ENDSET
             builder.Ignore(p => p.CustomerCodePeek); //CustomerID
             builder.Ignore(p => p.OrganizationCodePeek); //OrganizationID
-            //ENDSET
             builder.Property<DateTime>("InsertUtcDateTime");
             builder.Property<DateTime>("LastUpdatedUtcDateTime");
         }

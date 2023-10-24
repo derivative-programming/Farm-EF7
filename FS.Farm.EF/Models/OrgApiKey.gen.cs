@@ -21,9 +21,7 @@ namespace FS.Farm.EF.Models
         public int? OrganizationID { get; set; }
         public int? OrgCustomerID { get; set; }
         public Guid OrganizationCodePeek { get; set; }//OrganizationID // not mapped
-        //ENDSET
         public Guid OrgCustomerCodePeek { get; set; }//OrgCustomerID // not mapped
-        //ENDSET
         //public Organization Organization { get; set; }  //OrganizationID
         //public OrgCustomer OrgCustomer { get; set; } //OrgCustomerID
     }

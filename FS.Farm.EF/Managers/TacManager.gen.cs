@@ -41,18 +41,54 @@ namespace FS.Farm.EF.Managers
 				return tac;
 			}
 		}
-		public async Task<int> GetTotalCountAsync()
+        public Tac Add(Tac tac)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.TacSet.Add(tac);
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(tac).State = EntityState.Detached;
+                    transaction.Commit();
+                    return tac;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.TacSet.Add(tac);
+                _dbContext.SaveChanges();
+                _dbContext.Entry(tac).State = EntityState.Detached;
+                return tac;
+            }
+        }
+        public async Task<int> GetTotalCountAsync()
 		{
 			return await _dbContext.TacSet.AsNoTracking().CountAsync();
 		}
-		public async Task<int?> GetMaxIdAsync()
+        public int GetTotalCount()
+        {
+            return _dbContext.TacSet.AsNoTracking().Count();
+        }
+        public async Task<int?> GetMaxIdAsync()
 		{
-			return await _dbContext.TacSet.AsNoTracking().MaxAsync(p => (int?)p.TacID);
-		}
-		public async Task<Tac> GetByIdAsync(int id)
+			return await _dbContext.TacSet.AsNoTracking().MaxAsync(x => (int?)x.TacID);
+        }
+        public int? GetMaxId()
+        {
+            return _dbContext.TacSet.AsNoTracking().Max(x => (int?)x.TacID);
+        }
+        public async Task<Tac> GetByIdAsync(int id)
 		{
 			var tacsWithCodes = await BuildQuery()
-									.Where(p => p.TacObj.TacID == id)
+									.Where(x => x.TacObj.TacID == id)
 									.ToListAsync();
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             if (finalTacs.Count > 0)
@@ -61,15 +97,27 @@ namespace FS.Farm.EF.Managers
             }
 			return null;
         }
-		public async Task<Tac> DirtyGetByIdAsync(int id) //to test
+        public Tac GetById(int id)
+        {
+            var tacsWithCodes = BuildQuery()
+                                    .Where(x => x.TacObj.TacID == id)
+                                    .ToList();
+            List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
+            if (finalTacs.Count > 0)
+            {
+                return finalTacs[0];
+            }
+            return null;
+        }
+        public async Task<Tac> DirtyGetByIdAsync(int id) //to test
 		{
-			//return await _dbContext.TacSet.AsNoTracking().FirstOrDefaultAsync(p => p.TacID == id);
+			//return await _dbContext.TacSet.AsNoTracking().FirstOrDefaultAsync(x => x.TacID == id);
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
 			try
 			{
                 var tacsWithCodes = await BuildQuery()
-                                        .Where(p => p.TacObj.TacID == id)
+                                        .Where(x => x.TacObj.TacID == id)
                                         .ToListAsync();
                 List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -87,12 +135,38 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<Tac> GetByCodeAsync(Guid code)
+        public Tac DirtyGetById(int id) //to test
+        {
+            //return await _dbContext.TacSet.AsNoTracking().FirstOrDefaultAsync(x => x.TacID == id);
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var tacsWithCodes = BuildQuery()
+                                        .Where(x => x.TacObj.TacID == id)
+                                        .ToList();
+                List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalTacs.Count > 0)
+                {
+                    return finalTacs[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<Tac> GetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
             var tacsWithCodes = await BuildQuery()
-                                    .Where(p => p.TacObj.Code == code)
+                                    .Where(x => x.TacObj.Code == code)
                                     .ToListAsync();
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             if (finalTacs.Count > 0)
@@ -101,7 +175,21 @@ namespace FS.Farm.EF.Managers
             }
             return null;
         }
-		public async Task<Tac> DirtyGetByCodeAsync(Guid code)
+        public Tac GetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            var tacsWithCodes = BuildQuery()
+                                    .Where(x => x.TacObj.Code == code)
+                                    .ToList();
+            List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
+            if (finalTacs.Count > 0)
+            {
+                return finalTacs[0];
+            }
+            return null;
+        }
+        public async Task<Tac> DirtyGetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
@@ -110,7 +198,7 @@ namespace FS.Farm.EF.Managers
 			try
 			{
                 var tacsWithCodes = await BuildQuery()
-                                        .Where(p => p.TacObj.Code == code)
+                                        .Where(x => x.TacObj.Code == code)
                                         .ToListAsync();
                 List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -128,14 +216,48 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<IEnumerable<Tac>> GetAllAsync()
+        public Tac DirtyGetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var tacsWithCodes = BuildQuery()
+                                        .Where(x => x.TacObj.Code == code)
+                                        .ToList();
+                List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalTacs.Count > 0)
+                {
+                    return finalTacs[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<IEnumerable<Tac>> GetAllAsync()
 		{
             var tacsWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             return finalTacs;
         }
-		public async Task<bool> UpdateAsync(Tac tacToUpdate)
+        public IEnumerable<Tac> GetAll()
+        {
+            var tacsWithCodes = BuildQuery()
+                                    .ToList();
+            List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
+            return finalTacs;
+        }
+        public async Task<bool> UpdateAsync(Tac tacToUpdate)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -176,7 +298,48 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task<bool> DeleteAsync(int id)
+        public bool Update(Tac tacToUpdate)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.TacSet.Attach(tacToUpdate);
+                    _dbContext.Entry(tacToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(tacToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    tacToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(tacToUpdate).State = EntityState.Detached;
+                    transaction.Commit();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    _dbContext.TacSet.Attach(tacToUpdate);
+                    _dbContext.Entry(tacToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(tacToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    tacToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(tacToUpdate).State = EntityState.Detached;
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> DeleteAsync(int id)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -184,7 +347,7 @@ namespace FS.Farm.EF.Managers
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
 				try
 				{
-					var tac = await _dbContext.TacSet.FirstOrDefaultAsync(p => p.TacID == id);
+					var tac = await _dbContext.TacSet.FirstOrDefaultAsync(x => x.TacID == id);
 					if (tac == null) return false;
 					_dbContext.TacSet.Remove(tac);
 					await _dbContext.SaveChangesAsync();
@@ -201,7 +364,7 @@ namespace FS.Farm.EF.Managers
 			{
 				try
 				{
-					var tac = await _dbContext.TacSet.FirstOrDefaultAsync(p => p.TacID == id);
+					var tac = await _dbContext.TacSet.FirstOrDefaultAsync(x => x.TacID == id);
 					if (tac == null) return false;
 					_dbContext.TacSet.Remove(tac);
 					await _dbContext.SaveChangesAsync();
@@ -213,7 +376,44 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task BulkInsertAsync(IEnumerable<Tac> tacs)
+        public bool Delete(int id)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    var tac = _dbContext.TacSet.FirstOrDefault(x => x.TacID == id);
+                    if (tac == null) return false;
+                    _dbContext.TacSet.Remove(tac);
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                    return true;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                try
+                {
+                    var tac = _dbContext.TacSet.FirstOrDefault(x => x.TacID == id);
+                    if (tac == null) return false;
+                    _dbContext.TacSet.Remove(tac);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public async Task BulkInsertAsync(IEnumerable<Tac> tacs)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -257,7 +457,51 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkInsertAsync(tacs, bulkConfig);
 			}
 		}
-		public async Task BulkUpdateAsync(IEnumerable<Tac> updatedTacs)
+        public void BulkInsert(IEnumerable<Tac> tacs)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(Tac.TacID), nameof(Tac.LastChangeCode) },
+                SetOutputIdentity = true,
+                PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            foreach (var tac in tacs)
+            {
+                tac.LastChangeCode = Guid.NewGuid();
+                var entry = _dbContext.Entry(tac);
+                if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
+                {
+                    entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkInsert(tacs, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.BulkInsert(tacs, bulkConfig);
+            }
+        }
+        public async Task BulkUpdateAsync(IEnumerable<Tac> updatedTacs)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -267,12 +511,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = updatedTacs.Select(p => p.TacID).ToList();
+			var idsToUpdate = updatedTacs.Select(x => x.TacID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			//var existingTokens = await _dbContext.TacSet.AsNoTracking()
 			//	.Where(p => idsToUpdate.Contains(p.TacID))
 			//	.Select(p => new { p.TacID, p.LastChangeCode })
-			//	.ToDictionaryAsync(p => p.TacID, p => p.LastChangeCode);
+			//	.ToDictionaryAsync(x => x.TacID, x => x.LastChangeCode);
 			//// Check concurrency conflicts
 			foreach (var updatedTac in updatedTacs)
 			{
@@ -314,7 +558,64 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkUpdateAsync(updatedTacs, bulkConfig);
 			}
 		}
-		public async Task BulkDeleteAsync(IEnumerable<Tac> tacsToDelete)
+        public void BulkUpdate(IEnumerable<Tac> updatedTacs)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(Tac.TacID), nameof(Tac.LastChangeCode) },
+                //	SetOutputIdentity = true,
+                //	PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = updatedTacs.Select(x => x.TacID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            //var existingTokens = await _dbContext.TacSet.AsNoTracking()
+            //	.Where(p => idsToUpdate.Contains(p.TacID))
+            //	.Select(p => new { p.TacID, p.LastChangeCode })
+            //	.ToDictionaryAsync(x => x.TacID, x => x.LastChangeCode);
+            //// Check concurrency conflicts
+            foreach (var updatedTac in updatedTacs)
+            {
+                //	if (!existingTokens.TryGetValue(updatedTac.TacID, out var token) || token != updatedTac.LastChangeCode)
+                //	{
+                //		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                //	}
+                //	updatedTac.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+                //	_dbContext.TacSet.Attach(updatedTac);
+                //	_dbContext.Entry(updatedTac).State = EntityState.Modified;
+                //	var entry = _dbContext.Entry(updatedTac);
+                //	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                //_dbContext.TacSet.Attach(updatedTac);
+                //_dbContext.Entry(updatedTac).State = EntityState.Modified;
+                //_dbContext.Entry(tacToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                //updatedTac.LastChangeCode = Guid.NewGuid();
+                //await _dbContext.SaveChangesAsync();
+                //_dbContext.Entry(tacToUpdate).State = EntityState.Detached;
+            }
+            //TODO concurrency token check
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkUpdate(updatedTacs, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkUpdate(updatedTacs, bulkConfig);
+            }
+        }
+        public async Task BulkDeleteAsync(IEnumerable<Tac> tacsToDelete)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -324,12 +625,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = tacsToDelete.Select(p => p.TacID).ToList();
+			var idsToUpdate = tacsToDelete.Select(x => x.TacID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			var existingTokens = await _dbContext.TacSet.AsNoTracking()
 				.Where(p => idsToUpdate.Contains(p.TacID))
 				.Select(p => new { p.TacID, p.LastChangeCode })
-				.ToDictionaryAsync(p => p.TacID, p => p.LastChangeCode);
+				.ToDictionaryAsync(x => x.TacID, x => x.LastChangeCode);
 			// Check concurrency conflicts
 			foreach (var updatedTac in tacsToDelete)
 			{
@@ -360,16 +661,60 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkDeleteAsync(tacsToDelete, bulkConfig);
 			}
 		}
-		private IQueryable<QueryDTO> BuildQuery()
+        public void BulkDelete(IEnumerable<Tac> tacsToDelete)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //UpdateByProperties = new List<string> { nameof(Tac.TacID), nameof(Tac.LastChangeCode) },
+                //SetOutputIdentity = true,
+                //PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = tacsToDelete.Select(x => x.TacID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            var existingTokens = _dbContext.TacSet.AsNoTracking()
+                .Where(p => idsToUpdate.Contains(p.TacID))
+                .Select(p => new { p.TacID, p.LastChangeCode })
+                .ToDictionary(x => x.TacID, x => x.LastChangeCode);
+            // Check concurrency conflicts
+            foreach (var updatedTac in tacsToDelete)
+            {
+                if (!existingTokens.TryGetValue(updatedTac.TacID, out var token) || token != updatedTac.LastChangeCode)
+                {
+                    throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                }
+                updatedTac.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkDelete(tacsToDelete, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkDelete(tacsToDelete, bulkConfig);
+            }
+        }
+        private IQueryable<QueryDTO> BuildQuery()
 		{
 			return from tac in _dbContext.TacSet.AsNoTracking()
 				   from pac in _dbContext.PacSet.AsNoTracking().Where(l => l.PacID == tac.PacID).DefaultIfEmpty() //PacID
-																														//ENDSET
 				   select new QueryDTO
                    {
 					   TacObj = tac,
 					   PacCode = pac.Code, //PacID
-											 //ENDSET
 				   };
         }
 		private List<Tac> ProcessMappings(List<QueryDTO> data)
@@ -377,7 +722,6 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.TacObj.PacCodePeek = item.PacCode.Value; //PacID
-                //ENDSET
             }
             List<Tac> results = data.Select(r => r.TacObj).ToList();
             return results;
@@ -386,12 +730,19 @@ namespace FS.Farm.EF.Managers
         public async Task<List<Tac>> GetByPacAsync(int id)
         {
             var tacsWithCodes = await BuildQuery()
-                                    .Where(p => p.TacObj.PacID == id)
+                                    .Where(x => x.TacObj.PacID == id)
                                     .ToListAsync();
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             return finalTacs;
         }
-		//ENDSET
+        public List<Tac> GetByPac(int id)
+        {
+            var tacsWithCodes = BuildQuery()
+                                    .Where(x => x.TacObj.PacID == id)
+                                    .ToList();
+            List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
+            return finalTacs;
+        }
         private class QueryDTO
         {
             public Tac TacObj { get; set; }

@@ -20,7 +20,7 @@ namespace FS.Farm.EF.Reports
 				from plantflavor in _dbContext.FlavorSet.AsNoTracking().Where(x => x.FlavorID == plant.FlvrForeignKeyID).DefaultIfEmpty()   // fk lookup prop
 				from land  in _dbContext.LandSet.AsNoTracking().Where(x => x.LandID == plant.LandID).DefaultIfEmpty() // up obj tree
 				from pac  in _dbContext.PacSet.AsNoTracking().Where(x => x.PacID == land.PacID).DefaultIfEmpty() // up obj tree
-                   from tac in _dbContext.TacSet.AsNoTracking().Where(x => x.PacID == pac.PacID).DefaultIfEmpty() // up obj tree
+                   from tac in _dbContext.TacSet.AsNoTracking().Where(x => x.PacID == pac.PacID).DefaultIfEmpty()  
                    select new QueryDTO
                 {
                     plant = plant,

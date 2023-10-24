@@ -13,7 +13,6 @@ namespace FS.Farm.EF.Configurations
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)
                 .IsConcurrencyToken();
-            //ENDSET
             builder.Property<DateTime>("InsertUtcDateTime");
             builder.Property<DateTime>("LastUpdatedUtcDateTime");
         }

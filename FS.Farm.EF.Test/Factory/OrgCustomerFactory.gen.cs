@@ -16,7 +16,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var customer = await CustomerFactory.CreateAndSaveAsync(context);//CustomerID
             var organization = await OrganizationFactory.CreateAndSaveAsync(context); //OrganizationID
-            //ENDSET
             return new OrgCustomer
             {
                 OrgCustomerID = _counter,
@@ -24,7 +23,20 @@ namespace FS.Farm.EF.Test.Factory
                 CustomerID = customer.CustomerID,
                 Email = String.Empty,
                 OrganizationID = organization.OrganizationID,
-                //ENDSET
+            };
+        }
+        public static OrgCustomer Create(FarmDbContext context)
+        {
+            _counter++;
+            var customer = CustomerFactory.CreateAndSave(context);//CustomerID
+            var organization = OrganizationFactory.CreateAndSave(context); //OrganizationID
+            return new OrgCustomer
+            {
+                OrgCustomerID = _counter,
+                Code = Guid.NewGuid(),
+                CustomerID = customer.CustomerID,
+                Email = String.Empty,
+                OrganizationID = organization.OrganizationID,
             };
         }
         public static async Task<OrgCustomer> CreateAndSaveAsync(FarmDbContext context)
@@ -32,7 +44,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var customer = await CustomerFactory.CreateAndSaveAsync(context);//CustomerID
             var organization = await OrganizationFactory.CreateAndSaveAsync(context); //OrganizationID
-            //ENDSET
             OrgCustomer result =  new OrgCustomer
             {
                 OrgCustomerID = _counter,
@@ -40,10 +51,26 @@ namespace FS.Farm.EF.Test.Factory
                 CustomerID = customer.CustomerID,
                 Email = String.Empty,
                 OrganizationID = organization.OrganizationID,
-                //ENDSET
             };
             OrgCustomerManager orgCustomerManager = new OrgCustomerManager(context);
             result = await orgCustomerManager.AddAsync(result);
+            return result;
+        }
+        public static OrgCustomer CreateAndSave(FarmDbContext context)
+        {
+            _counter++;
+            var customer =   CustomerFactory.CreateAndSave(context);//CustomerID
+            var organization =   OrganizationFactory.CreateAndSave(context); //OrganizationID
+            OrgCustomer result = new OrgCustomer
+            {
+                OrgCustomerID = _counter,
+                Code = Guid.NewGuid(),
+                CustomerID = customer.CustomerID,
+                Email = String.Empty,
+                OrganizationID = organization.OrganizationID,
+            };
+            OrgCustomerManager orgCustomerManager = new OrgCustomerManager(context);
+            result = orgCustomerManager.Add(result);
             return result;
         }
     }

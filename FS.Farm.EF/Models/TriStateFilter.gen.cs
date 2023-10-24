@@ -19,7 +19,6 @@ namespace FS.Farm.EF.Models
         public int? PacID { get; set; }
         public int? StateIntValue { get; set; }
         public Guid PacCodePeek { get; set; }//PacID // not mapped
-        //ENDSET
         //public Pac Pac { get; set; }  //PacID
     }
 }

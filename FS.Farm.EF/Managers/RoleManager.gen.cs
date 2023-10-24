@@ -41,18 +41,54 @@ namespace FS.Farm.EF.Managers
 				return role;
 			}
 		}
-		public async Task<int> GetTotalCountAsync()
+        public Role Add(Role role)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.RoleSet.Add(role);
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(role).State = EntityState.Detached;
+                    transaction.Commit();
+                    return role;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.RoleSet.Add(role);
+                _dbContext.SaveChanges();
+                _dbContext.Entry(role).State = EntityState.Detached;
+                return role;
+            }
+        }
+        public async Task<int> GetTotalCountAsync()
 		{
 			return await _dbContext.RoleSet.AsNoTracking().CountAsync();
 		}
-		public async Task<int?> GetMaxIdAsync()
+        public int GetTotalCount()
+        {
+            return _dbContext.RoleSet.AsNoTracking().Count();
+        }
+        public async Task<int?> GetMaxIdAsync()
 		{
-			return await _dbContext.RoleSet.AsNoTracking().MaxAsync(p => (int?)p.RoleID);
-		}
-		public async Task<Role> GetByIdAsync(int id)
+			return await _dbContext.RoleSet.AsNoTracking().MaxAsync(x => (int?)x.RoleID);
+        }
+        public int? GetMaxId()
+        {
+            return _dbContext.RoleSet.AsNoTracking().Max(x => (int?)x.RoleID);
+        }
+        public async Task<Role> GetByIdAsync(int id)
 		{
 			var rolesWithCodes = await BuildQuery()
-									.Where(p => p.RoleObj.RoleID == id)
+									.Where(x => x.RoleObj.RoleID == id)
 									.ToListAsync();
             List<Role> finalRoles = ProcessMappings(rolesWithCodes);
             if (finalRoles.Count > 0)
@@ -61,15 +97,27 @@ namespace FS.Farm.EF.Managers
             }
 			return null;
         }
-		public async Task<Role> DirtyGetByIdAsync(int id) //to test
+        public Role GetById(int id)
+        {
+            var rolesWithCodes = BuildQuery()
+                                    .Where(x => x.RoleObj.RoleID == id)
+                                    .ToList();
+            List<Role> finalRoles = ProcessMappings(rolesWithCodes);
+            if (finalRoles.Count > 0)
+            {
+                return finalRoles[0];
+            }
+            return null;
+        }
+        public async Task<Role> DirtyGetByIdAsync(int id) //to test
 		{
-			//return await _dbContext.RoleSet.AsNoTracking().FirstOrDefaultAsync(p => p.RoleID == id);
+			//return await _dbContext.RoleSet.AsNoTracking().FirstOrDefaultAsync(x => x.RoleID == id);
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
 			try
 			{
                 var rolesWithCodes = await BuildQuery()
-                                        .Where(p => p.RoleObj.RoleID == id)
+                                        .Where(x => x.RoleObj.RoleID == id)
                                         .ToListAsync();
                 List<Role> finalRoles = ProcessMappings(rolesWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -87,12 +135,38 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<Role> GetByCodeAsync(Guid code)
+        public Role DirtyGetById(int id) //to test
+        {
+            //return await _dbContext.RoleSet.AsNoTracking().FirstOrDefaultAsync(x => x.RoleID == id);
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var rolesWithCodes = BuildQuery()
+                                        .Where(x => x.RoleObj.RoleID == id)
+                                        .ToList();
+                List<Role> finalRoles = ProcessMappings(rolesWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalRoles.Count > 0)
+                {
+                    return finalRoles[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<Role> GetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
             var rolesWithCodes = await BuildQuery()
-                                    .Where(p => p.RoleObj.Code == code)
+                                    .Where(x => x.RoleObj.Code == code)
                                     .ToListAsync();
             List<Role> finalRoles = ProcessMappings(rolesWithCodes);
             if (finalRoles.Count > 0)
@@ -101,7 +175,21 @@ namespace FS.Farm.EF.Managers
             }
             return null;
         }
-		public async Task<Role> DirtyGetByCodeAsync(Guid code)
+        public Role GetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            var rolesWithCodes = BuildQuery()
+                                    .Where(x => x.RoleObj.Code == code)
+                                    .ToList();
+            List<Role> finalRoles = ProcessMappings(rolesWithCodes);
+            if (finalRoles.Count > 0)
+            {
+                return finalRoles[0];
+            }
+            return null;
+        }
+        public async Task<Role> DirtyGetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
@@ -110,7 +198,7 @@ namespace FS.Farm.EF.Managers
 			try
 			{
                 var rolesWithCodes = await BuildQuery()
-                                        .Where(p => p.RoleObj.Code == code)
+                                        .Where(x => x.RoleObj.Code == code)
                                         .ToListAsync();
                 List<Role> finalRoles = ProcessMappings(rolesWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -128,14 +216,48 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<IEnumerable<Role>> GetAllAsync()
+        public Role DirtyGetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var rolesWithCodes = BuildQuery()
+                                        .Where(x => x.RoleObj.Code == code)
+                                        .ToList();
+                List<Role> finalRoles = ProcessMappings(rolesWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalRoles.Count > 0)
+                {
+                    return finalRoles[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<IEnumerable<Role>> GetAllAsync()
 		{
             var rolesWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Role> finalRoles = ProcessMappings(rolesWithCodes);
             return finalRoles;
         }
-		public async Task<bool> UpdateAsync(Role roleToUpdate)
+        public IEnumerable<Role> GetAll()
+        {
+            var rolesWithCodes = BuildQuery()
+                                    .ToList();
+            List<Role> finalRoles = ProcessMappings(rolesWithCodes);
+            return finalRoles;
+        }
+        public async Task<bool> UpdateAsync(Role roleToUpdate)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -176,7 +298,48 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task<bool> DeleteAsync(int id)
+        public bool Update(Role roleToUpdate)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.RoleSet.Attach(roleToUpdate);
+                    _dbContext.Entry(roleToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(roleToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    roleToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(roleToUpdate).State = EntityState.Detached;
+                    transaction.Commit();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    _dbContext.RoleSet.Attach(roleToUpdate);
+                    _dbContext.Entry(roleToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(roleToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    roleToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(roleToUpdate).State = EntityState.Detached;
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> DeleteAsync(int id)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -184,7 +347,7 @@ namespace FS.Farm.EF.Managers
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
 				try
 				{
-					var role = await _dbContext.RoleSet.FirstOrDefaultAsync(p => p.RoleID == id);
+					var role = await _dbContext.RoleSet.FirstOrDefaultAsync(x => x.RoleID == id);
 					if (role == null) return false;
 					_dbContext.RoleSet.Remove(role);
 					await _dbContext.SaveChangesAsync();
@@ -201,7 +364,7 @@ namespace FS.Farm.EF.Managers
 			{
 				try
 				{
-					var role = await _dbContext.RoleSet.FirstOrDefaultAsync(p => p.RoleID == id);
+					var role = await _dbContext.RoleSet.FirstOrDefaultAsync(x => x.RoleID == id);
 					if (role == null) return false;
 					_dbContext.RoleSet.Remove(role);
 					await _dbContext.SaveChangesAsync();
@@ -213,7 +376,44 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task BulkInsertAsync(IEnumerable<Role> roles)
+        public bool Delete(int id)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    var role = _dbContext.RoleSet.FirstOrDefault(x => x.RoleID == id);
+                    if (role == null) return false;
+                    _dbContext.RoleSet.Remove(role);
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                    return true;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                try
+                {
+                    var role = _dbContext.RoleSet.FirstOrDefault(x => x.RoleID == id);
+                    if (role == null) return false;
+                    _dbContext.RoleSet.Remove(role);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public async Task BulkInsertAsync(IEnumerable<Role> roles)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -257,7 +457,51 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkInsertAsync(roles, bulkConfig);
 			}
 		}
-		public async Task BulkUpdateAsync(IEnumerable<Role> updatedRoles)
+        public void BulkInsert(IEnumerable<Role> roles)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(Role.RoleID), nameof(Role.LastChangeCode) },
+                SetOutputIdentity = true,
+                PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            foreach (var role in roles)
+            {
+                role.LastChangeCode = Guid.NewGuid();
+                var entry = _dbContext.Entry(role);
+                if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
+                {
+                    entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkInsert(roles, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.BulkInsert(roles, bulkConfig);
+            }
+        }
+        public async Task BulkUpdateAsync(IEnumerable<Role> updatedRoles)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -267,12 +511,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = updatedRoles.Select(p => p.RoleID).ToList();
+			var idsToUpdate = updatedRoles.Select(x => x.RoleID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			//var existingTokens = await _dbContext.RoleSet.AsNoTracking()
 			//	.Where(p => idsToUpdate.Contains(p.RoleID))
 			//	.Select(p => new { p.RoleID, p.LastChangeCode })
-			//	.ToDictionaryAsync(p => p.RoleID, p => p.LastChangeCode);
+			//	.ToDictionaryAsync(x => x.RoleID, x => x.LastChangeCode);
 			//// Check concurrency conflicts
 			foreach (var updatedRole in updatedRoles)
 			{
@@ -314,7 +558,64 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkUpdateAsync(updatedRoles, bulkConfig);
 			}
 		}
-		public async Task BulkDeleteAsync(IEnumerable<Role> rolesToDelete)
+        public void BulkUpdate(IEnumerable<Role> updatedRoles)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(Role.RoleID), nameof(Role.LastChangeCode) },
+                //	SetOutputIdentity = true,
+                //	PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = updatedRoles.Select(x => x.RoleID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            //var existingTokens = await _dbContext.RoleSet.AsNoTracking()
+            //	.Where(p => idsToUpdate.Contains(p.RoleID))
+            //	.Select(p => new { p.RoleID, p.LastChangeCode })
+            //	.ToDictionaryAsync(x => x.RoleID, x => x.LastChangeCode);
+            //// Check concurrency conflicts
+            foreach (var updatedRole in updatedRoles)
+            {
+                //	if (!existingTokens.TryGetValue(updatedRole.RoleID, out var token) || token != updatedRole.LastChangeCode)
+                //	{
+                //		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                //	}
+                //	updatedRole.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+                //	_dbContext.RoleSet.Attach(updatedRole);
+                //	_dbContext.Entry(updatedRole).State = EntityState.Modified;
+                //	var entry = _dbContext.Entry(updatedRole);
+                //	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                //_dbContext.RoleSet.Attach(updatedRole);
+                //_dbContext.Entry(updatedRole).State = EntityState.Modified;
+                //_dbContext.Entry(roleToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                //updatedRole.LastChangeCode = Guid.NewGuid();
+                //await _dbContext.SaveChangesAsync();
+                //_dbContext.Entry(roleToUpdate).State = EntityState.Detached;
+            }
+            //TODO concurrency token check
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkUpdate(updatedRoles, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkUpdate(updatedRoles, bulkConfig);
+            }
+        }
+        public async Task BulkDeleteAsync(IEnumerable<Role> rolesToDelete)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -324,12 +625,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = rolesToDelete.Select(p => p.RoleID).ToList();
+			var idsToUpdate = rolesToDelete.Select(x => x.RoleID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			var existingTokens = await _dbContext.RoleSet.AsNoTracking()
 				.Where(p => idsToUpdate.Contains(p.RoleID))
 				.Select(p => new { p.RoleID, p.LastChangeCode })
-				.ToDictionaryAsync(p => p.RoleID, p => p.LastChangeCode);
+				.ToDictionaryAsync(x => x.RoleID, x => x.LastChangeCode);
 			// Check concurrency conflicts
 			foreach (var updatedRole in rolesToDelete)
 			{
@@ -360,16 +661,60 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkDeleteAsync(rolesToDelete, bulkConfig);
 			}
 		}
-		private IQueryable<QueryDTO> BuildQuery()
+        public void BulkDelete(IEnumerable<Role> rolesToDelete)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //UpdateByProperties = new List<string> { nameof(Role.RoleID), nameof(Role.LastChangeCode) },
+                //SetOutputIdentity = true,
+                //PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = rolesToDelete.Select(x => x.RoleID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            var existingTokens = _dbContext.RoleSet.AsNoTracking()
+                .Where(p => idsToUpdate.Contains(p.RoleID))
+                .Select(p => new { p.RoleID, p.LastChangeCode })
+                .ToDictionary(x => x.RoleID, x => x.LastChangeCode);
+            // Check concurrency conflicts
+            foreach (var updatedRole in rolesToDelete)
+            {
+                if (!existingTokens.TryGetValue(updatedRole.RoleID, out var token) || token != updatedRole.LastChangeCode)
+                {
+                    throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                }
+                updatedRole.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkDelete(rolesToDelete, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkDelete(rolesToDelete, bulkConfig);
+            }
+        }
+        private IQueryable<QueryDTO> BuildQuery()
 		{
 			return from role in _dbContext.RoleSet.AsNoTracking()
 				   from pac in _dbContext.PacSet.AsNoTracking().Where(l => l.PacID == role.PacID).DefaultIfEmpty() //PacID
-																														//ENDSET
 				   select new QueryDTO
                    {
 					   RoleObj = role,
 					   PacCode = pac.Code, //PacID
-											 //ENDSET
 				   };
         }
 		private List<Role> ProcessMappings(List<QueryDTO> data)
@@ -377,7 +722,6 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.RoleObj.PacCodePeek = item.PacCode.Value; //PacID
-                //ENDSET
             }
             List<Role> results = data.Select(r => r.RoleObj).ToList();
             return results;
@@ -386,12 +730,19 @@ namespace FS.Farm.EF.Managers
         public async Task<List<Role>> GetByPacAsync(int id)
         {
             var rolesWithCodes = await BuildQuery()
-                                    .Where(p => p.RoleObj.PacID == id)
+                                    .Where(x => x.RoleObj.PacID == id)
                                     .ToListAsync();
             List<Role> finalRoles = ProcessMappings(rolesWithCodes);
             return finalRoles;
         }
-		//ENDSET
+        public List<Role> GetByPac(int id)
+        {
+            var rolesWithCodes = BuildQuery()
+                                    .Where(x => x.RoleObj.PacID == id)
+                                    .ToList();
+            List<Role> finalRoles = ProcessMappings(rolesWithCodes);
+            return finalRoles;
+        }
         private class QueryDTO
         {
             public Role RoleObj { get; set; }

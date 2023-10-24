@@ -2,7 +2,7 @@
     "templateType":"report", 
     "ForceFileNameFormat" : "Pascal",
   "dimension": {
-    "name": "LandPlantList",
+    "name": "PlantUserDetails",
     "visualizationType": "DetailThreeColumn"
   },
   "ignoreDimensionPropertyList": [

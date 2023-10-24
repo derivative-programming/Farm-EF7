@@ -35,7 +35,6 @@ namespace FS.Farm.EF.Models
         public int? UTCOffsetInMinutes { get; set; }
         public string Zip { get; set; }
         public Guid TacCodePeek { get; set; }//TacID // not mapped
-        //ENDSET
         //public Tac Tac { get; set; }  //TacID
     }
 }

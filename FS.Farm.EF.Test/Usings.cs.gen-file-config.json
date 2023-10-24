@@ -1,0 +1,9 @@
+{
+    "templateType":"Namespace", 
+    "ForceFileNameFormat" : "Pascal",
+  "dimension": {
+    "name": "Farm"
+  },
+  "ignoreDimensionPropertyList": [
+  ]
+} 

@@ -16,7 +16,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var customer = await CustomerFactory.CreateAndSaveAsync(context); //CustomerID
             var role = await RoleFactory.CreateAndSaveAsync(context);//RoleID
-            //ENDSET
             return new CustomerRole
             {
                 CustomerRoleID = _counter,
@@ -25,7 +24,21 @@ namespace FS.Farm.EF.Test.Factory
                 IsPlaceholder = false,
                 Placeholder = false,
                 RoleID = role.RoleID,
-                //ENDSET
+            };
+        }
+        public static CustomerRole Create(FarmDbContext context)
+        {
+            _counter++;
+            var customer = CustomerFactory.CreateAndSave(context); //CustomerID
+            var role = RoleFactory.CreateAndSave(context);//RoleID
+            return new CustomerRole
+            {
+                CustomerRoleID = _counter,
+                Code = Guid.NewGuid(),
+                CustomerID = customer.CustomerID,
+                IsPlaceholder = false,
+                Placeholder = false,
+                RoleID = role.RoleID,
             };
         }
         public static async Task<CustomerRole> CreateAndSaveAsync(FarmDbContext context)
@@ -33,7 +46,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var customer = await CustomerFactory.CreateAndSaveAsync(context); //CustomerID
             var role = await RoleFactory.CreateAndSaveAsync(context);//RoleID
-            //ENDSET
             CustomerRole result =  new CustomerRole
             {
                 CustomerRoleID = _counter,
@@ -42,10 +54,27 @@ namespace FS.Farm.EF.Test.Factory
                 IsPlaceholder = false,
                 Placeholder = false,
                 RoleID = role.RoleID,
-                //ENDSET
             };
             CustomerRoleManager customerRoleManager = new CustomerRoleManager(context);
             result = await customerRoleManager.AddAsync(result);
+            return result;
+        }
+        public static CustomerRole CreateAndSave(FarmDbContext context)
+        {
+            _counter++;
+            var customer =   CustomerFactory.CreateAndSave(context); //CustomerID
+            var role =   RoleFactory.CreateAndSave(context);//RoleID
+            CustomerRole result = new CustomerRole
+            {
+                CustomerRoleID = _counter,
+                Code = Guid.NewGuid(),
+                CustomerID = customer.CustomerID,
+                IsPlaceholder = false,
+                Placeholder = false,
+                RoleID = role.RoleID,
+            };
+            CustomerRoleManager customerRoleManager = new CustomerRoleManager(context);
+            result = customerRoleManager.Add(result);
             return result;
         }
     }

@@ -15,31 +15,54 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var tac = await TacFactory.CreateAndSaveAsync(context); //TacID
-            //ENDSET
             return new Organization
             {
                 OrganizationID = _counter,
                 Code = Guid.NewGuid(),
                 Name = String.Empty,
                 TacID = tac.TacID,
-                //ENDSET
+            };
+        }
+        public static Organization Create(FarmDbContext context)
+        {
+            _counter++;
+            var tac = TacFactory.CreateAndSave(context); //TacID
+            return new Organization
+            {
+                OrganizationID = _counter,
+                Code = Guid.NewGuid(),
+                Name = String.Empty,
+                TacID = tac.TacID,
             };
         }
         public static async Task<Organization> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var tac = await TacFactory.CreateAndSaveAsync(context); //TacID
-            //ENDSET
             Organization result =  new Organization
             {
                 OrganizationID = _counter,
                 Code = Guid.NewGuid(),
                 Name = String.Empty,
                 TacID = tac.TacID,
-                //ENDSET
             };
             OrganizationManager organizationManager = new OrganizationManager(context);
             result = await organizationManager.AddAsync(result);
+            return result;
+        }
+        public static Organization CreateAndSave(FarmDbContext context)
+        {
+            _counter++;
+            var tac =   TacFactory.CreateAndSave(context); //TacID
+            Organization result = new Organization
+            {
+                OrganizationID = _counter,
+                Code = Guid.NewGuid(),
+                Name = String.Empty,
+                TacID = tac.TacID,
+            };
+            OrganizationManager organizationManager = new OrganizationManager(context);
+            result = organizationManager.Add(result);
             return result;
         }
     }

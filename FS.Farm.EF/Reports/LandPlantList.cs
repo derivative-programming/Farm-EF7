@@ -66,6 +66,51 @@ namespace FS.Farm.EF.Reports
             return await query.CountAsync();
         }
 
+        public int GetCount(
+           Guid? flavorCode,
+           Int32? someIntVal,
+           Int64? someBigIntVal,
+           Double? someFloatVal,
+           Boolean? someBitVal,
+           Boolean? isEditAllowed,
+           Boolean? isDeleteAllowed,
+           Decimal? someDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someMoneyVal,
+           String someNVarCharVal,
+           String someVarCharVal,
+           String someTextVal,
+           String somePhoneNumber,
+           String someEmailAddress,
+           System.Guid userID,
+           System.Guid contextCode)
+        {
+            var query = BuildQuery();
+
+            query = ApplyFilters(query,
+                flavorCode,
+                someIntVal,
+                someBigIntVal,
+                someFloatVal,
+                someBitVal,
+                isEditAllowed,
+                isDeleteAllowed,
+                someDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someMoneyVal,
+                someNVarCharVal,
+                someVarCharVal,
+                someTextVal,
+                somePhoneNumber,
+                someEmailAddress,
+                userID,
+                contextCode);
+
+            return query.Count();
+        }
+
         public async Task<List<LandPlantListDTO>> GetAsync(
            Guid? flavorCode,
            Int32? someIntVal,
@@ -132,7 +177,75 @@ namespace FS.Farm.EF.Reports
 
             return reports;
         }
-         
+
+
+        public List<LandPlantListDTO> Get(
+           Guid? flavorCode,
+           Int32? someIntVal,
+           Int64? someBigIntVal,
+           Double? someFloatVal,
+           Boolean? someBitVal,
+           Boolean? isEditAllowed,
+           Boolean? isDeleteAllowed,
+           Decimal? someDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someMoneyVal,
+           String someNVarCharVal,
+           String someVarCharVal,
+           String someTextVal,
+           String somePhoneNumber,
+           String someEmailAddress,
+           System.Guid userID,
+           System.Guid contextCode,
+            int pageNumber,
+            int itemCountPerPage,
+            string orderByColumnName,
+            bool orderByDescending)
+        {
+
+            var query = BuildQuery();
+
+            query = ApplyFilters(query,
+                flavorCode,
+                someIntVal,
+                someBigIntVal,
+                someFloatVal,
+                someBitVal,
+                isEditAllowed,
+                isDeleteAllowed,
+                someDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someMoneyVal,
+                someNVarCharVal,
+                someVarCharVal,
+                someTextVal,
+                somePhoneNumber,
+                someEmailAddress,
+                userID,
+                contextCode);
+
+            if (!string.IsNullOrEmpty(orderByColumnName))
+            {
+                if (orderByDescending)
+                {
+                    query = query.OrderByDescending(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
+                }
+                else
+                {
+                    query = query.OrderBy(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
+                }
+            }
+
+            // Applying pagination
+            query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
+
+            var reports = query.Select(x => MapLandPlantListDTO(x)).ToList();
+
+            return reports;
+        }
+
         public class LandPlantListDTO
         { 
             public Guid PlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");

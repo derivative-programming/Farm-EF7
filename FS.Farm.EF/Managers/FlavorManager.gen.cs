@@ -41,18 +41,54 @@ namespace FS.Farm.EF.Managers
 				return flavor;
 			}
 		}
-		public async Task<int> GetTotalCountAsync()
+        public Flavor Add(Flavor flavor)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.FlavorSet.Add(flavor);
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(flavor).State = EntityState.Detached;
+                    transaction.Commit();
+                    return flavor;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.FlavorSet.Add(flavor);
+                _dbContext.SaveChanges();
+                _dbContext.Entry(flavor).State = EntityState.Detached;
+                return flavor;
+            }
+        }
+        public async Task<int> GetTotalCountAsync()
 		{
 			return await _dbContext.FlavorSet.AsNoTracking().CountAsync();
 		}
-		public async Task<int?> GetMaxIdAsync()
+        public int GetTotalCount()
+        {
+            return _dbContext.FlavorSet.AsNoTracking().Count();
+        }
+        public async Task<int?> GetMaxIdAsync()
 		{
-			return await _dbContext.FlavorSet.AsNoTracking().MaxAsync(p => (int?)p.FlavorID);
-		}
-		public async Task<Flavor> GetByIdAsync(int id)
+			return await _dbContext.FlavorSet.AsNoTracking().MaxAsync(x => (int?)x.FlavorID);
+        }
+        public int? GetMaxId()
+        {
+            return _dbContext.FlavorSet.AsNoTracking().Max(x => (int?)x.FlavorID);
+        }
+        public async Task<Flavor> GetByIdAsync(int id)
 		{
 			var flavorsWithCodes = await BuildQuery()
-									.Where(p => p.FlavorObj.FlavorID == id)
+									.Where(x => x.FlavorObj.FlavorID == id)
 									.ToListAsync();
             List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
             if (finalFlavors.Count > 0)
@@ -61,15 +97,27 @@ namespace FS.Farm.EF.Managers
             }
 			return null;
         }
-		public async Task<Flavor> DirtyGetByIdAsync(int id) //to test
+        public Flavor GetById(int id)
+        {
+            var flavorsWithCodes = BuildQuery()
+                                    .Where(x => x.FlavorObj.FlavorID == id)
+                                    .ToList();
+            List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
+            if (finalFlavors.Count > 0)
+            {
+                return finalFlavors[0];
+            }
+            return null;
+        }
+        public async Task<Flavor> DirtyGetByIdAsync(int id) //to test
 		{
-			//return await _dbContext.FlavorSet.AsNoTracking().FirstOrDefaultAsync(p => p.FlavorID == id);
+			//return await _dbContext.FlavorSet.AsNoTracking().FirstOrDefaultAsync(x => x.FlavorID == id);
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
 			try
 			{
                 var flavorsWithCodes = await BuildQuery()
-                                        .Where(p => p.FlavorObj.FlavorID == id)
+                                        .Where(x => x.FlavorObj.FlavorID == id)
                                         .ToListAsync();
                 List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -87,12 +135,38 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<Flavor> GetByCodeAsync(Guid code)
+        public Flavor DirtyGetById(int id) //to test
+        {
+            //return await _dbContext.FlavorSet.AsNoTracking().FirstOrDefaultAsync(x => x.FlavorID == id);
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var flavorsWithCodes = BuildQuery()
+                                        .Where(x => x.FlavorObj.FlavorID == id)
+                                        .ToList();
+                List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalFlavors.Count > 0)
+                {
+                    return finalFlavors[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<Flavor> GetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
             var flavorsWithCodes = await BuildQuery()
-                                    .Where(p => p.FlavorObj.Code == code)
+                                    .Where(x => x.FlavorObj.Code == code)
                                     .ToListAsync();
             List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
             if (finalFlavors.Count > 0)
@@ -101,7 +175,21 @@ namespace FS.Farm.EF.Managers
             }
             return null;
         }
-		public async Task<Flavor> DirtyGetByCodeAsync(Guid code)
+        public Flavor GetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            var flavorsWithCodes = BuildQuery()
+                                    .Where(x => x.FlavorObj.Code == code)
+                                    .ToList();
+            List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
+            if (finalFlavors.Count > 0)
+            {
+                return finalFlavors[0];
+            }
+            return null;
+        }
+        public async Task<Flavor> DirtyGetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
@@ -110,7 +198,7 @@ namespace FS.Farm.EF.Managers
 			try
 			{
                 var flavorsWithCodes = await BuildQuery()
-                                        .Where(p => p.FlavorObj.Code == code)
+                                        .Where(x => x.FlavorObj.Code == code)
                                         .ToListAsync();
                 List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -128,14 +216,48 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<IEnumerable<Flavor>> GetAllAsync()
+        public Flavor DirtyGetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var flavorsWithCodes = BuildQuery()
+                                        .Where(x => x.FlavorObj.Code == code)
+                                        .ToList();
+                List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalFlavors.Count > 0)
+                {
+                    return finalFlavors[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<IEnumerable<Flavor>> GetAllAsync()
 		{
             var flavorsWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
             return finalFlavors;
         }
-		public async Task<bool> UpdateAsync(Flavor flavorToUpdate)
+        public IEnumerable<Flavor> GetAll()
+        {
+            var flavorsWithCodes = BuildQuery()
+                                    .ToList();
+            List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
+            return finalFlavors;
+        }
+        public async Task<bool> UpdateAsync(Flavor flavorToUpdate)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -176,7 +298,48 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task<bool> DeleteAsync(int id)
+        public bool Update(Flavor flavorToUpdate)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.FlavorSet.Attach(flavorToUpdate);
+                    _dbContext.Entry(flavorToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(flavorToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    flavorToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(flavorToUpdate).State = EntityState.Detached;
+                    transaction.Commit();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    _dbContext.FlavorSet.Attach(flavorToUpdate);
+                    _dbContext.Entry(flavorToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(flavorToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    flavorToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(flavorToUpdate).State = EntityState.Detached;
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> DeleteAsync(int id)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -184,7 +347,7 @@ namespace FS.Farm.EF.Managers
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
 				try
 				{
-					var flavor = await _dbContext.FlavorSet.FirstOrDefaultAsync(p => p.FlavorID == id);
+					var flavor = await _dbContext.FlavorSet.FirstOrDefaultAsync(x => x.FlavorID == id);
 					if (flavor == null) return false;
 					_dbContext.FlavorSet.Remove(flavor);
 					await _dbContext.SaveChangesAsync();
@@ -201,7 +364,7 @@ namespace FS.Farm.EF.Managers
 			{
 				try
 				{
-					var flavor = await _dbContext.FlavorSet.FirstOrDefaultAsync(p => p.FlavorID == id);
+					var flavor = await _dbContext.FlavorSet.FirstOrDefaultAsync(x => x.FlavorID == id);
 					if (flavor == null) return false;
 					_dbContext.FlavorSet.Remove(flavor);
 					await _dbContext.SaveChangesAsync();
@@ -213,7 +376,44 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task BulkInsertAsync(IEnumerable<Flavor> flavors)
+        public bool Delete(int id)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    var flavor = _dbContext.FlavorSet.FirstOrDefault(x => x.FlavorID == id);
+                    if (flavor == null) return false;
+                    _dbContext.FlavorSet.Remove(flavor);
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                    return true;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                try
+                {
+                    var flavor = _dbContext.FlavorSet.FirstOrDefault(x => x.FlavorID == id);
+                    if (flavor == null) return false;
+                    _dbContext.FlavorSet.Remove(flavor);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public async Task BulkInsertAsync(IEnumerable<Flavor> flavors)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -257,7 +457,51 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkInsertAsync(flavors, bulkConfig);
 			}
 		}
-		public async Task BulkUpdateAsync(IEnumerable<Flavor> updatedFlavors)
+        public void BulkInsert(IEnumerable<Flavor> flavors)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(Flavor.FlavorID), nameof(Flavor.LastChangeCode) },
+                SetOutputIdentity = true,
+                PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            foreach (var flavor in flavors)
+            {
+                flavor.LastChangeCode = Guid.NewGuid();
+                var entry = _dbContext.Entry(flavor);
+                if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
+                {
+                    entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkInsert(flavors, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.BulkInsert(flavors, bulkConfig);
+            }
+        }
+        public async Task BulkUpdateAsync(IEnumerable<Flavor> updatedFlavors)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -267,12 +511,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = updatedFlavors.Select(p => p.FlavorID).ToList();
+			var idsToUpdate = updatedFlavors.Select(x => x.FlavorID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			//var existingTokens = await _dbContext.FlavorSet.AsNoTracking()
 			//	.Where(p => idsToUpdate.Contains(p.FlavorID))
 			//	.Select(p => new { p.FlavorID, p.LastChangeCode })
-			//	.ToDictionaryAsync(p => p.FlavorID, p => p.LastChangeCode);
+			//	.ToDictionaryAsync(x => x.FlavorID, x => x.LastChangeCode);
 			//// Check concurrency conflicts
 			foreach (var updatedFlavor in updatedFlavors)
 			{
@@ -314,7 +558,64 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkUpdateAsync(updatedFlavors, bulkConfig);
 			}
 		}
-		public async Task BulkDeleteAsync(IEnumerable<Flavor> flavorsToDelete)
+        public void BulkUpdate(IEnumerable<Flavor> updatedFlavors)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(Flavor.FlavorID), nameof(Flavor.LastChangeCode) },
+                //	SetOutputIdentity = true,
+                //	PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = updatedFlavors.Select(x => x.FlavorID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            //var existingTokens = await _dbContext.FlavorSet.AsNoTracking()
+            //	.Where(p => idsToUpdate.Contains(p.FlavorID))
+            //	.Select(p => new { p.FlavorID, p.LastChangeCode })
+            //	.ToDictionaryAsync(x => x.FlavorID, x => x.LastChangeCode);
+            //// Check concurrency conflicts
+            foreach (var updatedFlavor in updatedFlavors)
+            {
+                //	if (!existingTokens.TryGetValue(updatedFlavor.FlavorID, out var token) || token != updatedFlavor.LastChangeCode)
+                //	{
+                //		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                //	}
+                //	updatedFlavor.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+                //	_dbContext.FlavorSet.Attach(updatedFlavor);
+                //	_dbContext.Entry(updatedFlavor).State = EntityState.Modified;
+                //	var entry = _dbContext.Entry(updatedFlavor);
+                //	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                //_dbContext.FlavorSet.Attach(updatedFlavor);
+                //_dbContext.Entry(updatedFlavor).State = EntityState.Modified;
+                //_dbContext.Entry(flavorToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                //updatedFlavor.LastChangeCode = Guid.NewGuid();
+                //await _dbContext.SaveChangesAsync();
+                //_dbContext.Entry(flavorToUpdate).State = EntityState.Detached;
+            }
+            //TODO concurrency token check
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkUpdate(updatedFlavors, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkUpdate(updatedFlavors, bulkConfig);
+            }
+        }
+        public async Task BulkDeleteAsync(IEnumerable<Flavor> flavorsToDelete)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -324,12 +625,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = flavorsToDelete.Select(p => p.FlavorID).ToList();
+			var idsToUpdate = flavorsToDelete.Select(x => x.FlavorID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			var existingTokens = await _dbContext.FlavorSet.AsNoTracking()
 				.Where(p => idsToUpdate.Contains(p.FlavorID))
 				.Select(p => new { p.FlavorID, p.LastChangeCode })
-				.ToDictionaryAsync(p => p.FlavorID, p => p.LastChangeCode);
+				.ToDictionaryAsync(x => x.FlavorID, x => x.LastChangeCode);
 			// Check concurrency conflicts
 			foreach (var updatedFlavor in flavorsToDelete)
 			{
@@ -360,16 +661,60 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkDeleteAsync(flavorsToDelete, bulkConfig);
 			}
 		}
-		private IQueryable<QueryDTO> BuildQuery()
+        public void BulkDelete(IEnumerable<Flavor> flavorsToDelete)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //UpdateByProperties = new List<string> { nameof(Flavor.FlavorID), nameof(Flavor.LastChangeCode) },
+                //SetOutputIdentity = true,
+                //PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = flavorsToDelete.Select(x => x.FlavorID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            var existingTokens = _dbContext.FlavorSet.AsNoTracking()
+                .Where(p => idsToUpdate.Contains(p.FlavorID))
+                .Select(p => new { p.FlavorID, p.LastChangeCode })
+                .ToDictionary(x => x.FlavorID, x => x.LastChangeCode);
+            // Check concurrency conflicts
+            foreach (var updatedFlavor in flavorsToDelete)
+            {
+                if (!existingTokens.TryGetValue(updatedFlavor.FlavorID, out var token) || token != updatedFlavor.LastChangeCode)
+                {
+                    throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                }
+                updatedFlavor.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkDelete(flavorsToDelete, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkDelete(flavorsToDelete, bulkConfig);
+            }
+        }
+        private IQueryable<QueryDTO> BuildQuery()
 		{
 			return from flavor in _dbContext.FlavorSet.AsNoTracking()
 				   from pac in _dbContext.PacSet.AsNoTracking().Where(l => l.PacID == flavor.PacID).DefaultIfEmpty() //PacID
-																														//ENDSET
 				   select new QueryDTO
                    {
 					   FlavorObj = flavor,
 					   PacCode = pac.Code, //PacID
-											 //ENDSET
 				   };
         }
 		private List<Flavor> ProcessMappings(List<QueryDTO> data)
@@ -377,7 +722,6 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.FlavorObj.PacCodePeek = item.PacCode.Value; //PacID
-                //ENDSET
             }
             List<Flavor> results = data.Select(r => r.FlavorObj).ToList();
             return results;
@@ -386,12 +730,19 @@ namespace FS.Farm.EF.Managers
         public async Task<List<Flavor>> GetByPacAsync(int id)
         {
             var flavorsWithCodes = await BuildQuery()
-                                    .Where(p => p.FlavorObj.PacID == id)
+                                    .Where(x => x.FlavorObj.PacID == id)
                                     .ToListAsync();
             List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
             return finalFlavors;
         }
-		//ENDSET
+        public List<Flavor> GetByPac(int id)
+        {
+            var flavorsWithCodes = BuildQuery()
+                                    .Where(x => x.FlavorObj.PacID == id)
+                                    .ToList();
+            List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
+            return finalFlavors;
+        }
         private class QueryDTO
         {
             public Flavor FlavorObj { get; set; }

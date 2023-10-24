@@ -15,7 +15,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-            //ENDSET
             return new DateGreaterThanFilter
             {
                 DateGreaterThanFilterID = _counter,
@@ -27,14 +26,29 @@ namespace FS.Farm.EF.Test.Factory
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                //ENDSET
+            };
+        }
+        public static DateGreaterThanFilter Create(FarmDbContext context)
+        {
+            _counter++;
+            var pac = PacFactory.CreateAndSave(context); //PacID
+            return new DateGreaterThanFilter
+            {
+                DateGreaterThanFilterID = _counter,
+                Code = Guid.NewGuid(),
+                DayCount = 0,
+                Description = String.Empty,
+                DisplayOrder = 0,
+                IsActive = false,
+                LookupEnumName = String.Empty,
+                Name = String.Empty,
+                PacID = pac.PacID,
             };
         }
         public static async Task<DateGreaterThanFilter> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-            //ENDSET
             DateGreaterThanFilter result =  new DateGreaterThanFilter
             {
                 DateGreaterThanFilterID = _counter,
@@ -46,10 +60,29 @@ namespace FS.Farm.EF.Test.Factory
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                //ENDSET
             };
             DateGreaterThanFilterManager dateGreaterThanFilterManager = new DateGreaterThanFilterManager(context);
             result = await dateGreaterThanFilterManager.AddAsync(result);
+            return result;
+        }
+        public static DateGreaterThanFilter CreateAndSave(FarmDbContext context)
+        {
+            _counter++;
+            var pac =   PacFactory.CreateAndSave(context); //PacID
+            DateGreaterThanFilter result = new DateGreaterThanFilter
+            {
+                DateGreaterThanFilterID = _counter,
+                Code = Guid.NewGuid(),
+                DayCount = 0,
+                Description = String.Empty,
+                DisplayOrder = 0,
+                IsActive = false,
+                LookupEnumName = String.Empty,
+                Name = String.Empty,
+                PacID = pac.PacID,
+            };
+            DateGreaterThanFilterManager dateGreaterThanFilterManager = new DateGreaterThanFilterManager(context);
+            result = dateGreaterThanFilterManager.Add(result);
             return result;
         }
     }

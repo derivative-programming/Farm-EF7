@@ -6,7 +6,6 @@ using FS.Farm.EF.Test.Factory;
 using Microsoft.Data.Sqlite;
 using System.Text.RegularExpressions;
 using FS.Common.Diagnostics.Loggers;
-
 namespace FS.Farm.EF.Test.Tests.Reports.Grid
 {
     [TestClass]
@@ -21,11 +20,29 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             {
                 context.Database.EnsureCreated();
                 var reportGenerator = new PacUserLandList(context);
-                var land1 = await CreateTestLand(context);
+                var land1 = await CreateTestLandAsync(context);
                 var manager = new LandManager(context);
                 await manager.AddAsync(land1);
                 var count = await manager.GetTotalCountAsync();
                 var resultCount = await reportGenerator.GetCountAsync(
+                    Guid.Empty,
+                    land1.PacCodePeek);
+                Assert.AreEqual(1, resultCount);
+            }
+        }
+        [TestMethod]
+        public void GetCount_ShouldReturnSingleCount()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var reportGenerator = new PacUserLandList(context);
+                var land1 = CreateTestLand(context);
+                var manager = new LandManager(context);
+                manager.Add(land1);
+                var count = manager.GetTotalCount();
+                var resultCount = reportGenerator.GetCount(
                     Guid.Empty,
                     land1.PacCodePeek);
                 Assert.AreEqual(1, resultCount);
@@ -39,11 +56,29 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             {
                 context.Database.EnsureCreated();
                 var reportGenerator = new PacUserLandList(context);
-                var land1 = await CreateTestLand(context);
+                var land1 = await CreateTestLandAsync(context);
                 var manager = new LandManager(context);
                 await manager.AddAsync(land1);
                 var count = await manager.GetTotalCountAsync();
                 var resultCount = await reportGenerator.GetCountAsync(
+                    Guid.Empty,
+                    Guid.NewGuid());
+                Assert.AreEqual(0, resultCount);
+            }
+        }
+        [TestMethod]
+        public void GetCount_ShouldReturnZeroCount()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var reportGenerator = new PacUserLandList(context);
+                var land1 = CreateTestLand(context);
+                var manager = new LandManager(context);
+                manager.Add(land1);
+                var count = manager.GetTotalCount();
+                var resultCount = reportGenerator.GetCount(
                     Guid.Empty,
                     Guid.NewGuid());
                 Assert.AreEqual(0, resultCount);
@@ -57,11 +92,34 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             {
                 context.Database.EnsureCreated();
                 var reportGenerator = new PacUserLandList(context);
-                var land1 = await CreateTestLand(context);
+                var land1 = await CreateTestLandAsync(context);
                 var manager = new LandManager(context);
                 await manager.AddAsync(land1);
                 var count = await manager.GetTotalCountAsync();
                 var result = await reportGenerator.GetAsync(
+                    Guid.Empty,
+                    land1.PacCodePeek,
+                    1,
+                    100,
+                    string.Empty,
+                    false
+                    );
+                Assert.AreEqual(1, result.Count);
+            }
+        }
+        [TestMethod]
+        public void Get_ShouldReturnSingleItem()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var reportGenerator = new PacUserLandList(context);
+                var land1 = CreateTestLand(context);
+                var manager = new LandManager(context);
+                manager.Add(land1);
+                var count = manager.GetTotalCount();
+                var result = reportGenerator.Get(
                     Guid.Empty,
                     land1.PacCodePeek,
                     1,
@@ -80,7 +138,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             {
                 context.Database.EnsureCreated();
                 var reportGenerator = new PacUserLandList(context);
-                var land1 = await CreateTestLand(context);
+                var land1 = await CreateTestLandAsync(context);
                 var manager = new LandManager(context);
                 await manager.AddAsync(land1);
                 var count = await manager.GetTotalCountAsync();
@@ -95,9 +153,36 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<Land> CreateTestLand(FarmDbContext dbContext)
+        [TestMethod]
+        public void Get_ShouldReturnNoItem()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var reportGenerator = new PacUserLandList(context);
+                var land1 = CreateTestLand(context);
+                var manager = new LandManager(context);
+                manager.Add(land1);
+                var count = manager.GetTotalCount();
+                var result = reportGenerator.Get(
+                    Guid.Empty,
+                    Guid.NewGuid(),
+                    1,
+                    100,
+                    string.Empty,
+                    false
+                    );
+                Assert.AreEqual(0, result.Count);
+            }
+        }
+        private async Task<Land> CreateTestLandAsync(FarmDbContext dbContext)
         {
             return await LandFactory.CreateAsync(dbContext);
+        }
+        private Land CreateTestLand(FarmDbContext dbContext)
+        {
+            return   LandFactory.Create(dbContext);
         }
         private DbContextOptions<FarmDbContext> CreateInMemoryDbContextOptions()
         {

@@ -15,7 +15,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-            //ENDSET
             return new TriStateFilter
             {
                 TriStateFilterID = _counter,
@@ -27,14 +26,29 @@ namespace FS.Farm.EF.Test.Factory
                 Name = String.Empty,
                 PacID = pac.PacID,
                 StateIntValue = 0,
-                //ENDSET
+            };
+        }
+        public static TriStateFilter Create(FarmDbContext context)
+        {
+            _counter++;
+            var pac = PacFactory.CreateAndSave(context); //PacID
+            return new TriStateFilter
+            {
+                TriStateFilterID = _counter,
+                Code = Guid.NewGuid(),
+                Description = String.Empty,
+                DisplayOrder = 0,
+                IsActive = false,
+                LookupEnumName = String.Empty,
+                Name = String.Empty,
+                PacID = pac.PacID,
+                StateIntValue = 0,
             };
         }
         public static async Task<TriStateFilter> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-            //ENDSET
             TriStateFilter result =  new TriStateFilter
             {
                 TriStateFilterID = _counter,
@@ -46,10 +60,29 @@ namespace FS.Farm.EF.Test.Factory
                 Name = String.Empty,
                 PacID = pac.PacID,
                 StateIntValue = 0,
-                //ENDSET
             };
             TriStateFilterManager triStateFilterManager = new TriStateFilterManager(context);
             result = await triStateFilterManager.AddAsync(result);
+            return result;
+        }
+        public static TriStateFilter CreateAndSave(FarmDbContext context)
+        {
+            _counter++;
+            var pac =   PacFactory.CreateAndSave(context); //PacID
+            TriStateFilter result = new TriStateFilter
+            {
+                TriStateFilterID = _counter,
+                Code = Guid.NewGuid(),
+                Description = String.Empty,
+                DisplayOrder = 0,
+                IsActive = false,
+                LookupEnumName = String.Empty,
+                Name = String.Empty,
+                PacID = pac.PacID,
+                StateIntValue = 0,
+            };
+            TriStateFilterManager triStateFilterManager = new TriStateFilterManager(context);
+            result = triStateFilterManager.Add(result);
             return result;
         }
     }

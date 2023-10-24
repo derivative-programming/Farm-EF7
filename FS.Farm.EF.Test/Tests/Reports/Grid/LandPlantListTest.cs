@@ -26,7 +26,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var reportGenerator = new LandPlantList(context);
 
-                var plant1 = await CreateTestPlant(context);
+                var plant1 = await CreateTestPlantAsync(context);
 
                 var manager = new PlantManager(context);
 
@@ -58,6 +58,48 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             }
         }
 
+        [TestMethod]
+        public void GetCount_ShouldReturnSingleCount()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+
+                var reportGenerator = new LandPlantList(context);
+
+                var plant1 = CreateTestPlant(context);
+
+                var manager = new PlantManager(context);
+
+                manager.Add(plant1);
+
+                var count = manager.GetTotalCount();
+
+                var resultCount = reportGenerator.GetCount(
+                    null,   //flavorCode
+                    null,   //someIntVal
+                    null,   //someBigIntVal
+                    null,   //someFloatVal
+                    null,   //someBitVal
+                    null,   //isEditAllowed
+                    null,   //isDeleteAllowed
+                    null,   //someDecimalVal
+                    null,   //someMinUTCDateTimeVal
+                    null,   //someMinDateVal
+                    null,   //someMoneyVal
+                    null,   //someNVarCharVal
+                    null,   //someVarCharVal
+                    null,   //someTextVal
+                    null,   //somePhoneNumber
+                    null,   //someEmailAddress
+                    Guid.Empty,
+                    plant1.LandCodePeek);
+
+                Assert.AreEqual(1, resultCount);
+            }
+        }
 
         [TestMethod]
         public async Task GetCountAsync_ShouldReturnZeroCount()
@@ -70,7 +112,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var reportGenerator = new LandPlantList(context);
 
-                var plant1 = await CreateTestPlant(context);
+                var plant1 = await CreateTestPlantAsync(context);
 
                 var manager = new PlantManager(context);
 
@@ -104,6 +146,49 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
 
         [TestMethod]
+        public void GetCount_ShouldReturnZeroCount()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+
+                var reportGenerator = new LandPlantList(context);
+
+                var plant1 = CreateTestPlant(context);
+
+                var manager = new PlantManager(context);
+
+                manager.Add(plant1);
+
+                var count = manager.GetTotalCount();
+
+                var resultCount = reportGenerator.GetCount(
+                    null,   //flavorCode
+                    null,   //someIntVal
+                    null,   //someBigIntVal
+                    null,   //someFloatVal
+                    null,   //someBitVal
+                    null,   //isEditAllowed
+                    null,   //isDeleteAllowed
+                    null,   //someDecimalVal
+                    null,   //someMinUTCDateTimeVal
+                    null,   //someMinDateVal
+                    null,   //someMoneyVal
+                    null,   //someNVarCharVal
+                    null,   //someVarCharVal
+                    null,   //someTextVal
+                    null,   //somePhoneNumber
+                    null,   //someEmailAddress
+                    Guid.Empty,
+                    Guid.NewGuid());
+
+                Assert.AreEqual(0, resultCount);
+            }
+        }
+
+        [TestMethod]
         public async Task GetAsync_ShouldReturnSingleItem()
         {
             var options = CreateSQLiteInMemoryDbContextOptions();
@@ -114,7 +199,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var reportGenerator = new LandPlantList(context);
 
-                var plant1 = await CreateTestPlant(context);
+                var plant1 = await CreateTestPlantAsync(context);
 
                 var manager = new PlantManager(context);
 
@@ -151,6 +236,53 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             }
         }
 
+        [TestMethod]
+        public void Get_ShouldReturnSingleItem()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+
+                var reportGenerator = new LandPlantList(context);
+
+                var plant1 = CreateTestPlant(context);
+
+                var manager = new PlantManager(context);
+
+                manager.Add(plant1);
+
+                var count = manager.GetTotalCount();
+
+                var result = reportGenerator.Get(
+                    null,   //flavorCode
+                    null,   //someIntVal
+                    null,   //someBigIntVal
+                    null,   //someFloatVal
+                    null,   //someBitVal
+                    null,   //isEditAllowed
+                    null,   //isDeleteAllowed
+                    null,   //someDecimalVal
+                    null,   //someMinUTCDateTimeVal
+                    null,   //someMinDateVal
+                    null,   //someMoneyVal
+                    null,   //someNVarCharVal
+                    null,   //someVarCharVal
+                    null,   //someTextVal
+                    null,   //somePhoneNumber
+                    null,   //someEmailAddress
+                    Guid.Empty,
+                    plant1.LandCodePeek,
+                    1,
+                    100,
+                    string.Empty,
+                    false
+                    );
+
+                Assert.AreEqual(1, result.Count);
+            }
+        }
 
         [TestMethod]
         public async Task GetAsync_ShouldReturnNoItem()
@@ -163,7 +295,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var reportGenerator = new LandPlantList(context);
 
-                var plant1 = await CreateTestPlant(context);
+                var plant1 = await CreateTestPlantAsync(context);
 
                 var manager = new PlantManager(context);
 
@@ -200,9 +332,60 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
             }
         }
 
-        private async Task<Plant> CreateTestPlant(FarmDbContext dbContext)
+        [TestMethod]
+        public void Get_ShouldReturnNoItem()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+
+                var reportGenerator = new LandPlantList(context);
+
+                var plant1 = CreateTestPlant(context);
+
+                var manager = new PlantManager(context);
+
+                manager.Add(plant1);
+
+                var count = manager.GetTotalCount();
+
+                var result = reportGenerator.Get(
+                    null,   //flavorCode
+                    null,   //someIntVal
+                    null,   //someBigIntVal
+                    null,   //someFloatVal
+                    null,   //someBitVal
+                    null,   //isEditAllowed
+                    null,   //isDeleteAllowed
+                    null,   //someDecimalVal
+                    null,   //someMinUTCDateTimeVal
+                    null,   //someMinDateVal
+                    null,   //someMoneyVal
+                    null,   //someNVarCharVal
+                    null,   //someVarCharVal
+                    null,   //someTextVal
+                    null,   //somePhoneNumber
+                    null,   //someEmailAddress
+                    Guid.Empty,
+                    Guid.NewGuid(),
+                    1,
+                    100,
+                    string.Empty,
+                    false
+                    );
+
+                Assert.AreEqual(0, result.Count);
+            }
+        }
+        private async Task<Plant> CreateTestPlantAsync(FarmDbContext dbContext)
         {
             return await PlantFactory.CreateAsync(dbContext);
+        }
+        private Plant CreateTestPlant(FarmDbContext dbContext)
+        {
+            return   PlantFactory.Create(dbContext);
         }
 
 

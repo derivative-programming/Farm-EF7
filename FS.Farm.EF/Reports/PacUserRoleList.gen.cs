@@ -29,6 +29,16 @@ namespace FS.Farm.EF.Reports
                 contextCode);
             return await query.CountAsync();
         }
+        public int GetCount(
+           System.Guid userID,
+           System.Guid contextCode)
+        {
+            var query = BuildQuery();
+            query = ApplyFilters(query,
+                userID,
+                contextCode);
+            return query.Count();
+        }
         public async Task<List<PacUserRoleListDTO>> GetAsync(
            System.Guid userID,
            System.Guid contextCode,
@@ -55,6 +65,34 @@ namespace FS.Farm.EF.Reports
             // Applying pagination
             query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
             var reports = await query.Select(x => MapPacUserRoleListDTO(x)).ToListAsync();
+            return reports;
+        }
+        public List<PacUserRoleListDTO> Get(
+           System.Guid userID,
+           System.Guid contextCode,
+            int pageNumber,
+            int itemCountPerPage,
+            string orderByColumnName,
+            bool orderByDescending)
+        {
+            var query = BuildQuery();
+            query = ApplyFilters(query,
+                userID,
+                contextCode);
+            if (!string.IsNullOrEmpty(orderByColumnName))
+            {
+                if (orderByDescending)
+                {
+                    query = query.OrderByDescending(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
+                }
+                else
+                {
+                    query = query.OrderBy(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
+                }
+            }
+            // Applying pagination
+            query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
+            var reports = query.Select(x => MapPacUserRoleListDTO(x)).ToList();
             return reports;
         }
         public class PacUserRoleListDTO

@@ -41,18 +41,54 @@ namespace FS.Farm.EF.Managers
 				return orgCustomer;
 			}
 		}
-		public async Task<int> GetTotalCountAsync()
+        public OrgCustomer Add(OrgCustomer orgCustomer)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.OrgCustomerSet.Add(orgCustomer);
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(orgCustomer).State = EntityState.Detached;
+                    transaction.Commit();
+                    return orgCustomer;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.OrgCustomerSet.Add(orgCustomer);
+                _dbContext.SaveChanges();
+                _dbContext.Entry(orgCustomer).State = EntityState.Detached;
+                return orgCustomer;
+            }
+        }
+        public async Task<int> GetTotalCountAsync()
 		{
 			return await _dbContext.OrgCustomerSet.AsNoTracking().CountAsync();
 		}
-		public async Task<int?> GetMaxIdAsync()
+        public int GetTotalCount()
+        {
+            return _dbContext.OrgCustomerSet.AsNoTracking().Count();
+        }
+        public async Task<int?> GetMaxIdAsync()
 		{
-			return await _dbContext.OrgCustomerSet.AsNoTracking().MaxAsync(p => (int?)p.OrgCustomerID);
-		}
-		public async Task<OrgCustomer> GetByIdAsync(int id)
+			return await _dbContext.OrgCustomerSet.AsNoTracking().MaxAsync(x => (int?)x.OrgCustomerID);
+        }
+        public int? GetMaxId()
+        {
+            return _dbContext.OrgCustomerSet.AsNoTracking().Max(x => (int?)x.OrgCustomerID);
+        }
+        public async Task<OrgCustomer> GetByIdAsync(int id)
 		{
 			var orgCustomersWithCodes = await BuildQuery()
-									.Where(p => p.OrgCustomerObj.OrgCustomerID == id)
+									.Where(x => x.OrgCustomerObj.OrgCustomerID == id)
 									.ToListAsync();
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             if (finalOrgCustomers.Count > 0)
@@ -61,15 +97,27 @@ namespace FS.Farm.EF.Managers
             }
 			return null;
         }
-		public async Task<OrgCustomer> DirtyGetByIdAsync(int id) //to test
+        public OrgCustomer GetById(int id)
+        {
+            var orgCustomersWithCodes = BuildQuery()
+                                    .Where(x => x.OrgCustomerObj.OrgCustomerID == id)
+                                    .ToList();
+            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+            if (finalOrgCustomers.Count > 0)
+            {
+                return finalOrgCustomers[0];
+            }
+            return null;
+        }
+        public async Task<OrgCustomer> DirtyGetByIdAsync(int id) //to test
 		{
-			//return await _dbContext.OrgCustomerSet.AsNoTracking().FirstOrDefaultAsync(p => p.OrgCustomerID == id);
+			//return await _dbContext.OrgCustomerSet.AsNoTracking().FirstOrDefaultAsync(x => x.OrgCustomerID == id);
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
 			try
 			{
                 var orgCustomersWithCodes = await BuildQuery()
-                                        .Where(p => p.OrgCustomerObj.OrgCustomerID == id)
+                                        .Where(x => x.OrgCustomerObj.OrgCustomerID == id)
                                         .ToListAsync();
                 List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -87,12 +135,38 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<OrgCustomer> GetByCodeAsync(Guid code)
+        public OrgCustomer DirtyGetById(int id) //to test
+        {
+            //return await _dbContext.OrgCustomerSet.AsNoTracking().FirstOrDefaultAsync(x => x.OrgCustomerID == id);
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var orgCustomersWithCodes = BuildQuery()
+                                        .Where(x => x.OrgCustomerObj.OrgCustomerID == id)
+                                        .ToList();
+                List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalOrgCustomers.Count > 0)
+                {
+                    return finalOrgCustomers[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<OrgCustomer> GetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
             var orgCustomersWithCodes = await BuildQuery()
-                                    .Where(p => p.OrgCustomerObj.Code == code)
+                                    .Where(x => x.OrgCustomerObj.Code == code)
                                     .ToListAsync();
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             if (finalOrgCustomers.Count > 0)
@@ -101,7 +175,21 @@ namespace FS.Farm.EF.Managers
             }
             return null;
         }
-		public async Task<OrgCustomer> DirtyGetByCodeAsync(Guid code)
+        public OrgCustomer GetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            var orgCustomersWithCodes = BuildQuery()
+                                    .Where(x => x.OrgCustomerObj.Code == code)
+                                    .ToList();
+            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+            if (finalOrgCustomers.Count > 0)
+            {
+                return finalOrgCustomers[0];
+            }
+            return null;
+        }
+        public async Task<OrgCustomer> DirtyGetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
@@ -110,7 +198,7 @@ namespace FS.Farm.EF.Managers
 			try
 			{
                 var orgCustomersWithCodes = await BuildQuery()
-                                        .Where(p => p.OrgCustomerObj.Code == code)
+                                        .Where(x => x.OrgCustomerObj.Code == code)
                                         .ToListAsync();
                 List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
                 // Commit transaction (this essentially just ends it since we're only reading data)
@@ -128,14 +216,48 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
-		public async Task<IEnumerable<OrgCustomer>> GetAllAsync()
+        public OrgCustomer DirtyGetByCode(Guid code)
+        {
+            if (code == Guid.Empty)
+                throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+            // Begin a new transaction with the READ UNCOMMITTED isolation level
+            using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+            try
+            {
+                var orgCustomersWithCodes = BuildQuery()
+                                        .Where(x => x.OrgCustomerObj.Code == code)
+                                        .ToList();
+                List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+                // Commit transaction (this essentially just ends it since we're only reading data)
+                transaction.Commit();
+                if (finalOrgCustomers.Count > 0)
+                {
+                    return finalOrgCustomers[0];
+                }
+                return null;
+            }
+            catch
+            {
+                // Rollback the transaction in case of any exceptions
+                transaction.Rollback();
+                throw; // Re-throw the exception
+            }
+        }
+        public async Task<IEnumerable<OrgCustomer>> GetAllAsync()
 		{
             var orgCustomersWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             return finalOrgCustomers;
         }
-		public async Task<bool> UpdateAsync(OrgCustomer orgCustomerToUpdate)
+        public IEnumerable<OrgCustomer> GetAll()
+        {
+            var orgCustomersWithCodes = BuildQuery()
+                                    .ToList();
+            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+            return finalOrgCustomers;
+        }
+        public async Task<bool> UpdateAsync(OrgCustomer orgCustomerToUpdate)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -176,7 +298,48 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task<bool> DeleteAsync(int id)
+        public bool Update(OrgCustomer orgCustomerToUpdate)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.OrgCustomerSet.Attach(orgCustomerToUpdate);
+                    _dbContext.Entry(orgCustomerToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(orgCustomerToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    orgCustomerToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(orgCustomerToUpdate).State = EntityState.Detached;
+                    transaction.Commit();
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+            else
+            {
+                try
+                {
+                    _dbContext.OrgCustomerSet.Attach(orgCustomerToUpdate);
+                    _dbContext.Entry(orgCustomerToUpdate).State = EntityState.Modified;
+                    //_dbContext.Entry(orgCustomerToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                    orgCustomerToUpdate.LastChangeCode = Guid.NewGuid();
+                    _dbContext.SaveChanges();
+                    _dbContext.Entry(orgCustomerToUpdate).State = EntityState.Detached;
+                    return true;
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return false;
+                }
+            }
+        }
+        public async Task<bool> DeleteAsync(int id)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
@@ -184,7 +347,7 @@ namespace FS.Farm.EF.Managers
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
 				try
 				{
-					var orgCustomer = await _dbContext.OrgCustomerSet.FirstOrDefaultAsync(p => p.OrgCustomerID == id);
+					var orgCustomer = await _dbContext.OrgCustomerSet.FirstOrDefaultAsync(x => x.OrgCustomerID == id);
 					if (orgCustomer == null) return false;
 					_dbContext.OrgCustomerSet.Remove(orgCustomer);
 					await _dbContext.SaveChangesAsync();
@@ -201,7 +364,7 @@ namespace FS.Farm.EF.Managers
 			{
 				try
 				{
-					var orgCustomer = await _dbContext.OrgCustomerSet.FirstOrDefaultAsync(p => p.OrgCustomerID == id);
+					var orgCustomer = await _dbContext.OrgCustomerSet.FirstOrDefaultAsync(x => x.OrgCustomerID == id);
 					if (orgCustomer == null) return false;
 					_dbContext.OrgCustomerSet.Remove(orgCustomer);
 					await _dbContext.SaveChangesAsync();
@@ -213,7 +376,44 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
-		public async Task BulkInsertAsync(IEnumerable<OrgCustomer> orgCustomers)
+        public bool Delete(int id)
+        {
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    var orgCustomer = _dbContext.OrgCustomerSet.FirstOrDefault(x => x.OrgCustomerID == id);
+                    if (orgCustomer == null) return false;
+                    _dbContext.OrgCustomerSet.Remove(orgCustomer);
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                    return true;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                try
+                {
+                    var orgCustomer = _dbContext.OrgCustomerSet.FirstOrDefault(x => x.OrgCustomerID == id);
+                    if (orgCustomer == null) return false;
+                    _dbContext.OrgCustomerSet.Remove(orgCustomer);
+                    _dbContext.SaveChanges();
+                    return true;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+        }
+        public async Task BulkInsertAsync(IEnumerable<OrgCustomer> orgCustomers)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -257,7 +457,51 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkInsertAsync(orgCustomers, bulkConfig);
 			}
 		}
-		public async Task BulkUpdateAsync(IEnumerable<OrgCustomer> updatedOrgCustomers)
+        public void BulkInsert(IEnumerable<OrgCustomer> orgCustomers)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(OrgCustomer.OrgCustomerID), nameof(OrgCustomer.LastChangeCode) },
+                SetOutputIdentity = true,
+                PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            foreach (var orgCustomer in orgCustomers)
+            {
+                orgCustomer.LastChangeCode = Guid.NewGuid();
+                var entry = _dbContext.Entry(orgCustomer);
+                if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
+                {
+                    entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                }
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkInsert(orgCustomers, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                _dbContext.BulkInsert(orgCustomers, bulkConfig);
+            }
+        }
+        public async Task BulkUpdateAsync(IEnumerable<OrgCustomer> updatedOrgCustomers)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -267,12 +511,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = updatedOrgCustomers.Select(p => p.OrgCustomerID).ToList();
+			var idsToUpdate = updatedOrgCustomers.Select(x => x.OrgCustomerID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			//var existingTokens = await _dbContext.OrgCustomerSet.AsNoTracking()
 			//	.Where(p => idsToUpdate.Contains(p.OrgCustomerID))
 			//	.Select(p => new { p.OrgCustomerID, p.LastChangeCode })
-			//	.ToDictionaryAsync(p => p.OrgCustomerID, p => p.LastChangeCode);
+			//	.ToDictionaryAsync(x => x.OrgCustomerID, x => x.LastChangeCode);
 			//// Check concurrency conflicts
 			foreach (var updatedOrgCustomer in updatedOrgCustomers)
 			{
@@ -314,7 +558,64 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkUpdateAsync(updatedOrgCustomers, bulkConfig);
 			}
 		}
-		public async Task BulkDeleteAsync(IEnumerable<OrgCustomer> orgCustomersToDelete)
+        public void BulkUpdate(IEnumerable<OrgCustomer> updatedOrgCustomers)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //	UpdateByProperties = new List<string> { nameof(OrgCustomer.OrgCustomerID), nameof(OrgCustomer.LastChangeCode) },
+                //	SetOutputIdentity = true,
+                //	PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = updatedOrgCustomers.Select(x => x.OrgCustomerID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            //var existingTokens = await _dbContext.OrgCustomerSet.AsNoTracking()
+            //	.Where(p => idsToUpdate.Contains(p.OrgCustomerID))
+            //	.Select(p => new { p.OrgCustomerID, p.LastChangeCode })
+            //	.ToDictionaryAsync(x => x.OrgCustomerID, x => x.LastChangeCode);
+            //// Check concurrency conflicts
+            foreach (var updatedOrgCustomer in updatedOrgCustomers)
+            {
+                //	if (!existingTokens.TryGetValue(updatedOrgCustomer.OrgCustomerID, out var token) || token != updatedOrgCustomer.LastChangeCode)
+                //	{
+                //		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                //	}
+                //	updatedOrgCustomer.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+                //	_dbContext.OrgCustomerSet.Attach(updatedOrgCustomer);
+                //	_dbContext.Entry(updatedOrgCustomer).State = EntityState.Modified;
+                //	var entry = _dbContext.Entry(updatedOrgCustomer);
+                //	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                //_dbContext.OrgCustomerSet.Attach(updatedOrgCustomer);
+                //_dbContext.Entry(updatedOrgCustomer).State = EntityState.Modified;
+                //_dbContext.Entry(orgCustomerToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
+                //updatedOrgCustomer.LastChangeCode = Guid.NewGuid();
+                //await _dbContext.SaveChangesAsync();
+                //_dbContext.Entry(orgCustomerToUpdate).State = EntityState.Detached;
+            }
+            //TODO concurrency token check
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkUpdate(updatedOrgCustomers, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkUpdate(updatedOrgCustomers, bulkConfig);
+            }
+        }
+        public async Task BulkDeleteAsync(IEnumerable<OrgCustomer> orgCustomersToDelete)
 		{
 			var bulkConfig = new BulkConfig
 			{
@@ -324,12 +625,12 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
-			var idsToUpdate = orgCustomersToDelete.Select(p => p.OrgCustomerID).ToList();
+			var idsToUpdate = orgCustomersToDelete.Select(x => x.OrgCustomerID).ToList();
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			var existingTokens = await _dbContext.OrgCustomerSet.AsNoTracking()
 				.Where(p => idsToUpdate.Contains(p.OrgCustomerID))
 				.Select(p => new { p.OrgCustomerID, p.LastChangeCode })
-				.ToDictionaryAsync(p => p.OrgCustomerID, p => p.LastChangeCode);
+				.ToDictionaryAsync(x => x.OrgCustomerID, x => x.LastChangeCode);
 			// Check concurrency conflicts
 			foreach (var updatedOrgCustomer in orgCustomersToDelete)
 			{
@@ -360,18 +661,62 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkDeleteAsync(orgCustomersToDelete, bulkConfig);
 			}
 		}
-		private IQueryable<QueryDTO> BuildQuery()
+        public void BulkDelete(IEnumerable<OrgCustomer> orgCustomersToDelete)
+        {
+            var bulkConfig = new BulkConfig
+            {
+                //UpdateByProperties = new List<string> { nameof(OrgCustomer.OrgCustomerID), nameof(OrgCustomer.LastChangeCode) },
+                //SetOutputIdentity = true,
+                //PreserveInsertOrder = true,
+                BatchSize = 5000,
+                EnableShadowProperties = true
+            };
+            var idsToUpdate = orgCustomersToDelete.Select(x => x.OrgCustomerID).ToList();
+            // Fetch only IDs and ConcurrencyToken values for existing entities
+            var existingTokens = _dbContext.OrgCustomerSet.AsNoTracking()
+                .Where(p => idsToUpdate.Contains(p.OrgCustomerID))
+                .Select(p => new { p.OrgCustomerID, p.LastChangeCode })
+                .ToDictionary(x => x.OrgCustomerID, x => x.LastChangeCode);
+            // Check concurrency conflicts
+            foreach (var updatedOrgCustomer in orgCustomersToDelete)
+            {
+                if (!existingTokens.TryGetValue(updatedOrgCustomer.OrgCustomerID, out var token) || token != updatedOrgCustomer.LastChangeCode)
+                {
+                    throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
+                }
+                updatedOrgCustomer.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+            }
+            var existingTransaction = _dbContext.Database.CurrentTransaction;
+            if (existingTransaction == null)
+            {
+                using var transaction = _dbContext.Database.BeginTransaction();
+                try
+                {
+                    _dbContext.BulkDelete(orgCustomersToDelete, bulkConfig);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            else
+            {
+                // If there's an existing transaction, just perform the bulk update without managing the transaction here.
+                _dbContext.BulkDelete(orgCustomersToDelete, bulkConfig);
+            }
+        }
+        private IQueryable<QueryDTO> BuildQuery()
 		{
 			return from orgCustomer in _dbContext.OrgCustomerSet.AsNoTracking()
 				   from customer in _dbContext.CustomerSet.AsNoTracking().Where(f => f.CustomerID == orgCustomer.CustomerID).DefaultIfEmpty() //CustomerID
 				   from organization in _dbContext.OrganizationSet.AsNoTracking().Where(l => l.OrganizationID == orgCustomer.OrganizationID).DefaultIfEmpty() //OrganizationID
-																														//ENDSET
 				   select new QueryDTO
                    {
 					   OrgCustomerObj = orgCustomer,
 					   CustomerCode = customer.Code, //CustomerID
 					   OrganizationCode = organization.Code, //OrganizationID
-											 //ENDSET
 				   };
         }
 		private List<OrgCustomer> ProcessMappings(List<QueryDTO> data)
@@ -380,7 +725,6 @@ namespace FS.Farm.EF.Managers
             {
                 item.OrgCustomerObj.CustomerCodePeek = item.CustomerCode.Value; //CustomerID
                 item.OrgCustomerObj.OrganizationCodePeek = item.OrganizationCode.Value; //OrganizationID
-                //ENDSET
             }
             List<OrgCustomer> results = data.Select(r => r.OrgCustomerObj).ToList();
             return results;
@@ -389,8 +733,16 @@ namespace FS.Farm.EF.Managers
         public async Task<List<OrgCustomer>> GetByCustomerAsync(int id)
         {
             var orgCustomersWithCodes = await BuildQuery()
-                                    .Where(p => p.OrgCustomerObj.CustomerID == id)
+                                    .Where(x => x.OrgCustomerObj.CustomerID == id)
                                     .ToListAsync();
+            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+            return finalOrgCustomers;
+        }
+        public List<OrgCustomer> GetByCustomer(int id)
+        {
+            var orgCustomersWithCodes = BuildQuery()
+                                    .Where(x => x.OrgCustomerObj.CustomerID == id)
+                                    .ToList();
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             return finalOrgCustomers;
         }
@@ -398,12 +750,19 @@ namespace FS.Farm.EF.Managers
         public async Task<List<OrgCustomer>> GetByOrganizationAsync(int id)
         {
             var orgCustomersWithCodes = await BuildQuery()
-                                    .Where(p => p.OrgCustomerObj.OrganizationID == id)
+                                    .Where(x => x.OrgCustomerObj.OrganizationID == id)
                                     .ToListAsync();
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             return finalOrgCustomers;
         }
-		//ENDSET
+        public List<OrgCustomer> GetByOrganization(int id)
+        {
+            var orgCustomersWithCodes = BuildQuery()
+                                    .Where(x => x.OrgCustomerObj.OrganizationID == id)
+                                    .ToList();
+            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+            return finalOrgCustomers;
+        }
         private class QueryDTO
         {
             public OrgCustomer OrgCustomerObj { get; set; }
