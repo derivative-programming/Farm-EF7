@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Models;
+using System.Data.SqlClient;
 
 namespace FS.Farm.EF
 {
@@ -7,8 +8,8 @@ namespace FS.Farm.EF
     {
         public FarmDbContext(DbContextOptions<FarmDbContext> options) : base(options)
         {
-        }
-         
+        } 
+
         public DbSet<Customer> CustomerSet { get; set; }
         public DbSet<CustomerRole> CustomerRoleSet { get; set; }
         public DbSet<DateGreaterThanFilter> DateGreaterThanFilterSet { get; set; }

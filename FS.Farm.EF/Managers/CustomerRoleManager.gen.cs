@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<CustomerRole>> GetAllAsync()
+        public async Task<List<CustomerRole>> GetAllAsync()
 		{
             var customerRolesWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
             return finalCustomerRoles;
         }
-        public IEnumerable<CustomerRole> GetAll()
+        public List<CustomerRole> GetAll()
         {
             var customerRolesWithCodes = BuildQuery()
                                     .ToList();
@@ -719,7 +719,64 @@ namespace FS.Farm.EF.Managers
 					   RoleCode = role.Code, //RoleID
 				   };
         }
-		private List<CustomerRole> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var customerRole = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (customerRole != null)
+                    {
+                        found = true;
+                        Delete(customerRole.CustomerRoleID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var customerRole = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (customerRole != null)
+                    {
+                        found = true;
+                        Delete(customerRole.CustomerRoleID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var customerRole = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (customerRole != null)
+                    {
+                        found = true;
+                        Delete(customerRole.CustomerRoleID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<CustomerRole> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

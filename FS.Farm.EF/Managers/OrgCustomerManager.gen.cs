@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<OrgCustomer>> GetAllAsync()
+        public async Task<List<OrgCustomer>> GetAllAsync()
 		{
             var orgCustomersWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             return finalOrgCustomers;
         }
-        public IEnumerable<OrgCustomer> GetAll()
+        public List<OrgCustomer> GetAll()
         {
             var orgCustomersWithCodes = BuildQuery()
                                     .ToList();
@@ -719,7 +719,64 @@ namespace FS.Farm.EF.Managers
 					   OrganizationCode = organization.Code, //OrganizationID
 				   };
         }
-		private List<OrgCustomer> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var orgCustomer = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (orgCustomer != null)
+                    {
+                        found = true;
+                        Delete(orgCustomer.OrgCustomerID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var orgCustomer = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (orgCustomer != null)
+                    {
+                        found = true;
+                        Delete(orgCustomer.OrgCustomerID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var orgCustomer = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (orgCustomer != null)
+                    {
+                        found = true;
+                        Delete(orgCustomer.OrgCustomerID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<OrgCustomer> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

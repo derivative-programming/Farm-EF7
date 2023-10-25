@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<Land>> GetAllAsync()
+        public async Task<List<Land>> GetAllAsync()
 		{
             var landsWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Land> finalLands = ProcessMappings(landsWithCodes);
             return finalLands;
         }
-        public IEnumerable<Land> GetAll()
+        public List<Land> GetAll()
         {
             var landsWithCodes = BuildQuery()
                                     .ToList();
@@ -717,7 +717,64 @@ namespace FS.Farm.EF.Managers
 					   PacCode = pac.Code, //PacID
 				   };
         }
-		private List<Land> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var land = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (land != null)
+                    {
+                        found = true;
+                        Delete(land.LandID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var land = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (land != null)
+                    {
+                        found = true;
+                        Delete(land.LandID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var land = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (land != null)
+                    {
+                        found = true;
+                        Delete(land.LandID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<Land> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

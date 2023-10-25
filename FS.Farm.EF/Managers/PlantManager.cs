@@ -316,7 +316,7 @@ namespace FS.Farm.EF.Managers
             }
         }
 
-        public async Task<IEnumerable<Plant>> GetAllAsync()
+        public async Task<List<Plant>> GetAllAsync()
 		{ 
             var plantsWithCodes = await BuildQuery() 
                                     .ToListAsync();
@@ -325,7 +325,7 @@ namespace FS.Farm.EF.Managers
 
             return finalPlants;
         }
-        public IEnumerable<Plant> GetAll()
+        public List<Plant> GetAll()
         {
             var plantsWithCodes = BuildQuery()
                                     .ToList();
@@ -877,7 +877,71 @@ namespace FS.Farm.EF.Managers
 				   }; 
         }
 
-		private List<Plant> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+
+            try
+            { 
+                while (found)
+                {
+                    found = false;
+                    var plant = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (plant != null)
+                    {
+                        found = true;
+                        Delete(plant.PlantID);
+                        delCount++;
+                    }
+                }
+
+                while (found)
+                {
+                    found = false;
+                    var plant = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (plant != null)
+                    {
+                        found = true;
+                        Delete(plant.PlantID);
+                        delCount++;
+
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+
+
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+
+            try
+            { 
+                while (found)
+                {
+                    found = false;
+                    var plant = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (plant != null)
+                    {
+                        found = true;
+                        Delete(plant.PlantID);
+                        delCount++;
+                    }
+                } 
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+
+        private List<Plant> ProcessMappings(List<QueryDTO> data)
 		{
 
             foreach (var item in data)
@@ -891,6 +955,8 @@ namespace FS.Farm.EF.Managers
 
             return results;
         }
+
+
 
         //FlvrForeignKeyID
         public async Task<List<Plant>> GetByFlvrForeignKeyAsync(int id) 

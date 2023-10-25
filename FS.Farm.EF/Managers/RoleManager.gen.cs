@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<Role>> GetAllAsync()
+        public async Task<List<Role>> GetAllAsync()
 		{
             var rolesWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Role> finalRoles = ProcessMappings(rolesWithCodes);
             return finalRoles;
         }
-        public IEnumerable<Role> GetAll()
+        public List<Role> GetAll()
         {
             var rolesWithCodes = BuildQuery()
                                     .ToList();
@@ -717,7 +717,64 @@ namespace FS.Farm.EF.Managers
 					   PacCode = pac.Code, //PacID
 				   };
         }
-		private List<Role> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var role = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (role != null)
+                    {
+                        found = true;
+                        Delete(role.RoleID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var role = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (role != null)
+                    {
+                        found = true;
+                        Delete(role.RoleID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var role = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (role != null)
+                    {
+                        found = true;
+                        Delete(role.RoleID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<Role> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

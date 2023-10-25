@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<OrgApiKey>> GetAllAsync()
+        public async Task<List<OrgApiKey>> GetAllAsync()
 		{
             var orgApiKeysWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<OrgApiKey> finalOrgApiKeys = ProcessMappings(orgApiKeysWithCodes);
             return finalOrgApiKeys;
         }
-        public IEnumerable<OrgApiKey> GetAll()
+        public List<OrgApiKey> GetAll()
         {
             var orgApiKeysWithCodes = BuildQuery()
                                     .ToList();
@@ -719,7 +719,64 @@ namespace FS.Farm.EF.Managers
 					   OrgCustomerCode = orgCustomer.Code, //OrgCustomerID
 				   };
         }
-		private List<OrgApiKey> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var orgApiKey = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (orgApiKey != null)
+                    {
+                        found = true;
+                        Delete(orgApiKey.OrgApiKeyID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var orgApiKey = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (orgApiKey != null)
+                    {
+                        found = true;
+                        Delete(orgApiKey.OrgApiKeyID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var orgApiKey = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (orgApiKey != null)
+                    {
+                        found = true;
+                        Delete(orgApiKey.OrgApiKeyID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<OrgApiKey> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

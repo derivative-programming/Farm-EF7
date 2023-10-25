@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<TriStateFilter>> GetAllAsync()
+        public async Task<List<TriStateFilter>> GetAllAsync()
 		{
             var triStateFiltersWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<TriStateFilter> finalTriStateFilters = ProcessMappings(triStateFiltersWithCodes);
             return finalTriStateFilters;
         }
-        public IEnumerable<TriStateFilter> GetAll()
+        public List<TriStateFilter> GetAll()
         {
             var triStateFiltersWithCodes = BuildQuery()
                                     .ToList();
@@ -717,7 +717,64 @@ namespace FS.Farm.EF.Managers
 					   PacCode = pac.Code, //PacID
 				   };
         }
-		private List<TriStateFilter> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var triStateFilter = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (triStateFilter != null)
+                    {
+                        found = true;
+                        Delete(triStateFilter.TriStateFilterID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var triStateFilter = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (triStateFilter != null)
+                    {
+                        found = true;
+                        Delete(triStateFilter.TriStateFilterID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var triStateFilter = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (triStateFilter != null)
+                    {
+                        found = true;
+                        Delete(triStateFilter.TriStateFilterID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<TriStateFilter> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

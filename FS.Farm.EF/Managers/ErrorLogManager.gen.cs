@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<ErrorLog>> GetAllAsync()
+        public async Task<List<ErrorLog>> GetAllAsync()
 		{
             var errorLogsWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<ErrorLog> finalErrorLogs = ProcessMappings(errorLogsWithCodes);
             return finalErrorLogs;
         }
-        public IEnumerable<ErrorLog> GetAll()
+        public List<ErrorLog> GetAll()
         {
             var errorLogsWithCodes = BuildQuery()
                                     .ToList();
@@ -717,7 +717,64 @@ namespace FS.Farm.EF.Managers
 					   PacCode = pac.Code, //PacID
 				   };
         }
-		private List<ErrorLog> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var errorLog = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (errorLog != null)
+                    {
+                        found = true;
+                        Delete(errorLog.ErrorLogID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var errorLog = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (errorLog != null)
+                    {
+                        found = true;
+                        Delete(errorLog.ErrorLogID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var errorLog = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (errorLog != null)
+                    {
+                        found = true;
+                        Delete(errorLog.ErrorLogID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<ErrorLog> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

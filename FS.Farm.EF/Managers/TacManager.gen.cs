@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<Tac>> GetAllAsync()
+        public async Task<List<Tac>> GetAllAsync()
 		{
             var tacsWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             return finalTacs;
         }
-        public IEnumerable<Tac> GetAll()
+        public List<Tac> GetAll()
         {
             var tacsWithCodes = BuildQuery()
                                     .ToList();
@@ -717,7 +717,64 @@ namespace FS.Farm.EF.Managers
 					   PacCode = pac.Code, //PacID
 				   };
         }
-		private List<Tac> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var tac = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (tac != null)
+                    {
+                        found = true;
+                        Delete(tac.TacID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var tac = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (tac != null)
+                    {
+                        found = true;
+                        Delete(tac.TacID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var tac = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (tac != null)
+                    {
+                        found = true;
+                        Delete(tac.TacID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<Tac> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

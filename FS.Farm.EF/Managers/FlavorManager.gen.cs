@@ -243,14 +243,14 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
-        public async Task<IEnumerable<Flavor>> GetAllAsync()
+        public async Task<List<Flavor>> GetAllAsync()
 		{
             var flavorsWithCodes = await BuildQuery()
                                     .ToListAsync();
             List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
             return finalFlavors;
         }
-        public IEnumerable<Flavor> GetAll()
+        public List<Flavor> GetAll()
         {
             var flavorsWithCodes = BuildQuery()
                                     .ToList();
@@ -717,7 +717,64 @@ namespace FS.Farm.EF.Managers
 					   PacCode = pac.Code, //PacID
 				   };
         }
-		private List<Flavor> ProcessMappings(List<QueryDTO> data)
+        public int ClearTestObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var flavor = GetByCode(Guid.Parse("11111111-1111-1111-1111-111111111111"));
+                    if (flavor != null)
+                    {
+                        found = true;
+                        Delete(flavor.FlavorID);
+                        delCount++;
+                    }
+                }
+                while (found)
+                {
+                    found = false;
+                    var flavor = GetByCode(Guid.Parse("22222222-2222-2222-2222-222222222222"));
+                    if (flavor != null)
+                    {
+                        found = true;
+                        Delete(flavor.FlavorID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        public int ClearTestChildObjects()
+        {
+            int delCount = 0;
+            bool found = false;
+            try
+            {
+                while (found)
+                {
+                    found = false;
+                    var flavor = GetByCode(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                    if (flavor != null)
+                    {
+                        found = true;
+                        Delete(flavor.FlavorID);
+                        delCount++;
+                    }
+                }
+            }
+            catch (System.Exception)
+            {
+            }
+            return delCount;
+        }
+        private List<Flavor> ProcessMappings(List<QueryDTO> data)
 		{
             foreach (var item in data)
             {

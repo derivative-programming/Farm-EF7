@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="CurrentRuntime.gen.cs" />
+    <Compile Remove="FarmDbContextFactory.gen.cs" />
     <Compile Remove="Managers\Plant.cs" />
     <Compile Remove="Reports\LandPlantList.Query.cs" />
     <Compile Remove="Reports\PlantUserDetails.Query.gen.cs" />
