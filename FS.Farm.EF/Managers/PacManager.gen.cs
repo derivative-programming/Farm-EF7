@@ -779,7 +779,7 @@ namespace FS.Farm.EF.Managers
             }
             List<Pac> results = data.Select(r => r.PacObj).ToList();
             return results;
-        } 
+        }
         private class QueryDTO
         {
             public Pac PacObj { get; set; }

@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<Customer> finalCustomers = ProcessMappings(customersWithCodes);
             return finalCustomers;
         }
+        //TacID
         public List<Customer> GetByTac(int id)
         {
             var customersWithCodes = BuildQuery()

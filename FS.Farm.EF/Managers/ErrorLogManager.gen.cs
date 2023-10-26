@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<ErrorLog> finalErrorLogs = ProcessMappings(errorLogsWithCodes);
             return finalErrorLogs;
         }
+        //PacID
         public List<ErrorLog> GetByPac(int id)
         {
             var errorLogsWithCodes = BuildQuery()

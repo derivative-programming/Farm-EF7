@@ -1,0 +1,7 @@
+{
+  "templateType": "namespace",
+  "ForceFileNameFormat": "Pascal",
+  "dimension": {
+    "name": "Farm"
+  }
+} 

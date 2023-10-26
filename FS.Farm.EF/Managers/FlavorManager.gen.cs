@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<Flavor> finalFlavors = ProcessMappings(flavorsWithCodes);
             return finalFlavors;
         }
+        //PacID
         public List<Flavor> GetByPac(int id)
         {
             var flavorsWithCodes = BuildQuery()

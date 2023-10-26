@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<TriStateFilter> finalTriStateFilters = ProcessMappings(triStateFiltersWithCodes);
             return finalTriStateFilters;
         }
+        //PacID
         public List<TriStateFilter> GetByPac(int id)
         {
             var triStateFiltersWithCodes = BuildQuery()

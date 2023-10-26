@@ -795,14 +795,6 @@ namespace FS.Farm.EF.Managers
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             return finalOrgCustomers;
         }
-        public List<OrgCustomer> GetByCustomer(int id)
-        {
-            var orgCustomersWithCodes = BuildQuery()
-                                    .Where(x => x.OrgCustomerObj.CustomerID == id)
-                                    .ToList();
-            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
-            return finalOrgCustomers;
-        }
         //OrganizationID
         public async Task<List<OrgCustomer>> GetByOrganizationAsync(int id)
         {
@@ -812,6 +804,16 @@ namespace FS.Farm.EF.Managers
             List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
             return finalOrgCustomers;
         }
+        //CustomerID
+        public List<OrgCustomer> GetByCustomer(int id)
+        {
+            var orgCustomersWithCodes = BuildQuery()
+                                    .Where(x => x.OrgCustomerObj.CustomerID == id)
+                                    .ToList();
+            List<OrgCustomer> finalOrgCustomers = ProcessMappings(orgCustomersWithCodes);
+            return finalOrgCustomers;
+        }
+        //OrganizationID
         public List<OrgCustomer> GetByOrganization(int id)
         {
             var orgCustomersWithCodes = BuildQuery()

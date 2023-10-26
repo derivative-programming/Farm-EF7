@@ -10,7 +10,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Reports;
 
-namespace FS.Farm.Reports.Providers.SqlServer
+namespace FS.Farm.Reports.Providers.EF7
 {
     partial class EF7FarmReportProvider : FS.Farm.Reports.Providers.FarmReportProvider
     { 

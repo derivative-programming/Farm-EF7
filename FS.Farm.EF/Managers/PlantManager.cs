@@ -969,6 +969,21 @@ namespace FS.Farm.EF.Managers
 
             return finalPlants;
         }
+
+        //LandID
+        public async Task<List<Plant>> GetByLandAsync(int id) 
+        {
+            var plantsWithCodes = await BuildQuery()
+                                    .Where(x => x.PlantObj.LandID == id)
+                                    .ToListAsync();
+
+            List<Plant> finalPlants = ProcessMappings(plantsWithCodes);
+
+            return finalPlants;
+        }
+
+
+        //FlvrForeignKeyID
         public List<Plant> GetByFlvrForeignKey(int id)
         {
             var plantsWithCodes = BuildQuery()
@@ -981,16 +996,6 @@ namespace FS.Farm.EF.Managers
         }
 
         //LandID
-        public async Task<List<Plant>> GetByLandAsync(int id) 
-        {
-            var plantsWithCodes = await BuildQuery()
-                                    .Where(x => x.PlantObj.LandID == id)
-                                    .ToListAsync();
-
-            List<Plant> finalPlants = ProcessMappings(plantsWithCodes);
-
-            return finalPlants;
-        } 
         public List<Plant> GetByLand(int id)
         {
             var plantsWithCodes = BuildQuery()

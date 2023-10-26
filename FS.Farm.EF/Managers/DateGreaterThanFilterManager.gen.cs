@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<DateGreaterThanFilter> finalDateGreaterThanFilters = ProcessMappings(dateGreaterThanFiltersWithCodes);
             return finalDateGreaterThanFilters;
         }
+        //PacID
         public List<DateGreaterThanFilter> GetByPac(int id)
         {
             var dateGreaterThanFiltersWithCodes = BuildQuery()

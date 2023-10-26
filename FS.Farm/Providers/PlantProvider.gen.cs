@@ -369,7 +369,7 @@ namespace FS.Farm.Providers
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-             Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code);
         public abstract Task PlantUpdateAsync(
             SessionContext context,
@@ -393,7 +393,7 @@ namespace FS.Farm.Providers
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-             Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code);
         public abstract IDataReader SearchPlants(
             SessionContext context,
@@ -463,17 +463,17 @@ namespace FS.Farm.Providers
             List<FS.Farm.Objects.Plant> dataList);
         public abstract bool SupportsTransactions();
         #endregion
-        public abstract IDataReader GetPlantList_FetchByLandID(
-            int landID,
-           SessionContext context);
-        public abstract Task<IDataReader> GetPlantList_FetchByLandIDAsync(
-            int landID,
-           SessionContext context);
         public abstract IDataReader GetPlantList_FetchByFlvrForeignKeyID(
             int flvrForeignKeyID,
            SessionContext context);
+        public abstract IDataReader GetPlantList_FetchByLandID(
+            int landID,
+           SessionContext context);
         public abstract Task<IDataReader> GetPlantList_FetchByFlvrForeignKeyIDAsync(
             int flvrForeignKeyID,
+           SessionContext context);
+        public abstract Task<IDataReader> GetPlantList_FetchByLandIDAsync(
+            int landID,
            SessionContext context);
     }
 }

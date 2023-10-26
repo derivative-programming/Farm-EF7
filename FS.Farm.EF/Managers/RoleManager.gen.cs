@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<Role> finalRoles = ProcessMappings(rolesWithCodes);
             return finalRoles;
         }
+        //PacID
         public List<Role> GetByPac(int id)
         {
             var rolesWithCodes = BuildQuery()

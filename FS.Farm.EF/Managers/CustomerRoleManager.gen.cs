@@ -804,18 +804,20 @@ namespace FS.Farm.EF.Managers
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
             return finalCustomerRoles;
         }
-        public List<CustomerRole> GetByRole(int id)
-        {
-            var customerRolesWithCodes = BuildQuery()
-                                    .Where(x => x.CustomerRoleObj.RoleID == id)
-                                    .ToList();
-            List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
-            return finalCustomerRoles;
-        }
+        //CustomerID
         public List<CustomerRole> GetByCustomer(int id)
         {
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.CustomerID == id)
+                                    .ToList();
+            List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+            return finalCustomerRoles;
+        }
+        //RoleID
+        public List<CustomerRole> GetByRole(int id)
+        {
+            var customerRolesWithCodes = BuildQuery()
+                                    .Where(x => x.CustomerRoleObj.RoleID == id)
                                     .ToList();
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
             return finalCustomerRoles;

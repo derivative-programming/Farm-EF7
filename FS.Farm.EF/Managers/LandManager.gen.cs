@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<Land> finalLands = ProcessMappings(landsWithCodes);
             return finalLands;
         }
+        //PacID
         public List<Land> GetByPac(int id)
         {
             var landsWithCodes = BuildQuery()

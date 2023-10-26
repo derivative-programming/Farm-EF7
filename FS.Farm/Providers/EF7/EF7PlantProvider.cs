@@ -13,7 +13,7 @@ using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
 
-namespace FS.Farm.Providers.SqlServer
+namespace FS.Farm.Providers.EF7
 {
     partial class EF7PlantProvider : FS.Farm.Providers.PlantProvider
     {
@@ -176,11 +176,30 @@ namespace FS.Farm.Providers.SqlServer
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            //ENDSET
             System.Guid code)
         {
             string procedureName = "PlantInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
+            //Int32 flvrForeignKeyID,
+            //Boolean isDeleteAllowed,
+            //Boolean isEditAllowed,
+            //Int32 landID,
+            //String otherFlavor,
+            //Int64 someBigIntVal,
+            //Boolean someBitVal, 
+            //Decimal someDecimalVal,
+            //String someEmailAddress,
+            //Double someFloatVal,
+            //Int32 someIntVal,
+            //Decimal someMoneyVal,
+            //String someNVarCharVal,
+            //String somePhoneNumber,
+            //String someTextVal,
+            //Guid someUniqueidentifierVal, 
+            //String someVarCharVal,
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -221,7 +240,8 @@ namespace FS.Farm.Providers.SqlServer
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-                 
+                //ENDSET
+
                 plant = plantManager.Add(plant);
 
                 iOut = plant.PlantID; 
@@ -259,11 +279,29 @@ namespace FS.Farm.Providers.SqlServer
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            //ENDSET
             System.Guid code)
         {
             string procedureName = "PlantInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            //Int32 flvrForeignKeyID,
+            //Boolean isDeleteAllowed,
+            //Boolean isEditAllowed,
+            //Int32 landID,
+            //String otherFlavor,
+            //Int64 someBigIntVal,
+            //Boolean someBitVal, 
+            //Decimal someDecimalVal,
+            //String someEmailAddress,
+            //Double someFloatVal,
+            //Int32 someIntVal,
+            //Decimal someMoneyVal,
+            //String someNVarCharVal,
+            //String somePhoneNumber,
+            //String someTextVal,
+            //Guid someUniqueidentifierVal, 
+            //String someVarCharVal,
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -304,6 +342,7 @@ namespace FS.Farm.Providers.SqlServer
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                //ENDSET
 
                 plant = await plantManager.AddAsync(plant);
 
@@ -343,12 +382,30 @@ namespace FS.Farm.Providers.SqlServer
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            //ENDSET
              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "PlantUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            //Int32 flvrForeignKeyID,
+            //Boolean isDeleteAllowed,
+            //Boolean isEditAllowed,
+            //Int32 landID,
+            //String otherFlavor,
+            //Int64 someBigIntVal,
+            //Boolean someBitVal, 
+            //Decimal someDecimalVal,
+            //String someEmailAddress,
+            //Double someFloatVal,
+            //Int32 someIntVal,
+            //Decimal someMoneyVal,
+            //String someNVarCharVal,
+            //String somePhoneNumber,
+            //String someTextVal,
+            //Guid someUniqueidentifierVal, 
+            //String someVarCharVal,
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -386,6 +443,7 @@ namespace FS.Farm.Providers.SqlServer
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                //ENDSET
 
                 bool success = plantManager.Update(plant);
                 if (!success)
@@ -427,12 +485,30 @@ namespace FS.Farm.Providers.SqlServer
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-             Guid lastChangeCode,
-             System.Guid code)
+            //ENDSET
+            Guid lastChangeCode,
+            System.Guid code)
         {
             string procedureName = "PlantUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            //Int32 flvrForeignKeyID,
+            //Boolean isDeleteAllowed,
+            //Boolean isEditAllowed,
+            //Int32 landID,
+            //String otherFlavor,
+            //Int64 someBigIntVal,
+            //Boolean someBitVal, 
+            //Decimal someDecimalVal,
+            //String someEmailAddress,
+            //Double someFloatVal,
+            //Int32 someIntVal,
+            //Decimal someMoneyVal,
+            //String someNVarCharVal,
+            //String somePhoneNumber,
+            //String someTextVal,
+            //Guid someUniqueidentifierVal, 
+            //String someVarCharVal,
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -472,6 +548,7 @@ namespace FS.Farm.Providers.SqlServer
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                //ENDSET
 
                 bool success = await plantManager.UpdateAsync(plant);
                 if(!success)
@@ -513,6 +590,7 @@ namespace FS.Farm.Providers.SqlServer
             bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
             bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
             bool searchBySomeVarCharVal, String someVarCharVal,
+            //ENDSET
             bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlants";
@@ -564,6 +642,7 @@ namespace FS.Farm.Providers.SqlServer
                     bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
                     bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
                     bool searchBySomeVarCharVal, String someVarCharVal,
+                    //ENDSET
                     bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlantsAsync";
@@ -1176,7 +1255,8 @@ namespace FS.Farm.Providers.SqlServer
                     plant.SomePhoneNumber = item.SomePhoneNumber;
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
-                    plant.SomeVarCharVal = item.SomeVarCharVal; 
+                    plant.SomeVarCharVal = item.SomeVarCharVal;
+                    //ENDSET
                     plants.Add(plant);
                 }
 
@@ -1247,6 +1327,7 @@ namespace FS.Farm.Providers.SqlServer
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    //ENDSET
                     plants.Add(plant);
                 }
 
@@ -1318,6 +1399,7 @@ namespace FS.Farm.Providers.SqlServer
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.LastChangeCode = item.LastChangeCode;
+                    //ENDSET
                     plants.Add(plant);
                 }
 
@@ -1389,6 +1471,7 @@ namespace FS.Farm.Providers.SqlServer
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
@@ -1460,6 +1543,7 @@ namespace FS.Farm.Providers.SqlServer
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
@@ -1531,6 +1615,7 @@ namespace FS.Farm.Providers.SqlServer
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
@@ -1713,6 +1798,38 @@ namespace FS.Farm.Providers.SqlServer
             Log(procedureName + "::End");
             return rdr;
         }
+        public override IDataReader GetPlantList_FetchByFlvrForeignKeyID(
+            int flvrForeignKeyID,
+           SessionContext context
+            )
+        {
+            string procedureName = "GetPlantList_FetchByFlvrForeignKeyID";
+            Log(procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = BuildDbContext(context);
+
+                var plantManager = new EF.Managers.PlantManager(dbContext);
+
+                rdr = BuildDataReader(plantManager.GetByFlvrForeignKey(flvrForeignKeyID));
+
+            }
+            catch (Exception x)
+            {
+                Log(x);
+                string sException = "Error Executing FS_Farm_Plant_FetchByFlvrForeignKeyID: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            Log(procedureName + "::End");
+            return rdr;
+        }
         public override async Task<IDataReader> GetPlantList_FetchByLandIDAsync(
             int landID,
            SessionContext context
@@ -1743,38 +1860,6 @@ namespace FS.Farm.Providers.SqlServer
                     dbContext.Dispose();
             }
             await LogAsync(context, procedureName + "::End");
-            return rdr;
-        }
-        public override IDataReader GetPlantList_FetchByFlvrForeignKeyID(
-            int flvrForeignKeyID,
-           SessionContext context
-            )
-        {
-            string procedureName = "GetPlantList_FetchByFlvrForeignKeyID";
-            Log(procedureName + "::Start");
-            IDataReader rdr = null;
-            EF.FarmDbContext dbContext = null; 
-            try
-            {
-                dbContext = BuildDbContext(context);
-
-                var plantManager = new EF.Managers.PlantManager(dbContext);
-
-                rdr = BuildDataReader(plantManager.GetByFlvrForeignKey(flvrForeignKeyID));
-
-            }
-            catch (Exception x)
-            { 
-                Log(x);
-                string sException = "Error Executing FS_Farm_Plant_FetchByFlvrForeignKeyID: \r\n"; 
-                throw new Exception(sException, x);
-            }
-            finally
-            {
-                if (dbContext != null)
-                    dbContext.Dispose();
-            }
-            Log(procedureName + "::End");
             return rdr;
         }
         public override async Task<IDataReader> GetPlantList_FetchByFlvrForeignKeyIDAsync(

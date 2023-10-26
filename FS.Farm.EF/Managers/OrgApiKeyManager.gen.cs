@@ -804,18 +804,20 @@ namespace FS.Farm.EF.Managers
             List<OrgApiKey> finalOrgApiKeys = ProcessMappings(orgApiKeysWithCodes);
             return finalOrgApiKeys;
         }
-        public List<OrgApiKey> GetByOrgCustomer(int id)
-        {
-            var orgApiKeysWithCodes = BuildQuery()
-                                    .Where(x => x.OrgApiKeyObj.OrgCustomerID == id)
-                                    .ToList();
-            List<OrgApiKey> finalOrgApiKeys = ProcessMappings(orgApiKeysWithCodes);
-            return finalOrgApiKeys;
-        }
+        //OrganizationID
         public List<OrgApiKey> GetByOrganization(int id)
         {
             var orgApiKeysWithCodes = BuildQuery()
                                     .Where(x => x.OrgApiKeyObj.OrganizationID == id)
+                                    .ToList();
+            List<OrgApiKey> finalOrgApiKeys = ProcessMappings(orgApiKeysWithCodes);
+            return finalOrgApiKeys;
+        }
+        //OrgCustomerID
+        public List<OrgApiKey> GetByOrgCustomer(int id)
+        {
+            var orgApiKeysWithCodes = BuildQuery()
+                                    .Where(x => x.OrgApiKeyObj.OrgCustomerID == id)
                                     .ToList();
             List<OrgApiKey> finalOrgApiKeys = ProcessMappings(orgApiKeysWithCodes);
             return finalOrgApiKeys;

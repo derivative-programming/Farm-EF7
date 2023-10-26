@@ -7,7 +7,7 @@ using FS.Common.Objects;
 using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace FS.Farm.Reports.Providers.SqlServer
+namespace FS.Farm.Reports.Providers.EF7
 {
     partial class EF7FarmReportProvider : FS.Farm.Reports.Providers.FarmReportProvider
     {

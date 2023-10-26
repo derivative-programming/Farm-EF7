@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             return finalTacs;
         }
+        //PacID
         public List<Tac> GetByPac(int id)
         {
             var tacsWithCodes = BuildQuery()

@@ -792,6 +792,7 @@ namespace FS.Farm.EF.Managers
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
             return finalOrganizations;
         }
+        //TacID
         public List<Organization> GetByTac(int id)
         {
             var organizationsWithCodes = BuildQuery()
