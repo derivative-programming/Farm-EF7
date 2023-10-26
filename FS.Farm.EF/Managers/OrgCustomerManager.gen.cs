@@ -787,7 +787,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //CustomerID
-        public async Task<List<OrgCustomer>> GetByCustomerAsync(int id)
+        public async Task<List<OrgCustomer>> GetByCustomerIDAsync(int id)
         {
             var orgCustomersWithCodes = await BuildQuery()
                                     .Where(x => x.OrgCustomerObj.CustomerID == id)
@@ -796,7 +796,7 @@ namespace FS.Farm.EF.Managers
             return finalOrgCustomers;
         }
         //OrganizationID
-        public async Task<List<OrgCustomer>> GetByOrganizationAsync(int id)
+        public async Task<List<OrgCustomer>> GetByOrganizationIDAsync(int id)
         {
             var orgCustomersWithCodes = await BuildQuery()
                                     .Where(x => x.OrgCustomerObj.OrganizationID == id)
@@ -805,7 +805,7 @@ namespace FS.Farm.EF.Managers
             return finalOrgCustomers;
         }
         //CustomerID
-        public List<OrgCustomer> GetByCustomer(int id)
+        public List<OrgCustomer> GetByCustomerID(int id)
         {
             var orgCustomersWithCodes = BuildQuery()
                                     .Where(x => x.OrgCustomerObj.CustomerID == id)
@@ -814,7 +814,7 @@ namespace FS.Farm.EF.Managers
             return finalOrgCustomers;
         }
         //OrganizationID
-        public List<OrgCustomer> GetByOrganization(int id)
+        public List<OrgCustomer> GetByOrganizationID(int id)
         {
             var orgCustomersWithCodes = BuildQuery()
                                     .Where(x => x.OrgCustomerObj.OrganizationID == id)

@@ -1,12 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="CurrentRuntime.gen.cs" />
-    <Compile Remove="FarmDbContextFactory.gen.cs" />
     <Compile Remove="Managers\Plant.cs" />
     <Compile Remove="Reports\LandPlantList.Query.cs" />
     <Compile Remove="Reports\PlantUserDetails.Query.gen.cs" />
@@ -17,7 +15,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EFCore.BulkExtensions" Version="7.1.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FS.Base\FS.Base.csproj" />

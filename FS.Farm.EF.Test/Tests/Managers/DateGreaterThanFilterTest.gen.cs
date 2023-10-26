@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.DateGreaterThanFilterSet.Add(dateGreaterThanFilter);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(dateGreaterThanFilter);
-                var result = await manager.GetByPacAsync(dateGreaterThanFilter.PacID.Value);
+                var result = await manager.GetByPacIDAsync(dateGreaterThanFilter.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(dateGreaterThanFilter.DateGreaterThanFilterID, result.First().DateGreaterThanFilterID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.DateGreaterThanFilterSet.Add(dateGreaterThanFilter);
                 //context.SaveChanges();
                 manager.Add(dateGreaterThanFilter);
-                var result = manager.GetByPac(dateGreaterThanFilter.PacID.Value);
+                var result = manager.GetByPacID(dateGreaterThanFilter.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(dateGreaterThanFilter.DateGreaterThanFilterID, result.First().DateGreaterThanFilterID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new DateGreaterThanFilterManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new DateGreaterThanFilterManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(dateGreaterThanFilter2);
                 //context.DateGreaterThanFilterSet.AddRange(dateGreaterThanFilter1, dateGreaterThanFilter2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(dateGreaterThanFilter1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(dateGreaterThanFilter1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(dateGreaterThanFilter2);
                 //context.DateGreaterThanFilterSet.AddRange(dateGreaterThanFilter1, dateGreaterThanFilter2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(dateGreaterThanFilter1.PacID.Value);
+                var result = manager.GetByPacID(dateGreaterThanFilter1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

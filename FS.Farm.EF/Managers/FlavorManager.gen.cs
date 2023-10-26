@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //PacID
-        public async Task<List<Flavor>> GetByPacAsync(int id)
+        public async Task<List<Flavor>> GetByPacIDAsync(int id)
         {
             var flavorsWithCodes = await BuildQuery()
                                     .Where(x => x.FlavorObj.PacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalFlavors;
         }
         //PacID
-        public List<Flavor> GetByPac(int id)
+        public List<Flavor> GetByPacID(int id)
         {
             var flavorsWithCodes = BuildQuery()
                                     .Where(x => x.FlavorObj.PacID == id)

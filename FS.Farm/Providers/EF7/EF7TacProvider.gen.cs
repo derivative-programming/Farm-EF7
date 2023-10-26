@@ -1327,7 +1327,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
-                rdr = BuildDataReader(tacManager.GetByPac(pacID));
+                rdr = BuildDataReader(tacManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1356,7 +1356,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
-                rdr = BuildDataReader(await tacManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await tacManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

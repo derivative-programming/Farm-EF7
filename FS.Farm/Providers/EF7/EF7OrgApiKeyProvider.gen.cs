@@ -1411,7 +1411,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
-                rdr = BuildDataReader(orgApiKeyManager.GetByOrganization(organizationID));
+                rdr = BuildDataReader(orgApiKeyManager.GetByOrganizationID(organizationID));
             }
             catch (Exception x)
             {
@@ -1440,7 +1440,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
-                rdr = BuildDataReader(orgApiKeyManager.GetByOrgCustomer(orgCustomerID));
+                rdr = BuildDataReader(orgApiKeyManager.GetByOrgCustomerID(orgCustomerID));
             }
             catch (Exception x)
             {
@@ -1469,7 +1469,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
-                rdr = BuildDataReader(await orgApiKeyManager.GetByOrganizationAsync(organizationID));
+                rdr = BuildDataReader(await orgApiKeyManager.GetByOrganizationIDAsync(organizationID));
             }
             catch (Exception x)
             {
@@ -1498,7 +1498,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
-                rdr = BuildDataReader(await orgApiKeyManager.GetByOrgCustomerAsync(orgCustomerID));
+                rdr = BuildDataReader(await orgApiKeyManager.GetByOrgCustomerIDAsync(orgCustomerID));
             }
             catch (Exception x)
             {

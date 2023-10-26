@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //PacID
-        public async Task<List<Role>> GetByPacAsync(int id)
+        public async Task<List<Role>> GetByPacIDAsync(int id)
         {
             var rolesWithCodes = await BuildQuery()
                                     .Where(x => x.RoleObj.PacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalRoles;
         }
         //PacID
-        public List<Role> GetByPac(int id)
+        public List<Role> GetByPacID(int id)
         {
             var rolesWithCodes = BuildQuery()
                                     .Where(x => x.RoleObj.PacID == id)

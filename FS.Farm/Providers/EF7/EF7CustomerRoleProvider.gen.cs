@@ -1287,7 +1287,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
-                rdr = BuildDataReader(customerRoleManager.GetByCustomer(customerID));
+                rdr = BuildDataReader(customerRoleManager.GetByCustomerID(customerID));
             }
             catch (Exception x)
             {
@@ -1316,7 +1316,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
-                rdr = BuildDataReader(customerRoleManager.GetByRole(roleID));
+                rdr = BuildDataReader(customerRoleManager.GetByRoleID(roleID));
             }
             catch (Exception x)
             {
@@ -1345,7 +1345,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
-                rdr = BuildDataReader(await customerRoleManager.GetByCustomerAsync(customerID));
+                rdr = BuildDataReader(await customerRoleManager.GetByCustomerIDAsync(customerID));
             }
             catch (Exception x)
             {
@@ -1374,7 +1374,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
-                rdr = BuildDataReader(await customerRoleManager.GetByRoleAsync(roleID));
+                rdr = BuildDataReader(await customerRoleManager.GetByRoleIDAsync(roleID));
             }
             catch (Exception x)
             {

@@ -1715,7 +1715,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
-                rdr = BuildDataReader(customerManager.GetByTac(tacID));
+                rdr = BuildDataReader(customerManager.GetByTacID(tacID));
             }
             catch (Exception x)
             {
@@ -1744,7 +1744,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
-                rdr = BuildDataReader(await customerManager.GetByTacAsync(tacID));
+                rdr = BuildDataReader(await customerManager.GetByTacIDAsync(tacID));
             }
             catch (Exception x)
             {

@@ -787,7 +787,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //OrganizationID
-        public async Task<List<OrgApiKey>> GetByOrganizationAsync(int id)
+        public async Task<List<OrgApiKey>> GetByOrganizationIDAsync(int id)
         {
             var orgApiKeysWithCodes = await BuildQuery()
                                     .Where(x => x.OrgApiKeyObj.OrganizationID == id)
@@ -796,7 +796,7 @@ namespace FS.Farm.EF.Managers
             return finalOrgApiKeys;
         }
         //OrgCustomerID
-        public async Task<List<OrgApiKey>> GetByOrgCustomerAsync(int id)
+        public async Task<List<OrgApiKey>> GetByOrgCustomerIDAsync(int id)
         {
             var orgApiKeysWithCodes = await BuildQuery()
                                     .Where(x => x.OrgApiKeyObj.OrgCustomerID == id)
@@ -805,7 +805,7 @@ namespace FS.Farm.EF.Managers
             return finalOrgApiKeys;
         }
         //OrganizationID
-        public List<OrgApiKey> GetByOrganization(int id)
+        public List<OrgApiKey> GetByOrganizationID(int id)
         {
             var orgApiKeysWithCodes = BuildQuery()
                                     .Where(x => x.OrgApiKeyObj.OrganizationID == id)
@@ -814,7 +814,7 @@ namespace FS.Farm.EF.Managers
             return finalOrgApiKeys;
         }
         //OrgCustomerID
-        public List<OrgApiKey> GetByOrgCustomer(int id)
+        public List<OrgApiKey> GetByOrgCustomerID(int id)
         {
             var orgApiKeysWithCodes = BuildQuery()
                                     .Where(x => x.OrgApiKeyObj.OrgCustomerID == id)

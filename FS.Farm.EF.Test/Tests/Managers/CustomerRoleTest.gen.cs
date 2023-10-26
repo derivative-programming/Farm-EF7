@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.CustomerRoleSet.Add(customerRole);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(customerRole);
-                var result = await manager.GetByCustomerAsync(customerRole.CustomerID.Value);
+                var result = await manager.GetByCustomerIDAsync(customerRole.CustomerID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(customerRole.CustomerRoleID, result.First().CustomerRoleID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.CustomerRoleSet.Add(customerRole);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(customerRole);
-                var result = await manager.GetByRoleAsync(customerRole.RoleID.Value);
+                var result = await manager.GetByRoleIDAsync(customerRole.RoleID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(customerRole.CustomerRoleID, result.First().CustomerRoleID);
             }
@@ -1115,7 +1115,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.CustomerRoleSet.Add(customerRole);
                 //context.SaveChanges();
                 manager.Add(customerRole);
-                var result = manager.GetByCustomer(customerRole.CustomerID.Value);
+                var result = manager.GetByCustomerID(customerRole.CustomerID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(customerRole.CustomerRoleID, result.First().CustomerRoleID);
             }
@@ -1133,7 +1133,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.CustomerRoleSet.Add(customerRole);
                 //context.SaveChanges();
                 manager.Add(customerRole);
-                var result = manager.GetByRole(customerRole.RoleID.Value);
+                var result = manager.GetByRoleID(customerRole.RoleID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(customerRole.CustomerRoleID, result.First().CustomerRoleID);
             }
@@ -1146,7 +1146,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new CustomerRoleManager(context);
-                var result = await manager.GetByCustomerAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByCustomerIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1158,7 +1158,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new CustomerRoleManager(context);
-                var result = await manager.GetByRoleAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByRoleIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1170,7 +1170,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new CustomerRoleManager(context);
-                var result = manager.GetByCustomer(100);  // ID 100 is not added to the database
+                var result = manager.GetByCustomerID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1182,7 +1182,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new CustomerRoleManager(context);
-                var result = manager.GetByRole(100);  // ID 100 is not added to the database
+                var result = manager.GetByRoleID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1201,7 +1201,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(customerRole2);
                 //context.CustomerRoleSet.AddRange(customerRole1, customerRole2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByCustomerAsync(customerRole1.CustomerID.Value);
+                var result = await manager.GetByCustomerIDAsync(customerRole1.CustomerID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1221,7 +1221,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(customerRole1);
                 await manager.AddAsync(customerRole2);
-                var result = await manager.GetByRoleAsync(customerRole1.RoleID.Value);
+                var result = await manager.GetByRoleIDAsync(customerRole1.RoleID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1240,7 +1240,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(customerRole2);
                 //context.CustomerRoleSet.AddRange(customerRole1, customerRole2);
                 //context.SaveChanges();
-                var result = manager.GetByCustomer(customerRole1.CustomerID.Value);
+                var result = manager.GetByCustomerID(customerRole1.CustomerID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1260,7 +1260,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.SaveChanges();
                 manager.Add(customerRole1);
                 manager.Add(customerRole2);
-                var result = manager.GetByRole(customerRole1.RoleID.Value);
+                var result = manager.GetByRoleID(customerRole1.RoleID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

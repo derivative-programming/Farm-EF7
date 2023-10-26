@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //TacID
-        public async Task<List<Customer>> GetByTacAsync(int id)
+        public async Task<List<Customer>> GetByTacIDAsync(int id)
         {
             var customersWithCodes = await BuildQuery()
                                     .Where(x => x.CustomerObj.TacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalCustomers;
         }
         //TacID
-        public List<Customer> GetByTac(int id)
+        public List<Customer> GetByTacID(int id)
         {
             var customersWithCodes = BuildQuery()
                                     .Where(x => x.CustomerObj.TacID == id)

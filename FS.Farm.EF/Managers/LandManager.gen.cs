@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //PacID
-        public async Task<List<Land>> GetByPacAsync(int id)
+        public async Task<List<Land>> GetByPacIDAsync(int id)
         {
             var landsWithCodes = await BuildQuery()
                                     .Where(x => x.LandObj.PacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalLands;
         }
         //PacID
-        public List<Land> GetByPac(int id)
+        public List<Land> GetByPacID(int id)
         {
             var landsWithCodes = BuildQuery()
                                     .Where(x => x.LandObj.PacID == id)

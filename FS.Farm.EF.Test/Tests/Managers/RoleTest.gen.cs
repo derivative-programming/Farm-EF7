@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.RoleSet.Add(role);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(role);
-                var result = await manager.GetByPacAsync(role.PacID.Value);
+                var result = await manager.GetByPacIDAsync(role.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(role.RoleID, result.First().RoleID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.RoleSet.Add(role);
                 //context.SaveChanges();
                 manager.Add(role);
-                var result = manager.GetByPac(role.PacID.Value);
+                var result = manager.GetByPacID(role.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(role.RoleID, result.First().RoleID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new RoleManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new RoleManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(role2);
                 //context.RoleSet.AddRange(role1, role2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(role1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(role1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(role2);
                 //context.RoleSet.AddRange(role1, role2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(role1.PacID.Value);
+                var result = manager.GetByPacID(role1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

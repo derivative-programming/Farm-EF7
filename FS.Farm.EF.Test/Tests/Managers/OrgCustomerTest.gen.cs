@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgCustomerSet.Add(orgCustomer);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(orgCustomer);
-                var result = await manager.GetByCustomerAsync(orgCustomer.CustomerID.Value);
+                var result = await manager.GetByCustomerIDAsync(orgCustomer.CustomerID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgCustomer.OrgCustomerID, result.First().OrgCustomerID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgCustomerSet.Add(orgCustomer);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(orgCustomer);
-                var result = await manager.GetByOrganizationAsync(orgCustomer.OrganizationID.Value);
+                var result = await manager.GetByOrganizationIDAsync(orgCustomer.OrganizationID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgCustomer.OrgCustomerID, result.First().OrgCustomerID);
             }
@@ -1115,7 +1115,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgCustomerSet.Add(orgCustomer);
                 //context.SaveChanges();
                 manager.Add(orgCustomer);
-                var result = manager.GetByCustomer(orgCustomer.CustomerID.Value);
+                var result = manager.GetByCustomerID(orgCustomer.CustomerID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgCustomer.OrgCustomerID, result.First().OrgCustomerID);
             }
@@ -1133,7 +1133,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgCustomerSet.Add(orgCustomer);
                 //context.SaveChanges();
                 manager.Add(orgCustomer);
-                var result = manager.GetByOrganization(orgCustomer.OrganizationID.Value);
+                var result = manager.GetByOrganizationID(orgCustomer.OrganizationID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgCustomer.OrgCustomerID, result.First().OrgCustomerID);
             }
@@ -1146,7 +1146,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgCustomerManager(context);
-                var result = await manager.GetByCustomerAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByCustomerIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1158,7 +1158,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgCustomerManager(context);
-                var result = await manager.GetByOrganizationAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByOrganizationIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1170,7 +1170,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgCustomerManager(context);
-                var result = manager.GetByCustomer(100);  // ID 100 is not added to the database
+                var result = manager.GetByCustomerID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1182,7 +1182,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgCustomerManager(context);
-                var result = manager.GetByOrganization(100);  // ID 100 is not added to the database
+                var result = manager.GetByOrganizationID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1202,7 +1202,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(orgCustomer1);
                 await manager.AddAsync(orgCustomer2);
-                var result = await manager.GetByCustomerAsync(orgCustomer1.CustomerID.Value);
+                var result = await manager.GetByCustomerIDAsync(orgCustomer1.CustomerID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1221,7 +1221,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(orgCustomer2);
                 //context.OrgCustomerSet.AddRange(orgCustomer1, orgCustomer2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByOrganizationAsync(orgCustomer1.OrganizationID.Value);
+                var result = await manager.GetByOrganizationIDAsync(orgCustomer1.OrganizationID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1241,7 +1241,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.SaveChanges();
                 manager.Add(orgCustomer1);
                 manager.Add(orgCustomer2);
-                var result = manager.GetByCustomer(orgCustomer1.CustomerID.Value);
+                var result = manager.GetByCustomerID(orgCustomer1.CustomerID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1260,7 +1260,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(orgCustomer2);
                 //context.OrgCustomerSet.AddRange(orgCustomer1, orgCustomer2);
                 //context.SaveChanges();
-                var result = manager.GetByOrganization(orgCustomer1.OrganizationID.Value);
+                var result = manager.GetByOrganizationID(orgCustomer1.OrganizationID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

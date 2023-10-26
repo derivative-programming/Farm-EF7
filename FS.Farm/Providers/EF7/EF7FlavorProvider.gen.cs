@@ -1327,7 +1327,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
-                rdr = BuildDataReader(flavorManager.GetByPac(pacID));
+                rdr = BuildDataReader(flavorManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1356,7 +1356,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
-                rdr = BuildDataReader(await flavorManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await flavorManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

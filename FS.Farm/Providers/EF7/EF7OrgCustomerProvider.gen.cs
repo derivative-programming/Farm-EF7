@@ -1267,7 +1267,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
-                rdr = BuildDataReader(orgCustomerManager.GetByCustomer(customerID));
+                rdr = BuildDataReader(orgCustomerManager.GetByCustomerID(customerID));
             }
             catch (Exception x)
             {
@@ -1296,7 +1296,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
-                rdr = BuildDataReader(orgCustomerManager.GetByOrganization(organizationID));
+                rdr = BuildDataReader(orgCustomerManager.GetByOrganizationID(organizationID));
             }
             catch (Exception x)
             {
@@ -1325,7 +1325,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
-                rdr = BuildDataReader(await orgCustomerManager.GetByCustomerAsync(customerID));
+                rdr = BuildDataReader(await orgCustomerManager.GetByCustomerIDAsync(customerID));
             }
             catch (Exception x)
             {
@@ -1354,7 +1354,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
-                rdr = BuildDataReader(await orgCustomerManager.GetByOrganizationAsync(organizationID));
+                rdr = BuildDataReader(await orgCustomerManager.GetByOrganizationIDAsync(organizationID));
             }
             catch (Exception x)
             {

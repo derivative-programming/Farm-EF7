@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrganizationSet.Add(organization);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(organization);
-                var result = await manager.GetByTacAsync(organization.TacID.Value);
+                var result = await manager.GetByTacIDAsync(organization.TacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(organization.OrganizationID, result.First().OrganizationID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrganizationSet.Add(organization);
                 //context.SaveChanges();
                 manager.Add(organization);
-                var result = manager.GetByTac(organization.TacID.Value);
+                var result = manager.GetByTacID(organization.TacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(organization.OrganizationID, result.First().OrganizationID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrganizationManager(context);
-                var result = await manager.GetByTacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByTacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrganizationManager(context);
-                var result = manager.GetByTac(100);  // ID 100 is not added to the database
+                var result = manager.GetByTacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(organization2);
                 //context.OrganizationSet.AddRange(organization1, organization2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByTacAsync(organization1.TacID.Value);
+                var result = await manager.GetByTacIDAsync(organization1.TacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(organization2);
                 //context.OrganizationSet.AddRange(organization1, organization2);
                 //context.SaveChanges();
-                var result = manager.GetByTac(organization1.TacID.Value);
+                var result = manager.GetByTacID(organization1.TacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

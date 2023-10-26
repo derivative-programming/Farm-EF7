@@ -1379,7 +1379,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
-                rdr = BuildDataReader(errorLogManager.GetByPac(pacID));
+                rdr = BuildDataReader(errorLogManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1408,7 +1408,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
-                rdr = BuildDataReader(await errorLogManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await errorLogManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.ErrorLogSet.Add(errorLog);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(errorLog);
-                var result = await manager.GetByPacAsync(errorLog.PacID.Value);
+                var result = await manager.GetByPacIDAsync(errorLog.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(errorLog.ErrorLogID, result.First().ErrorLogID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.ErrorLogSet.Add(errorLog);
                 //context.SaveChanges();
                 manager.Add(errorLog);
-                var result = manager.GetByPac(errorLog.PacID.Value);
+                var result = manager.GetByPacID(errorLog.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(errorLog.ErrorLogID, result.First().ErrorLogID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new ErrorLogManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new ErrorLogManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(errorLog2);
                 //context.ErrorLogSet.AddRange(errorLog1, errorLog2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(errorLog1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(errorLog1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(errorLog2);
                 //context.ErrorLogSet.AddRange(errorLog1, errorLog2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(errorLog1.PacID.Value);
+                var result = manager.GetByPacID(errorLog1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

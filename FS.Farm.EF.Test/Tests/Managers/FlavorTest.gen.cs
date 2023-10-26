@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.FlavorSet.Add(flavor);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(flavor);
-                var result = await manager.GetByPacAsync(flavor.PacID.Value);
+                var result = await manager.GetByPacIDAsync(flavor.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(flavor.FlavorID, result.First().FlavorID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.FlavorSet.Add(flavor);
                 //context.SaveChanges();
                 manager.Add(flavor);
-                var result = manager.GetByPac(flavor.PacID.Value);
+                var result = manager.GetByPacID(flavor.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(flavor.FlavorID, result.First().FlavorID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new FlavorManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new FlavorManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(flavor2);
                 //context.FlavorSet.AddRange(flavor1, flavor2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(flavor1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(flavor1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(flavor2);
                 //context.FlavorSet.AddRange(flavor1, flavor2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(flavor1.PacID.Value);
+                var result = manager.GetByPacID(flavor1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.CustomerSet.Add(customer);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(customer);
-                var result = await manager.GetByTacAsync(customer.TacID.Value);
+                var result = await manager.GetByTacIDAsync(customer.TacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(customer.CustomerID, result.First().CustomerID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.CustomerSet.Add(customer);
                 //context.SaveChanges();
                 manager.Add(customer);
-                var result = manager.GetByTac(customer.TacID.Value);
+                var result = manager.GetByTacID(customer.TacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(customer.CustomerID, result.First().CustomerID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new CustomerManager(context);
-                var result = await manager.GetByTacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByTacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new CustomerManager(context);
-                var result = manager.GetByTac(100);  // ID 100 is not added to the database
+                var result = manager.GetByTacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(customer2);
                 //context.CustomerSet.AddRange(customer1, customer2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByTacAsync(customer1.TacID.Value);
+                var result = await manager.GetByTacIDAsync(customer1.TacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(customer2);
                 //context.CustomerSet.AddRange(customer1, customer2);
                 //context.SaveChanges();
-                var result = manager.GetByTac(customer1.TacID.Value);
+                var result = manager.GetByTacID(customer1.TacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

@@ -1327,7 +1327,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
-                rdr = BuildDataReader(landManager.GetByPac(pacID));
+                rdr = BuildDataReader(landManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1356,7 +1356,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
-                rdr = BuildDataReader(await landManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await landManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

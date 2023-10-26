@@ -959,7 +959,7 @@ namespace FS.Farm.EF.Managers
 
 
         //FlvrForeignKeyID
-        public async Task<List<Plant>> GetByFlvrForeignKeyAsync(int id) 
+        public async Task<List<Plant>> GetByFlvrForeignKeyIDAsync(int id) 
         {  
             var plantsWithCodes = await BuildQuery()
                                     .Where(x => x.PlantObj.FlvrForeignKeyID == id)
@@ -971,7 +971,7 @@ namespace FS.Farm.EF.Managers
         }
 
         //LandID
-        public async Task<List<Plant>> GetByLandAsync(int id) 
+        public async Task<List<Plant>> GetByLandIDAsync(int id) 
         {
             var plantsWithCodes = await BuildQuery()
                                     .Where(x => x.PlantObj.LandID == id)
@@ -984,7 +984,7 @@ namespace FS.Farm.EF.Managers
 
 
         //FlvrForeignKeyID
-        public List<Plant> GetByFlvrForeignKey(int id)
+        public List<Plant> GetByFlvrForeignKeyID(int id)
         {
             var plantsWithCodes = BuildQuery()
                                     .Where(x => x.PlantObj.FlvrForeignKeyID == id)
@@ -996,7 +996,7 @@ namespace FS.Farm.EF.Managers
         }
 
         //LandID
-        public List<Plant> GetByLand(int id)
+        public List<Plant> GetByLandID(int id)
         {
             var plantsWithCodes = BuildQuery()
                                     .Where(x => x.PlantObj.LandID == id)

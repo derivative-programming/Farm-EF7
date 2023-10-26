@@ -1347,7 +1347,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
-                rdr = BuildDataReader(dateGreaterThanFilterManager.GetByPac(pacID));
+                rdr = BuildDataReader(dateGreaterThanFilterManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1376,7 +1376,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
-                rdr = BuildDataReader(await dateGreaterThanFilterManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await dateGreaterThanFilterManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

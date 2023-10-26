@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.LandSet.Add(land);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(land);
-                var result = await manager.GetByPacAsync(land.PacID.Value);
+                var result = await manager.GetByPacIDAsync(land.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(land.LandID, result.First().LandID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.LandSet.Add(land);
                 //context.SaveChanges();
                 manager.Add(land);
-                var result = manager.GetByPac(land.PacID.Value);
+                var result = manager.GetByPacID(land.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(land.LandID, result.First().LandID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new LandManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new LandManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(land2);
                 //context.LandSet.AddRange(land1, land2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(land1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(land1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(land2);
                 //context.LandSet.AddRange(land1, land2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(land1.PacID.Value);
+                var result = manager.GetByPacID(land1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

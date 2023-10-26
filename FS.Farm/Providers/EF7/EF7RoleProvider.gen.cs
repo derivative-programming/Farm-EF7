@@ -1327,7 +1327,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
-                rdr = BuildDataReader(roleManager.GetByPac(pacID));
+                rdr = BuildDataReader(roleManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1356,7 +1356,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
-                rdr = BuildDataReader(await roleManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await roleManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

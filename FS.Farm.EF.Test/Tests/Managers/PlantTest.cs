@@ -1368,7 +1368,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(plant);
 
-                var result = await manager.GetByLandAsync(plant.LandID.Value);
+                var result = await manager.GetByLandIDAsync(plant.LandID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(plant.PlantID, result.First().PlantID);
             }
@@ -1390,7 +1390,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(plant);
 
-                var result = await manager.GetByFlvrForeignKeyAsync(plant.FlvrForeignKeyID.Value);
+                var result = await manager.GetByFlvrForeignKeyIDAsync(plant.FlvrForeignKeyID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(plant.PlantID, result.First().PlantID);
             }
@@ -1414,7 +1414,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.SaveChanges();
                 manager.Add(plant);
 
-                var result = manager.GetByLand(plant.LandID.Value);
+                var result = manager.GetByLandID(plant.LandID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(plant.PlantID, result.First().PlantID);
             }
@@ -1436,7 +1436,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.SaveChanges();
                 manager.Add(plant);
 
-                var result = manager.GetByFlvrForeignKey(plant.FlvrForeignKeyID.Value);
+                var result = manager.GetByFlvrForeignKeyID(plant.FlvrForeignKeyID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(plant.PlantID, result.First().PlantID);
             }
@@ -1455,7 +1455,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 context.Database.EnsureCreated();
                 var manager = new PlantManager(context);
 
-                var result = await manager.GetByLandAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByLandIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1470,7 +1470,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 context.Database.EnsureCreated();
                 var manager = new PlantManager(context);
 
-                var result = await manager.GetByFlvrForeignKeyAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByFlvrForeignKeyIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1488,7 +1488,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 context.Database.EnsureCreated();
                 var manager = new PlantManager(context);
 
-                var result = manager.GetByLand(100);  // ID 100 is not added to the database
+                var result = manager.GetByLandID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1503,7 +1503,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 context.Database.EnsureCreated();
                 var manager = new PlantManager(context);
 
-                var result = manager.GetByFlvrForeignKey(100);  // ID 100 is not added to the database
+                var result = manager.GetByFlvrForeignKeyID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1531,7 +1531,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.PlantSet.AddRange(plant1, plant2);
                 //await context.SaveChangesAsync();
 
-                var result = await manager.GetByLandAsync(plant1.LandID.Value);
+                var result = await manager.GetByLandIDAsync(plant1.LandID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1557,7 +1557,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(plant1);
                 await manager.AddAsync(plant2);
 
-                var result = await manager.GetByFlvrForeignKeyAsync(plant1.FlvrForeignKeyID.Value);
+                var result = await manager.GetByFlvrForeignKeyIDAsync(plant1.FlvrForeignKeyID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1584,7 +1584,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.PlantSet.AddRange(plant1, plant2);
                 //context.SaveChanges();
 
-                var result = manager.GetByLand(plant1.LandID.Value);
+                var result = manager.GetByLandID(plant1.LandID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1610,7 +1610,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(plant1);
                 manager.Add(plant2);
 
-                var result = manager.GetByFlvrForeignKey(plant1.FlvrForeignKeyID.Value);
+                var result = manager.GetByFlvrForeignKeyID(plant1.FlvrForeignKeyID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

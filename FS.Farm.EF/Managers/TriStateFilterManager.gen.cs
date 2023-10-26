@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //PacID
-        public async Task<List<TriStateFilter>> GetByPacAsync(int id)
+        public async Task<List<TriStateFilter>> GetByPacIDAsync(int id)
         {
             var triStateFiltersWithCodes = await BuildQuery()
                                     .Where(x => x.TriStateFilterObj.PacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalTriStateFilters;
         }
         //PacID
-        public List<TriStateFilter> GetByPac(int id)
+        public List<TriStateFilter> GetByPacID(int id)
         {
             var triStateFiltersWithCodes = BuildQuery()
                                     .Where(x => x.TriStateFilterObj.PacID == id)

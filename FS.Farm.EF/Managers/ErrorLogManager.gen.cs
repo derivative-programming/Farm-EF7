@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //PacID
-        public async Task<List<ErrorLog>> GetByPacAsync(int id)
+        public async Task<List<ErrorLog>> GetByPacIDAsync(int id)
         {
             var errorLogsWithCodes = await BuildQuery()
                                     .Where(x => x.ErrorLogObj.PacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalErrorLogs;
         }
         //PacID
-        public List<ErrorLog> GetByPac(int id)
+        public List<ErrorLog> GetByPacID(int id)
         {
             var errorLogsWithCodes = BuildQuery()
                                     .Where(x => x.ErrorLogObj.PacID == id)

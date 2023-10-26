@@ -787,7 +787,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //CustomerID
-        public async Task<List<CustomerRole>> GetByCustomerAsync(int id)
+        public async Task<List<CustomerRole>> GetByCustomerIDAsync(int id)
         {
             var customerRolesWithCodes = await BuildQuery()
                                     .Where(x => x.CustomerRoleObj.CustomerID == id)
@@ -796,7 +796,7 @@ namespace FS.Farm.EF.Managers
             return finalCustomerRoles;
         }
         //RoleID
-        public async Task<List<CustomerRole>> GetByRoleAsync(int id)
+        public async Task<List<CustomerRole>> GetByRoleIDAsync(int id)
         {
             var customerRolesWithCodes = await BuildQuery()
                                     .Where(x => x.CustomerRoleObj.RoleID == id)
@@ -805,7 +805,7 @@ namespace FS.Farm.EF.Managers
             return finalCustomerRoles;
         }
         //CustomerID
-        public List<CustomerRole> GetByCustomer(int id)
+        public List<CustomerRole> GetByCustomerID(int id)
         {
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.CustomerID == id)
@@ -814,7 +814,7 @@ namespace FS.Farm.EF.Managers
             return finalCustomerRoles;
         }
         //RoleID
-        public List<CustomerRole> GetByRole(int id)
+        public List<CustomerRole> GetByRoleID(int id)
         {
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.RoleID == id)

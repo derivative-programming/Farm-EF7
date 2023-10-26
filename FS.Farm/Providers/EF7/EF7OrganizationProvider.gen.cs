@@ -1247,7 +1247,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
-                rdr = BuildDataReader(organizationManager.GetByTac(tacID));
+                rdr = BuildDataReader(organizationManager.GetByTacID(tacID));
             }
             catch (Exception x)
             {
@@ -1276,7 +1276,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
-                rdr = BuildDataReader(await organizationManager.GetByTacAsync(tacID));
+                rdr = BuildDataReader(await organizationManager.GetByTacIDAsync(tacID));
             }
             catch (Exception x)
             {

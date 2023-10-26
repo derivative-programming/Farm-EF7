@@ -784,7 +784,7 @@ namespace FS.Farm.EF.Managers
             return results;
         }
         //PacID
-        public async Task<List<DateGreaterThanFilter>> GetByPacAsync(int id)
+        public async Task<List<DateGreaterThanFilter>> GetByPacIDAsync(int id)
         {
             var dateGreaterThanFiltersWithCodes = await BuildQuery()
                                     .Where(x => x.DateGreaterThanFilterObj.PacID == id)
@@ -793,7 +793,7 @@ namespace FS.Farm.EF.Managers
             return finalDateGreaterThanFilters;
         }
         //PacID
-        public List<DateGreaterThanFilter> GetByPac(int id)
+        public List<DateGreaterThanFilter> GetByPacID(int id)
         {
             var dateGreaterThanFiltersWithCodes = BuildQuery()
                                     .Where(x => x.DateGreaterThanFilterObj.PacID == id)

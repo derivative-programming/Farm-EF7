@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.TacSet.Add(tac);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(tac);
-                var result = await manager.GetByPacAsync(tac.PacID.Value);
+                var result = await manager.GetByPacIDAsync(tac.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(tac.TacID, result.First().TacID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.TacSet.Add(tac);
                 //context.SaveChanges();
                 manager.Add(tac);
-                var result = manager.GetByPac(tac.PacID.Value);
+                var result = manager.GetByPacID(tac.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(tac.TacID, result.First().TacID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new TacManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new TacManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(tac2);
                 //context.TacSet.AddRange(tac1, tac2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(tac1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(tac1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(tac2);
                 //context.TacSet.AddRange(tac1, tac2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(tac1.PacID.Value);
+                var result = manager.GetByPacID(tac1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

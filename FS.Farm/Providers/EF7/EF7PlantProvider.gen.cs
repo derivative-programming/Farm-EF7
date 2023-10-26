@@ -1611,7 +1611,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
-                rdr = BuildDataReader(plantManager.GetByFlavor(flvrForeignKeyID));
+                rdr = BuildDataReader(plantManager.GetByFlvrForeignKeyID(flvrForeignKeyID));
             }
             catch (Exception x)
             {
@@ -1640,7 +1640,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
-                rdr = BuildDataReader(plantManager.GetByLand(landID));
+                rdr = BuildDataReader(plantManager.GetByLandID(landID));
             }
             catch (Exception x)
             {
@@ -1669,7 +1669,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
-                rdr = BuildDataReader(await plantManager.GetByFlavorAsync(flvrForeignKeyID));
+                rdr = BuildDataReader(await plantManager.GetByFlvrForeignKeyIDAsync(flvrForeignKeyID));
             }
             catch (Exception x)
             {
@@ -1698,7 +1698,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
-                rdr = BuildDataReader(await plantManager.GetByLandAsync(landID));
+                rdr = BuildDataReader(await plantManager.GetByLandIDAsync(landID));
             }
             catch (Exception x)
             {

@@ -1347,7 +1347,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = BuildDbContext(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
-                rdr = BuildDataReader(triStateFilterManager.GetByPac(pacID));
+                rdr = BuildDataReader(triStateFilterManager.GetByPacID(pacID));
             }
             catch (Exception x)
             {
@@ -1376,7 +1376,7 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = await BuildDbContextAsync(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
-                rdr = BuildDataReader(await triStateFilterManager.GetByPacAsync(pacID));
+                rdr = BuildDataReader(await triStateFilterManager.GetByPacIDAsync(pacID));
             }
             catch (Exception x)
             {

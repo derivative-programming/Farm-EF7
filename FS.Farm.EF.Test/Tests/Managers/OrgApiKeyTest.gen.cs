@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgApiKeySet.Add(orgApiKey);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(orgApiKey);
-                var result = await manager.GetByOrganizationAsync(orgApiKey.OrganizationID.Value);
+                var result = await manager.GetByOrganizationIDAsync(orgApiKey.OrganizationID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgApiKey.OrgApiKeyID, result.First().OrgApiKeyID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgApiKeySet.Add(orgApiKey);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(orgApiKey);
-                var result = await manager.GetByOrgCustomerAsync(orgApiKey.OrgCustomerID.Value);
+                var result = await manager.GetByOrgCustomerIDAsync(orgApiKey.OrgCustomerID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgApiKey.OrgApiKeyID, result.First().OrgApiKeyID);
             }
@@ -1115,7 +1115,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgApiKeySet.Add(orgApiKey);
                 //context.SaveChanges();
                 manager.Add(orgApiKey);
-                var result = manager.GetByOrganization(orgApiKey.OrganizationID.Value);
+                var result = manager.GetByOrganizationID(orgApiKey.OrganizationID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgApiKey.OrgApiKeyID, result.First().OrgApiKeyID);
             }
@@ -1133,7 +1133,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.OrgApiKeySet.Add(orgApiKey);
                 //context.SaveChanges();
                 manager.Add(orgApiKey);
-                var result = manager.GetByOrgCustomer(orgApiKey.OrgCustomerID.Value);
+                var result = manager.GetByOrgCustomerID(orgApiKey.OrgCustomerID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(orgApiKey.OrgApiKeyID, result.First().OrgApiKeyID);
             }
@@ -1146,7 +1146,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgApiKeyManager(context);
-                var result = await manager.GetByOrganizationAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByOrganizationIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1158,7 +1158,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgApiKeyManager(context);
-                var result = await manager.GetByOrgCustomerAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByOrgCustomerIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1170,7 +1170,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgApiKeyManager(context);
-                var result = manager.GetByOrganization(100);  // ID 100 is not added to the database
+                var result = manager.GetByOrganizationID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1182,7 +1182,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new OrgApiKeyManager(context);
-                var result = manager.GetByOrgCustomer(100);  // ID 100 is not added to the database
+                var result = manager.GetByOrgCustomerID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1201,7 +1201,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(orgApiKey2);
                 //context.OrgApiKeySet.AddRange(orgApiKey1, orgApiKey2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByOrganizationAsync(orgApiKey1.OrganizationID.Value);
+                var result = await manager.GetByOrganizationIDAsync(orgApiKey1.OrganizationID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1221,7 +1221,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(orgApiKey1);
                 await manager.AddAsync(orgApiKey2);
-                var result = await manager.GetByOrgCustomerAsync(orgApiKey1.OrgCustomerID.Value);
+                var result = await manager.GetByOrgCustomerIDAsync(orgApiKey1.OrgCustomerID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1240,7 +1240,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(orgApiKey2);
                 //context.OrgApiKeySet.AddRange(orgApiKey1, orgApiKey2);
                 //context.SaveChanges();
-                var result = manager.GetByOrganization(orgApiKey1.OrganizationID.Value);
+                var result = manager.GetByOrganizationID(orgApiKey1.OrganizationID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1260,7 +1260,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.SaveChanges();
                 manager.Add(orgApiKey1);
                 manager.Add(orgApiKey2);
-                var result = manager.GetByOrgCustomer(orgApiKey1.OrgCustomerID.Value);
+                var result = manager.GetByOrgCustomerID(orgApiKey1.OrgCustomerID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }

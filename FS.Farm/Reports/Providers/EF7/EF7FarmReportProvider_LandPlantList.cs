@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Reports;
+using System.Collections.Generic;
 
 namespace FS.Farm.Reports.Providers.EF7
 {

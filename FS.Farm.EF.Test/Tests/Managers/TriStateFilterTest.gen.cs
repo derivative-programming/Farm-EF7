@@ -1079,7 +1079,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.TriStateFilterSet.Add(triStateFilter);
                 //await context.SaveChangesAsync();
                 await manager.AddAsync(triStateFilter);
-                var result = await manager.GetByPacAsync(triStateFilter.PacID.Value);
+                var result = await manager.GetByPacIDAsync(triStateFilter.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(triStateFilter.TriStateFilterID, result.First().TriStateFilterID);
             }
@@ -1097,7 +1097,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.TriStateFilterSet.Add(triStateFilter);
                 //context.SaveChanges();
                 manager.Add(triStateFilter);
-                var result = manager.GetByPac(triStateFilter.PacID.Value);
+                var result = manager.GetByPacID(triStateFilter.PacID.Value);
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(triStateFilter.TriStateFilterID, result.First().TriStateFilterID);
             }
@@ -1110,7 +1110,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new TriStateFilterManager(context);
-                var result = await manager.GetByPacAsync(100);  // ID 100 is not added to the database
+                var result = await manager.GetByPacIDAsync(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1122,7 +1122,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             {
                 context.Database.EnsureCreated();
                 var manager = new TriStateFilterManager(context);
-                var result = manager.GetByPac(100);  // ID 100 is not added to the database
+                var result = manager.GetByPacID(100);  // ID 100 is not added to the database
                 Assert.AreEqual(0, result.Count);
             }
         }
@@ -1141,7 +1141,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 await manager.AddAsync(triStateFilter2);
                 //context.TriStateFilterSet.AddRange(triStateFilter1, triStateFilter2);
                 //await context.SaveChangesAsync();
-                var result = await manager.GetByPacAsync(triStateFilter1.PacID.Value);
+                var result = await manager.GetByPacIDAsync(triStateFilter1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
@@ -1160,7 +1160,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 manager.Add(triStateFilter2);
                 //context.TriStateFilterSet.AddRange(triStateFilter1, triStateFilter2);
                 //context.SaveChanges();
-                var result = manager.GetByPac(triStateFilter1.PacID.Value);
+                var result = manager.GetByPacID(triStateFilter1.PacID.Value);
                 Assert.AreEqual(2, result.Count);
             }
         }
