@@ -50,12 +50,12 @@ namespace FS.Farm.EF
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
-                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("insert_utc_date_time").CurrentValue = DateTime.UtcNow;
+                    entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
-                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
                 }
             }
         }

@@ -1432,7 +1432,12 @@ namespace FS.Farm.Providers.EF7
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.OrgCustomer).GetProperties())
             {
-                dataTable.Columns.Add(prop.Name, prop.PropertyType);
+                Type columnType = prop.PropertyType;
+                if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    columnType = Nullable.GetUnderlyingType(columnType);
+                }
+                dataTable.Columns.Add(prop.Name, columnType);
             }
             // Populating the DataTable
             foreach (var item in data)

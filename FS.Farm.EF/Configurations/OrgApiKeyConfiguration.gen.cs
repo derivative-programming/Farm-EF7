@@ -24,8 +24,8 @@ namespace FS.Farm.EF.Configurations
                 .HasColumnName(ToSnakeCase(nameof(OrgApiKey.LastChangeCode)));
             builder.Ignore(p => p.OrganizationCodePeek); //OrganizationID
             builder.Ignore(p => p.OrgCustomerCodePeek); //OrgCustomerID
-            builder.Property<DateTime>("InsertUtcDateTime").HasColumnName(ToSnakeCase("InsertUtcDateTime"));
-            builder.Property<DateTime>("LastUpdatedUtcDateTime").HasColumnName(ToSnakeCase("LastUpdatedUtcDateTime"));
+            builder.Property<DateTime>("insert_utc_date_time");
+            builder.Property<DateTime>("last_updated_utc_date_time");
             // Loop through all the properties to set snake_case column names
             foreach (var property in builder.Metadata.GetProperties())
             {

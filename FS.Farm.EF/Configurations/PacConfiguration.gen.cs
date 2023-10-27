@@ -16,8 +16,8 @@ namespace FS.Farm.EF.Configurations
             builder.Property(p => p.LastChangeCode)
                 .IsConcurrencyToken()
                 .HasColumnName(ToSnakeCase(nameof(Pac.LastChangeCode)));
-            builder.Property<DateTime>("InsertUtcDateTime").HasColumnName(ToSnakeCase("InsertUtcDateTime"));
-            builder.Property<DateTime>("LastUpdatedUtcDateTime").HasColumnName(ToSnakeCase("LastUpdatedUtcDateTime"));
+            builder.Property<DateTime>("insert_utc_date_time");
+            builder.Property<DateTime>("last_updated_utc_date_time");
             // Loop through all the properties to set snake_case column names
             foreach (var property in builder.Metadata.GetProperties())
             {

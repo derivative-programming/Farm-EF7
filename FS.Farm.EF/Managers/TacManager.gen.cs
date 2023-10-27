@@ -4,6 +4,7 @@ using FS.Farm.EF.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using EFCore.BulkExtensions;
 using System.Data;
+using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
 	public class TacManager
@@ -429,12 +430,12 @@ namespace FS.Farm.EF.Managers
 				var entry = _dbContext.Entry(tac);
 				if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
 				{
-					entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
-					entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+					entry.Property("insert_utc_date_time").CurrentValue = DateTime.UtcNow;
+					entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
 				}
 				else if (entry.State == EntityState.Modified)
 				{
-					entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+					entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
 				}
 			}
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
@@ -473,12 +474,12 @@ namespace FS.Farm.EF.Managers
                 var entry = _dbContext.Entry(tac);
                 if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
                 {
-                    entry.Property("InsertUtcDateTime").CurrentValue = DateTime.UtcNow;
-                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("insert_utc_date_time").CurrentValue = DateTime.UtcNow;
+                    entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
                 }
                 else if (entry.State == EntityState.Modified)
                 {
-                    entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+                    entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
                 }
             }
             var existingTransaction = _dbContext.Database.CurrentTransaction;
@@ -800,6 +801,12 @@ namespace FS.Farm.EF.Managers
                                     .ToList();
             List<Tac> finalTacs = ProcessMappings(tacsWithCodes);
             return finalTacs;
+        }
+        private string ToSnakeCase(string input)
+        {
+            if (string.IsNullOrEmpty(input)) { return input; }
+            var startUnderscores = Regex.Match(input, @"^_+");
+            return startUnderscores + Regex.Replace(input, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
         }
         private class QueryDTO
         {
