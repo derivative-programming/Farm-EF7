@@ -252,6 +252,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
+                orgCustomer.OrgCustomerID = orgCustomerID;
                 orgCustomer.Code = code;
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
@@ -296,6 +297,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
+                orgCustomer.OrgCustomerID = orgCustomerID;
                 orgCustomer.Code = code;
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
@@ -870,11 +872,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].OrgCustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.Code = item.Code;
@@ -885,7 +889,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkInsert(orgCustomers);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -918,11 +922,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgCustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.Code = item.Code;
@@ -933,7 +939,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomers.Add(orgCustomer);
                 }
                 await orgCustomerManager.BulkInsertAsync(orgCustomers);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -966,11 +972,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgCustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.OrgCustomerID = item.OrgCustomerID;
@@ -982,7 +990,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkUpdate(orgCustomers);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1015,11 +1023,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgCustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.OrgCustomerID = item.OrgCustomerID;
@@ -1031,7 +1041,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkUpdate(orgCustomers);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1062,11 +1072,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgCustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.OrgCustomerID = item.OrgCustomerID;
@@ -1078,7 +1090,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkDelete(orgCustomers);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1109,11 +1121,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgCustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.OrgCustomerID = item.OrgCustomerID;
@@ -1125,7 +1139,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomers.Add(orgCustomer);
                 }
                 await orgCustomerManager.BulkDeleteAsync(orgCustomers);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

@@ -284,6 +284,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
+                triStateFilter.TriStateFilterID = triStateFilterID;
                 triStateFilter.Code = code;
                 triStateFilter.Description = description;
                 triStateFilter.DisplayOrder = displayOrder;
@@ -340,6 +341,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
+                triStateFilter.TriStateFilterID = triStateFilterID;
                 triStateFilter.Code = code;
                 triStateFilter.Description = description;
                 triStateFilter.DisplayOrder = displayOrder;
@@ -926,11 +928,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].TriStateFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.Code = item.Code;
@@ -945,7 +949,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilters.Add(triStateFilter);
                 }
                 triStateFilterManager.BulkInsert(triStateFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -978,11 +982,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TriStateFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.Code = item.Code;
@@ -997,7 +1003,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilters.Add(triStateFilter);
                 }
                 await triStateFilterManager.BulkInsertAsync(triStateFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1030,11 +1036,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TriStateFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.TriStateFilterID = item.TriStateFilterID;
@@ -1050,7 +1058,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilters.Add(triStateFilter);
                 }
                 triStateFilterManager.BulkUpdate(triStateFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1083,11 +1091,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TriStateFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.TriStateFilterID = item.TriStateFilterID;
@@ -1103,7 +1113,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilters.Add(triStateFilter);
                 }
                 triStateFilterManager.BulkUpdate(triStateFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1134,11 +1144,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TriStateFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.TriStateFilterID = item.TriStateFilterID;
@@ -1154,7 +1166,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilters.Add(triStateFilter);
                 }
                 triStateFilterManager.BulkDelete(triStateFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1185,11 +1197,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TriStateFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.TriStateFilterID = item.TriStateFilterID;
@@ -1205,7 +1219,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilters.Add(triStateFilter);
                 }
                 await triStateFilterManager.BulkDeleteAsync(triStateFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

@@ -244,6 +244,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 EF.Models.Organization organization = new EF.Models.Organization();
+                organization.OrganizationID = organizationID;
                 organization.Code = code;
                 organization.Name = name;
                 organization.TacID = tacID;
@@ -285,6 +286,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 EF.Models.Organization organization = new EF.Models.Organization();
+                organization.OrganizationID = organizationID;
                 organization.Code = code;
                 organization.Name = name;
                 organization.TacID = tacID;
@@ -856,11 +858,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].OrganizationID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.Code = item.Code;
@@ -870,7 +874,7 @@ namespace FS.Farm.Providers.EF7
                     organizations.Add(organization);
                 }
                 organizationManager.BulkInsert(organizations);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -903,11 +907,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrganizationID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.Code = item.Code;
@@ -917,7 +923,7 @@ namespace FS.Farm.Providers.EF7
                     organizations.Add(organization);
                 }
                 await organizationManager.BulkInsertAsync(organizations);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -950,11 +956,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrganizationID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.OrganizationID = item.OrganizationID;
@@ -965,7 +973,7 @@ namespace FS.Farm.Providers.EF7
                     organizations.Add(organization);
                 }
                 organizationManager.BulkUpdate(organizations);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -998,11 +1006,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrganizationID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.OrganizationID = item.OrganizationID;
@@ -1013,7 +1023,7 @@ namespace FS.Farm.Providers.EF7
                     organizations.Add(organization);
                 }
                 organizationManager.BulkUpdate(organizations);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1044,11 +1054,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrganizationID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.OrganizationID = item.OrganizationID;
@@ -1059,7 +1071,7 @@ namespace FS.Farm.Providers.EF7
                     organizations.Add(organization);
                 }
                 organizationManager.BulkDelete(organizations);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1090,11 +1102,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrganizationID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.OrganizationID = item.OrganizationID;
@@ -1105,7 +1119,7 @@ namespace FS.Farm.Providers.EF7
                     organizations.Add(organization);
                 }
                 await organizationManager.BulkDeleteAsync(organizations);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

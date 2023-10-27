@@ -284,6 +284,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
+                dateGreaterThanFilter.DateGreaterThanFilterID = dateGreaterThanFilterID;
                 dateGreaterThanFilter.Code = code;
                 dateGreaterThanFilter.DayCount = dayCount;
                 dateGreaterThanFilter.Description = description;
@@ -340,6 +341,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
+                dateGreaterThanFilter.DateGreaterThanFilterID = dateGreaterThanFilterID;
                 dateGreaterThanFilter.Code = code;
                 dateGreaterThanFilter.DayCount = dayCount;
                 dateGreaterThanFilter.Description = description;
@@ -926,11 +928,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.Code = item.Code;
@@ -945,7 +949,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkInsert(dateGreaterThanFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -978,11 +982,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.Code = item.Code;
@@ -997,7 +1003,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 await dateGreaterThanFilterManager.BulkInsertAsync(dateGreaterThanFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1030,11 +1036,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
@@ -1050,7 +1058,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1083,11 +1091,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
@@ -1103,7 +1113,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1134,11 +1144,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
@@ -1154,7 +1166,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkDelete(dateGreaterThanFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1185,11 +1197,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
@@ -1205,7 +1219,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 await dateGreaterThanFilterManager.BulkDeleteAsync(dateGreaterThanFilters);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

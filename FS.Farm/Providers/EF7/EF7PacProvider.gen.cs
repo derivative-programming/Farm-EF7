@@ -268,6 +268,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 EF.Models.Pac pac = new EF.Models.Pac();
+                pac.PacID = pacID;
                 pac.Code = code;
                 pac.Description = description;
                 pac.DisplayOrder = displayOrder;
@@ -318,6 +319,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 EF.Models.Pac pac = new EF.Models.Pac();
+                pac.PacID = pacID;
                 pac.Code = code;
                 pac.Description = description;
                 pac.DisplayOrder = displayOrder;
@@ -898,11 +900,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.Code = item.Code;
@@ -915,7 +919,7 @@ namespace FS.Farm.Providers.EF7
                     pacs.Add(pac);
                 }
                 pacManager.BulkInsert(pacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -948,11 +952,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.Code = item.Code;
@@ -965,7 +971,7 @@ namespace FS.Farm.Providers.EF7
                     pacs.Add(pac);
                 }
                 await pacManager.BulkInsertAsync(pacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -998,11 +1004,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
@@ -1016,7 +1024,7 @@ namespace FS.Farm.Providers.EF7
                     pacs.Add(pac);
                 }
                 pacManager.BulkUpdate(pacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1049,11 +1057,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
@@ -1067,7 +1077,7 @@ namespace FS.Farm.Providers.EF7
                     pacs.Add(pac);
                 }
                 pacManager.BulkUpdate(pacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1098,11 +1108,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
@@ -1116,7 +1128,7 @@ namespace FS.Farm.Providers.EF7
                     pacs.Add(pac);
                 }
                 pacManager.BulkDelete(pacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1147,11 +1159,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
@@ -1165,7 +1179,7 @@ namespace FS.Farm.Providers.EF7
                     pacs.Add(pac);
                 }
                 await pacManager.BulkDeleteAsync(pacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

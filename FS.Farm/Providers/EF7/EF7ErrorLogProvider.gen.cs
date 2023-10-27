@@ -301,6 +301,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
+                errorLog.ErrorLogID = errorLogID;
                 errorLog.Code = code;
                 errorLog.BrowserCode = browserCode;
                 errorLog.ContextCode = contextCode;
@@ -363,6 +364,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
+                errorLog.ErrorLogID = errorLogID;
                 errorLog.Code = code;
                 errorLog.BrowserCode = browserCode;
                 errorLog.ContextCode = contextCode;
@@ -952,11 +954,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.Code = item.Code;
@@ -972,7 +976,7 @@ namespace FS.Farm.Providers.EF7
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkInsert(errorLogs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1005,11 +1009,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.Code = item.Code;
@@ -1025,7 +1031,7 @@ namespace FS.Farm.Providers.EF7
                     errorLogs.Add(errorLog);
                 }
                 await errorLogManager.BulkInsertAsync(errorLogs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1058,11 +1064,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
@@ -1079,7 +1087,7 @@ namespace FS.Farm.Providers.EF7
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkUpdate(errorLogs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1112,11 +1120,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
@@ -1133,7 +1143,7 @@ namespace FS.Farm.Providers.EF7
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkUpdate(errorLogs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1164,11 +1174,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
@@ -1185,7 +1197,7 @@ namespace FS.Farm.Providers.EF7
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkDelete(errorLogs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1216,11 +1228,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
@@ -1237,7 +1251,7 @@ namespace FS.Farm.Providers.EF7
                     errorLogs.Add(errorLog);
                 }
                 await errorLogManager.BulkDeleteAsync(errorLogs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

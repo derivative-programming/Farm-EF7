@@ -398,6 +398,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 EF.Models.Plant plant = new EF.Models.Plant();
+                plant.PlantID = plantID;
                 plant.Code = code;
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
@@ -496,6 +497,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 EF.Models.Plant plant = new EF.Models.Plant();
+                plant.PlantID = plantID;
                 plant.Code = code;
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
@@ -1118,11 +1120,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
@@ -1149,7 +1153,7 @@ namespace FS.Farm.Providers.EF7
                     plants.Add(plant);
                 }
                 plantManager.BulkInsert(plants);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1182,11 +1186,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
@@ -1213,7 +1219,7 @@ namespace FS.Farm.Providers.EF7
                     plants.Add(plant);
                 }
                 await plantManager.BulkInsertAsync(plants);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1246,11 +1252,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
@@ -1278,7 +1286,7 @@ namespace FS.Farm.Providers.EF7
                     plants.Add(plant);
                 }
                 plantManager.BulkUpdate(plants);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1311,11 +1319,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
@@ -1343,7 +1353,7 @@ namespace FS.Farm.Providers.EF7
                     plants.Add(plant);
                 }
                 plantManager.BulkUpdate(plants);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1374,11 +1384,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
@@ -1406,7 +1418,7 @@ namespace FS.Farm.Providers.EF7
                     plants.Add(plant);
                 }
                 plantManager.BulkDelete(plants);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1437,11 +1449,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
@@ -1469,7 +1483,7 @@ namespace FS.Farm.Providers.EF7
                     plants.Add(plant);
                 }
                 await plantManager.BulkDeleteAsync(plants);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

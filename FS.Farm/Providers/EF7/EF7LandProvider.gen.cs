@@ -276,6 +276,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 EF.Models.Land land = new EF.Models.Land();
+                land.LandID = landID;
                 land.Code = code;
                 land.Description = description;
                 land.DisplayOrder = displayOrder;
@@ -329,6 +330,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 EF.Models.Land land = new EF.Models.Land();
+                land.LandID = landID;
                 land.Code = code;
                 land.Description = description;
                 land.DisplayOrder = displayOrder;
@@ -912,11 +914,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.Code = item.Code;
@@ -930,7 +934,7 @@ namespace FS.Farm.Providers.EF7
                     lands.Add(land);
                 }
                 landManager.BulkInsert(lands);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -963,11 +967,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.Code = item.Code;
@@ -981,7 +987,7 @@ namespace FS.Farm.Providers.EF7
                     lands.Add(land);
                 }
                 await landManager.BulkInsertAsync(lands);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1014,11 +1020,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
@@ -1033,7 +1041,7 @@ namespace FS.Farm.Providers.EF7
                     lands.Add(land);
                 }
                 landManager.BulkUpdate(lands);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1066,11 +1074,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
@@ -1085,7 +1095,7 @@ namespace FS.Farm.Providers.EF7
                     lands.Add(land);
                 }
                 landManager.BulkUpdate(lands);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1116,11 +1126,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
@@ -1135,7 +1147,7 @@ namespace FS.Farm.Providers.EF7
                     lands.Add(land);
                 }
                 landManager.BulkDelete(lands);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1166,11 +1178,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
@@ -1185,7 +1199,7 @@ namespace FS.Farm.Providers.EF7
                     lands.Add(land);
                 }
                 await landManager.BulkDeleteAsync(lands);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

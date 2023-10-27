@@ -276,6 +276,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 EF.Models.Tac tac = new EF.Models.Tac();
+                tac.TacID = tacID;
                 tac.Code = code;
                 tac.Description = description;
                 tac.DisplayOrder = displayOrder;
@@ -329,6 +330,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 EF.Models.Tac tac = new EF.Models.Tac();
+                tac.TacID = tacID;
                 tac.Code = code;
                 tac.Description = description;
                 tac.DisplayOrder = displayOrder;
@@ -912,11 +914,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].TacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.Code = item.Code;
@@ -930,7 +934,7 @@ namespace FS.Farm.Providers.EF7
                     tacs.Add(tac);
                 }
                 tacManager.BulkInsert(tacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -963,11 +967,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.Code = item.Code;
@@ -981,7 +987,7 @@ namespace FS.Farm.Providers.EF7
                     tacs.Add(tac);
                 }
                 await tacManager.BulkInsertAsync(tacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1014,11 +1020,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.TacID = item.TacID;
@@ -1033,7 +1041,7 @@ namespace FS.Farm.Providers.EF7
                     tacs.Add(tac);
                 }
                 tacManager.BulkUpdate(tacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1066,11 +1074,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.TacID = item.TacID;
@@ -1085,7 +1095,7 @@ namespace FS.Farm.Providers.EF7
                     tacs.Add(tac);
                 }
                 tacManager.BulkUpdate(tacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1116,11 +1126,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.TacID = item.TacID;
@@ -1135,7 +1147,7 @@ namespace FS.Farm.Providers.EF7
                     tacs.Add(tac);
                 }
                 tacManager.BulkDelete(tacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1166,11 +1178,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].TacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.TacID = item.TacID;
@@ -1185,7 +1199,7 @@ namespace FS.Farm.Providers.EF7
                     tacs.Add(tac);
                 }
                 await tacManager.BulkDeleteAsync(tacs);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

@@ -318,6 +318,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
+                orgApiKey.OrgApiKeyID = orgApiKeyID;
                 orgApiKey.Code = code;
                 orgApiKey.ApiKeyValue = apiKeyValue;
                 orgApiKey.CreatedBy = createdBy;
@@ -386,6 +387,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
+                orgApiKey.OrgApiKeyID = orgApiKeyID;
                 orgApiKey.Code = code;
                 orgApiKey.ApiKeyValue = apiKeyValue;
                 orgApiKey.CreatedBy = createdBy;
@@ -978,11 +980,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.Code = item.Code;
@@ -999,7 +1003,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkInsert(orgApiKeys);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1032,11 +1036,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.Code = item.Code;
@@ -1053,7 +1059,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKeys.Add(orgApiKey);
                 }
                 await orgApiKeyManager.BulkInsertAsync(orgApiKeys);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1086,11 +1092,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
@@ -1108,7 +1116,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1141,11 +1149,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
@@ -1163,7 +1173,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1194,11 +1204,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
@@ -1216,7 +1228,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkDelete(orgApiKeys);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1247,11 +1259,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
@@ -1269,7 +1283,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKeys.Add(orgApiKey);
                 }
                 await orgApiKeyManager.BulkDeleteAsync(orgApiKeys);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

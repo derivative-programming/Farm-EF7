@@ -276,6 +276,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 EF.Models.Flavor flavor = new EF.Models.Flavor();
+                flavor.FlavorID = flavorID;
                 flavor.Code = code;
                 flavor.Description = description;
                 flavor.DisplayOrder = displayOrder;
@@ -329,6 +330,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 EF.Models.Flavor flavor = new EF.Models.Flavor();
+                flavor.FlavorID = flavorID;
                 flavor.Code = code;
                 flavor.Description = description;
                 flavor.DisplayOrder = displayOrder;
@@ -912,11 +914,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].FlavorID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.Code = item.Code;
@@ -930,7 +934,7 @@ namespace FS.Farm.Providers.EF7
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkInsert(flavors);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -963,11 +967,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].FlavorID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.Code = item.Code;
@@ -981,7 +987,7 @@ namespace FS.Farm.Providers.EF7
                     flavors.Add(flavor);
                 }
                 await flavorManager.BulkInsertAsync(flavors);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1014,11 +1020,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].FlavorID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.FlavorID = item.FlavorID;
@@ -1033,7 +1041,7 @@ namespace FS.Farm.Providers.EF7
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkUpdate(flavors);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1066,11 +1074,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].FlavorID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.FlavorID = item.FlavorID;
@@ -1085,7 +1095,7 @@ namespace FS.Farm.Providers.EF7
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkUpdate(flavors);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1116,11 +1126,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].FlavorID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.FlavorID = item.FlavorID;
@@ -1135,7 +1147,7 @@ namespace FS.Farm.Providers.EF7
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkDelete(flavors);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1166,11 +1178,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].FlavorID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.FlavorID = item.FlavorID;
@@ -1185,7 +1199,7 @@ namespace FS.Farm.Providers.EF7
                     flavors.Add(flavor);
                 }
                 await flavorManager.BulkDeleteAsync(flavors);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

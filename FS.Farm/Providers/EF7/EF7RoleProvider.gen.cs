@@ -276,6 +276,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 EF.Models.Role role = new EF.Models.Role();
+                role.RoleID = roleID;
                 role.Code = code;
                 role.Description = description;
                 role.DisplayOrder = displayOrder;
@@ -329,6 +330,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 EF.Models.Role role = new EF.Models.Role();
+                role.RoleID = roleID;
                 role.Code = code;
                 role.Description = description;
                 role.DisplayOrder = displayOrder;
@@ -912,11 +914,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].RoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.Code = item.Code;
@@ -930,7 +934,7 @@ namespace FS.Farm.Providers.EF7
                     roles.Add(role);
                 }
                 roleManager.BulkInsert(roles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -963,11 +967,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].RoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.Code = item.Code;
@@ -981,7 +987,7 @@ namespace FS.Farm.Providers.EF7
                     roles.Add(role);
                 }
                 await roleManager.BulkInsertAsync(roles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1014,11 +1020,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].RoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.RoleID = item.RoleID;
@@ -1033,7 +1041,7 @@ namespace FS.Farm.Providers.EF7
                     roles.Add(role);
                 }
                 roleManager.BulkUpdate(roles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1066,11 +1074,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].RoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.RoleID = item.RoleID;
@@ -1085,7 +1095,7 @@ namespace FS.Farm.Providers.EF7
                     roles.Add(role);
                 }
                 roleManager.BulkUpdate(roles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1116,11 +1126,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].RoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.RoleID = item.RoleID;
@@ -1135,7 +1147,7 @@ namespace FS.Farm.Providers.EF7
                     roles.Add(role);
                 }
                 roleManager.BulkDelete(roles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1166,11 +1178,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].RoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.RoleID = item.RoleID;
@@ -1185,7 +1199,7 @@ namespace FS.Farm.Providers.EF7
                     roles.Add(role);
                 }
                 await roleManager.BulkDeleteAsync(roles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {

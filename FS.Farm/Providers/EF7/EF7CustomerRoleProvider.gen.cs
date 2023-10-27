@@ -260,6 +260,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
+                customerRole.CustomerRoleID = customerRoleID;
                 customerRole.Code = code;
                 customerRole.CustomerID = customerID;
                 customerRole.IsPlaceholder = isPlaceholder;
@@ -307,6 +308,7 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
+                customerRole.CustomerRoleID = customerRoleID;
                 customerRole.Code = code;
                 customerRole.CustomerID = customerID;
                 customerRole.IsPlaceholder = isPlaceholder;
@@ -884,11 +886,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+                int actionCount = 0;
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.Code = item.Code;
@@ -900,7 +904,7 @@ namespace FS.Farm.Providers.EF7
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkInsert(customerRoles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -933,11 +937,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.Code = item.Code;
@@ -949,7 +955,7 @@ namespace FS.Farm.Providers.EF7
                     customerRoles.Add(customerRole);
                 }
                 await customerRoleManager.BulkInsertAsync(customerRoles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -982,11 +988,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
@@ -999,7 +1007,7 @@ namespace FS.Farm.Providers.EF7
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkUpdate(customerRoles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1032,11 +1040,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
@@ -1049,7 +1059,7 @@ namespace FS.Farm.Providers.EF7
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkUpdate(customerRoles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1080,11 +1090,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = BuildDbContext(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
@@ -1097,7 +1109,7 @@ namespace FS.Farm.Providers.EF7
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkDelete(customerRoles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
@@ -1128,11 +1140,13 @@ namespace FS.Farm.Providers.EF7
                 dbContext = await BuildDbContextAsync(context);
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+                int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+                    actionCount++;
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
@@ -1145,7 +1159,7 @@ namespace FS.Farm.Providers.EF7
                     customerRoles.Add(customerRole);
                 }
                 await customerRoleManager.BulkDeleteAsync(customerRoles);
-                bulkCount = dataList.Count;
+                bulkCount = actionCount;
             }
             catch (Exception x)
             {
