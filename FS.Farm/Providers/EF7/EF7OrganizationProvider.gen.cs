@@ -166,6 +166,7 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 EF.Models.Organization organization = new EF.Models.Organization();
                 organization.Code = code;
+                organization.LastChangeCode = Guid.NewGuid();
                 organization.Name = name;
                 organization.TacID = tacID;
                 organization = organizationManager.Add(organization);
@@ -205,6 +206,7 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 EF.Models.Organization organization = new EF.Models.Organization();
                 organization.Code = code;
+                organization.LastChangeCode = Guid.NewGuid();
                 organization.Name = name;
                 organization.TacID = tacID;
                 organization = await organizationManager.AddAsync(organization);
@@ -862,6 +864,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.Code = item.Code;
+                    organization.LastChangeCode = Guid.NewGuid();
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
                     organizations.Add(organization);
@@ -908,6 +911,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Organization item = dataList[i];
                     EF.Models.Organization organization = new EF.Models.Organization();
                     organization.Code = item.Code;
+                    organization.LastChangeCode = Guid.NewGuid();
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
                     organizations.Add(organization);

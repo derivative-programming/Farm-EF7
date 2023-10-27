@@ -168,6 +168,7 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                 orgCustomer.Code = code;
+                orgCustomer.LastChangeCode = Guid.NewGuid();
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
@@ -210,6 +211,7 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                 orgCustomer.Code = code;
+                orgCustomer.LastChangeCode = Guid.NewGuid();
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
@@ -876,6 +878,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.Code = item.Code;
+                    orgCustomer.LastChangeCode = Guid.NewGuid();
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
@@ -923,6 +926,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.OrgCustomer item = dataList[i];
                     EF.Models.OrgCustomer orgCustomer = new EF.Models.OrgCustomer();
                     orgCustomer.Code = item.Code;
+                    orgCustomer.LastChangeCode = Guid.NewGuid();
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;

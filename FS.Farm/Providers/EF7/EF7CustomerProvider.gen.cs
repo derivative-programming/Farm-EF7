@@ -220,6 +220,7 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 EF.Models.Customer customer = new EF.Models.Customer();
                 customer.Code = code;
+                customer.LastChangeCode = Guid.NewGuid();
                 customer.ActiveOrganizationID = activeOrganizationID;
                 customer.Email = email;
                 customer.EmailConfirmedUTCDateTime = emailConfirmedUTCDateTime;
@@ -334,6 +335,7 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 EF.Models.Customer customer = new EF.Models.Customer();
                 customer.Code = code;
+                customer.LastChangeCode = Guid.NewGuid();
                 customer.ActiveOrganizationID = activeOrganizationID;
                 customer.Email = email;
                 customer.EmailConfirmedUTCDateTime = emailConfirmedUTCDateTime;
@@ -1204,6 +1206,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Customer item = dataList[i];
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.Code = item.Code;
+                    customer.LastChangeCode = Guid.NewGuid();
                     customer.ActiveOrganizationID = item.ActiveOrganizationID;
                     customer.Email = item.Email;
                     customer.EmailConfirmedUTCDateTime = item.EmailConfirmedUTCDateTime;
@@ -1271,6 +1274,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Customer item = dataList[i];
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.Code = item.Code;
+                    customer.LastChangeCode = Guid.NewGuid();
                     customer.ActiveOrganizationID = item.ActiveOrganizationID;
                     customer.Email = item.Email;
                     customer.EmailConfirmedUTCDateTime = item.EmailConfirmedUTCDateTime;

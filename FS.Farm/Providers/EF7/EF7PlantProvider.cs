@@ -221,6 +221,7 @@ namespace FS.Farm.Providers.EF7
 
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.Code = code;
+                plant.LastChangeCode = Guid.NewGuid();
                 plant.SomeTextVal = someTextVal;
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
@@ -323,6 +324,7 @@ namespace FS.Farm.Providers.EF7
 
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.Code = code;
+                plant.LastChangeCode = Guid.NewGuid();
                 plant.SomeTextVal = someTextVal;
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
@@ -1237,6 +1239,7 @@ namespace FS.Farm.Providers.EF7
                      
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
+                    plant.LastChangeCode = Guid.NewGuid();
                     plant.SomeTextVal = item.SomeTextVal;
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
@@ -1308,6 +1311,7 @@ namespace FS.Farm.Providers.EF7
 
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
+                    plant.LastChangeCode = Guid.NewGuid();
                     plant.SomeTextVal = item.SomeTextVal;
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;

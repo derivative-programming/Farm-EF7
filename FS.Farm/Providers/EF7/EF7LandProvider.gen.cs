@@ -174,6 +174,7 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 EF.Models.Land land = new EF.Models.Land();
                 land.Code = code;
+                land.LastChangeCode = Guid.NewGuid();
                 land.Description = description;
                 land.DisplayOrder = displayOrder;
                 land.IsActive = isActive;
@@ -225,6 +226,7 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 EF.Models.Land land = new EF.Models.Land();
                 land.Code = code;
+                land.LastChangeCode = Guid.NewGuid();
                 land.Description = description;
                 land.DisplayOrder = displayOrder;
                 land.IsActive = isActive;
@@ -918,6 +920,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.Code = item.Code;
+                    land.LastChangeCode = Guid.NewGuid();
                     land.Description = item.Description;
                     land.DisplayOrder = item.DisplayOrder;
                     land.IsActive = item.IsActive;
@@ -968,6 +971,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Land item = dataList[i];
                     EF.Models.Land land = new EF.Models.Land();
                     land.Code = item.Code;
+                    land.LastChangeCode = Guid.NewGuid();
                     land.Description = item.Description;
                     land.DisplayOrder = item.DisplayOrder;
                     land.IsActive = item.IsActive;

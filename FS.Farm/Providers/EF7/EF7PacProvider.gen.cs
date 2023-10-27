@@ -172,6 +172,7 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 EF.Models.Pac pac = new EF.Models.Pac();
                 pac.Code = code;
+                pac.LastChangeCode = Guid.NewGuid();
                 pac.Description = description;
                 pac.DisplayOrder = displayOrder;
                 pac.IsActive = isActive;
@@ -220,6 +221,7 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 EF.Models.Pac pac = new EF.Models.Pac();
                 pac.Code = code;
+                pac.LastChangeCode = Guid.NewGuid();
                 pac.Description = description;
                 pac.DisplayOrder = displayOrder;
                 pac.IsActive = isActive;
@@ -904,6 +906,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.Code = item.Code;
+                    pac.LastChangeCode = Guid.NewGuid();
                     pac.Description = item.Description;
                     pac.DisplayOrder = item.DisplayOrder;
                     pac.IsActive = item.IsActive;
@@ -953,6 +956,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Pac item = dataList[i];
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.Code = item.Code;
+                    pac.LastChangeCode = Guid.NewGuid();
                     pac.Description = item.Description;
                     pac.DisplayOrder = item.DisplayOrder;
                     pac.IsActive = item.IsActive;

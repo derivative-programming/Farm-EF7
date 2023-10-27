@@ -186,6 +186,7 @@ namespace FS.Farm.Providers.EF7
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                 orgApiKey.Code = code;
+                orgApiKey.LastChangeCode = Guid.NewGuid();
                 orgApiKey.ApiKeyValue = apiKeyValue;
                 orgApiKey.CreatedBy = createdBy;
                 orgApiKey.CreatedUTCDateTime = createdUTCDateTime;
@@ -252,6 +253,7 @@ namespace FS.Farm.Providers.EF7
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                 orgApiKey.Code = code;
+                orgApiKey.LastChangeCode = Guid.NewGuid();
                 orgApiKey.ApiKeyValue = apiKeyValue;
                 orgApiKey.CreatedBy = createdBy;
                 orgApiKey.CreatedUTCDateTime = createdUTCDateTime;
@@ -984,6 +986,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.Code = item.Code;
+                    orgApiKey.LastChangeCode = Guid.NewGuid();
                     orgApiKey.ApiKeyValue = item.ApiKeyValue;
                     orgApiKey.CreatedBy = item.CreatedBy;
                     orgApiKey.CreatedUTCDateTime = item.CreatedUTCDateTime;
@@ -1037,6 +1040,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.OrgApiKey item = dataList[i];
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.Code = item.Code;
+                    orgApiKey.LastChangeCode = Guid.NewGuid();
                     orgApiKey.ApiKeyValue = item.ApiKeyValue;
                     orgApiKey.CreatedBy = item.CreatedBy;
                     orgApiKey.CreatedUTCDateTime = item.CreatedUTCDateTime;

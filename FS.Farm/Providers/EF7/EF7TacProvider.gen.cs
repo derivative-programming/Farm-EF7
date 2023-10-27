@@ -174,6 +174,7 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 EF.Models.Tac tac = new EF.Models.Tac();
                 tac.Code = code;
+                tac.LastChangeCode = Guid.NewGuid();
                 tac.Description = description;
                 tac.DisplayOrder = displayOrder;
                 tac.IsActive = isActive;
@@ -225,6 +226,7 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 EF.Models.Tac tac = new EF.Models.Tac();
                 tac.Code = code;
+                tac.LastChangeCode = Guid.NewGuid();
                 tac.Description = description;
                 tac.DisplayOrder = displayOrder;
                 tac.IsActive = isActive;
@@ -918,6 +920,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.Code = item.Code;
+                    tac.LastChangeCode = Guid.NewGuid();
                     tac.Description = item.Description;
                     tac.DisplayOrder = item.DisplayOrder;
                     tac.IsActive = item.IsActive;
@@ -968,6 +971,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Tac item = dataList[i];
                     EF.Models.Tac tac = new EF.Models.Tac();
                     tac.Code = item.Code;
+                    tac.LastChangeCode = Guid.NewGuid();
                     tac.Description = item.Description;
                     tac.DisplayOrder = item.DisplayOrder;
                     tac.IsActive = item.IsActive;

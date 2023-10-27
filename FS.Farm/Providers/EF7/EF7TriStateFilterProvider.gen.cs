@@ -176,6 +176,7 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                 triStateFilter.Code = code;
+                triStateFilter.LastChangeCode = Guid.NewGuid();
                 triStateFilter.Description = description;
                 triStateFilter.DisplayOrder = displayOrder;
                 triStateFilter.IsActive = isActive;
@@ -230,6 +231,7 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                 triStateFilter.Code = code;
+                triStateFilter.LastChangeCode = Guid.NewGuid();
                 triStateFilter.Description = description;
                 triStateFilter.DisplayOrder = displayOrder;
                 triStateFilter.IsActive = isActive;
@@ -932,6 +934,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.Code = item.Code;
+                    triStateFilter.LastChangeCode = Guid.NewGuid();
                     triStateFilter.Description = item.Description;
                     triStateFilter.DisplayOrder = item.DisplayOrder;
                     triStateFilter.IsActive = item.IsActive;
@@ -983,6 +986,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.TriStateFilter item = dataList[i];
                     EF.Models.TriStateFilter triStateFilter = new EF.Models.TriStateFilter();
                     triStateFilter.Code = item.Code;
+                    triStateFilter.LastChangeCode = Guid.NewGuid();
                     triStateFilter.Description = item.Description;
                     triStateFilter.DisplayOrder = item.DisplayOrder;
                     triStateFilter.IsActive = item.IsActive;

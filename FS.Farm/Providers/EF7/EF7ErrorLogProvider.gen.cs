@@ -181,6 +181,7 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                 errorLog.Code = code;
+                errorLog.LastChangeCode = Guid.NewGuid();
                 errorLog.BrowserCode = browserCode;
                 errorLog.ContextCode = contextCode;
                 errorLog.CreatedUTCDateTime = createdUTCDateTime;
@@ -241,6 +242,7 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                 errorLog.Code = code;
+                errorLog.LastChangeCode = Guid.NewGuid();
                 errorLog.BrowserCode = browserCode;
                 errorLog.ContextCode = contextCode;
                 errorLog.CreatedUTCDateTime = createdUTCDateTime;
@@ -958,6 +960,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.Code = item.Code;
+                    errorLog.LastChangeCode = Guid.NewGuid();
                     errorLog.BrowserCode = item.BrowserCode;
                     errorLog.ContextCode = item.ContextCode;
                     errorLog.CreatedUTCDateTime = item.CreatedUTCDateTime;
@@ -1010,6 +1013,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.ErrorLog item = dataList[i];
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.Code = item.Code;
+                    errorLog.LastChangeCode = Guid.NewGuid();
                     errorLog.BrowserCode = item.BrowserCode;
                     errorLog.ContextCode = item.ContextCode;
                     errorLog.CreatedUTCDateTime = item.CreatedUTCDateTime;

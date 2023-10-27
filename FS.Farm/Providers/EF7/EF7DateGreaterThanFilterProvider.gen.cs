@@ -176,6 +176,7 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                 dateGreaterThanFilter.Code = code;
+                dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
                 dateGreaterThanFilter.DayCount = dayCount;
                 dateGreaterThanFilter.Description = description;
                 dateGreaterThanFilter.DisplayOrder = displayOrder;
@@ -230,6 +231,7 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                 dateGreaterThanFilter.Code = code;
+                dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
                 dateGreaterThanFilter.DayCount = dayCount;
                 dateGreaterThanFilter.Description = description;
                 dateGreaterThanFilter.DisplayOrder = displayOrder;
@@ -932,6 +934,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.Code = item.Code;
+                    dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
                     dateGreaterThanFilter.DayCount = item.DayCount;
                     dateGreaterThanFilter.Description = item.Description;
                     dateGreaterThanFilter.DisplayOrder = item.DisplayOrder;
@@ -983,6 +986,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.DateGreaterThanFilter item = dataList[i];
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.Code = item.Code;
+                    dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
                     dateGreaterThanFilter.DayCount = item.DayCount;
                     dateGreaterThanFilter.Description = item.Description;
                     dateGreaterThanFilter.DisplayOrder = item.DisplayOrder;

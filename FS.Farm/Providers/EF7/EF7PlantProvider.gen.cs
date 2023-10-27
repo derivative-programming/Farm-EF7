@@ -206,6 +206,7 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.Code = code;
+                plant.LastChangeCode = Guid.NewGuid();
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
                 plant.IsEditAllowed = isEditAllowed;
@@ -302,6 +303,7 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.Code = code;
+                plant.LastChangeCode = Guid.NewGuid();
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
                 plant.IsEditAllowed = isEditAllowed;
@@ -1124,6 +1126,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
+                    plant.LastChangeCode = Guid.NewGuid();
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
@@ -1187,6 +1190,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Plant item = dataList[i];
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
+                    plant.LastChangeCode = Guid.NewGuid();
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;

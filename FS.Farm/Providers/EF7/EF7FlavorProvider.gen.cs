@@ -174,6 +174,7 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 EF.Models.Flavor flavor = new EF.Models.Flavor();
                 flavor.Code = code;
+                flavor.LastChangeCode = Guid.NewGuid();
                 flavor.Description = description;
                 flavor.DisplayOrder = displayOrder;
                 flavor.IsActive = isActive;
@@ -225,6 +226,7 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 EF.Models.Flavor flavor = new EF.Models.Flavor();
                 flavor.Code = code;
+                flavor.LastChangeCode = Guid.NewGuid();
                 flavor.Description = description;
                 flavor.DisplayOrder = displayOrder;
                 flavor.IsActive = isActive;
@@ -918,6 +920,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.Code = item.Code;
+                    flavor.LastChangeCode = Guid.NewGuid();
                     flavor.Description = item.Description;
                     flavor.DisplayOrder = item.DisplayOrder;
                     flavor.IsActive = item.IsActive;
@@ -968,6 +971,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Flavor item = dataList[i];
                     EF.Models.Flavor flavor = new EF.Models.Flavor();
                     flavor.Code = item.Code;
+                    flavor.LastChangeCode = Guid.NewGuid();
                     flavor.Description = item.Description;
                     flavor.DisplayOrder = item.DisplayOrder;
                     flavor.IsActive = item.IsActive;

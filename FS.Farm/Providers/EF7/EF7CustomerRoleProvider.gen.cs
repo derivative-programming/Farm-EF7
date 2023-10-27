@@ -170,6 +170,7 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                 customerRole.Code = code;
+                customerRole.LastChangeCode = Guid.NewGuid();
                 customerRole.CustomerID = customerID;
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
@@ -215,6 +216,7 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                 customerRole.Code = code;
+                customerRole.LastChangeCode = Guid.NewGuid();
                 customerRole.CustomerID = customerID;
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
@@ -890,6 +892,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.Code = item.Code;
+                    customerRole.LastChangeCode = Guid.NewGuid();
                     customerRole.CustomerID = item.CustomerID;
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
@@ -938,6 +941,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.CustomerRole item = dataList[i];
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.Code = item.Code;
+                    customerRole.LastChangeCode = Guid.NewGuid();
                     customerRole.CustomerID = item.CustomerID;
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;

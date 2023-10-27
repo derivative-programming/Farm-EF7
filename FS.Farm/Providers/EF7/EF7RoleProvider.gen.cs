@@ -174,6 +174,7 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 EF.Models.Role role = new EF.Models.Role();
                 role.Code = code;
+                role.LastChangeCode = Guid.NewGuid();
                 role.Description = description;
                 role.DisplayOrder = displayOrder;
                 role.IsActive = isActive;
@@ -225,6 +226,7 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 EF.Models.Role role = new EF.Models.Role();
                 role.Code = code;
+                role.LastChangeCode = Guid.NewGuid();
                 role.Description = description;
                 role.DisplayOrder = displayOrder;
                 role.IsActive = isActive;
@@ -918,6 +920,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.Code = item.Code;
+                    role.LastChangeCode = Guid.NewGuid();
                     role.Description = item.Description;
                     role.DisplayOrder = item.DisplayOrder;
                     role.IsActive = item.IsActive;
@@ -968,6 +971,7 @@ namespace FS.Farm.Providers.EF7
                     Objects.Role item = dataList[i];
                     EF.Models.Role role = new EF.Models.Role();
                     role.Code = item.Code;
+                    role.LastChangeCode = Guid.NewGuid();
                     role.Description = item.Description;
                     role.DisplayOrder = item.DisplayOrder;
                     role.IsActive = item.IsActive;
