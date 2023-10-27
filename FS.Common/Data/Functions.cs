@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -13,7 +13,7 @@ namespace FS.Common.Data
     {
         public static string SetApplicationName(string connString, string appName)
         {
-            System.Data.SqlClient.SqlConnectionStringBuilder connBuilder = new System.Data.SqlClient.SqlConnectionStringBuilder(connString);
+            Microsoft.Data.SqlClient.SqlConnectionStringBuilder connBuilder = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder(connString);
             // ---------------------------------------------------------------------
             // ---------------------------------------------------------------------
             // Use machine and process name
@@ -36,7 +36,7 @@ namespace FS.Common.Data
 
         }
 
-        //private static System.Data.SqlClient.SqlConnectionStringBuilder SetConnectionTimeOut(System.Data.SqlClient.SqlConnectionStringBuilder connBuilder)
+        //private static Microsoft.Data.SqlClient.SqlConnectionStringBuilder SetConnectionTimeOut(Microsoft.Data.SqlClient.SqlConnectionStringBuilder connBuilder)
         //{
 
         //    //connBuilder.ConnectTimeout = AT2.Base.Configuration.ApplicationSetting.ReadApplicationSettingAs<System.Int32>(DEFAULT_TIMEOUT_KEY, DEFAULT_TIMEOUT_SETTING);

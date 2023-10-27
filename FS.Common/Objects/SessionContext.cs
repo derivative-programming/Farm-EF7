@@ -147,7 +147,7 @@ namespace FS.Common.Objects
             {
                 if (!this.DBConnections[i].IsSqlServer)
                     continue;
-                System.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
+                Microsoft.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
                 if (sqlTransaction != null)
                 {
                     sqlTransaction.Rollback();
@@ -161,7 +161,7 @@ namespace FS.Common.Objects
                 }
 
 
-                System.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
+                Microsoft.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                     connection.Close();
             }
@@ -178,7 +178,7 @@ namespace FS.Common.Objects
             {
                 if (!this.DBConnections[i].IsSqlServer)
                     continue;
-                System.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
+                Microsoft.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
                 if (sqlTransaction != null)
                 {
                     await sqlTransaction.RollbackAsync();
@@ -192,7 +192,7 @@ namespace FS.Common.Objects
                 }
 
 
-                System.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
+                Microsoft.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                     await connection.CloseAsync();
             }
@@ -208,7 +208,7 @@ namespace FS.Common.Objects
             {
                 if (!this.DBConnections[i].IsSqlServer)
                     continue;
-                System.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
+                Microsoft.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
                 if (sqlTransaction != null)
                 {
                     sqlTransaction.Commit();
@@ -221,7 +221,7 @@ namespace FS.Common.Objects
                     }
                 }
 
-                System.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
+                Microsoft.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                     connection.Close();
             } 
@@ -237,7 +237,7 @@ namespace FS.Common.Objects
             {
                 if (!this.DBConnections[i].IsSqlServer)
                     continue;
-                System.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
+                Microsoft.Data.SqlClient.SqlTransaction sqlTransaction = this.DBConnections[i].SqlTransaction;
                 if (sqlTransaction != null)
                 {
                     await sqlTransaction.CommitAsync();
@@ -250,7 +250,7 @@ namespace FS.Common.Objects
                     }
                 }
 
-                System.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
+                Microsoft.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                     await connection.CloseAsync();
             } 
@@ -269,7 +269,7 @@ namespace FS.Common.Objects
             {
                 if (!this.DBConnections[i].IsSqlServer)
                     continue;
-                System.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
+                Microsoft.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                     connection.Close();
             } 
@@ -286,14 +286,14 @@ namespace FS.Common.Objects
             {
                 if (!this.DBConnections[i].IsSqlServer)
                     continue;
-                System.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
+                Microsoft.Data.SqlClient.SqlConnection connection = this.DBConnections[i].SqlConnection;
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                     await connection.CloseAsync();
             } 
             this.DBConnections.Clear();
         }
 
-        public System.Data.SqlClient.SqlConnection GetSqlConnection(string connectionString)
+        public Microsoft.Data.SqlClient.SqlConnection GetSqlConnection(string connectionString)
         {
             for (int i = 0; i < DBConnections.Count; i++)
             {
@@ -310,7 +310,7 @@ namespace FS.Common.Objects
             return (GetSqlConnection(connectionString) != null);
         } 
 
-        public System.Data.SqlClient.SqlTransaction GetSqlTransaction(string connectionString)
+        public Microsoft.Data.SqlClient.SqlTransaction GetSqlTransaction(string connectionString)
         {
             for (int i = 0; i < DBConnections.Count; i++)
             {
@@ -323,7 +323,7 @@ namespace FS.Common.Objects
         {
             return (GetSqlTransaction(connectionString) != null);
         } 
-        public void AddConnection(string connectionString, System.Data.SqlClient.SqlConnection sqlConnection, System.Data.SqlClient.SqlTransaction sqlTransaction)
+        public void AddConnection(string connectionString, Microsoft.Data.SqlClient.SqlConnection sqlConnection, Microsoft.Data.SqlClient.SqlTransaction sqlTransaction)
         {
             ConnectionInstance connectionInstance = new ConnectionInstance();
             connectionInstance.ConnectionString = connectionString.ToLower().Trim();
@@ -337,8 +337,8 @@ namespace FS.Common.Objects
 
         public class ConnectionInstance
         {
-            public System.Data.SqlClient.SqlTransaction SqlTransaction = null;
-            public System.Data.SqlClient.SqlConnection SqlConnection = null; 
+            public Microsoft.Data.SqlClient.SqlTransaction SqlTransaction = null;
+            public Microsoft.Data.SqlClient.SqlConnection SqlConnection = null; 
             public Boolean IsSqlServer = false;
             public Boolean IsPostgres = false;
             public Boolean IsMySql = false;

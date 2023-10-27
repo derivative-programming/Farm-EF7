@@ -2,7 +2,7 @@ using System;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using FS.Common.Objects;
 using System.Threading.Tasks;

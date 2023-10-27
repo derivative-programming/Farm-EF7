@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace FS.Farm.EF
 {

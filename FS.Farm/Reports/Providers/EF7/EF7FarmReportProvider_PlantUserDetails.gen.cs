@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Specialized;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Threading.Tasks;
 using FS.Common.Objects;

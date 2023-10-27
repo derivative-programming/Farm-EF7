@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using Pomelo.EntityFrameworkCore.MySql.Metadata.Internal;
 
 namespace FS.Farm.EF
