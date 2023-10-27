@@ -284,6 +284,7 @@ namespace FS.Farm.Providers.EF7
                 flavor.LookupEnumName = lookupEnumName;
                 flavor.Name = name;
                 flavor.PacID = pacID;
+                flavor.LastChangeCode = lastChangeCode;
                 bool success = flavorManager.Update(flavor);
                 if (!success)
                 {
@@ -338,6 +339,7 @@ namespace FS.Farm.Providers.EF7
                 flavor.LookupEnumName = lookupEnumName;
                 flavor.Name = name;
                 flavor.PacID = pacID;
+                flavor.LastChangeCode = lastChangeCode;
                 bool success = await flavorManager.UpdateAsync(flavor);
                 if(!success)
                 {
@@ -586,7 +588,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = flavorManager.GetById(flavorID);
-                flavors.Add(flavor);
+                if(flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -619,7 +622,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = await flavorManager.GetByIdAsync(flavorID);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -652,7 +656,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = flavorManager.DirtyGetById(flavorID);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -685,7 +690,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = await flavorManager.DirtyGetByIdAsync(flavorID);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -718,7 +724,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = flavorManager.GetByCode(code);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -751,7 +758,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = await flavorManager.GetByCodeAsync(code);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -784,7 +792,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = flavorManager.DirtyGetByCode(code);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)
@@ -817,7 +826,8 @@ namespace FS.Farm.Providers.EF7
                 var flavorManager = new EF.Managers.FlavorManager(dbContext);
                 List<EF.Models.Flavor> flavors = new List<EF.Models.Flavor>();
                 var flavor = await flavorManager.DirtyGetByCodeAsync(code);
-                flavors.Add(flavor);
+                if (flavor != null)
+                    flavors.Add(flavor);
                 rdr = BuildDataReader(flavors);
             }
             catch (Exception x)

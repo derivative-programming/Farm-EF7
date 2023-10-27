@@ -419,6 +419,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                plant.LastChangeCode = lastChangeCode;
                 bool success = plantManager.Update(plant);
                 if (!success)
                 {
@@ -518,6 +519,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                plant.LastChangeCode = lastChangeCode;
                 bool success = await plantManager.UpdateAsync(plant);
                 if(!success)
                 {
@@ -792,7 +794,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = plantManager.GetById(plantID);
-                plants.Add(plant);
+                if(plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -825,7 +828,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = await plantManager.GetByIdAsync(plantID);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -858,7 +862,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = plantManager.DirtyGetById(plantID);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -891,7 +896,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = await plantManager.DirtyGetByIdAsync(plantID);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -924,7 +930,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = plantManager.GetByCode(code);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -957,7 +964,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = await plantManager.GetByCodeAsync(code);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -990,7 +998,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = plantManager.DirtyGetByCode(code);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -1023,7 +1032,8 @@ namespace FS.Farm.Providers.EF7
                 var plantManager = new EF.Managers.PlantManager(dbContext);
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
                 var plant = await plantManager.DirtyGetByCodeAsync(code);
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)

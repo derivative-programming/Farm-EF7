@@ -257,6 +257,7 @@ namespace FS.Farm.Providers.EF7
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
+                orgCustomer.LastChangeCode = lastChangeCode;
                 bool success = orgCustomerManager.Update(orgCustomer);
                 if (!success)
                 {
@@ -302,6 +303,7 @@ namespace FS.Farm.Providers.EF7
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
+                orgCustomer.LastChangeCode = lastChangeCode;
                 bool success = await orgCustomerManager.UpdateAsync(orgCustomer);
                 if(!success)
                 {
@@ -544,7 +546,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = orgCustomerManager.GetById(orgCustomerID);
-                orgCustomers.Add(orgCustomer);
+                if(orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -577,7 +580,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = await orgCustomerManager.GetByIdAsync(orgCustomerID);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -610,7 +614,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = orgCustomerManager.DirtyGetById(orgCustomerID);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -643,7 +648,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = await orgCustomerManager.DirtyGetByIdAsync(orgCustomerID);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -676,7 +682,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = orgCustomerManager.GetByCode(code);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -709,7 +716,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = await orgCustomerManager.GetByCodeAsync(code);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -742,7 +750,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = orgCustomerManager.DirtyGetByCode(code);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)
@@ -775,7 +784,8 @@ namespace FS.Farm.Providers.EF7
                 var orgCustomerManager = new EF.Managers.OrgCustomerManager(dbContext);
                 List<EF.Models.OrgCustomer> orgCustomers = new List<EF.Models.OrgCustomer>();
                 var orgCustomer = await orgCustomerManager.DirtyGetByCodeAsync(code);
-                orgCustomers.Add(orgCustomer);
+                if (orgCustomer != null)
+                    orgCustomers.Add(orgCustomer);
                 rdr = BuildDataReader(orgCustomers);
             }
             catch (Exception x)

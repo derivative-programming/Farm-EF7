@@ -293,6 +293,7 @@ namespace FS.Farm.Providers.EF7
                 triStateFilter.Name = name;
                 triStateFilter.PacID = pacID;
                 triStateFilter.StateIntValue = stateIntValue;
+                triStateFilter.LastChangeCode = lastChangeCode;
                 bool success = triStateFilterManager.Update(triStateFilter);
                 if (!success)
                 {
@@ -350,6 +351,7 @@ namespace FS.Farm.Providers.EF7
                 triStateFilter.Name = name;
                 triStateFilter.PacID = pacID;
                 triStateFilter.StateIntValue = stateIntValue;
+                triStateFilter.LastChangeCode = lastChangeCode;
                 bool success = await triStateFilterManager.UpdateAsync(triStateFilter);
                 if(!success)
                 {
@@ -600,7 +602,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = triStateFilterManager.GetById(triStateFilterID);
-                triStateFilters.Add(triStateFilter);
+                if(triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -633,7 +636,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = await triStateFilterManager.GetByIdAsync(triStateFilterID);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -666,7 +670,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = triStateFilterManager.DirtyGetById(triStateFilterID);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -699,7 +704,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = await triStateFilterManager.DirtyGetByIdAsync(triStateFilterID);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -732,7 +738,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = triStateFilterManager.GetByCode(code);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -765,7 +772,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = await triStateFilterManager.GetByCodeAsync(code);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -798,7 +806,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = triStateFilterManager.DirtyGetByCode(code);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)
@@ -831,7 +840,8 @@ namespace FS.Farm.Providers.EF7
                 var triStateFilterManager = new EF.Managers.TriStateFilterManager(dbContext);
                 List<EF.Models.TriStateFilter> triStateFilters = new List<EF.Models.TriStateFilter>();
                 var triStateFilter = await triStateFilterManager.DirtyGetByCodeAsync(code);
-                triStateFilters.Add(triStateFilter);
+                if (triStateFilter != null)
+                    triStateFilters.Add(triStateFilter);
                 rdr = BuildDataReader(triStateFilters);
             }
             catch (Exception x)

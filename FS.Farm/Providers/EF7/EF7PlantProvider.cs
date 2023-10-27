@@ -447,6 +447,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
                 //ENDSET
+                plant.LastChangeCode = lastChangeCode;
 
                 bool success = plantManager.Update(plant);
                 if (!success)
@@ -553,6 +554,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
                 //ENDSET
+                plant.LastChangeCode = lastChangeCode;
 
                 bool success = await plantManager.UpdateAsync(plant);
                 if(!success)
@@ -854,7 +856,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = plantManager.GetById(plantID);
 
-                plants.Add(plant);
+                if(plant != null)
+                    plants.Add(plant);
                  
                 rdr = BuildDataReader(plants);
             }
@@ -893,7 +896,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = await plantManager.GetByIdAsync(plantID);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
             }
@@ -932,7 +936,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = plantManager.DirtyGetById(plantID);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
             }
@@ -970,7 +975,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = await plantManager.DirtyGetByIdAsync(plantID);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
             }
@@ -1008,7 +1014,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = plantManager.GetByCode(code);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
             }
@@ -1047,7 +1054,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = await plantManager.GetByCodeAsync(code);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
             }
@@ -1085,7 +1093,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = plantManager.DirtyGetByCode(code);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
             }
@@ -1123,7 +1132,8 @@ namespace FS.Farm.Providers.EF7
 
                 var plant = await plantManager.DirtyGetByCodeAsync(code);
 
-                plants.Add(plant);
+                if (plant != null)
+                    plants.Add(plant);
 
                 rdr = BuildDataReader(plants);
 
@@ -1416,8 +1426,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                    plant.LastChangeCode = item.LastChangeCode;
                     //ENDSET
+                    plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
 

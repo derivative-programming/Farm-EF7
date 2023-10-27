@@ -284,6 +284,7 @@ namespace FS.Farm.Providers.EF7
                 land.LookupEnumName = lookupEnumName;
                 land.Name = name;
                 land.PacID = pacID;
+                land.LastChangeCode = lastChangeCode;
                 bool success = landManager.Update(land);
                 if (!success)
                 {
@@ -338,6 +339,7 @@ namespace FS.Farm.Providers.EF7
                 land.LookupEnumName = lookupEnumName;
                 land.Name = name;
                 land.PacID = pacID;
+                land.LastChangeCode = lastChangeCode;
                 bool success = await landManager.UpdateAsync(land);
                 if(!success)
                 {
@@ -586,7 +588,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = landManager.GetById(landID);
-                lands.Add(land);
+                if(land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -619,7 +622,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = await landManager.GetByIdAsync(landID);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -652,7 +656,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = landManager.DirtyGetById(landID);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -685,7 +690,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = await landManager.DirtyGetByIdAsync(landID);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -718,7 +724,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = landManager.GetByCode(code);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -751,7 +758,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = await landManager.GetByCodeAsync(code);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -784,7 +792,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = landManager.DirtyGetByCode(code);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -817,7 +826,8 @@ namespace FS.Farm.Providers.EF7
                 var landManager = new EF.Managers.LandManager(dbContext);
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
                 var land = await landManager.DirtyGetByCodeAsync(code);
-                lands.Add(land);
+                if (land != null)
+                    lands.Add(land);
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)

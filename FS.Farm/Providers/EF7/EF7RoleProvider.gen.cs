@@ -284,6 +284,7 @@ namespace FS.Farm.Providers.EF7
                 role.LookupEnumName = lookupEnumName;
                 role.Name = name;
                 role.PacID = pacID;
+                role.LastChangeCode = lastChangeCode;
                 bool success = roleManager.Update(role);
                 if (!success)
                 {
@@ -338,6 +339,7 @@ namespace FS.Farm.Providers.EF7
                 role.LookupEnumName = lookupEnumName;
                 role.Name = name;
                 role.PacID = pacID;
+                role.LastChangeCode = lastChangeCode;
                 bool success = await roleManager.UpdateAsync(role);
                 if(!success)
                 {
@@ -586,7 +588,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = roleManager.GetById(roleID);
-                roles.Add(role);
+                if(role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -619,7 +622,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = await roleManager.GetByIdAsync(roleID);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -652,7 +656,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = roleManager.DirtyGetById(roleID);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -685,7 +690,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = await roleManager.DirtyGetByIdAsync(roleID);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -718,7 +724,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = roleManager.GetByCode(code);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -751,7 +758,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = await roleManager.GetByCodeAsync(code);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -784,7 +792,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = roleManager.DirtyGetByCode(code);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)
@@ -817,7 +826,8 @@ namespace FS.Farm.Providers.EF7
                 var roleManager = new EF.Managers.RoleManager(dbContext);
                 List<EF.Models.Role> roles = new List<EF.Models.Role>();
                 var role = await roleManager.DirtyGetByCodeAsync(code);
-                roles.Add(role);
+                if (role != null)
+                    roles.Add(role);
                 rdr = BuildDataReader(roles);
             }
             catch (Exception x)

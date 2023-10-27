@@ -293,6 +293,7 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
+                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
                 bool success = dateGreaterThanFilterManager.Update(dateGreaterThanFilter);
                 if (!success)
                 {
@@ -350,6 +351,7 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
+                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
                 bool success = await dateGreaterThanFilterManager.UpdateAsync(dateGreaterThanFilter);
                 if(!success)
                 {
@@ -600,7 +602,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.GetById(dateGreaterThanFilterID);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if(dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -633,7 +636,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.GetByIdAsync(dateGreaterThanFilterID);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -666,7 +670,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.DirtyGetById(dateGreaterThanFilterID);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -699,7 +704,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.DirtyGetByIdAsync(dateGreaterThanFilterID);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -732,7 +738,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.GetByCode(code);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -765,7 +772,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.GetByCodeAsync(code);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -798,7 +806,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.DirtyGetByCode(code);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -831,7 +840,8 @@ namespace FS.Farm.Providers.EF7
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.DirtyGetByCodeAsync(code);
-                dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                if (dateGreaterThanFilter != null)
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)

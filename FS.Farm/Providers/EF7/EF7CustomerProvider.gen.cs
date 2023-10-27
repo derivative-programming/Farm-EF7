@@ -473,6 +473,7 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
+                customer.LastChangeCode = lastChangeCode;
                 bool success = customerManager.Update(customer);
                 if (!success)
                 {
@@ -590,6 +591,7 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
+                customer.LastChangeCode = lastChangeCode;
                 bool success = await customerManager.UpdateAsync(customer);
                 if(!success)
                 {
@@ -872,7 +874,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = customerManager.GetById(customerID);
-                customers.Add(customer);
+                if(customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -905,7 +908,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = await customerManager.GetByIdAsync(customerID);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -938,7 +942,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = customerManager.DirtyGetById(customerID);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -971,7 +976,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = await customerManager.DirtyGetByIdAsync(customerID);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1004,7 +1010,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = customerManager.GetByCode(code);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1037,7 +1044,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = await customerManager.GetByCodeAsync(code);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1070,7 +1078,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = customerManager.DirtyGetByCode(code);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1103,7 +1112,8 @@ namespace FS.Farm.Providers.EF7
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
                 var customer = await customerManager.DirtyGetByCodeAsync(code);
-                customers.Add(customer);
+                if (customer != null)
+                    customers.Add(customer);
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)

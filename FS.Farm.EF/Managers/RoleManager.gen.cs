@@ -721,7 +721,7 @@ namespace FS.Farm.EF.Managers
         public int ClearTestObjects()
         {
             int delCount = 0;
-            bool found = false;
+            bool found = true;
             try
             {
                 while (found)
@@ -755,7 +755,7 @@ namespace FS.Farm.EF.Managers
         public int ClearTestChildObjects()
         {
             int delCount = 0;
-            bool found = false;
+            bool found = true;
             try
             {
                 while (found)

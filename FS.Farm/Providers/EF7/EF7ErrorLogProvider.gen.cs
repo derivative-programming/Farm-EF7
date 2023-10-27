@@ -311,6 +311,7 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
+                errorLog.LastChangeCode = lastChangeCode;
                 bool success = errorLogManager.Update(errorLog);
                 if (!success)
                 {
@@ -374,6 +375,7 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
+                errorLog.LastChangeCode = lastChangeCode;
                 bool success = await errorLogManager.UpdateAsync(errorLog);
                 if(!success)
                 {
@@ -626,7 +628,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = errorLogManager.GetById(errorLogID);
-                errorLogs.Add(errorLog);
+                if(errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -659,7 +662,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = await errorLogManager.GetByIdAsync(errorLogID);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -692,7 +696,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = errorLogManager.DirtyGetById(errorLogID);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -725,7 +730,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = await errorLogManager.DirtyGetByIdAsync(errorLogID);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -758,7 +764,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = errorLogManager.GetByCode(code);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -791,7 +798,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = await errorLogManager.GetByCodeAsync(code);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -824,7 +832,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = errorLogManager.DirtyGetByCode(code);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -857,7 +866,8 @@ namespace FS.Farm.Providers.EF7
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
                 var errorLog = await errorLogManager.DirtyGetByCodeAsync(code);
-                errorLogs.Add(errorLog);
+                if (errorLog != null)
+                    errorLogs.Add(errorLog);
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)

@@ -248,6 +248,7 @@ namespace FS.Farm.Providers.EF7
                 organization.Code = code;
                 organization.Name = name;
                 organization.TacID = tacID;
+                organization.LastChangeCode = lastChangeCode;
                 bool success = organizationManager.Update(organization);
                 if (!success)
                 {
@@ -290,6 +291,7 @@ namespace FS.Farm.Providers.EF7
                 organization.Code = code;
                 organization.Name = name;
                 organization.TacID = tacID;
+                organization.LastChangeCode = lastChangeCode;
                 bool success = await organizationManager.UpdateAsync(organization);
                 if(!success)
                 {
@@ -530,7 +532,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = organizationManager.GetById(organizationID);
-                organizations.Add(organization);
+                if(organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -563,7 +566,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = await organizationManager.GetByIdAsync(organizationID);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -596,7 +600,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = organizationManager.DirtyGetById(organizationID);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -629,7 +634,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = await organizationManager.DirtyGetByIdAsync(organizationID);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -662,7 +668,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = organizationManager.GetByCode(code);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -695,7 +702,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = await organizationManager.GetByCodeAsync(code);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -728,7 +736,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = organizationManager.DirtyGetByCode(code);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)
@@ -761,7 +770,8 @@ namespace FS.Farm.Providers.EF7
                 var organizationManager = new EF.Managers.OrganizationManager(dbContext);
                 List<EF.Models.Organization> organizations = new List<EF.Models.Organization>();
                 var organization = await organizationManager.DirtyGetByCodeAsync(code);
-                organizations.Add(organization);
+                if (organization != null)
+                    organizations.Add(organization);
                 rdr = BuildDataReader(organizations);
             }
             catch (Exception x)

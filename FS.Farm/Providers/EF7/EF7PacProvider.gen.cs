@@ -275,6 +275,7 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
+                pac.LastChangeCode = lastChangeCode;
                 bool success = pacManager.Update(pac);
                 if (!success)
                 {
@@ -326,6 +327,7 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
+                pac.LastChangeCode = lastChangeCode;
                 bool success = await pacManager.UpdateAsync(pac);
                 if(!success)
                 {
@@ -572,7 +574,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = pacManager.GetById(pacID);
-                pacs.Add(pac);
+                if(pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -605,7 +608,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = await pacManager.GetByIdAsync(pacID);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -638,7 +642,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = pacManager.DirtyGetById(pacID);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -671,7 +676,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = await pacManager.DirtyGetByIdAsync(pacID);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -704,7 +710,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = pacManager.GetByCode(code);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -737,7 +744,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = await pacManager.GetByCodeAsync(code);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -770,7 +778,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = pacManager.DirtyGetByCode(code);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -803,7 +812,8 @@ namespace FS.Farm.Providers.EF7
                 var pacManager = new EF.Managers.PacManager(dbContext);
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
                 var pac = await pacManager.DirtyGetByCodeAsync(code);
-                pacs.Add(pac);
+                if (pac != null)
+                    pacs.Add(pac);
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)

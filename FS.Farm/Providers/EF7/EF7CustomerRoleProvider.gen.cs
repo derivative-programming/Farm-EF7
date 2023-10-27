@@ -266,6 +266,7 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
+                customerRole.LastChangeCode = lastChangeCode;
                 bool success = customerRoleManager.Update(customerRole);
                 if (!success)
                 {
@@ -314,6 +315,7 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
+                customerRole.LastChangeCode = lastChangeCode;
                 bool success = await customerRoleManager.UpdateAsync(customerRole);
                 if(!success)
                 {
@@ -558,7 +560,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = customerRoleManager.GetById(customerRoleID);
-                customerRoles.Add(customerRole);
+                if(customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -591,7 +594,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = await customerRoleManager.GetByIdAsync(customerRoleID);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -624,7 +628,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = customerRoleManager.DirtyGetById(customerRoleID);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -657,7 +662,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = await customerRoleManager.DirtyGetByIdAsync(customerRoleID);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -690,7 +696,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = customerRoleManager.GetByCode(code);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -723,7 +730,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = await customerRoleManager.GetByCodeAsync(code);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -756,7 +764,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = customerRoleManager.DirtyGetByCode(code);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -789,7 +798,8 @@ namespace FS.Farm.Providers.EF7
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
                 var customerRole = await customerRoleManager.DirtyGetByCodeAsync(code);
-                customerRoles.Add(customerRole);
+                if (customerRole != null)
+                    customerRoles.Add(customerRole);
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)

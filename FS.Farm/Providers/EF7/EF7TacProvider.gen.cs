@@ -284,6 +284,7 @@ namespace FS.Farm.Providers.EF7
                 tac.LookupEnumName = lookupEnumName;
                 tac.Name = name;
                 tac.PacID = pacID;
+                tac.LastChangeCode = lastChangeCode;
                 bool success = tacManager.Update(tac);
                 if (!success)
                 {
@@ -338,6 +339,7 @@ namespace FS.Farm.Providers.EF7
                 tac.LookupEnumName = lookupEnumName;
                 tac.Name = name;
                 tac.PacID = pacID;
+                tac.LastChangeCode = lastChangeCode;
                 bool success = await tacManager.UpdateAsync(tac);
                 if(!success)
                 {
@@ -586,7 +588,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = tacManager.GetById(tacID);
-                tacs.Add(tac);
+                if(tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -619,7 +622,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = await tacManager.GetByIdAsync(tacID);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -652,7 +656,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = tacManager.DirtyGetById(tacID);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -685,7 +690,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = await tacManager.DirtyGetByIdAsync(tacID);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -718,7 +724,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = tacManager.GetByCode(code);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -751,7 +758,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = await tacManager.GetByCodeAsync(code);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -784,7 +792,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = tacManager.DirtyGetByCode(code);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
@@ -817,7 +826,8 @@ namespace FS.Farm.Providers.EF7
                 var tacManager = new EF.Managers.TacManager(dbContext);
                 List<EF.Models.Tac> tacs = new List<EF.Models.Tac>();
                 var tac = await tacManager.DirtyGetByCodeAsync(code);
-                tacs.Add(tac);
+                if (tac != null)
+                    tacs.Add(tac);
                 rdr = BuildDataReader(tacs);
             }
             catch (Exception x)
