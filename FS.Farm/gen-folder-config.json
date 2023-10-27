@@ -1,3 +1,7 @@
 {
-    "templateType":"none" 
+  "templateType": "namespace",
+  "forceFolderNameFormat": "Pascal",
+  "dimension": {
+    "name": "Farm"
+  }
 }
