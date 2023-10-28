@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
+    public partial class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
     {
          public void Configure(EntityTypeBuilder<Organization> builder)
         {
@@ -16,6 +16,19 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<Tac>() //TacID
                 .WithMany()
                 .HasForeignKey(p => p.TacID);
+            bool isDBColumnIndexed = false;
+            //String name,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Name);
+            }
+            //TacID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.TacID);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

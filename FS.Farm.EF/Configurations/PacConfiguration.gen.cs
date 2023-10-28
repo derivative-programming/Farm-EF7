@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class PacConfiguration : IEntityTypeConfiguration<Pac>
+    public partial class PacConfiguration : IEntityTypeConfiguration<Pac>
     {
          public void Configure(EntityTypeBuilder<Pac> builder)
         {
@@ -17,6 +17,37 @@ namespace FS.Farm.EF.Configurations
             //Boolean isActive,
             //String lookupEnumName,
             //String name,
+            bool isDBColumnIndexed = false;
+            //String description,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Description);
+            }
+            //Int32 displayOrder,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.DisplayOrder);
+            }
+            //Boolean isActive,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsActive);
+            }
+            //String lookupEnumName,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.LookupEnumName);
+            }
+            //String name,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Name);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

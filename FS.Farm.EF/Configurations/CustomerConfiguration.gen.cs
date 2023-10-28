@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+    public partial class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
          public void Configure(EntityTypeBuilder<Customer> builder)
         {
@@ -37,6 +37,145 @@ namespace FS.Farm.EF.Configurations
                 .HasForeignKey(p => p.TacID);
             //Int32 uTCOffsetInMinutes,
             //String zip,
+            bool isDBColumnIndexed = false;
+            //Int32 activeOrganizationID,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.ActiveOrganizationID);
+            }
+            //String email,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Email);
+            }
+            //EmailConfirmedUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.EmailConfirmedUTCDateTime);
+            }
+            //String firstName,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.FirstName);
+            }
+            //ForgotPasswordKeyExpirationUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.ForgotPasswordKeyExpirationUTCDateTime);
+            }
+            //String forgotPasswordKeyValue,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.ForgotPasswordKeyValue);
+            }
+            //Guid fSUserCodeValue,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.FSUserCodeValue);
+            }
+            //Boolean isActive,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsActive);
+            }
+            //Boolean isEmailAllowed,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsEmailAllowed);
+            }
+            //Boolean isEmailConfirmed,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsEmailConfirmed);
+            }
+            //Boolean isEmailMarketingAllowed,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsEmailMarketingAllowed);
+            }
+            //Boolean isLocked,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsLocked);
+            }
+            //Boolean isMultipleOrganizationsAllowed,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsMultipleOrganizationsAllowed);
+            }
+            //Boolean isVerboseLoggingForced,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsVerboseLoggingForced);
+            }
+            //LastLoginUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.LastLoginUTCDateTime);
+            }
+            //String lastName,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.LastName);
+            }
+            //String password,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Password);
+            }
+            //String phone,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Phone);
+            }
+            //String province,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Province);
+            }
+            //RegistrationUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.RegistrationUTCDateTime);
+            }
+            //TacID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.TacID);
+            }
+            //Int32 uTCOffsetInMinutes,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.UTCOffsetInMinutes);
+            }
+            //String zip,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Zip);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

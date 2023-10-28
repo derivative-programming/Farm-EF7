@@ -8,7 +8,7 @@ using NetTopologySuite.Operation.Overlay;
 
 namespace FS.Farm.EF.Configurations
 {
-    public class PlantConfiguration : IEntityTypeConfiguration<Plant>
+    public partial class PlantConfiguration : IEntityTypeConfiguration<Plant>
     {
          public void Configure(EntityTypeBuilder<Plant> builder)
         { 
@@ -42,6 +42,124 @@ namespace FS.Farm.EF.Configurations
             //SomeUTCDateTimeVal
             //String someVarCharVal,
             // someDateVal, 
+            //ENDSET
+
+
+            bool isDBColumnIndexed = false;
+            //LandID 
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.LandID);
+            }
+            //FlvrForeignKeyID 
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.FlvrForeignKeyID);
+            }
+            //Boolean isDeleteAllowed,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsDeleteAllowed);
+            }
+            //Boolean isEditAllowed, 
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsEditAllowed);
+            }
+            //String otherFlavor,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.OtherFlavor);
+            }
+            //Int64 someBigIntVal,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeBigIntVal);
+            }
+            //Boolean someBitVal,  
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeBitVal);
+            }
+            //SomeDecimalVal  
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeDecimalVal);
+            }
+            //String someEmailAddress,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeEmailAddress);
+            }
+            //Double someFloatVal,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeFloatVal);
+            }
+            //Int32 someIntVal, 
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeIntVal);
+            }
+            //SomeMoneyVal 
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeMoneyVal);
+            }
+            //String someNVarCharVal,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeNVarCharVal);
+            }
+            //String somePhoneNumber,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomePhoneNumber);
+            }
+            //String someTextVal,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeTextVal);
+            }
+            //Guid someUniqueidentifierVal, 
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeUniqueidentifierVal);
+            }
+            //SomeUTCDateTimeVal
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeUTCDateTimeVal);
+            }
+            //String someVarCharVal,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeVarCharVal);
+            }
+            // someDateVal, 
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.SomeDateVal);
+            }
             //ENDSET
 
             builder.HasIndex(p => p.Code)

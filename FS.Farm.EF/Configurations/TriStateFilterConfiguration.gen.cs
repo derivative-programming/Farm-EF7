@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class TriStateFilterConfiguration : IEntityTypeConfiguration<TriStateFilter>
+    public partial class TriStateFilterConfiguration : IEntityTypeConfiguration<TriStateFilter>
     {
          public void Configure(EntityTypeBuilder<TriStateFilter> builder)
         {
@@ -21,6 +21,49 @@ namespace FS.Farm.EF.Configurations
                 .WithMany()
                 .HasForeignKey(p => p.PacID);
             //Int32 stateIntValue,
+            bool isDBColumnIndexed = false;
+            //String description,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Description);
+            }
+            //Int32 displayOrder,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.DisplayOrder);
+            }
+            //Boolean isActive,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsActive);
+            }
+            //String lookupEnumName,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.LookupEnumName);
+            }
+            //String name,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Name);
+            }
+            //PacID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.PacID);
+            }
+            //Int32 stateIntValue,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.StateIntValue);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

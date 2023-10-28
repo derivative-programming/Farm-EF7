@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class OrgApiKeyConfiguration : IEntityTypeConfiguration<OrgApiKey>
+    public partial class OrgApiKeyConfiguration : IEntityTypeConfiguration<OrgApiKey>
     {
          public void Configure(EntityTypeBuilder<OrgApiKey> builder)
         {
@@ -25,6 +25,61 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<OrgCustomer>() //OrgCustomerID
                 .WithMany()
                 .HasForeignKey(p => p.OrgCustomerID);
+            bool isDBColumnIndexed = false;
+            //String apiKeyValue,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.ApiKeyValue);
+            }
+            //String createdBy,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.CreatedBy);
+            }
+            //CreatedUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.CreatedUTCDateTime);
+            }
+            //ExpirationUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.ExpirationUTCDateTime);
+            }
+            //Boolean isActive,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsActive);
+            }
+            //Boolean isTempUserKey,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsTempUserKey);
+            }
+            //String name,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Name);
+            }
+            //OrganizationID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.OrganizationID);
+            }
+            //OrgCustomerID
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.OrgCustomerID);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

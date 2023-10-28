@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class CustomerRoleConfiguration : IEntityTypeConfiguration<CustomerRole>
+    public partial class CustomerRoleConfiguration : IEntityTypeConfiguration<CustomerRole>
     {
          public void Configure(EntityTypeBuilder<CustomerRole> builder)
         {
@@ -20,6 +20,31 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<Role>() //RoleID
                 .WithMany()
                 .HasForeignKey(p => p.RoleID);
+            bool isDBColumnIndexed = false;
+            //CustomerID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.CustomerID);
+            }
+            //Boolean isPlaceholder,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsPlaceholder);
+            }
+            //Boolean placeholder,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Placeholder);
+            }
+            //RoleID
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.RoleID);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

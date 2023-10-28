@@ -9,7 +9,7 @@ using FS.Common.Diagnostics.Loggers;
 namespace FS.Farm.EF.Test.Tests.Managers
 {
     [TestClass]
-    public class PlantTest
+    public partial class PlantTest
     {
         [TestMethod]
         public async Task AddAsync_NoExistingTransaction_ShouldAddPlant()
@@ -1616,6 +1616,11 @@ namespace FS.Farm.EF.Test.Tests.Managers
         }
 
         //ENDSET
+
+
+
+        //GENINCLUDEFILE[GENVALNameTest.include.*]
+
 
         private async Task<Plant> CreateTestPlantAsync(FarmDbContext dbContext)
         {

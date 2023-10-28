@@ -8,7 +8,7 @@ using FS.Common.Diagnostics.Loggers;
 namespace FS.Farm.EF.Test.Tests.Managers
 {
     [TestClass]
-    public class CustomerRoleTest
+    public partial class CustomerRoleTest
     {
         [TestMethod]
         public async Task AddAsync_NoExistingTransaction_ShouldAddCustomerRole()

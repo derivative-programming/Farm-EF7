@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class ErrorLogConfiguration : IEntityTypeConfiguration<ErrorLog>
+    public partial class ErrorLogConfiguration : IEntityTypeConfiguration<ErrorLog>
     {
          public void Configure(EntityTypeBuilder<ErrorLog> builder)
         {
@@ -22,6 +22,55 @@ namespace FS.Farm.EF.Configurations
                 .WithMany()
                 .HasForeignKey(p => p.PacID);
             //String url,
+            bool isDBColumnIndexed = false;
+            //Guid browserCode,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.BrowserCode);
+            }
+            //Guid contextCode,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.ContextCode);
+            }
+            //CreatedUTCDateTime
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.CreatedUTCDateTime);
+            }
+            //String description,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Description);
+            }
+            //Boolean isClientSideError,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsClientSideError);
+            }
+            //Boolean isResolved,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsResolved);
+            }
+            //PacID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.PacID);
+            }
+            //String url,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Url);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

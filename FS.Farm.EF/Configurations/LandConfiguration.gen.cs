@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
-    public class LandConfiguration : IEntityTypeConfiguration<Land>
+    public partial class LandConfiguration : IEntityTypeConfiguration<Land>
     {
          public void Configure(EntityTypeBuilder<Land> builder)
         {
@@ -20,6 +20,43 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<Pac>() //PacID
                 .WithMany()
                 .HasForeignKey(p => p.PacID);
+            bool isDBColumnIndexed = false;
+            //String description,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Description);
+            }
+            //Int32 displayOrder,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.DisplayOrder);
+            }
+            //Boolean isActive,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.IsActive);
+            }
+            //String lookupEnumName,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.LookupEnumName);
+            }
+            //String name,
+            isDBColumnIndexed = false;
+            if (isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.Name);
+            }
+            //PacID
+            isDBColumnIndexed = false;
+            if(isDBColumnIndexed)
+            {
+                builder.HasIndex(p => p.PacID);
+            }
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

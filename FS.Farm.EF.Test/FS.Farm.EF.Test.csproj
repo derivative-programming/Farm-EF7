@@ -6,8 +6,12 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Tests\Managers\PlantTest.include.QueryBy.cs" />
     <Compile Remove="Tests\Reports\PlantUserDetailsTest.gen.cs" />
     <Compile Remove="Tests\Reports\TacFarmDashboardTest.gen.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tests\Managers\PlantTest.include.QueryBy.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.13" />

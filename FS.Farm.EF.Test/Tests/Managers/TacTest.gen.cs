@@ -8,7 +8,7 @@ using FS.Common.Diagnostics.Loggers;
 namespace FS.Farm.EF.Test.Tests.Managers
 {
     [TestClass]
-    public class TacTest
+    public partial class TacTest
     {
         [TestMethod]
         public async Task AddAsync_NoExistingTransaction_ShouldAddTac()

@@ -8,7 +8,7 @@ using FS.Common.Diagnostics.Loggers;
 namespace FS.Farm.EF.Test.Tests.Managers
 {
     [TestClass]
-    public class ErrorLogTest
+    public partial class ErrorLogTest
     {
         [TestMethod]
         public async Task AddAsync_NoExistingTransaction_ShouldAddErrorLog()

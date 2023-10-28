@@ -8,7 +8,7 @@ using FS.Common.Diagnostics.Loggers;
 namespace FS.Farm.EF.Test.Tests.Managers
 {
     [TestClass]
-    public class CustomerTest
+    public partial class CustomerTest
     {
         [TestMethod]
         public async Task AddAsync_NoExistingTransaction_ShouldAddCustomer()
@@ -1162,6 +1162,66 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 //context.SaveChanges();
                 var result = manager.GetByTacID(customer1.TacID.Value);
                 Assert.AreEqual(2, result.Count);
+            }
+        }
+        [TestMethod]
+        public async Task GetByEmailAsync_ValidEmail_ShouldReturnCustomers()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var manager = new CustomerManager(context);
+                var customer = await CreateTestCustomerAsync(context);
+                await manager.AddAsync(customer);
+                var result = await manager.GetByEmailAsync(customer.Email);
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(customer.CustomerID, result.First().CustomerID);
+            }
+        }
+        [TestMethod]
+        public void GetByEmail_ValidEmail_ShouldReturnCustomers()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var manager = new CustomerManager(context);
+                var customer = CreateTestCustomer(context);
+                manager.Add(customer);
+                var result = manager.GetByEmail(customer.Email);
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(customer.CustomerID, result.First().CustomerID);
+            }
+        }
+        [TestMethod]
+        public async Task GetByForgotPasswordKeyValueAsync_ValidForgotPasswordKeyValue_ShouldReturnCustomers()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var manager = new CustomerManager(context);
+                var customer = await CreateTestCustomerAsync(context);
+                await manager.AddAsync(customer);
+                var result = await manager.GetByForgotPasswordKeyValueAsync(customer.ForgotPasswordKeyValue);
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(customer.CustomerID, result.First().CustomerID);
+            }
+        }
+        [TestMethod]
+        public void GetByForgotPasswordKeyValue_ValidForgotPasswordKeyValue_ShouldReturnCustomers()
+        {
+            var options = CreateSQLiteInMemoryDbContextOptions();
+            using (var context = new FarmDbContext(options))
+            {
+                context.Database.EnsureCreated();
+                var manager = new CustomerManager(context);
+                var customer = CreateTestCustomer(context);
+                manager.Add(customer);
+                var result = manager.GetByForgotPasswordKeyValue(customer.ForgotPasswordKeyValue);
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(customer.CustomerID, result.First().CustomerID);
             }
         }
         private async Task<Customer> CreateTestCustomerAsync(FarmDbContext dbContext)
