@@ -157,11 +157,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "TacInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -209,11 +228,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "TacInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -263,11 +301,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "TacUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -317,11 +374,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "TacUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             //Define the parameters
             EF.FarmDbContext dbContext = null;
@@ -919,6 +995,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -941,6 +1018,28 @@ namespace FS.Farm.Providers.EF7
                     tac.LookupEnumName = item.LookupEnumName;
                     tac.Name = item.Name;
                     tac.PacID = item.PacID;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Description = encryptionServices.Encrypt(tac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.LookupEnumName = encryptionServices.Encrypt(tac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Name = encryptionServices.Encrypt(tac.Name);
+                    }
+                    //Int32 pacID,
                     tacs.Add(tac);
                 }
                 tacManager.BulkInsert(tacs);
@@ -972,6 +1071,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -994,6 +1094,28 @@ namespace FS.Farm.Providers.EF7
                     tac.LookupEnumName = item.LookupEnumName;
                     tac.Name = item.Name;
                     tac.PacID = item.PacID;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Description = encryptionServices.Encrypt(tac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.LookupEnumName = encryptionServices.Encrypt(tac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Name = encryptionServices.Encrypt(tac.Name);
+                    }
+                    //Int32 pacID,
                     tacs.Add(tac);
                 }
                 await tacManager.BulkInsertAsync(tacs);
@@ -1025,6 +1147,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1033,8 +1156,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].TacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].TacID == 0)
                         continue;
                     actionCount++;
                     Objects.Tac item = dataList[i];
@@ -1048,6 +1170,28 @@ namespace FS.Farm.Providers.EF7
                     tac.Name = item.Name;
                     tac.PacID = item.PacID;
                     tac.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Description = encryptionServices.Encrypt(tac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.LookupEnumName = encryptionServices.Encrypt(tac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Name = encryptionServices.Encrypt(tac.Name);
+                    }
+                    //Int32 pacID,
                     tacs.Add(tac);
                 }
                 tacManager.BulkUpdate(tacs);
@@ -1079,6 +1223,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1087,8 +1232,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].TacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].TacID == 0)
                         continue;
                     actionCount++;
                     Objects.Tac item = dataList[i];
@@ -1102,6 +1246,28 @@ namespace FS.Farm.Providers.EF7
                     tac.Name = item.Name;
                     tac.PacID = item.PacID;
                     tac.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Description = encryptionServices.Encrypt(tac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.LookupEnumName = encryptionServices.Encrypt(tac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        tac.Name = encryptionServices.Encrypt(tac.Name);
+                    }
+                    //Int32 pacID,
                     tacs.Add(tac);
                 }
                 tacManager.BulkUpdate(tacs);
@@ -1139,8 +1305,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].TacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].TacID == 0)
                         continue;
                     actionCount++;
                     Objects.Tac item = dataList[i];
@@ -1191,8 +1356,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].TacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].TacID == 0)
                         continue;
                     actionCount++;
                     Objects.Tac item = dataList[i];

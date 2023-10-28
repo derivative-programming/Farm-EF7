@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class DateGreaterThanFilterManager
+	public partial class DateGreaterThanFilterManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public DateGreaterThanFilterManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.DateGreaterThanFilterSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.DateGreaterThanFilterSet.AsNoTracking().MaxAsync(x => (int?)x.DateGreaterThanFilterID);
+        {
+            int? maxId = await _dbContext.DateGreaterThanFilterSet.AsNoTracking().MaxAsync(x => (int?)x.DateGreaterThanFilterID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.DateGreaterThanFilterSet.AsNoTracking().Max(x => (int?)x.DateGreaterThanFilterID);
+            int? maxId = _dbContext.DateGreaterThanFilterSet.AsNoTracking().Max(x => (int?)x.DateGreaterThanFilterID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<DateGreaterThanFilter> GetByIdAsync(int id)
 		{

@@ -174,18 +174,31 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
-            if (System.Convert.ToDateTime(emailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            if (System.Convert.ToDateTime(emailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //emailConfirmedUTCDateTime
             {
                  emailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String firstName,
-            if (System.Convert.ToDateTime(forgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices FirstNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                firstName = FirstNameEncryptionServices.Encrypt(firstName);
+            }
+            if (System.Convert.ToDateTime(forgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //forgotPasswordKeyExpirationUTCDateTime
             {
                  forgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String forgotPasswordKeyValue,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ForgotPasswordKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                forgotPasswordKeyValue = ForgotPasswordKeyValueEncryptionServices.Encrypt(forgotPasswordKeyValue);
+            }
             //Guid fSUserCodeValue,
             //Boolean isActive,
             //Boolean isEmailAllowed,
@@ -194,21 +207,45 @@ namespace FS.Farm.Providers.EF7
             //Boolean isLocked,
             //Boolean isMultipleOrganizationsAllowed,
             //Boolean isVerboseLoggingForced,
-            if (System.Convert.ToDateTime(lastLoginUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            if (System.Convert.ToDateTime(lastLoginUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //lastLoginUTCDateTime
             {
                  lastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String lastName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LastNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lastName = LastNameEncryptionServices.Encrypt(lastName);
+            }
             //String password,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices PasswordEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                password = PasswordEncryptionServices.Encrypt(password);
+            }
             //String phone,
             //String province,
-            if (System.Convert.ToDateTime(registrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ProvinceEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                province = ProvinceEncryptionServices.Encrypt(province);
+            }
+            if (System.Convert.ToDateTime(registrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //registrationUTCDateTime
             {
                  registrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //Int32 tacID,
             //Int32 uTCOffsetInMinutes,
             //String zip,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                zip = ZipEncryptionServices.Encrypt(zip);
+            }
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -289,6 +326,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
             if (System.Convert.ToDateTime(emailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -296,11 +334,23 @@ namespace FS.Farm.Providers.EF7
                  emailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String firstName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices FirstNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                firstName = FirstNameEncryptionServices.Encrypt(firstName);
+            }
             if (System.Convert.ToDateTime(forgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  forgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String forgotPasswordKeyValue,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ForgotPasswordKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                forgotPasswordKeyValue = ForgotPasswordKeyValueEncryptionServices.Encrypt(forgotPasswordKeyValue);
+            }
             //Guid fSUserCodeValue,
             //Boolean isActive,
             //Boolean isEmailAllowed,
@@ -314,9 +364,27 @@ namespace FS.Farm.Providers.EF7
                  lastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String lastName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LastNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lastName = LastNameEncryptionServices.Encrypt(lastName);
+            }
             //String password,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices PasswordEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                password = PasswordEncryptionServices.Encrypt(password);
+            }
             //String phone,
             //String province,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ProvinceEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                province = ProvinceEncryptionServices.Encrypt(province);
+            }
             if (System.Convert.ToDateTime(registrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  registrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -324,6 +392,12 @@ namespace FS.Farm.Providers.EF7
             //Int32 tacID,
             //Int32 uTCOffsetInMinutes,
             //String zip,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                zip = ZipEncryptionServices.Encrypt(zip);
+            }
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -406,6 +480,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
             if (System.Convert.ToDateTime(emailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -413,11 +488,23 @@ namespace FS.Farm.Providers.EF7
                  emailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String firstName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices FirstNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                firstName = FirstNameEncryptionServices.Encrypt(firstName);
+            }
             if (System.Convert.ToDateTime(forgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  forgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String forgotPasswordKeyValue,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ForgotPasswordKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                forgotPasswordKeyValue = ForgotPasswordKeyValueEncryptionServices.Encrypt(forgotPasswordKeyValue);
+            }
             //Guid fSUserCodeValue,
             //Boolean isActive,
             //Boolean isEmailAllowed,
@@ -431,9 +518,27 @@ namespace FS.Farm.Providers.EF7
                  lastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String lastName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LastNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lastName = LastNameEncryptionServices.Encrypt(lastName);
+            }
             //String password,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices PasswordEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                password = PasswordEncryptionServices.Encrypt(password);
+            }
             //String phone,
             //String province,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ProvinceEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                province = ProvinceEncryptionServices.Encrypt(province);
+            }
             if (System.Convert.ToDateTime(registrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  registrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -441,6 +546,12 @@ namespace FS.Farm.Providers.EF7
             //Int32 tacID,
             //Int32 uTCOffsetInMinutes,
             //String zip,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                zip = ZipEncryptionServices.Encrypt(zip);
+            }
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -523,6 +634,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
             if (System.Convert.ToDateTime(emailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -530,11 +642,23 @@ namespace FS.Farm.Providers.EF7
                  emailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String firstName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices FirstNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                firstName = FirstNameEncryptionServices.Encrypt(firstName);
+            }
             if (System.Convert.ToDateTime(forgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  forgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String forgotPasswordKeyValue,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ForgotPasswordKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                forgotPasswordKeyValue = ForgotPasswordKeyValueEncryptionServices.Encrypt(forgotPasswordKeyValue);
+            }
             //Guid fSUserCodeValue,
             //Boolean isActive,
             //Boolean isEmailAllowed,
@@ -548,9 +672,27 @@ namespace FS.Farm.Providers.EF7
                  lastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String lastName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LastNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lastName = LastNameEncryptionServices.Encrypt(lastName);
+            }
             //String password,
+            isEncrypted = true;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices PasswordEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                password = PasswordEncryptionServices.Encrypt(password);
+            }
             //String phone,
             //String province,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ProvinceEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                province = ProvinceEncryptionServices.Encrypt(province);
+            }
             if (System.Convert.ToDateTime(registrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  registrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -558,6 +700,12 @@ namespace FS.Farm.Providers.EF7
             //Int32 tacID,
             //Int32 uTCOffsetInMinutes,
             //String zip,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                zip = ZipEncryptionServices.Encrypt(zip);
+            }
             //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -1205,6 +1353,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1244,6 +1393,72 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
+                    bool isEncrypted = false;
+                    //Int32 activeOrganizationID,
+                    //String email,
+                    if (System.Convert.ToDateTime(customer.EmailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.EmailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String firstName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.FirstName = encryptionServices.Encrypt(customer.FirstName);
+                    }
+                    if (System.Convert.ToDateTime(customer.ForgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.ForgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String forgotPasswordKeyValue,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.ForgotPasswordKeyValue = encryptionServices.Encrypt(customer.ForgotPasswordKeyValue);
+                    }
+                    //Guid fSUserCodeValue,
+                    //Boolean isActive,
+                    //Boolean isEmailAllowed,
+                    //Boolean isEmailConfirmed,
+                    //Boolean isEmailMarketingAllowed,
+                    //Boolean isLocked,
+                    //Boolean isMultipleOrganizationsAllowed,
+                    //Boolean isVerboseLoggingForced,
+                    if (System.Convert.ToDateTime(customer.LastLoginUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.LastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String lastName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.LastName = encryptionServices.Encrypt(customer.LastName);
+                    }
+                    //String password,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.Password = encryptionServices.Encrypt(customer.Password);
+                    }
+                    //String phone,
+                    //String province,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Province = encryptionServices.Encrypt(customer.Province);
+                    }
+                    if (System.Convert.ToDateTime(customer.RegistrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.RegistrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Int32 tacID,
+                    //Int32 uTCOffsetInMinutes,
+                    //String zip,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Zip = encryptionServices.Encrypt(customer.Zip);
+                    }
                     customers.Add(customer);
                 }
                 customerManager.BulkInsert(customers);
@@ -1275,6 +1490,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1314,6 +1530,72 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
+                    bool isEncrypted = false;
+                    //Int32 activeOrganizationID,
+                    //String email,
+                    if (System.Convert.ToDateTime(customer.EmailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.EmailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String firstName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.FirstName = encryptionServices.Encrypt(customer.FirstName);
+                    }
+                    if (System.Convert.ToDateTime(customer.ForgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.ForgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String forgotPasswordKeyValue,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.ForgotPasswordKeyValue = encryptionServices.Encrypt(customer.ForgotPasswordKeyValue);
+                    }
+                    //Guid fSUserCodeValue,
+                    //Boolean isActive,
+                    //Boolean isEmailAllowed,
+                    //Boolean isEmailConfirmed,
+                    //Boolean isEmailMarketingAllowed,
+                    //Boolean isLocked,
+                    //Boolean isMultipleOrganizationsAllowed,
+                    //Boolean isVerboseLoggingForced,
+                    if (System.Convert.ToDateTime(customer.LastLoginUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.LastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String lastName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.LastName = encryptionServices.Encrypt(customer.LastName);
+                    }
+                    //String password,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.Password = encryptionServices.Encrypt(customer.Password);
+                    }
+                    //String phone,
+                    //String province,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Province = encryptionServices.Encrypt(customer.Province);
+                    }
+                    if (System.Convert.ToDateTime(customer.RegistrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.RegistrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Int32 tacID,
+                    //Int32 uTCOffsetInMinutes,
+                    //String zip,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Zip = encryptionServices.Encrypt(customer.Zip);
+                    }
                     customers.Add(customer);
                 }
                 await customerManager.BulkInsertAsync(customers);
@@ -1345,6 +1627,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1353,8 +1636,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.Customer item = dataList[i];
@@ -1385,6 +1667,72 @@ namespace FS.Farm.Providers.EF7
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
                     customer.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 activeOrganizationID,
+                    //String email,
+                    if (System.Convert.ToDateTime(customer.EmailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.EmailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String firstName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.FirstName = encryptionServices.Encrypt(customer.FirstName);
+                    }
+                    if (System.Convert.ToDateTime(customer.ForgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.ForgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String forgotPasswordKeyValue,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.ForgotPasswordKeyValue = encryptionServices.Encrypt(customer.ForgotPasswordKeyValue);
+                    }
+                    //Guid fSUserCodeValue,
+                    //Boolean isActive,
+                    //Boolean isEmailAllowed,
+                    //Boolean isEmailConfirmed,
+                    //Boolean isEmailMarketingAllowed,
+                    //Boolean isLocked,
+                    //Boolean isMultipleOrganizationsAllowed,
+                    //Boolean isVerboseLoggingForced,
+                    if (System.Convert.ToDateTime(customer.LastLoginUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.LastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String lastName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.LastName = encryptionServices.Encrypt(customer.LastName);
+                    }
+                    //String password,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.Password = encryptionServices.Encrypt(customer.Password);
+                    }
+                    //String phone,
+                    //String province,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Province = encryptionServices.Encrypt(customer.Province);
+                    }
+                    if (System.Convert.ToDateTime(customer.RegistrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.RegistrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Int32 tacID,
+                    //Int32 uTCOffsetInMinutes,
+                    //String zip,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Zip = encryptionServices.Encrypt(customer.Zip);
+                    }
                     customers.Add(customer);
                 }
                 customerManager.BulkUpdate(customers);
@@ -1416,6 +1764,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1424,8 +1773,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.Customer item = dataList[i];
@@ -1456,6 +1804,72 @@ namespace FS.Farm.Providers.EF7
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
                     customer.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 activeOrganizationID,
+                    //String email,
+                    if (System.Convert.ToDateTime(customer.EmailConfirmedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.EmailConfirmedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String firstName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.FirstName = encryptionServices.Encrypt(customer.FirstName);
+                    }
+                    if (System.Convert.ToDateTime(customer.ForgotPasswordKeyExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.ForgotPasswordKeyExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String forgotPasswordKeyValue,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.ForgotPasswordKeyValue = encryptionServices.Encrypt(customer.ForgotPasswordKeyValue);
+                    }
+                    //Guid fSUserCodeValue,
+                    //Boolean isActive,
+                    //Boolean isEmailAllowed,
+                    //Boolean isEmailConfirmed,
+                    //Boolean isEmailMarketingAllowed,
+                    //Boolean isLocked,
+                    //Boolean isMultipleOrganizationsAllowed,
+                    //Boolean isVerboseLoggingForced,
+                    if (System.Convert.ToDateTime(customer.LastLoginUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.LastLoginUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String lastName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.LastName = encryptionServices.Encrypt(customer.LastName);
+                    }
+                    //String password,
+                    isEncrypted = true;
+                    if (isEncrypted)
+                    {
+                        customer.Password = encryptionServices.Encrypt(customer.Password);
+                    }
+                    //String phone,
+                    //String province,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Province = encryptionServices.Encrypt(customer.Province);
+                    }
+                    if (System.Convert.ToDateTime(customer.RegistrationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        customer.RegistrationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Int32 tacID,
+                    //Int32 uTCOffsetInMinutes,
+                    //String zip,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        customer.Zip = encryptionServices.Encrypt(customer.Zip);
+                    }
                     customers.Add(customer);
                 }
                 customerManager.BulkUpdate(customers);
@@ -1493,8 +1907,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.Customer item = dataList[i];
@@ -1562,8 +1975,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.Customer item = dataList[i];
@@ -1864,6 +2276,122 @@ namespace FS.Farm.Providers.EF7
                 dataTable.Rows.Add(row);
             }
             return dataTable.CreateDataReader();
+        }
+        public override async Task<IDataReader> GetCustomerList_QueryByEmailAsync(
+            String email,
+           SessionContext context
+            )
+        {
+            String procedureName = "GetCustomerList_QueryhByEmailAsync";
+            await LogAsync(context, procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = await BuildDbContextAsync(context);
+                var customerManager = new EF.Managers.CustomerManager(dbContext);
+                rdr = BuildDataReader(await customerManager.GetByEmailAsync(email));
+            }
+            catch (Exception x)
+            {
+                await LogAsync(context, x);
+                String sException = "Error Executing FS_Farm_Customer_QueryhByEmail: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            await LogAsync(context, procedureName + "::End");
+            return rdr;
+        }
+        public override IDataReader GetCustomerList_QueryByEmail(
+            String email,
+           SessionContext context
+            )
+        {
+            String procedureName = "GetCustomerList_QueryhByEmail";
+            Log(procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = BuildDbContext(context);
+                var customerManager = new EF.Managers.CustomerManager(dbContext);
+                rdr = BuildDataReader(customerManager.GetByEmail(email));
+            }
+            catch (Exception x)
+            {
+                Log(x);
+                String sException = "Error Executing FS_Farm_Customer_QueryhByEmail: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            Log(procedureName + "::End");
+            return rdr;
+        }
+        public override async Task<IDataReader> GetCustomerList_QueryByForgotPasswordKeyValueAsync(
+            String forgotPasswordKeyValue,
+           SessionContext context
+            )
+        {
+            String procedureName = "GetCustomerList_QueryhByForgotPasswordKeyValueAsync";
+            await LogAsync(context, procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = await BuildDbContextAsync(context);
+                var customerManager = new EF.Managers.CustomerManager(dbContext);
+                rdr = BuildDataReader(await customerManager.GetByForgotPasswordKeyValueAsync(forgotPasswordKeyValue));
+            }
+            catch (Exception x)
+            {
+                await LogAsync(context, x);
+                String sException = "Error Executing FS_Farm_Customer_QueryhByForgotPasswordKeyValue: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            await LogAsync(context, procedureName + "::End");
+            return rdr;
+        }
+        public override IDataReader GetCustomerList_QueryByForgotPasswordKeyValue(
+            String forgotPasswordKeyValue,
+           SessionContext context
+            )
+        {
+            String procedureName = "GetCustomerList_QueryhByForgotPasswordKeyValue";
+            Log(procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = BuildDbContext(context);
+                var customerManager = new EF.Managers.CustomerManager(dbContext);
+                rdr = BuildDataReader(customerManager.GetByForgotPasswordKeyValue(forgotPasswordKeyValue));
+            }
+            catch (Exception x)
+            {
+                Log(x);
+                String sException = "Error Executing FS_Farm_Customer_QueryhByForgotPasswordKeyValue: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            Log(procedureName + "::End");
+            return rdr;
         }
     }
 }

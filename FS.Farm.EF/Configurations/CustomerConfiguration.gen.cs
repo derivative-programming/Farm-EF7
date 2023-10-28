@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
@@ -11,9 +12,31 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable(ToSnakeCase("Customer"));
+            //Int32 activeOrganizationID,
+            //String email,
+            //EmailConfirmedUTCDateTime
+            //String firstName,
+            //ForgotPasswordKeyExpirationUTCDateTime
+            //String forgotPasswordKeyValue,
+            //Guid fSUserCodeValue,
+            //Boolean isActive,
+            //Boolean isEmailAllowed,
+            //Boolean isEmailConfirmed,
+            //Boolean isEmailMarketingAllowed,
+            //Boolean isLocked,
+            //Boolean isMultipleOrganizationsAllowed,
+            //Boolean isVerboseLoggingForced,
+            //LastLoginUTCDateTime
+            //String lastName,
+            //String password,
+            //String phone,
+            //String province,
+            //RegistrationUTCDateTime
             builder.HasOne<Tac>() //TacID
                 .WithMany()
                 .HasForeignKey(p => p.TacID);
+            //Int32 uTCOffsetInMinutes,
+            //String zip,
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

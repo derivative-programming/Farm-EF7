@@ -131,7 +131,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
             }
         }
         [TestMethod]
-        public async Task GetMaxIdAsync_NoRoles_ShouldReturnNull()
+        public async Task GetMaxIdAsync_NoRoles_ShouldReturnZero()
         {
             var options = CreateSQLiteInMemoryDbContextOptions();
             using (var context = new FarmDbContext(options))
@@ -139,11 +139,11 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 context.Database.EnsureCreated();
                 var manager = new RoleManager(context);
                 var result = await manager.GetMaxIdAsync();
-                Assert.IsNull(result);
+                Assert.AreEqual(0, result);
             }
         }
         [TestMethod]
-        public void GetMaxId_NoRoles_ShouldReturnNull()
+        public void GetMaxId_NoRoles_ShouldReturnZero()
         {
             var options = CreateSQLiteInMemoryDbContextOptions();
             using (var context = new FarmDbContext(options))
@@ -151,7 +151,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
                 context.Database.EnsureCreated();
                 var manager = new RoleManager(context);
                 var result = manager.GetMaxId();
-                Assert.IsNull(result);
+                Assert.AreEqual(0, result);
             }
         }
         [TestMethod]

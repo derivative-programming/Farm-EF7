@@ -18,7 +18,7 @@ namespace FS.Farm.EF.Reports
         {
             return from tac in _dbContext.TacSet.AsNoTracking()
 				from pac  in _dbContext.PacSet.AsNoTracking().Where(x => x.PacID == tac.PacID).DefaultIfEmpty() // up obj tree
-                from land in _dbContext.LandSet.AsNoTracking().Where(x => x.PacID != tac.PacID).DefaultIfEmpty()   
+                from land in _dbContext.LandSet.AsNoTracking().Where(x => x.PacID == pac.PacID).DefaultIfEmpty()
                 select new QueryDTO
                 {
                     tac = tac,

@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class FlavorManager
+	public partial class FlavorManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public FlavorManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.FlavorSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.FlavorSet.AsNoTracking().MaxAsync(x => (int?)x.FlavorID);
+        {
+            int? maxId = await _dbContext.FlavorSet.AsNoTracking().MaxAsync(x => (int?)x.FlavorID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.FlavorSet.AsNoTracking().Max(x => (int?)x.FlavorID);
+            int? maxId = _dbContext.FlavorSet.AsNoTracking().Max(x => (int?)x.FlavorID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<Flavor> GetByIdAsync(int id)
 		{

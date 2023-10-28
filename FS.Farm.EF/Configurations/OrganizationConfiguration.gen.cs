@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
@@ -11,6 +12,7 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<Organization> builder)
         {
             builder.ToTable(ToSnakeCase("Organization"));
+            //String name,
             builder.HasOne<Tac>() //TacID
                 .WithMany()
                 .HasForeignKey(p => p.TacID);

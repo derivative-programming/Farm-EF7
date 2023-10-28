@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class ErrorLogManager
+	public partial class ErrorLogManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public ErrorLogManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.ErrorLogSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.ErrorLogSet.AsNoTracking().MaxAsync(x => (int?)x.ErrorLogID);
+        {
+            int? maxId = await _dbContext.ErrorLogSet.AsNoTracking().MaxAsync(x => (int?)x.ErrorLogID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.ErrorLogSet.AsNoTracking().Max(x => (int?)x.ErrorLogID);
+            int? maxId = _dbContext.ErrorLogSet.AsNoTracking().Max(x => (int?)x.ErrorLogID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<ErrorLog> GetByIdAsync(int id)
 		{

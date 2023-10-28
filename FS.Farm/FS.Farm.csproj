@@ -6,14 +6,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Providers\EF7\EF7PlantProvider.gen.cs" />
+    <Compile Remove="Providers\EF7\EF7PlantProvider.include.QueryBy.cs" />
     <Compile Remove="Providers\EF7\SqlPlantProvider.gen.cs" />
     <Compile Remove="Providers\PlantProvider.gen.cs" />
+    <Compile Remove="Providers\PlantProvider.include.QueryBy.cs" />
     <Compile Remove="Providers\PlantProviderConfiguration.gen.cs" />
     <Compile Remove="Providers\PlantProviderConfigurationHandler.gen.cs" />
     <Compile Remove="Reports\Providers\EF7\EF7FarmReportProvider.gen.cs" />
     <Compile Remove="Reports\Providers\EF7\EF7FarmReportProvider_LandPlantList.gen.cs" />
     <Compile Remove="Reports\Providers\EF7\SqlFarmReportProvider_LandPlantList.gen.cs" />
     <Compile Remove="Reports\Providers\FarmReportProvider_LandPlantList.gen.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Providers\PlantProvider.include.QueryBy.cs" />
+    <None Include="Providers\EF7\EF7PlantProvider.include.QueryBy.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FS.Base\FS.Base.csproj" />

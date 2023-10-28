@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class OrgApiKeyConfiguration : IEntityTypeConfiguration<OrgApiKey>
@@ -11,6 +12,13 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<OrgApiKey> builder)
         {
             builder.ToTable(ToSnakeCase("OrgApiKey"));
+            //String apiKeyValue,
+            //String createdBy,
+            //CreatedUTCDateTime
+            //ExpirationUTCDateTime
+            //Boolean isActive,
+            //Boolean isTempUserKey,
+            //String name,
             builder.HasOne<Organization>() //OrganizationID
                 .WithMany()
                 .HasForeignKey(p => p.OrganizationID);

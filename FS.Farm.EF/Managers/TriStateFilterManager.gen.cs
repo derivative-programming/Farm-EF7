@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class TriStateFilterManager
+	public partial class TriStateFilterManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public TriStateFilterManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.TriStateFilterSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.TriStateFilterSet.AsNoTracking().MaxAsync(x => (int?)x.TriStateFilterID);
+        {
+            int? maxId = await _dbContext.TriStateFilterSet.AsNoTracking().MaxAsync(x => (int?)x.TriStateFilterID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.TriStateFilterSet.AsNoTracking().Max(x => (int?)x.TriStateFilterID);
+            int? maxId = _dbContext.TriStateFilterSet.AsNoTracking().Max(x => (int?)x.TriStateFilterID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<TriStateFilter> GetByIdAsync(int id)
 		{

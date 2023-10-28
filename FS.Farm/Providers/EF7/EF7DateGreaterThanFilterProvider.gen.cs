@@ -158,12 +158,31 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "DateGreaterThanFilterInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -213,12 +232,31 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "DateGreaterThanFilterInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -270,12 +308,31 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "DateGreaterThanFilterUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -327,12 +384,31 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "DateGreaterThanFilterUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             //Define the parameters
             EF.FarmDbContext dbContext = null;
@@ -933,6 +1009,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -956,6 +1033,29 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
+                    bool isEncrypted = false;
+                    //Int32 dayCount,
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Description = encryptionServices.Encrypt(dateGreaterThanFilter.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.LookupEnumName = encryptionServices.Encrypt(dateGreaterThanFilter.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
+                    }
+                    //Int32 pacID,
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkInsert(dateGreaterThanFilters);
@@ -987,6 +1087,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1010,6 +1111,29 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
+                    bool isEncrypted = false;
+                    //Int32 dayCount,
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Description = encryptionServices.Encrypt(dateGreaterThanFilter.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.LookupEnumName = encryptionServices.Encrypt(dateGreaterThanFilter.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
+                    }
+                    //Int32 pacID,
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 await dateGreaterThanFilterManager.BulkInsertAsync(dateGreaterThanFilters);
@@ -1041,6 +1165,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1049,8 +1174,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].DateGreaterThanFilterID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
                     actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
@@ -1065,6 +1189,29 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
                     dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 dayCount,
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Description = encryptionServices.Encrypt(dateGreaterThanFilter.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.LookupEnumName = encryptionServices.Encrypt(dateGreaterThanFilter.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
+                    }
+                    //Int32 pacID,
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
@@ -1096,6 +1243,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1104,8 +1252,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].DateGreaterThanFilterID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
                     actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
@@ -1120,6 +1267,29 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
                     dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 dayCount,
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Description = encryptionServices.Encrypt(dateGreaterThanFilter.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.LookupEnumName = encryptionServices.Encrypt(dateGreaterThanFilter.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
+                    }
+                    //Int32 pacID,
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
@@ -1157,8 +1327,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].DateGreaterThanFilterID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
                     actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];
@@ -1210,8 +1379,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].DateGreaterThanFilterID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
                     actionCount++;
                     Objects.DateGreaterThanFilter item = dataList[i];

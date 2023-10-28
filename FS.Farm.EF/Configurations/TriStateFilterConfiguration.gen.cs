@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class TriStateFilterConfiguration : IEntityTypeConfiguration<TriStateFilter>
@@ -11,9 +12,15 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<TriStateFilter> builder)
         {
             builder.ToTable(ToSnakeCase("TriStateFilter"));
+            //String description,
+            //Int32 displayOrder,
+            //Boolean isActive,
+            //String lookupEnumName,
+            //String name,
             builder.HasOne<Pac>() //PacID
                 .WithMany()
                 .HasForeignKey(p => p.PacID);
+            //Int32 stateIntValue,
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

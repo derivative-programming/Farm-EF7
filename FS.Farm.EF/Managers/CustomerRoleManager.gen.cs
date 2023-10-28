@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class CustomerRoleManager
+	public partial class CustomerRoleManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public CustomerRoleManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.CustomerRoleSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.CustomerRoleSet.AsNoTracking().MaxAsync(x => (int?)x.CustomerRoleID);
+        {
+            int? maxId = await _dbContext.CustomerRoleSet.AsNoTracking().MaxAsync(x => (int?)x.CustomerRoleID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.CustomerRoleSet.AsNoTracking().Max(x => (int?)x.CustomerRoleID);
+            int? maxId = _dbContext.CustomerRoleSet.AsNoTracking().Max(x => (int?)x.CustomerRoleID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<CustomerRole> GetByIdAsync(int id)
 		{

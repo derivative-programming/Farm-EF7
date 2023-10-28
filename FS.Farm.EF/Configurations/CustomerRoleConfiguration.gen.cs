@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class CustomerRoleConfiguration : IEntityTypeConfiguration<CustomerRole>
@@ -14,6 +15,8 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<Customer>() //CustomerID
                 .WithMany()
                 .HasForeignKey(p => p.CustomerID);
+            //Boolean isPlaceholder,
+            //Boolean placeholder,
             builder.HasOne<Role>() //RoleID
                 .WithMany()
                 .HasForeignKey(p => p.RoleID);

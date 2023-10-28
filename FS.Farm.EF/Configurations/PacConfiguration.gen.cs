@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class PacConfiguration : IEntityTypeConfiguration<Pac>
@@ -11,6 +12,11 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<Pac> builder)
         {
             builder.ToTable(ToSnakeCase("Pac"));
+            //String description,
+            //Int32 displayOrder,
+            //Boolean isActive,
+            //String lookupEnumName,
+            //String name,
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

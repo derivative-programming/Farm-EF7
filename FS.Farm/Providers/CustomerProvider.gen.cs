@@ -493,5 +493,17 @@ namespace FS.Farm.Providers
         public abstract Task<IDataReader> GetCustomerList_FetchByTacIDAsync(
             int tacID,
            SessionContext context);
+        public abstract IDataReader GetCustomerList_QueryByEmail(
+            String email,
+           SessionContext context);
+        public abstract Task<IDataReader> GetCustomerList_QueryByEmailAsync(
+            String email,
+           SessionContext context);
+        public abstract IDataReader GetCustomerList_QueryByForgotPasswordKeyValue(
+            String forgotPasswordKeyValue,
+           SessionContext context);
+        public abstract Task<IDataReader> GetCustomerList_QueryByForgotPasswordKeyValueAsync(
+            String forgotPasswordKeyValue,
+           SessionContext context);
     }
 }

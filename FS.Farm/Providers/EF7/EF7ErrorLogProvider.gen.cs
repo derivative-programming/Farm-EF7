@@ -159,17 +159,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "ErrorLogInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
-            if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //createdUTCDateTime
             {
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Boolean isClientSideError,
             //Boolean isResolved,
             //Int32 pacID,
             //String url,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                url = UrlEncryptionServices.Encrypt(url);
+            }
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -220,6 +233,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "ErrorLogInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
             if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -227,10 +241,22 @@ namespace FS.Farm.Providers.EF7
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Boolean isClientSideError,
             //Boolean isResolved,
             //Int32 pacID,
             //String url,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                url = UrlEncryptionServices.Encrypt(url);
+            }
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -283,6 +309,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "ErrorLogUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
             if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -290,10 +317,22 @@ namespace FS.Farm.Providers.EF7
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Boolean isClientSideError,
             //Boolean isResolved,
             //Int32 pacID,
             //String url,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                url = UrlEncryptionServices.Encrypt(url);
+            }
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -346,6 +385,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "ErrorLogUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
             if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -353,10 +393,22 @@ namespace FS.Farm.Providers.EF7
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Boolean isClientSideError,
             //Boolean isResolved,
             //Int32 pacID,
             //String url,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                url = UrlEncryptionServices.Encrypt(url);
+            }
             //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -959,6 +1011,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -983,6 +1036,28 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
+                    bool isEncrypted = false;
+                    //Guid browserCode,
+                    //Guid contextCode,
+                    if (System.Convert.ToDateTime(errorLog.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        errorLog.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Description = encryptionServices.Encrypt(errorLog.Description);
+                    }
+                    //Boolean isClientSideError,
+                    //Boolean isResolved,
+                    //Int32 pacID,
+                    //String url,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
+                    }
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkInsert(errorLogs);
@@ -1014,6 +1089,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1038,6 +1114,28 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
+                    bool isEncrypted = false;
+                    //Guid browserCode,
+                    //Guid contextCode,
+                    if (System.Convert.ToDateTime(errorLog.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        errorLog.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Description = encryptionServices.Encrypt(errorLog.Description);
+                    }
+                    //Boolean isClientSideError,
+                    //Boolean isResolved,
+                    //Int32 pacID,
+                    //String url,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
+                    }
                     errorLogs.Add(errorLog);
                 }
                 await errorLogManager.BulkInsertAsync(errorLogs);
@@ -1069,6 +1167,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1077,8 +1176,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].ErrorLogID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].ErrorLogID == 0)
                         continue;
                     actionCount++;
                     Objects.ErrorLog item = dataList[i];
@@ -1094,6 +1192,28 @@ namespace FS.Farm.Providers.EF7
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
                     errorLog.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Guid browserCode,
+                    //Guid contextCode,
+                    if (System.Convert.ToDateTime(errorLog.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        errorLog.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Description = encryptionServices.Encrypt(errorLog.Description);
+                    }
+                    //Boolean isClientSideError,
+                    //Boolean isResolved,
+                    //Int32 pacID,
+                    //String url,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
+                    }
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkUpdate(errorLogs);
@@ -1125,6 +1245,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1133,8 +1254,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].ErrorLogID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].ErrorLogID == 0)
                         continue;
                     actionCount++;
                     Objects.ErrorLog item = dataList[i];
@@ -1150,6 +1270,28 @@ namespace FS.Farm.Providers.EF7
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
                     errorLog.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Guid browserCode,
+                    //Guid contextCode,
+                    if (System.Convert.ToDateTime(errorLog.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        errorLog.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Description = encryptionServices.Encrypt(errorLog.Description);
+                    }
+                    //Boolean isClientSideError,
+                    //Boolean isResolved,
+                    //Int32 pacID,
+                    //String url,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
+                    }
                     errorLogs.Add(errorLog);
                 }
                 errorLogManager.BulkUpdate(errorLogs);
@@ -1187,8 +1329,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].ErrorLogID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].ErrorLogID == 0)
                         continue;
                     actionCount++;
                     Objects.ErrorLog item = dataList[i];
@@ -1241,8 +1382,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].ErrorLogID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].ErrorLogID == 0)
                         continue;
                     actionCount++;
                     Objects.ErrorLog item = dataList[i];

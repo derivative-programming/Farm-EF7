@@ -100,13 +100,48 @@ namespace FS.Farm.EF.Reports
         }
         public class PacUserLandListDTO
         {
-            public Guid LandCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public String LandDescription = String.Empty;
-            public Int32 LandDisplayOrder = 0;
-            public Boolean LandIsActive = false;
-            public String LandLookupEnumName = String.Empty;
-            public String LandName = String.Empty;
-            public String PacName = String.Empty;
+            private Guid _landCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private String _landDescription = String.Empty;
+            private Int32 _landDisplayOrder = 0;
+            private Boolean _landIsActive = false;
+            private String _landLookupEnumName = String.Empty;
+            private String _landName = String.Empty;
+            private String _pacName = String.Empty;
+            public Guid LandCode
+            {
+                get { return _landCode; }
+                set { _landCode = value; }
+            }
+            public String LandDescription
+            {
+                get { return _landDescription; }
+                set { _landDescription = value; }
+            }
+            public Int32 LandDisplayOrder
+            {
+                get { return _landDisplayOrder; }
+                set { _landDisplayOrder = value; }
+            }
+            public Boolean LandIsActive
+            {
+                get { return _landIsActive; }
+                set { _landIsActive = value; }
+            }
+            public String LandLookupEnumName
+            {
+                get { return _landLookupEnumName; }
+                set { _landLookupEnumName = value; }
+            }
+            public String LandName
+            {
+                get { return _landName; }
+                set { _landName = value; }
+            }
+            public String PacName
+            {
+                get { return _pacName; }
+                set { _pacName = value; }
+            }
         }
     }
 }

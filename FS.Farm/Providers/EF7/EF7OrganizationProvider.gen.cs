@@ -153,7 +153,14 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrganizationInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 tacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -193,7 +200,14 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrganizationInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 tacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -235,7 +249,14 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrganizationUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 tacID,
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -277,7 +298,14 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrganizationUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 tacID,
             //Define the parameters
             EF.FarmDbContext dbContext = null;
@@ -863,6 +891,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -881,6 +910,14 @@ namespace FS.Farm.Providers.EF7
                     organization.LastChangeCode = Guid.NewGuid();
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
+                    bool isEncrypted = false;
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        organization.Name = encryptionServices.Encrypt(organization.Name);
+                    }
+                    //Int32 tacID,
                     organizations.Add(organization);
                 }
                 organizationManager.BulkInsert(organizations);
@@ -912,6 +949,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -930,6 +968,14 @@ namespace FS.Farm.Providers.EF7
                     organization.LastChangeCode = Guid.NewGuid();
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
+                    bool isEncrypted = false;
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        organization.Name = encryptionServices.Encrypt(organization.Name);
+                    }
+                    //Int32 tacID,
                     organizations.Add(organization);
                 }
                 await organizationManager.BulkInsertAsync(organizations);
@@ -961,6 +1007,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -969,8 +1016,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrganizationID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrganizationID == 0)
                         continue;
                     actionCount++;
                     Objects.Organization item = dataList[i];
@@ -980,6 +1026,14 @@ namespace FS.Farm.Providers.EF7
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
                     organization.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        organization.Name = encryptionServices.Encrypt(organization.Name);
+                    }
+                    //Int32 tacID,
                     organizations.Add(organization);
                 }
                 organizationManager.BulkUpdate(organizations);
@@ -1011,6 +1065,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1019,8 +1074,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrganizationID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrganizationID == 0)
                         continue;
                     actionCount++;
                     Objects.Organization item = dataList[i];
@@ -1030,6 +1084,14 @@ namespace FS.Farm.Providers.EF7
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
                     organization.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        organization.Name = encryptionServices.Encrypt(organization.Name);
+                    }
+                    //Int32 tacID,
                     organizations.Add(organization);
                 }
                 organizationManager.BulkUpdate(organizations);
@@ -1067,8 +1129,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrganizationID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrganizationID == 0)
                         continue;
                     actionCount++;
                     Objects.Organization item = dataList[i];
@@ -1115,8 +1176,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrganizationID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrganizationID == 0)
                         continue;
                     actionCount++;
                     Objects.Organization item = dataList[i];

@@ -155,6 +155,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerRoleInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
@@ -201,6 +202,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerRoleInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
@@ -249,6 +251,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerRoleUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
@@ -297,6 +300,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "CustomerRoleUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
@@ -891,6 +895,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -911,6 +916,11 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //Boolean isPlaceholder,
+                    //Boolean placeholder,
+                    //Int32 roleID,
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkInsert(customerRoles);
@@ -942,6 +952,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -962,6 +973,11 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //Boolean isPlaceholder,
+                    //Boolean placeholder,
+                    //Int32 roleID,
                     customerRoles.Add(customerRole);
                 }
                 await customerRoleManager.BulkInsertAsync(customerRoles);
@@ -993,6 +1009,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1001,8 +1018,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerRoleID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerRoleID == 0)
                         continue;
                     actionCount++;
                     Objects.CustomerRole item = dataList[i];
@@ -1014,6 +1030,11 @@ namespace FS.Farm.Providers.EF7
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
                     customerRole.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //Boolean isPlaceholder,
+                    //Boolean placeholder,
+                    //Int32 roleID,
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkUpdate(customerRoles);
@@ -1045,6 +1066,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1053,8 +1075,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerRoleID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerRoleID == 0)
                         continue;
                     actionCount++;
                     Objects.CustomerRole item = dataList[i];
@@ -1066,6 +1087,11 @@ namespace FS.Farm.Providers.EF7
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
                     customerRole.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //Boolean isPlaceholder,
+                    //Boolean placeholder,
+                    //Int32 roleID,
                     customerRoles.Add(customerRole);
                 }
                 customerRoleManager.BulkUpdate(customerRoles);
@@ -1103,8 +1129,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerRoleID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerRoleID == 0)
                         continue;
                     actionCount++;
                     Objects.CustomerRole item = dataList[i];
@@ -1153,8 +1178,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].CustomerRoleID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].CustomerRoleID == 0)
                         continue;
                     actionCount++;
                     Objects.CustomerRole item = dataList[i];

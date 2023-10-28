@@ -156,11 +156,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PacInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -205,11 +224,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PacInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -256,11 +294,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PacUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -307,11 +364,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PacUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -905,6 +981,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -926,6 +1003,27 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Description = encryptionServices.Encrypt(pac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.LookupEnumName = encryptionServices.Encrypt(pac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Name = encryptionServices.Encrypt(pac.Name);
+                    }
                     pacs.Add(pac);
                 }
                 pacManager.BulkInsert(pacs);
@@ -957,6 +1055,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -978,6 +1077,27 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Description = encryptionServices.Encrypt(pac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.LookupEnumName = encryptionServices.Encrypt(pac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Name = encryptionServices.Encrypt(pac.Name);
+                    }
                     pacs.Add(pac);
                 }
                 await pacManager.BulkInsertAsync(pacs);
@@ -1009,6 +1129,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1017,8 +1138,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PacID == 0)
                         continue;
                     actionCount++;
                     Objects.Pac item = dataList[i];
@@ -1031,6 +1151,27 @@ namespace FS.Farm.Providers.EF7
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
                     pac.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Description = encryptionServices.Encrypt(pac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.LookupEnumName = encryptionServices.Encrypt(pac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Name = encryptionServices.Encrypt(pac.Name);
+                    }
                     pacs.Add(pac);
                 }
                 pacManager.BulkUpdate(pacs);
@@ -1062,6 +1203,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1070,8 +1212,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PacID == 0)
                         continue;
                     actionCount++;
                     Objects.Pac item = dataList[i];
@@ -1084,6 +1225,27 @@ namespace FS.Farm.Providers.EF7
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
                     pac.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Description = encryptionServices.Encrypt(pac.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.LookupEnumName = encryptionServices.Encrypt(pac.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        pac.Name = encryptionServices.Encrypt(pac.Name);
+                    }
                     pacs.Add(pac);
                 }
                 pacManager.BulkUpdate(pacs);
@@ -1121,8 +1283,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PacID == 0)
                         continue;
                     actionCount++;
                     Objects.Pac item = dataList[i];
@@ -1172,8 +1333,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PacID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PacID == 0)
                         continue;
                     actionCount++;
                     Objects.Pac item = dataList[i];

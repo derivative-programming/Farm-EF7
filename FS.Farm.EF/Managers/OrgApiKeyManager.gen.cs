@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class OrgApiKeyManager
+	public partial class OrgApiKeyManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public OrgApiKeyManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.OrgApiKeySet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.OrgApiKeySet.AsNoTracking().MaxAsync(x => (int?)x.OrgApiKeyID);
+        {
+            int? maxId = await _dbContext.OrgApiKeySet.AsNoTracking().MaxAsync(x => (int?)x.OrgApiKeyID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.OrgApiKeySet.AsNoTracking().Max(x => (int?)x.OrgApiKeyID);
+            int? maxId = _dbContext.OrgApiKeySet.AsNoTracking().Max(x => (int?)x.OrgApiKeyID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<OrgApiKey> GetByIdAsync(int id)
 		{

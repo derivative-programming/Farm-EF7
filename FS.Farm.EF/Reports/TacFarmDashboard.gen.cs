@@ -100,9 +100,24 @@ namespace FS.Farm.EF.Reports
         }
         public class TacFarmDashboardDTO
         {
-            public Guid FieldOnePlantListLinkLandCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public Guid ConditionalBtnExampleLinkLandCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public Boolean IsConditionalBtnAvailable = false;
+            private Guid _fieldOnePlantListLinkLandCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _conditionalBtnExampleLinkLandCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Boolean _isConditionalBtnAvailable = false;
+            public Guid FieldOnePlantListLinkLandCode
+            {
+                get { return _fieldOnePlantListLinkLandCode; }
+                set { _fieldOnePlantListLinkLandCode = value; }
+            }
+            public Guid ConditionalBtnExampleLinkLandCode
+            {
+                get { return _conditionalBtnExampleLinkLandCode; }
+                set { _conditionalBtnExampleLinkLandCode = value; }
+            }
+            public Boolean IsConditionalBtnAvailable
+            {
+                get { return _isConditionalBtnAvailable; }
+                set { _isConditionalBtnAvailable = value; }
+            }
         }
     }
 }

@@ -164,7 +164,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
         }
 
         [TestMethod]
-        public async Task GetMaxIdAsync_NoPlants_ShouldReturnNull()
+        public async Task GetMaxIdAsync_NoPlants_ShouldReturnZero()
         {
             var options = CreateSQLiteInMemoryDbContextOptions();
 
@@ -175,11 +175,11 @@ namespace FS.Farm.EF.Test.Tests.Managers
 
                 var result = await manager.GetMaxIdAsync();
 
-                Assert.IsNull(result);
+                Assert.AreEqual(0, result);
             }
         }
         [TestMethod]
-        public void GetMaxId_NoPlants_ShouldReturnNull()
+        public void GetMaxId_NoPlants_ShouldReturnZero()
         {
             var options = CreateSQLiteInMemoryDbContextOptions();
 
@@ -190,7 +190,7 @@ namespace FS.Farm.EF.Test.Tests.Managers
 
                 var result = manager.GetMaxId();
 
-                Assert.IsNull(result);
+                Assert.AreEqual(0, result);
             }
         }
 

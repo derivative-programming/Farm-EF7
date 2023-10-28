@@ -100,13 +100,48 @@ namespace FS.Farm.EF.Reports
         }
         public class PacUserDateGreaterThanFilterListDTO
         {
-            public Guid DateGreaterThanFilterCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public Int32 DateGreaterThanFilterDayCount = 0;
-            public String DateGreaterThanFilterDescription = String.Empty;
-            public Int32 DateGreaterThanFilterDisplayOrder = 0;
-            public Boolean DateGreaterThanFilterIsActive = false;
-            public String DateGreaterThanFilterLookupEnumName = String.Empty;
-            public String DateGreaterThanFilterName = String.Empty;
+            private Guid _dateGreaterThanFilterCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Int32 _dateGreaterThanFilterDayCount = 0;
+            private String _dateGreaterThanFilterDescription = String.Empty;
+            private Int32 _dateGreaterThanFilterDisplayOrder = 0;
+            private Boolean _dateGreaterThanFilterIsActive = false;
+            private String _dateGreaterThanFilterLookupEnumName = String.Empty;
+            private String _dateGreaterThanFilterName = String.Empty;
+            public Guid DateGreaterThanFilterCode
+            {
+                get { return _dateGreaterThanFilterCode; }
+                set { _dateGreaterThanFilterCode = value; }
+            }
+            public Int32 DateGreaterThanFilterDayCount
+            {
+                get { return _dateGreaterThanFilterDayCount; }
+                set { _dateGreaterThanFilterDayCount = value; }
+            }
+            public String DateGreaterThanFilterDescription
+            {
+                get { return _dateGreaterThanFilterDescription; }
+                set { _dateGreaterThanFilterDescription = value; }
+            }
+            public Int32 DateGreaterThanFilterDisplayOrder
+            {
+                get { return _dateGreaterThanFilterDisplayOrder; }
+                set { _dateGreaterThanFilterDisplayOrder = value; }
+            }
+            public Boolean DateGreaterThanFilterIsActive
+            {
+                get { return _dateGreaterThanFilterIsActive; }
+                set { _dateGreaterThanFilterIsActive = value; }
+            }
+            public String DateGreaterThanFilterLookupEnumName
+            {
+                get { return _dateGreaterThanFilterLookupEnumName; }
+                set { _dateGreaterThanFilterLookupEnumName = value; }
+            }
+            public String DateGreaterThanFilterName
+            {
+                get { return _dateGreaterThanFilterName; }
+                set { _dateGreaterThanFilterName = value; }
+            }
         }
     }
 }

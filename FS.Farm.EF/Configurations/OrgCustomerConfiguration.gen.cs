@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class OrgCustomerConfiguration : IEntityTypeConfiguration<OrgCustomer>
@@ -14,6 +15,7 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<Customer>() //CustomerID
                 .WithMany()
                 .HasForeignKey(p => p.CustomerID);
+            //String email,
             builder.HasOne<Organization>() //OrganizationID
                 .WithMany()
                 .HasForeignKey(p => p.OrganizationID);

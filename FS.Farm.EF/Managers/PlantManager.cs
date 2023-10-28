@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace FS.Farm.EF.Managers
 {
-	public class PlantManager
+	public partial class PlantManager
 	{
 		private readonly FarmDbContext _dbContext;
 
@@ -98,12 +98,28 @@ namespace FS.Farm.EF.Managers
         }
 
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.PlantSet.AsNoTracking().MaxAsync(x => (int?)x.PlantID);
+        {
+            int? maxId = await _dbContext.PlantSet.AsNoTracking().MaxAsync(x => (int?)x.PlantID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.PlantSet.AsNoTracking().Max(x => (int?)x.PlantID);
+            int? maxId = _dbContext.PlantSet.AsNoTracking().Max(x => (int?)x.PlantID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
 
         public async Task<Plant> GetByIdAsync(int id)
@@ -952,7 +968,7 @@ namespace FS.Farm.EF.Managers
                 //ENDSET
             }
 
-            List<Plant> results = data.Select(r => r.PlantObj).ToList();
+            List<Plant> results = data.Select(r => r.PlantObj).ToList(); 
 
             return results;
         }
@@ -1010,6 +1026,8 @@ namespace FS.Farm.EF.Managers
 
         //ENDSET
 
+
+        //GENINCLUDEFILE[GENVALNameManager.include.*]
 
         private string ToSnakeCase(string input)
         {

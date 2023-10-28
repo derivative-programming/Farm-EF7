@@ -100,13 +100,48 @@ namespace FS.Farm.EF.Reports
         }
         public class PacUserTriStateFilterListDTO
         {
-            public Guid TriStateFilterCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public String TriStateFilterDescription = String.Empty;
-            public Int32 TriStateFilterDisplayOrder = 0;
-            public Boolean TriStateFilterIsActive = false;
-            public String TriStateFilterLookupEnumName = String.Empty;
-            public String TriStateFilterName = String.Empty;
-            public Int32 TriStateFilterStateIntValue = 0;
+            private Guid _triStateFilterCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private String _triStateFilterDescription = String.Empty;
+            private Int32 _triStateFilterDisplayOrder = 0;
+            private Boolean _triStateFilterIsActive = false;
+            private String _triStateFilterLookupEnumName = String.Empty;
+            private String _triStateFilterName = String.Empty;
+            private Int32 _triStateFilterStateIntValue = 0;
+            public Guid TriStateFilterCode
+            {
+                get { return _triStateFilterCode; }
+                set { _triStateFilterCode = value; }
+            }
+            public String TriStateFilterDescription
+            {
+                get { return _triStateFilterDescription; }
+                set { _triStateFilterDescription = value; }
+            }
+            public Int32 TriStateFilterDisplayOrder
+            {
+                get { return _triStateFilterDisplayOrder; }
+                set { _triStateFilterDisplayOrder = value; }
+            }
+            public Boolean TriStateFilterIsActive
+            {
+                get { return _triStateFilterIsActive; }
+                set { _triStateFilterIsActive = value; }
+            }
+            public String TriStateFilterLookupEnumName
+            {
+                get { return _triStateFilterLookupEnumName; }
+                set { _triStateFilterLookupEnumName = value; }
+            }
+            public String TriStateFilterName
+            {
+                get { return _triStateFilterName; }
+                set { _triStateFilterName = value; }
+            }
+            public Int32 TriStateFilterStateIntValue
+            {
+                get { return _triStateFilterStateIntValue; }
+                set { _triStateFilterStateIntValue = value; }
+            }
         }
     }
 }

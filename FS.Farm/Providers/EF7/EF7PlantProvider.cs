@@ -183,11 +183,18 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
 
+            bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
             //Int32 landID,
             //String otherFlavor,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                otherFlavor = GENVALPropNameEncryptionServices.Encrypt(otherFlavor);
+            }
             //Int64 someBigIntVal,
             //Boolean someBitVal, 
             //Decimal someDecimalVal,
@@ -196,18 +203,32 @@ namespace FS.Farm.Providers.EF7
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someNVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someNVarCharVal);
+
+            }
             //String somePhoneNumber,
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
-            if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someVarCharVal); 
+            }
+            if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //someDateVal
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-            if (System.Convert.ToDateTime(someUTCDateTimeVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            if (System.Convert.ToDateTime(someUTCDateTimeVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //someUTCDateTimeVal
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
+            //ENDSET
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -286,11 +307,19 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PlantInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
+            bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
             //Int32 landID,
             //String otherFlavor,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                otherFlavor = GENVALPropNameEncryptionServices.Encrypt(otherFlavor);
+            }
             //Int64 someBigIntVal,
             //Boolean someBitVal, 
             //Decimal someDecimalVal,
@@ -299,10 +328,23 @@ namespace FS.Farm.Providers.EF7
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someNVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someNVarCharVal);
+
+            }
             //String somePhoneNumber,
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someVarCharVal);
+            }
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -311,6 +353,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
+            //ENDSET
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -391,11 +434,19 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PlantUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
+            bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
             //Int32 landID,
             //String otherFlavor,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                otherFlavor = GENVALPropNameEncryptionServices.Encrypt(otherFlavor);
+            }
             //Int64 someBigIntVal,
             //Boolean someBitVal, 
             //Decimal someDecimalVal,
@@ -404,10 +455,23 @@ namespace FS.Farm.Providers.EF7
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someNVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someNVarCharVal);
+
+            }
             //String somePhoneNumber,
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someVarCharVal);
+            }
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -416,6 +480,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
+            //ENDSET
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -496,11 +561,19 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "PlantUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
+            bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
             //Int32 landID,
             //String otherFlavor,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                otherFlavor = GENVALPropNameEncryptionServices.Encrypt(otherFlavor);
+            }
             //Int64 someBigIntVal,
             //Boolean someBitVal, 
             //Decimal someDecimalVal,
@@ -509,10 +582,23 @@ namespace FS.Farm.Providers.EF7
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someNVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someNVarCharVal);
+
+            }
             //String somePhoneNumber,
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices GENVALPropNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someVarCharVal = GENVALPropNameEncryptionServices.Encrypt(someVarCharVal);
+            }
             if (System.Convert.ToDateTime(someDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -521,6 +607,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
+            //ENDSET
             //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -1233,6 +1320,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1276,6 +1364,50 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     //ENDSET
+
+                    bool isEncrypted = false;
+                    //Int32 flvrForeignKeyID,
+                    //Boolean isDeleteAllowed,
+                    //Boolean isEditAllowed,
+                    //Int32 landID,
+                    //String otherFlavor,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.OtherFlavor = encryptionServices.Encrypt(plant.OtherFlavor);
+                    }
+                    //Int64 someBigIntVal,
+                    //Boolean someBitVal, 
+                    //Decimal someDecimalVal,
+                    //String someEmailAddress,
+                    //Double someFloatVal,
+                    //Int32 someIntVal,
+                    //Decimal someMoneyVal,
+                    //String someNVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    { 
+                        plant.SomeNVarCharVal = encryptionServices.Encrypt(plant.SomeNVarCharVal);
+
+                    }
+                    //String somePhoneNumber,
+                    //String someTextVal,
+                    //Guid someUniqueidentifierVal, 
+                    //String someVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    { 
+                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeUTCDateTimeVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //ENDSET
                     plants.Add(plant);
                 }
 
@@ -1309,6 +1441,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1352,6 +1485,50 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     //ENDSET
+
+                    bool isEncrypted = false;
+                    //Int32 flvrForeignKeyID,
+                    //Boolean isDeleteAllowed,
+                    //Boolean isEditAllowed,
+                    //Int32 landID,
+                    //String otherFlavor,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.OtherFlavor = encryptionServices.Encrypt(plant.OtherFlavor);
+                    }
+                    //Int64 someBigIntVal,
+                    //Boolean someBitVal, 
+                    //Decimal someDecimalVal,
+                    //String someEmailAddress,
+                    //Double someFloatVal,
+                    //Int32 someIntVal,
+                    //Decimal someMoneyVal,
+                    //String someNVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeNVarCharVal = encryptionServices.Encrypt(plant.SomeNVarCharVal);
+
+                    }
+                    //String somePhoneNumber,
+                    //String someTextVal,
+                    //Guid someUniqueidentifierVal, 
+                    //String someVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeUTCDateTimeVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //ENDSET
                     plants.Add(plant);
                 }
 
@@ -1384,6 +1561,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1396,8 +1574,7 @@ namespace FS.Farm.Providers.EF7
 
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PlantID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PlantID == 0)
                         continue;
 
                     actionCount++;
@@ -1428,6 +1605,52 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
+
+
+                    bool isEncrypted = false;
+                    //Int32 flvrForeignKeyID,
+                    //Boolean isDeleteAllowed,
+                    //Boolean isEditAllowed,
+                    //Int32 landID,
+                    //String otherFlavor,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.OtherFlavor = encryptionServices.Encrypt(plant.OtherFlavor);
+                    }
+                    //Int64 someBigIntVal,
+                    //Boolean someBitVal, 
+                    //Decimal someDecimalVal,
+                    //String someEmailAddress,
+                    //Double someFloatVal,
+                    //Int32 someIntVal,
+                    //Decimal someMoneyVal,
+                    //String someNVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeNVarCharVal = encryptionServices.Encrypt(plant.SomeNVarCharVal);
+
+                    }
+                    //String somePhoneNumber,
+                    //String someTextVal,
+                    //Guid someUniqueidentifierVal, 
+                    //String someVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeUTCDateTimeVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //ENDSET
+
                     plants.Add(plant);
                 }
 
@@ -1461,6 +1684,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1473,8 +1697,7 @@ namespace FS.Farm.Providers.EF7
 
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PlantID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PlantID == 0)
                         continue;
 
                     actionCount++;
@@ -1505,6 +1728,51 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
+
+
+                    bool isEncrypted = false;
+                    //Int32 flvrForeignKeyID,
+                    //Boolean isDeleteAllowed,
+                    //Boolean isEditAllowed,
+                    //Int32 landID,
+                    //String otherFlavor,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.OtherFlavor = encryptionServices.Encrypt(plant.OtherFlavor);
+                    }
+                    //Int64 someBigIntVal,
+                    //Boolean someBitVal, 
+                    //Decimal someDecimalVal,
+                    //String someEmailAddress,
+                    //Double someFloatVal,
+                    //Int32 someIntVal,
+                    //Decimal someMoneyVal,
+                    //String someNVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeNVarCharVal = encryptionServices.Encrypt(plant.SomeNVarCharVal);
+
+                    }
+                    //String somePhoneNumber,
+                    //String someTextVal,
+                    //Guid someUniqueidentifierVal, 
+                    //String someVarCharVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeDateVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(plant.SomeUTCDateTimeVal) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //ENDSET
                     plants.Add(plant);
                 }
 
@@ -1549,8 +1817,7 @@ namespace FS.Farm.Providers.EF7
 
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PlantID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PlantID == 0)
                         continue;
 
                     actionCount++;
@@ -1625,8 +1892,7 @@ namespace FS.Farm.Providers.EF7
 
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].PlantID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].PlantID == 0)
                         continue;
 
                     actionCount++;
@@ -2024,6 +2290,8 @@ namespace FS.Farm.Providers.EF7
 
             return dataTable.CreateDataReader();
 
-        }
+        } 
+
+        //GENINCLUDEFILE[EF7GENVALNameProvider.include.*]
     }
 }

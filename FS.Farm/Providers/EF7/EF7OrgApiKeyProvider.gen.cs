@@ -160,19 +160,38 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgApiKeyInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String apiKeyValue,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ApiKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                apiKeyValue = ApiKeyValueEncryptionServices.Encrypt(apiKeyValue);
+            }
             //String createdBy,
-            if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices CreatedByEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                createdBy = CreatedByEncryptionServices.Encrypt(createdBy);
+            }
+            if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //createdUTCDateTime
             {
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-            if (System.Convert.ToDateTime(expirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+            if (System.Convert.ToDateTime(expirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) //expirationUTCDateTime
             {
                  expirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //Boolean isActive,
             //Boolean isTempUserKey,
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 organizationID,
             //Int32 orgCustomerID,
             SqlDataReader rdr = null;
@@ -227,8 +246,21 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgApiKeyInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String apiKeyValue,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ApiKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                apiKeyValue = ApiKeyValueEncryptionServices.Encrypt(apiKeyValue);
+            }
             //String createdBy,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices CreatedByEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                createdBy = CreatedByEncryptionServices.Encrypt(createdBy);
+            }
             if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -240,6 +272,12 @@ namespace FS.Farm.Providers.EF7
             //Boolean isActive,
             //Boolean isTempUserKey,
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 organizationID,
             //Int32 orgCustomerID,
             SqlDataReader rdr = null;
@@ -296,8 +334,21 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgApiKeyUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String apiKeyValue,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ApiKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                apiKeyValue = ApiKeyValueEncryptionServices.Encrypt(apiKeyValue);
+            }
             //String createdBy,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices CreatedByEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                createdBy = CreatedByEncryptionServices.Encrypt(createdBy);
+            }
             if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -309,6 +360,12 @@ namespace FS.Farm.Providers.EF7
             //Boolean isActive,
             //Boolean isTempUserKey,
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 organizationID,
             //Int32 orgCustomerID,
             EF.FarmDbContext dbContext = null;
@@ -365,8 +422,21 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgApiKeyUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String apiKeyValue,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices ApiKeyValueEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                apiKeyValue = ApiKeyValueEncryptionServices.Encrypt(apiKeyValue);
+            }
             //String createdBy,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices CreatedByEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                createdBy = CreatedByEncryptionServices.Encrypt(createdBy);
+            }
             if (System.Convert.ToDateTime(createdUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
             {
                  createdUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
@@ -378,6 +448,12 @@ namespace FS.Farm.Providers.EF7
             //Boolean isActive,
             //Boolean isTempUserKey,
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 organizationID,
             //Int32 orgCustomerID,
             //Define the parameters
@@ -985,6 +1061,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1010,6 +1087,37 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
+                    bool isEncrypted = false;
+                    //String apiKeyValue,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.ApiKeyValue = encryptionServices.Encrypt(orgApiKey.ApiKeyValue);
+                    }
+                    //String createdBy,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.CreatedBy = encryptionServices.Encrypt(orgApiKey.CreatedBy);
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.ExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.ExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Boolean isActive,
+                    //Boolean isTempUserKey,
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.Name = encryptionServices.Encrypt(orgApiKey.Name);
+                    }
+                    //Int32 organizationID,
+                    //Int32 orgCustomerID,
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkInsert(orgApiKeys);
@@ -1041,6 +1149,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1066,6 +1175,37 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
+                    bool isEncrypted = false;
+                    //String apiKeyValue,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.ApiKeyValue = encryptionServices.Encrypt(orgApiKey.ApiKeyValue);
+                    }
+                    //String createdBy,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.CreatedBy = encryptionServices.Encrypt(orgApiKey.CreatedBy);
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.ExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.ExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Boolean isActive,
+                    //Boolean isTempUserKey,
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.Name = encryptionServices.Encrypt(orgApiKey.Name);
+                    }
+                    //Int32 organizationID,
+                    //Int32 orgCustomerID,
                     orgApiKeys.Add(orgApiKey);
                 }
                 await orgApiKeyManager.BulkInsertAsync(orgApiKeys);
@@ -1097,6 +1237,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1105,8 +1246,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgApiKeyID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgApiKeyID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgApiKey item = dataList[i];
@@ -1123,6 +1263,37 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
                     orgApiKey.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String apiKeyValue,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.ApiKeyValue = encryptionServices.Encrypt(orgApiKey.ApiKeyValue);
+                    }
+                    //String createdBy,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.CreatedBy = encryptionServices.Encrypt(orgApiKey.CreatedBy);
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.ExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.ExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Boolean isActive,
+                    //Boolean isTempUserKey,
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.Name = encryptionServices.Encrypt(orgApiKey.Name);
+                    }
+                    //Int32 organizationID,
+                    //Int32 orgCustomerID,
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
@@ -1154,6 +1325,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1162,8 +1334,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgApiKeyID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgApiKeyID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgApiKey item = dataList[i];
@@ -1180,6 +1351,37 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
                     orgApiKey.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String apiKeyValue,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.ApiKeyValue = encryptionServices.Encrypt(orgApiKey.ApiKeyValue);
+                    }
+                    //String createdBy,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.CreatedBy = encryptionServices.Encrypt(orgApiKey.CreatedBy);
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.CreatedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.CreatedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    if (System.Convert.ToDateTime(orgApiKey.ExpirationUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
+                    {
+                        orgApiKey.ExpirationUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+                    }
+                    //Boolean isActive,
+                    //Boolean isTempUserKey,
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        orgApiKey.Name = encryptionServices.Encrypt(orgApiKey.Name);
+                    }
+                    //Int32 organizationID,
+                    //Int32 orgCustomerID,
                     orgApiKeys.Add(orgApiKey);
                 }
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
@@ -1217,8 +1419,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgApiKeyID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgApiKeyID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgApiKey item = dataList[i];
@@ -1272,8 +1473,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgApiKeyID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgApiKeyID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgApiKey item = dataList[i];

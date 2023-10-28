@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class ErrorLogConfiguration : IEntityTypeConfiguration<ErrorLog>
@@ -11,9 +12,16 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<ErrorLog> builder)
         {
             builder.ToTable(ToSnakeCase("ErrorLog"));
+            //Guid browserCode,
+            //Guid contextCode,
+            //CreatedUTCDateTime
+            //String description,
+            //Boolean isClientSideError,
+            //Boolean isResolved,
             builder.HasOne<Pac>() //PacID
                 .WithMany()
                 .HasForeignKey(p => p.PacID);
+            //String url,
             builder.HasIndex(p => p.Code)
                 .IsUnique();
             builder.Property(p => p.LastChangeCode)

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 namespace FS.Farm.EF.Configurations
 {
     public class LandConfiguration : IEntityTypeConfiguration<Land>
@@ -11,6 +12,11 @@ namespace FS.Farm.EF.Configurations
          public void Configure(EntityTypeBuilder<Land> builder)
         {
             builder.ToTable(ToSnakeCase("Land"));
+            //String description,
+            //Int32 displayOrder,
+            //Boolean isActive,
+            //String lookupEnumName,
+            //String name,
             builder.HasOne<Pac>() //PacID
                 .WithMany()
                 .HasForeignKey(p => p.PacID);

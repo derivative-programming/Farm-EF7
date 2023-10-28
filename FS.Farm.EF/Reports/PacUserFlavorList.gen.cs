@@ -100,13 +100,48 @@ namespace FS.Farm.EF.Reports
         }
         public class PacUserFlavorListDTO
         {
-            public Guid FlavorCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public String FlavorDescription = String.Empty;
-            public Int32 FlavorDisplayOrder = 0;
-            public Boolean FlavorIsActive = false;
-            public String FlavorLookupEnumName = String.Empty;
-            public String FlavorName = String.Empty;
-            public String PacName = String.Empty;
+            private Guid _flavorCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private String _flavorDescription = String.Empty;
+            private Int32 _flavorDisplayOrder = 0;
+            private Boolean _flavorIsActive = false;
+            private String _flavorLookupEnumName = String.Empty;
+            private String _flavorName = String.Empty;
+            private String _pacName = String.Empty;
+            public Guid FlavorCode
+            {
+                get { return _flavorCode; }
+                set { _flavorCode = value; }
+            }
+            public String FlavorDescription
+            {
+                get { return _flavorDescription; }
+                set { _flavorDescription = value; }
+            }
+            public Int32 FlavorDisplayOrder
+            {
+                get { return _flavorDisplayOrder; }
+                set { _flavorDisplayOrder = value; }
+            }
+            public Boolean FlavorIsActive
+            {
+                get { return _flavorIsActive; }
+                set { _flavorIsActive = value; }
+            }
+            public String FlavorLookupEnumName
+            {
+                get { return _flavorLookupEnumName; }
+                set { _flavorLookupEnumName = value; }
+            }
+            public String FlavorName
+            {
+                get { return _flavorName; }
+                set { _flavorName = value; }
+            }
+            public String PacName
+            {
+                get { return _pacName; }
+                set { _pacName = value; }
+            }
         }
     }
 }

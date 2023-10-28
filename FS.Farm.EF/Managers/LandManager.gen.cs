@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class LandManager
+	public partial class LandManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public LandManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.LandSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.LandSet.AsNoTracking().MaxAsync(x => (int?)x.LandID);
+        {
+            int? maxId = await _dbContext.LandSet.AsNoTracking().MaxAsync(x => (int?)x.LandID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.LandSet.AsNoTracking().Max(x => (int?)x.LandID);
+            int? maxId = _dbContext.LandSet.AsNoTracking().Max(x => (int?)x.LandID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<Land> GetByIdAsync(int id)
 		{

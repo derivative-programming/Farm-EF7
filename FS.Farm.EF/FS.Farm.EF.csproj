@@ -6,11 +6,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Managers\Plant.cs" />
+    <Compile Remove="Managers\PlantManager.include.QueryBy.cs" />
     <Compile Remove="Reports\LandPlantList.Query.cs" />
     <Compile Remove="Reports\PlantUserDetails.Query.gen.cs" />
     <Compile Remove="Reports\TacFarmDashboard.Query.gen.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Managers\PlantManager.include.QueryBy.cs" />
     <None Include="Reports\LandPlantList.Query.cs" />
   </ItemGroup>
   <ItemGroup>

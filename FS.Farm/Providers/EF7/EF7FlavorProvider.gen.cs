@@ -157,11 +157,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "FlavorInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -209,11 +228,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "FlavorInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             SqlDataReader rdr = null;
             //Define the parameters
@@ -263,11 +301,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "FlavorUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -317,11 +374,30 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "FlavorUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //String description,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices DescriptionEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                description = DescriptionEncryptionServices.Encrypt(description);
+            }
             //Int32 displayOrder,
             //Boolean isActive,
             //String lookupEnumName,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices LookupEnumNameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                lookupEnumName = LookupEnumNameEncryptionServices.Encrypt(lookupEnumName);
+            }
             //String name,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                name = NameEncryptionServices.Encrypt(name);
+            }
             //Int32 pacID,
             //Define the parameters
             EF.FarmDbContext dbContext = null;
@@ -919,6 +995,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -941,6 +1018,28 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Description = encryptionServices.Encrypt(flavor.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.LookupEnumName = encryptionServices.Encrypt(flavor.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Name = encryptionServices.Encrypt(flavor.Name);
+                    }
+                    //Int32 pacID,
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkInsert(flavors);
@@ -972,6 +1071,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -994,6 +1094,28 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Description = encryptionServices.Encrypt(flavor.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.LookupEnumName = encryptionServices.Encrypt(flavor.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Name = encryptionServices.Encrypt(flavor.Name);
+                    }
+                    //Int32 pacID,
                     flavors.Add(flavor);
                 }
                 await flavorManager.BulkInsertAsync(flavors);
@@ -1025,6 +1147,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -1033,8 +1156,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].FlavorID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].FlavorID == 0)
                         continue;
                     actionCount++;
                     Objects.Flavor item = dataList[i];
@@ -1048,6 +1170,28 @@ namespace FS.Farm.Providers.EF7
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
                     flavor.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Description = encryptionServices.Encrypt(flavor.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.LookupEnumName = encryptionServices.Encrypt(flavor.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Name = encryptionServices.Encrypt(flavor.Name);
+                    }
+                    //Int32 pacID,
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkUpdate(flavors);
@@ -1079,6 +1223,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1087,8 +1232,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].FlavorID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].FlavorID == 0)
                         continue;
                     actionCount++;
                     Objects.Flavor item = dataList[i];
@@ -1102,6 +1246,28 @@ namespace FS.Farm.Providers.EF7
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
                     flavor.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //String description,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Description = encryptionServices.Encrypt(flavor.Description);
+                    }
+                    //Int32 displayOrder,
+                    //Boolean isActive,
+                    //String lookupEnumName,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.LookupEnumName = encryptionServices.Encrypt(flavor.LookupEnumName);
+                    }
+                    //String name,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        flavor.Name = encryptionServices.Encrypt(flavor.Name);
+                    }
+                    //Int32 pacID,
                     flavors.Add(flavor);
                 }
                 flavorManager.BulkUpdate(flavors);
@@ -1139,8 +1305,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].FlavorID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].FlavorID == 0)
                         continue;
                     actionCount++;
                     Objects.Flavor item = dataList[i];
@@ -1191,8 +1356,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].FlavorID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].FlavorID == 0)
                         continue;
                     actionCount++;
                     Objects.Flavor item = dataList[i];

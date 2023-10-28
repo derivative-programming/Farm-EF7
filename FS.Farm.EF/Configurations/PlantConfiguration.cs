@@ -4,23 +4,45 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
+using NetTopologySuite.Operation.Overlay;
 
 namespace FS.Farm.EF.Configurations
 {
     public class PlantConfiguration : IEntityTypeConfiguration<Plant>
     {
          public void Configure(EntityTypeBuilder<Plant> builder)
-        {
+        { 
+
             builder.ToTable(ToSnakeCase("Plant"));
 
 
             builder.HasOne<Land>() //LandID
                 .WithMany()
-                .HasForeignKey(p => p.LandID);
-
+                .HasForeignKey(p => p.LandID); 
             builder.HasOne<Flavor>() //FlvrForeignKeyID
                 .WithMany()
                 .HasForeignKey(p => p.FlvrForeignKeyID);
+            //Boolean isDeleteAllowed,
+            //Boolean isEditAllowed, 
+            //String otherFlavor,
+            //Int64 someBigIntVal,
+            //Boolean someBitVal,  
+            builder.Property(p => p.SomeDecimalVal)
+              .HasColumnType("decimal(18,6)")
+              .HasPrecision(18, 6);
+            //String someEmailAddress,
+            //Double someFloatVal,
+            //Int32 someIntVal, 
+            builder.Property(p => p.SomeMoneyVal)
+              .HasColumnType("money");
+            //String someNVarCharVal,
+            //String somePhoneNumber,
+            //String someTextVal,
+            //Guid someUniqueidentifierVal, 
+            //SomeUTCDateTimeVal
+            //String someVarCharVal,
+            // someDateVal, 
+            //ENDSET
 
             builder.HasIndex(p => p.Code)
                 .IsUnique();
@@ -29,7 +51,6 @@ namespace FS.Farm.EF.Configurations
                 .IsConcurrencyToken()
                 .HasColumnName(ToSnakeCase(nameof(Plant.LastChangeCode)));
 
-            //ENDSET
 
             builder.Ignore(p => p.FlvrForeignKeyCodePeek); //FlvrForeignKeyID
             builder.Ignore(p => p.LandCodePeek); //LandID

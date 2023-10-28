@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class TacManager
+	public partial class TacManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public TacManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.TacSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.TacSet.AsNoTracking().MaxAsync(x => (int?)x.TacID);
+        {
+            int? maxId = await _dbContext.TacSet.AsNoTracking().MaxAsync(x => (int?)x.TacID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.TacSet.AsNoTracking().Max(x => (int?)x.TacID);
+            int? maxId = _dbContext.TacSet.AsNoTracking().Max(x => (int?)x.TacID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<Tac> GetByIdAsync(int id)
 		{

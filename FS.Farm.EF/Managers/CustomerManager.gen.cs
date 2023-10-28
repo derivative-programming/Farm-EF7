@@ -7,7 +7,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 namespace FS.Farm.EF.Managers
 {
-	public class CustomerManager
+	public partial class CustomerManager
 	{
 		private readonly FarmDbContext _dbContext;
 		public CustomerManager(FarmDbContext dbContext)
@@ -79,12 +79,28 @@ namespace FS.Farm.EF.Managers
             return _dbContext.CustomerSet.AsNoTracking().Count();
         }
         public async Task<int?> GetMaxIdAsync()
-		{
-			return await _dbContext.CustomerSet.AsNoTracking().MaxAsync(x => (int?)x.CustomerID);
+        {
+            int? maxId = await _dbContext.CustomerSet.AsNoTracking().MaxAsync(x => (int?)x.CustomerID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public int? GetMaxId()
         {
-            return _dbContext.CustomerSet.AsNoTracking().Max(x => (int?)x.CustomerID);
+            int? maxId = _dbContext.CustomerSet.AsNoTracking().Max(x => (int?)x.CustomerID);
+            if (maxId == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return maxId.Value;
+            }
         }
         public async Task<Customer> GetByIdAsync(int id)
 		{
@@ -798,6 +814,38 @@ namespace FS.Farm.EF.Managers
         {
             var customersWithCodes = BuildQuery()
                                     .Where(x => x.CustomerObj.TacID == id)
+                                    .ToList();
+            List<Customer> finalCustomers = ProcessMappings(customersWithCodes);
+            return finalCustomers;
+        }
+        public async Task<List<Customer>> GetByEmailAsync(String email)
+        {
+            var customersWithCodes = await BuildQuery()
+                                    .Where(x => x.CustomerObj.Email == email)
+                                    .ToListAsync();
+            List<Customer> finalCustomers = ProcessMappings(customersWithCodes);
+            return finalCustomers;
+        }
+        public List<Customer> GetByEmail(String email)
+        {
+            var customersWithCodes = BuildQuery()
+                                    .Where(x => x.CustomerObj.Email == email)
+                                    .ToList();
+            List<Customer> finalCustomers = ProcessMappings(customersWithCodes);
+            return finalCustomers;
+        }
+        public async Task<List<Customer>> GetByForgotPasswordKeyValueAsync(String forgotPasswordKeyValue)
+        {
+            var customersWithCodes = await BuildQuery()
+                                    .Where(x => x.CustomerObj.ForgotPasswordKeyValue == forgotPasswordKeyValue)
+                                    .ToListAsync();
+            List<Customer> finalCustomers = ProcessMappings(customersWithCodes);
+            return finalCustomers;
+        }
+        public List<Customer> GetByForgotPasswordKeyValue(String forgotPasswordKeyValue)
+        {
+            var customersWithCodes = BuildQuery()
+                                    .Where(x => x.CustomerObj.ForgotPasswordKeyValue == forgotPasswordKeyValue)
                                     .ToList();
             List<Customer> finalCustomers = ProcessMappings(customersWithCodes);
             return finalCustomers;

@@ -100,29 +100,144 @@ namespace FS.Farm.EF.Reports
         }
         public class PlantUserDetailsDTO
         {
-            public String FlavorName = String.Empty;
-            public Boolean IsDeleteAllowed = false;
-            public Boolean IsEditAllowed = false;
-            public String OtherFlavor = String.Empty;
-            public Int64 SomeBigIntVal = 0;
-            public Boolean SomeBitVal = false;
-            public DateTime SomeDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
-            public Decimal SomeDecimalVal = 0;
-            public String SomeEmailAddress = String.Empty;
-            public Double SomeFloatVal = 0;
-            public Int32 SomeIntVal = 0;
-            public Decimal SomeMoneyVal = 0;
-            public String SomeNVarCharVal = String.Empty;
-            public String SomePhoneNumber = String.Empty;
-            public String SomeTextVal = String.Empty;
-            public Guid SomeUniqueidentifierVal = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public DateTime SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
-            public String SomeVarCharVal = String.Empty;
-            public String PhoneNumConditionalOnIsEditable = String.Empty;
-            public String NVarCharAsUrl = String.Empty;
-            public Guid UpdateButtonTextLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public Guid RandomPropertyUpdatesLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public Guid BackToDashboardLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private String _flavorName = String.Empty;
+            private Boolean _isDeleteAllowed = false;
+            private Boolean _isEditAllowed = false;
+            private String _otherFlavor = String.Empty;
+            private Int64 _someBigIntVal = 0;
+            private Boolean _someBitVal = false;
+            private DateTime _someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            private Decimal _someDecimalVal = 0;
+            private String _someEmailAddress = String.Empty;
+            private Double _someFloatVal = 0;
+            private Int32 _someIntVal = 0;
+            private Decimal _someMoneyVal = 0;
+            private String _someNVarCharVal = String.Empty;
+            private String _somePhoneNumber = String.Empty;
+            private String _someTextVal = String.Empty;
+            private Guid _someUniqueidentifierVal = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private DateTime _someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            private String _someVarCharVal = String.Empty;
+            private String _phoneNumConditionalOnIsEditable = String.Empty;
+            private String _nVarCharAsUrl = String.Empty;
+            private Guid _updateButtonTextLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _randomPropertyUpdatesLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _backToDashboardLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            public String FlavorName
+            {
+                get { return _flavorName; }
+                set { _flavorName = value; }
+            }
+            public Boolean IsDeleteAllowed
+            {
+                get { return _isDeleteAllowed; }
+                set { _isDeleteAllowed = value; }
+            }
+            public Boolean IsEditAllowed
+            {
+                get { return _isEditAllowed; }
+                set { _isEditAllowed = value; }
+            }
+            public String OtherFlavor
+            {
+                get { return _otherFlavor; }
+                set { _otherFlavor = value; }
+            }
+            public Int64 SomeBigIntVal
+            {
+                get { return _someBigIntVal; }
+                set { _someBigIntVal = value; }
+            }
+            public Boolean SomeBitVal
+            {
+                get { return _someBitVal; }
+                set { _someBitVal = value; }
+            }
+            public DateTime SomeDateVal
+            {
+                get { return _someDateVal; }
+                set { _someDateVal = value; }
+            }
+            public Decimal SomeDecimalVal
+            {
+                get { return _someDecimalVal; }
+                set { _someDecimalVal = value; }
+            }
+            public String SomeEmailAddress
+            {
+                get { return _someEmailAddress; }
+                set { _someEmailAddress = value; }
+            }
+            public Double SomeFloatVal
+            {
+                get { return _someFloatVal; }
+                set { _someFloatVal = value; }
+            }
+            public Int32 SomeIntVal
+            {
+                get { return _someIntVal; }
+                set { _someIntVal = value; }
+            }
+            public Decimal SomeMoneyVal
+            {
+                get { return _someMoneyVal; }
+                set { _someMoneyVal = value; }
+            }
+            public String SomeNVarCharVal
+            {
+                get { return _someNVarCharVal; }
+                set { _someNVarCharVal = value; }
+            }
+            public String SomePhoneNumber
+            {
+                get { return _somePhoneNumber; }
+                set { _somePhoneNumber = value; }
+            }
+            public String SomeTextVal
+            {
+                get { return _someTextVal; }
+                set { _someTextVal = value; }
+            }
+            public Guid SomeUniqueidentifierVal
+            {
+                get { return _someUniqueidentifierVal; }
+                set { _someUniqueidentifierVal = value; }
+            }
+            public DateTime SomeUTCDateTimeVal
+            {
+                get { return _someUTCDateTimeVal; }
+                set { _someUTCDateTimeVal = value; }
+            }
+            public String SomeVarCharVal
+            {
+                get { return _someVarCharVal; }
+                set { _someVarCharVal = value; }
+            }
+            public String PhoneNumConditionalOnIsEditable
+            {
+                get { return _phoneNumConditionalOnIsEditable; }
+                set { _phoneNumConditionalOnIsEditable = value; }
+            }
+            public String NVarCharAsUrl
+            {
+                get { return _nVarCharAsUrl; }
+                set { _nVarCharAsUrl = value; }
+            }
+            public Guid UpdateButtonTextLinkPlantCode
+            {
+                get { return _updateButtonTextLinkPlantCode; }
+                set { _updateButtonTextLinkPlantCode = value; }
+            }
+            public Guid RandomPropertyUpdatesLinkPlantCode
+            {
+                get { return _randomPropertyUpdatesLinkPlantCode; }
+                set { _randomPropertyUpdatesLinkPlantCode = value; }
+            }
+            public Guid BackToDashboardLinkTacCode
+            {
+                get { return _backToDashboardLinkTacCode; }
+                set { _backToDashboardLinkTacCode = value; }
+            }
         }
     }
 }

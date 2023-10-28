@@ -100,13 +100,48 @@ namespace FS.Farm.EF.Reports
         }
         public class PacUserTacListDTO
         {
-            public Guid TacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            public String TacDescription = String.Empty;
-            public Int32 TacDisplayOrder = 0;
-            public Boolean TacIsActive = false;
-            public String TacLookupEnumName = String.Empty;
-            public String TacName = String.Empty;
-            public String PacName = String.Empty;
+            private Guid _tacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private String _tacDescription = String.Empty;
+            private Int32 _tacDisplayOrder = 0;
+            private Boolean _tacIsActive = false;
+            private String _tacLookupEnumName = String.Empty;
+            private String _tacName = String.Empty;
+            private String _pacName = String.Empty;
+            public Guid TacCode
+            {
+                get { return _tacCode; }
+                set { _tacCode = value; }
+            }
+            public String TacDescription
+            {
+                get { return _tacDescription; }
+                set { _tacDescription = value; }
+            }
+            public Int32 TacDisplayOrder
+            {
+                get { return _tacDisplayOrder; }
+                set { _tacDisplayOrder = value; }
+            }
+            public Boolean TacIsActive
+            {
+                get { return _tacIsActive; }
+                set { _tacIsActive = value; }
+            }
+            public String TacLookupEnumName
+            {
+                get { return _tacLookupEnumName; }
+                set { _tacLookupEnumName = value; }
+            }
+            public String TacName
+            {
+                get { return _tacName; }
+                set { _tacName = value; }
+            }
+            public String PacName
+            {
+                get { return _pacName; }
+                set { _pacName = value; }
+            }
         }
     }
 }

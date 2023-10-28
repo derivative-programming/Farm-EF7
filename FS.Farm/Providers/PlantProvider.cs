@@ -475,5 +475,7 @@ namespace FS.Farm.Providers
         public abstract Task<IDataReader> GetPlantList_FetchByFlvrForeignKeyIDAsync(
             int flvrForeignKeyID,
            SessionContext context);
+
+        //GENINCLUDEFILE[GENVALNameProvider.include.*]
     }
 }

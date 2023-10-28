@@ -154,6 +154,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgCustomerInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
@@ -197,6 +198,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgCustomerInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
@@ -242,6 +244,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgCustomerUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
@@ -287,6 +290,7 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "OrgCustomerUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+            bool isEncrypted = false;
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
@@ -877,6 +881,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -896,6 +901,10 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //String email,
+                    //Int32 organizationID,
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkInsert(orgCustomers);
@@ -927,6 +936,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -946,6 +956,10 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //String email,
+                    //Int32 organizationID,
                     orgCustomers.Add(orgCustomer);
                 }
                 await orgCustomerManager.BulkInsertAsync(orgCustomers);
@@ -977,6 +991,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = BuildDbContext(context);
@@ -985,8 +1000,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgCustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgCustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgCustomer item = dataList[i];
@@ -997,6 +1011,10 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
                     orgCustomer.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //String email,
+                    //Int32 organizationID,
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkUpdate(orgCustomers);
@@ -1028,6 +1046,7 @@ namespace FS.Farm.Providers.EF7
                 return bulkCount;
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
+            FS.Common.Encryption.EncryptionServices encryptionServices = new FS.Common.Encryption.EncryptionServices();
             try
             {
                 dbContext = await BuildDbContextAsync(context);
@@ -1036,8 +1055,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgCustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgCustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgCustomer item = dataList[i];
@@ -1048,6 +1066,10 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
                     orgCustomer.LastChangeCode = item.LastChangeCode;
+                    bool isEncrypted = false;
+                    //Int32 customerID,
+                    //String email,
+                    //Int32 organizationID,
                     orgCustomers.Add(orgCustomer);
                 }
                 orgCustomerManager.BulkUpdate(orgCustomers);
@@ -1085,8 +1107,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgCustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgCustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgCustomer item = dataList[i];
@@ -1134,8 +1155,7 @@ namespace FS.Farm.Providers.EF7
                 int actionCount = 0;
                 for (int i = 0; i < dataList.Count; i++)
                 {
-                    if (dataList[i].OrgCustomerID > 0 ||
-                        dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if (dataList[i].OrgCustomerID == 0)
                         continue;
                     actionCount++;
                     Objects.OrgCustomer item = dataList[i];
