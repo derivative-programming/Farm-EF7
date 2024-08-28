@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 namespace FS.Farm.EF.Reports
 {
     public partial class PacUserTacList
@@ -22,27 +23,39 @@ namespace FS.Farm.EF.Reports
         {
             _dbContext = dbContext;
         }
+
         public async Task<int> GetCountAsync(
+
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             return await query.CountAsync();
         }
+
         public int GetCount(
+
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             return query.Count();
         }
+
         public async Task<List<PacUserTacListDTO>> GetAsync(
+
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -50,10 +63,14 @@ namespace FS.Farm.EF.Reports
             string orderByColumnName,
             bool orderByDescending)
         {
+
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             if (!string.IsNullOrEmpty(orderByColumnName))
             {
                 if (orderByDescending)
@@ -65,12 +82,17 @@ namespace FS.Farm.EF.Reports
                     query = query.OrderBy(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
                 }
             }
+
             // Applying pagination
             query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
+
             var reports = await query.Select(x => MapPacUserTacListDTO(x)).ToListAsync();
+
             return reports;
         }
+
         public List<PacUserTacListDTO> Get(
+
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -78,10 +100,14 @@ namespace FS.Farm.EF.Reports
             string orderByColumnName,
             bool orderByDescending)
         {
+
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             if (!string.IsNullOrEmpty(orderByColumnName))
             {
                 if (orderByDescending)
@@ -93,11 +119,15 @@ namespace FS.Farm.EF.Reports
                     query = query.OrderBy(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
                 }
             }
+
             // Applying pagination
             query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
+
             var reports = query.Select(x => MapPacUserTacListDTO(x)).ToList();
+
             return reports;
         }
+
         public class PacUserTacListDTO
         {
             private Guid _tacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
@@ -142,6 +172,8 @@ namespace FS.Farm.EF.Reports
                 get { return _pacName; }
                 set { _pacName = value; }
             }
+
         }
     }
 }
+

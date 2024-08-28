@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7PlantProvider : FS.Farm.Providers.PlantProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 iOut = plantManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 iOut = await plantManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 iOut = plantManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 var maxId = await plantManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -165,11 +176,12 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "PlantInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
@@ -214,7 +226,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -222,7 +234,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.Code = code;
                 plant.LastChangeCode = Guid.NewGuid();
@@ -245,7 +259,9 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+
                 plant = plantManager.Add(plant);
+
                 iOut = plant.PlantID;
             }
             catch (Exception x)
@@ -281,11 +297,12 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "PlantInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
@@ -330,7 +347,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -338,7 +355,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.Code = code;
                 plant.LastChangeCode = Guid.NewGuid();
@@ -361,7 +380,9 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+
                 plant = await plantManager.AddAsync(plant);
+
                 iOut = plant.PlantID;
             }
             catch (Exception x)
@@ -398,12 +419,13 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "PlantUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
@@ -448,12 +470,14 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
             }
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.PlantID = plantID;
                 plant.Code = code;
@@ -476,12 +500,14 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-                plant.LastChangeCode = lastChangeCode;
+                                plant.LastChangeCode = lastChangeCode;
+
                 bool success = plantManager.Update(plant);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -516,12 +542,13 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "PlantUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
@@ -566,13 +593,15 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
             }
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 EF.Models.Plant plant = new EF.Models.Plant();
                 plant.PlantID = plantID;
                 plant.Code = code;
@@ -595,12 +624,14 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-                plant.LastChangeCode = lastChangeCode;
+                                plant.LastChangeCode = lastChangeCode;
+
                 bool success = await plantManager.UpdateAsync(plant);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -635,7 +666,7 @@ namespace FS.Farm.Providers.EF7
             bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
             bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
             bool searchBySomeVarCharVal, String someVarCharVal,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlants";
             Log(procedureName + "::Start");
@@ -645,7 +676,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -684,7 +717,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
                     bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
                     bool searchBySomeVarCharVal, String someVarCharVal,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlantsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -694,8 +727,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -722,7 +758,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 rdr = BuildDataReader(plantManager.GetAll());
             }
             catch (Exception x)
@@ -745,11 +783,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetPlantListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 rdr = BuildDataReader(await plantManager.GetAllAsync());
             }
             catch (Exception x)
@@ -791,9 +833,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 var plant = plantManager.GetById(plantID);
+
                 result = plant.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -835,9 +881,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 var plant = await plantManager.GetByIdAsync(plantID);
+
                 result = plant.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -867,11 +917,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = plantManager.GetById(plantID);
+
                 if(plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -901,11 +956,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = await plantManager.GetByIdAsync(plantID);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -935,11 +995,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = plantManager.DirtyGetById(plantID);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -969,11 +1034,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = await plantManager.DirtyGetByIdAsync(plantID);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -1003,11 +1073,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = plantManager.GetByCode(code);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -1037,11 +1112,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = await plantManager.GetByCodeAsync(code);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -1071,11 +1151,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = plantManager.DirtyGetByCode(code);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
             }
             catch (Exception x)
@@ -1105,12 +1190,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 var plant = await plantManager.DirtyGetByCodeAsync(code);
+
                 if (plant != null)
                     plants.Add(plant);
+
                 rdr = BuildDataReader(plants);
+
             }
             catch (Exception x)
             {
@@ -1139,8 +1230,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 var plant = plantManager.GetByCode(code);
+
                 result = plant.PlantID;
             }
             catch (Exception x)
@@ -1171,8 +1265,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 var plant = await plantManager.GetByCodeAsync(code);
+
                 result = plant.PlantID;
             }
             catch (Exception x)
@@ -1205,16 +1302,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Plant item = dataList[i];
+
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
                     plant.LastChangeCode = Guid.NewGuid();
@@ -1237,6 +1341,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
@@ -1278,9 +1383,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
                     }
-                    plants.Add(plant);
+                                        plants.Add(plant);
                 }
+
                 plantManager.BulkInsert(plants);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1313,16 +1420,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Plant item = dataList[i];
+
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.Code = item.Code;
                     plant.LastChangeCode = Guid.NewGuid();
@@ -1345,6 +1459,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
@@ -1386,8 +1501,9 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
                     }
-                    plants.Add(plant);
+                                        plants.Add(plant);
                 }
+
                 await plantManager.BulkInsertAsync(plants);
                 bulkCount = actionCount;
             }
@@ -1421,15 +1537,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Plant item = dataList[i];
+
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
                     plant.Code = item.Code;
@@ -1452,7 +1575,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                    plant.LastChangeCode = item.LastChangeCode;
+                                        plant.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
@@ -1494,9 +1618,12 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
                     }
+
                     plants.Add(plant);
                 }
+
                 plantManager.BulkUpdate(plants);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1529,15 +1656,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Plant item = dataList[i];
+
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
                     plant.Code = item.Code;
@@ -1560,7 +1694,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                    plant.LastChangeCode = item.LastChangeCode;
+                                        plant.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
@@ -1602,9 +1737,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
                     }
-                    plants.Add(plant);
+                                        plants.Add(plant);
                 }
+
                 plantManager.BulkUpdate(plants);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1629,20 +1766,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Plant item = dataList[i];
+
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
                     plant.Code = item.Code;
@@ -1665,10 +1810,12 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                    plant.LastChangeCode = item.LastChangeCode;
+                                        plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
+
                 plantManager.BulkDelete(plants);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1693,20 +1840,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 List<EF.Models.Plant> plants = new List<EF.Models.Plant>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PlantID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Plant item = dataList[i];
+
                     EF.Models.Plant plant = new EF.Models.Plant();
                     plant.PlantID = item.PlantID;
                     plant.Code = item.Code;
@@ -1729,10 +1884,12 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                    plant.LastChangeCode = item.LastChangeCode;
+                                        plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
+
                 await plantManager.BulkDeleteAsync(plants);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1761,8 +1918,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 plantManager.Delete(plantID);
+
             }
             catch (Exception x)
             {
@@ -1787,8 +1947,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 await plantManager.DeleteAsync(plantID);
+
             }
             catch (Exception x)
             {
@@ -1811,7 +1974,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1834,7 +1999,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1878,8 +2045,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 rdr = BuildDataReader(plantManager.GetByFlvrForeignKeyID(flvrForeignKeyID));
+
             }
             catch (Exception x)
             {
@@ -1907,8 +2077,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 rdr = BuildDataReader(plantManager.GetByLandID(landID));
+
             }
             catch (Exception x)
             {
@@ -1936,8 +2109,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 rdr = BuildDataReader(await plantManager.GetByFlvrForeignKeyIDAsync(flvrForeignKeyID));
+
             }
             catch (Exception x)
             {
@@ -1965,8 +2141,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var plantManager = new EF.Managers.PlantManager(dbContext);
+
                 rdr = BuildDataReader(await plantManager.GetByLandIDAsync(landID));
+
             }
             catch (Exception x)
             {
@@ -1982,6 +2161,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1991,6 +2171,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1999,6 +2180,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -2006,8 +2188,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -2017,6 +2201,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -2025,6 +2210,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -2032,21 +2218,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.Plant> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.Plant).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -2057,7 +2248,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }

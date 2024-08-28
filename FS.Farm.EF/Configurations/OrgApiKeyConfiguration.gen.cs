@@ -5,12 +5,14 @@ using System.Reflection.Emit;
 using System;
 using System.Text.RegularExpressions;
 using NetTopologySuite.Operation.Overlay;
+
 namespace FS.Farm.EF.Configurations
 {
     public partial class OrgApiKeyConfiguration : IEntityTypeConfiguration<OrgApiKey>
     {
          public void Configure(EntityTypeBuilder<OrgApiKey> builder)
         {
+
             builder.ToTable(ToSnakeCase("OrgApiKey"));
             //String apiKeyValue,
             //String createdBy,
@@ -25,6 +27,7 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<OrgCustomer>() //OrgCustomerID
                 .WithMany()
                 .HasForeignKey(p => p.OrgCustomerID);
+
             bool isDBColumnIndexed = false;
             //String apiKeyValue,
             isDBColumnIndexed = false;
@@ -80,24 +83,30 @@ namespace FS.Farm.EF.Configurations
             {
                 builder.HasIndex(p => p.OrgCustomerID);
             }
+
             builder.HasIndex(p => p.Code)
                 .IsUnique();
+
             builder.Property(p => p.LastChangeCode)
                 .IsConcurrencyToken()
                 .HasColumnName(ToSnakeCase(nameof(OrgApiKey.LastChangeCode)));
             builder.Ignore(p => p.OrganizationCodePeek); //OrganizationID
             builder.Ignore(p => p.OrgCustomerCodePeek); //OrgCustomerID
+
             builder.Property<DateTime>("insert_utc_date_time");
             builder.Property<DateTime>("last_updated_utc_date_time");
+
             // Loop through all the properties to set snake_case column names
             foreach (var property in builder.Metadata.GetProperties())
             {
                 builder.Property(property.Name).HasColumnName(ToSnakeCase(property.Name));
             }
         }
+
         private string ToSnakeCase(string input)
         {
             if (string.IsNullOrEmpty(input)) { return input; }
+
             var startUnderscores = Regex.Match(input, @"^_+");
             return startUnderscores + Regex.Replace(input, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
         }

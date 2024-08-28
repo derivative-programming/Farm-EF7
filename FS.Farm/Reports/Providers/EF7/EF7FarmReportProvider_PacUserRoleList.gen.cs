@@ -10,12 +10,14 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Reports;
 using System.Collections.Generic;
+
 namespace FS.Farm.Reports.Providers.EF7
 {
     partial class EF7FarmReportProvider : FS.Farm.Reports.Providers.FarmReportProvider
     {
         public async override Task<IDataReader> GeneratePacUserRoleListReportAsync(
             SessionContext context,
+
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -33,20 +35,25 @@ namespace FS.Farm.Reports.Providers.EF7
                 orderByDescending = false;
             }
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
             //Define the parameters
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacUserRoleList = new EF.Reports.PacUserRoleList(dbContext);
+
                 List<EF.Reports.PacUserRoleList.PacUserRoleListDTO> pacUserRoleListDTOs =
                     await pacUserRoleList.GetAsync(
+
                             userID,
                             contextCode,
                             pageNumber,
                             itemCountPerPage,
                             orderByColumnName,
                             orderByDescending);
+
                 rdr = BuildDataReader(pacUserRoleListDTOs);
             }
             catch (Exception x)
@@ -61,8 +68,10 @@ namespace FS.Farm.Reports.Providers.EF7
             await LogAsync(context,procedureName + "::End");
             return rdr;
         }
+
         public override IDataReader GeneratePacUserRoleListReport(
             SessionContext context,
+
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -80,20 +89,24 @@ namespace FS.Farm.Reports.Providers.EF7
                 orderByDescending = false;
             }
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
             //Define the parameters
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacUserRoleList = new EF.Reports.PacUserRoleList(dbContext);
                 List<EF.Reports.PacUserRoleList.PacUserRoleListDTO> pacUserRoleListDTOs =
                     pacUserRoleList.Get(
+
                             userID,
                             contextCode,
                             pageNumber,
                             itemCountPerPage,
                             orderByColumnName,
                             orderByDescending);
+
                 rdr = BuildDataReader(pacUserRoleListDTOs);
             }
             catch (Exception x)
@@ -108,8 +121,10 @@ namespace FS.Farm.Reports.Providers.EF7
             Log(procedureName + "::End");
             return rdr;
         }
+
         public async override Task<int> GetPacUserRoleListReportItemCountAsync(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage)
@@ -117,13 +132,17 @@ namespace FS.Farm.Reports.Providers.EF7
             string procedureName = "GetPacUserRoleListReportItemCountAsync";
             await LogAsync(context,procedureName + "::Start");
             IDataReader rdr = null;
+
             int iOut = 0;
+
             EF.FarmDbContext dbContext = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacUserRoleList = new EF.Reports.PacUserRoleList(dbContext);
                 iOut = await pacUserRoleList.GetCountAsync(
+
                             userID,
                             contextCode);
             }
@@ -139,8 +158,10 @@ namespace FS.Farm.Reports.Providers.EF7
             await LogAsync(context,procedureName + "::End");
             return iOut;
         }
+
         public override int GetPacUserRoleListReportItemCount(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage,
@@ -149,13 +170,18 @@ namespace FS.Farm.Reports.Providers.EF7
             string procedureName = "GetPacUserRoleListReportItemCountAsync";
             Log(procedureName + "::Start");
             SqlDataReader rdr = null;
+
             int iOut = 0;
+
             EF.FarmDbContext dbContext = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacUserRoleList = new EF.Reports.PacUserRoleList(dbContext);
+
                 iOut = pacUserRoleList.GetCount(
+
                             userID,
                             contextCode);
             }
@@ -173,6 +199,7 @@ namespace FS.Farm.Reports.Providers.EF7
         }
         public async override Task<IDataReader> GetPacUserRoleListReportSummaryAsync(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode)
         {
@@ -183,8 +210,10 @@ namespace FS.Farm.Reports.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         public override IDataReader GetPacUserRoleListReportSummary(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode)
         {
@@ -195,19 +224,24 @@ namespace FS.Farm.Reports.Providers.EF7
             Log(procedureName + "::End");
             return rdr;
         }
+
         private IDataReader BuildDataReader(List<EF.Reports.PacUserRoleList.PacUserRoleListDTO> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Reports.PacUserRoleList.PacUserRoleListDTO).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -218,7 +252,9 @@ namespace FS.Farm.Reports.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
     }
 }

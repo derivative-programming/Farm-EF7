@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using FS.Farm.EF;
 using FS.Farm.EF.Managers;
 using FS.Farm.EF.Models;
+
 namespace FS.Farm.EF.Test.Factory
 {
     public static class CustomerFactory
     {
         private static int _counter = 0;
+
         public static async Task<Customer> CreateAsync(FarmDbContext context)
         {
             _counter++;
             var tac = await TacFactory.CreateAndSaveAsync(context); //TacID
+
             return new Customer
             {
                 CustomerID = _counter,
@@ -42,12 +45,14 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-            };
+                            };
         }
+
         public static Customer Create(FarmDbContext context)
         {
             _counter++;
             var tac = TacFactory.CreateAndSave(context); //TacID
+
             return new Customer
             {
                 CustomerID = _counter,
@@ -75,12 +80,13 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-            };
+                            };
         }
         public static async Task<Customer> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var tac = await TacFactory.CreateAndSaveAsync(context); //TacID
+
             Customer result =  new Customer
             {
                 CustomerID = _counter,
@@ -108,15 +114,18 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-            };
+                            };
+
             CustomerManager customerManager = new CustomerManager(context);
             result = await customerManager.AddAsync(result);
             return result;
         }
+
         public static Customer CreateAndSave(FarmDbContext context)
         {
             _counter++;
             var tac =   TacFactory.CreateAndSave(context); //TacID
+
             Customer result = new Customer
             {
                 CustomerID = _counter,
@@ -144,10 +153,12 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-            };
+                            };
+
             CustomerManager customerManager = new CustomerManager(context);
             result = customerManager.Add(result);
             return result;
         }
+
     }
 }

@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7OrgApiKeyProvider : FS.Farm.Providers.OrgApiKeyProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 iOut = orgApiKeyManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 iOut = await orgApiKeyManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 iOut = orgApiKeyManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 var maxId = await orgApiKeyManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -155,11 +166,12 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "OrgApiKeyInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String apiKeyValue,
             isEncrypted = false;
@@ -194,7 +206,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -202,7 +214,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                 orgApiKey.Code = code;
                 orgApiKey.LastChangeCode = Guid.NewGuid();
@@ -215,7 +229,9 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
+
                 orgApiKey = orgApiKeyManager.Add(orgApiKey);
+
                 iOut = orgApiKey.OrgApiKeyID;
             }
             catch (Exception x)
@@ -241,11 +257,12 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "OrgApiKeyInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String apiKeyValue,
             isEncrypted = false;
@@ -280,7 +297,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -288,7 +305,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                 orgApiKey.Code = code;
                 orgApiKey.LastChangeCode = Guid.NewGuid();
@@ -301,7 +320,9 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
+
                 orgApiKey = await orgApiKeyManager.AddAsync(orgApiKey);
+
                 iOut = orgApiKey.OrgApiKeyID;
             }
             catch (Exception x)
@@ -328,12 +349,13 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "OrgApiKeyUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String apiKeyValue,
             isEncrypted = false;
@@ -368,12 +390,14 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                 orgApiKey.OrgApiKeyID = orgApiKeyID;
                 orgApiKey.Code = code;
@@ -386,12 +410,14 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
-                orgApiKey.LastChangeCode = lastChangeCode;
+                                orgApiKey.LastChangeCode = lastChangeCode;
+
                 bool success = orgApiKeyManager.Update(orgApiKey);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -416,12 +442,13 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "OrgApiKeyUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String apiKeyValue,
             isEncrypted = false;
@@ -456,13 +483,15 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                 orgApiKey.OrgApiKeyID = orgApiKeyID;
                 orgApiKey.Code = code;
@@ -475,12 +504,14 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
-                orgApiKey.LastChangeCode = lastChangeCode;
+                                orgApiKey.LastChangeCode = lastChangeCode;
+
                 bool success = await orgApiKeyManager.UpdateAsync(orgApiKey);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -505,7 +536,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByName, String name,
             bool searchByOrganizationID, Int32 organizationID,
             bool searchByOrgCustomerID, Int32 orgCustomerID,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrgApiKeys";
             Log(procedureName + "::Start");
@@ -515,7 +546,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -544,7 +577,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByName, String name,
                     bool searchByOrganizationID, Int32 organizationID,
                     bool searchByOrgCustomerID, Int32 orgCustomerID,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrgApiKeysAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -554,8 +587,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -582,7 +618,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 rdr = BuildDataReader(orgApiKeyManager.GetAll());
             }
             catch (Exception x)
@@ -605,11 +643,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetOrgApiKeyListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 rdr = BuildDataReader(await orgApiKeyManager.GetAllAsync());
             }
             catch (Exception x)
@@ -651,9 +693,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 var orgApiKey = orgApiKeyManager.GetById(orgApiKeyID);
+
                 result = orgApiKey.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -695,9 +741,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 var orgApiKey = await orgApiKeyManager.GetByIdAsync(orgApiKeyID);
+
                 result = orgApiKey.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -727,11 +777,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = orgApiKeyManager.GetById(orgApiKeyID);
+
                 if(orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -761,11 +816,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = await orgApiKeyManager.GetByIdAsync(orgApiKeyID);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -795,11 +855,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = orgApiKeyManager.DirtyGetById(orgApiKeyID);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -829,11 +894,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = await orgApiKeyManager.DirtyGetByIdAsync(orgApiKeyID);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -863,11 +933,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = orgApiKeyManager.GetByCode(code);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -897,11 +972,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = await orgApiKeyManager.GetByCodeAsync(code);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -931,11 +1011,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = orgApiKeyManager.DirtyGetByCode(code);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
             }
             catch (Exception x)
@@ -965,12 +1050,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 var orgApiKey = await orgApiKeyManager.DirtyGetByCodeAsync(code);
+
                 if (orgApiKey != null)
                     orgApiKeys.Add(orgApiKey);
+
                 rdr = BuildDataReader(orgApiKeys);
+
             }
             catch (Exception x)
             {
@@ -999,8 +1090,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 var orgApiKey = orgApiKeyManager.GetByCode(code);
+
                 result = orgApiKey.OrgApiKeyID;
             }
             catch (Exception x)
@@ -1031,8 +1125,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 var orgApiKey = await orgApiKeyManager.GetByCodeAsync(code);
+
                 result = orgApiKey.OrgApiKeyID;
             }
             catch (Exception x)
@@ -1065,16 +1162,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.OrgApiKey item = dataList[i];
+
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.Code = item.Code;
                     orgApiKey.LastChangeCode = Guid.NewGuid();
@@ -1087,6 +1191,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
+
                     bool isEncrypted = false;
                     //String apiKeyValue,
                     isEncrypted = false;
@@ -1118,9 +1223,11 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
-                    orgApiKeys.Add(orgApiKey);
+                                        orgApiKeys.Add(orgApiKey);
                 }
+
                 orgApiKeyManager.BulkInsert(orgApiKeys);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1153,16 +1260,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.OrgApiKey item = dataList[i];
+
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.Code = item.Code;
                     orgApiKey.LastChangeCode = Guid.NewGuid();
@@ -1175,6 +1289,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
+
                     bool isEncrypted = false;
                     //String apiKeyValue,
                     isEncrypted = false;
@@ -1206,8 +1321,9 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
-                    orgApiKeys.Add(orgApiKey);
+                                        orgApiKeys.Add(orgApiKey);
                 }
+
                 await orgApiKeyManager.BulkInsertAsync(orgApiKeys);
                 bulkCount = actionCount;
             }
@@ -1241,15 +1357,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.OrgApiKey item = dataList[i];
+
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
                     orgApiKey.Code = item.Code;
@@ -1262,7 +1385,8 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                    orgApiKey.LastChangeCode = item.LastChangeCode;
+                                        orgApiKey.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //String apiKeyValue,
                     isEncrypted = false;
@@ -1294,9 +1418,12 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
+
                     orgApiKeys.Add(orgApiKey);
                 }
+
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1329,15 +1456,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.OrgApiKey item = dataList[i];
+
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
                     orgApiKey.Code = item.Code;
@@ -1350,7 +1484,8 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                    orgApiKey.LastChangeCode = item.LastChangeCode;
+                                        orgApiKey.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //String apiKeyValue,
                     isEncrypted = false;
@@ -1382,9 +1517,11 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
-                    orgApiKeys.Add(orgApiKey);
+                                        orgApiKeys.Add(orgApiKey);
                 }
+
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1409,20 +1546,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.OrgApiKey item = dataList[i];
+
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
                     orgApiKey.Code = item.Code;
@@ -1435,10 +1580,12 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                    orgApiKey.LastChangeCode = item.LastChangeCode;
+                                        orgApiKey.LastChangeCode = item.LastChangeCode;
                     orgApiKeys.Add(orgApiKey);
                 }
+
                 orgApiKeyManager.BulkDelete(orgApiKeys);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1463,20 +1610,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 List<EF.Models.OrgApiKey> orgApiKeys = new List<EF.Models.OrgApiKey>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].OrgApiKeyID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.OrgApiKey item = dataList[i];
+
                     EF.Models.OrgApiKey orgApiKey = new EF.Models.OrgApiKey();
                     orgApiKey.OrgApiKeyID = item.OrgApiKeyID;
                     orgApiKey.Code = item.Code;
@@ -1489,10 +1644,12 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                    orgApiKey.LastChangeCode = item.LastChangeCode;
+                                        orgApiKey.LastChangeCode = item.LastChangeCode;
                     orgApiKeys.Add(orgApiKey);
                 }
+
                 await orgApiKeyManager.BulkDeleteAsync(orgApiKeys);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1521,8 +1678,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 orgApiKeyManager.Delete(orgApiKeyID);
+
             }
             catch (Exception x)
             {
@@ -1547,8 +1707,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 await orgApiKeyManager.DeleteAsync(orgApiKeyID);
+
             }
             catch (Exception x)
             {
@@ -1571,7 +1734,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1594,7 +1759,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1638,8 +1805,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 rdr = BuildDataReader(orgApiKeyManager.GetByOrganizationID(organizationID));
+
             }
             catch (Exception x)
             {
@@ -1667,8 +1837,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 rdr = BuildDataReader(orgApiKeyManager.GetByOrgCustomerID(orgCustomerID));
+
             }
             catch (Exception x)
             {
@@ -1696,8 +1869,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 rdr = BuildDataReader(await orgApiKeyManager.GetByOrganizationIDAsync(organizationID));
+
             }
             catch (Exception x)
             {
@@ -1725,8 +1901,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var orgApiKeyManager = new EF.Managers.OrgApiKeyManager(dbContext);
+
                 rdr = BuildDataReader(await orgApiKeyManager.GetByOrgCustomerIDAsync(orgCustomerID));
+
             }
             catch (Exception x)
             {
@@ -1742,6 +1921,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1751,6 +1931,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1759,6 +1940,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -1766,8 +1948,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1777,6 +1961,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1785,6 +1970,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -1792,21 +1978,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.OrgApiKey> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.OrgApiKey).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -1817,7 +2008,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }

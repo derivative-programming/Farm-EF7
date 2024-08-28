@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 namespace FS.Farm.EF.Reports
 {
     public partial class PlantUserDetails
@@ -22,27 +23,39 @@ namespace FS.Farm.EF.Reports
         {
             _dbContext = dbContext;
         }
+
         public async Task<int> GetCountAsync(
+
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             return await query.CountAsync();
         }
+
         public int GetCount(
+
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             return query.Count();
         }
+
         public async Task<List<PlantUserDetailsDTO>> GetAsync(
+
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -50,10 +63,14 @@ namespace FS.Farm.EF.Reports
             string orderByColumnName,
             bool orderByDescending)
         {
+
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             if (!string.IsNullOrEmpty(orderByColumnName))
             {
                 if (orderByDescending)
@@ -65,12 +82,17 @@ namespace FS.Farm.EF.Reports
                     query = query.OrderBy(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
                 }
             }
+
             // Applying pagination
             query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
+
             var reports = await query.Select(x => MapPlantUserDetailsDTO(x)).ToListAsync();
+
             return reports;
         }
+
         public List<PlantUserDetailsDTO> Get(
+
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -78,10 +100,14 @@ namespace FS.Farm.EF.Reports
             string orderByColumnName,
             bool orderByDescending)
         {
+
             var query = BuildQuery();
+
             query = ApplyFilters(query,
+
                 userID,
                 contextCode);
+
             if (!string.IsNullOrEmpty(orderByColumnName))
             {
                 if (orderByDescending)
@@ -93,11 +119,15 @@ namespace FS.Farm.EF.Reports
                     query = query.OrderBy(p => Microsoft.EntityFrameworkCore.EF.Property<object>(p, orderByColumnName));
                 }
             }
+
             // Applying pagination
             query = query.Skip((pageNumber - 1) * itemCountPerPage).Take(itemCountPerPage);
+
             var reports = query.Select(x => MapPlantUserDetailsDTO(x)).ToList();
+
             return reports;
         }
+
         public class PlantUserDetailsDTO
         {
             private String _flavorName = String.Empty;
@@ -123,6 +153,11 @@ namespace FS.Farm.EF.Reports
             private Guid _updateButtonTextLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _randomPropertyUpdatesLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _backToDashboardLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testFileDownloadLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testConditionalAsyncFileDownloadLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testConditionalAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _conditionalBtnExampleLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             public String FlavorName
             {
                 get { return _flavorName; }
@@ -238,6 +273,33 @@ namespace FS.Farm.EF.Reports
                 get { return _backToDashboardLinkTacCode; }
                 set { _backToDashboardLinkTacCode = value; }
             }
+            public Guid TestFileDownloadLinkPacCode
+            {
+                get { return _testFileDownloadLinkPacCode; }
+                set { _testFileDownloadLinkPacCode = value; }
+            }
+            public Guid TestConditionalAsyncFileDownloadLinkPacCode
+            {
+                get { return _testConditionalAsyncFileDownloadLinkPacCode; }
+                set { _testConditionalAsyncFileDownloadLinkPacCode = value; }
+            }
+            public Guid TestAsyncFlowReqLinkPacCode
+            {
+                get { return _testAsyncFlowReqLinkPacCode; }
+                set { _testAsyncFlowReqLinkPacCode = value; }
+            }
+            public Guid TestConditionalAsyncFlowReqLinkPacCode
+            {
+                get { return _testConditionalAsyncFlowReqLinkPacCode; }
+                set { _testConditionalAsyncFlowReqLinkPacCode = value; }
+            }
+            public Guid ConditionalBtnExampleLinkTacCode
+            {
+                get { return _conditionalBtnExampleLinkTacCode; }
+                set { _conditionalBtnExampleLinkTacCode = value; }
+            }
+
         }
     }
 }
+

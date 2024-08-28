@@ -379,5 +379,6 @@ namespace FS.Farm.Providers
             List<FS.Farm.Objects.Pac> dataList);
         public abstract bool SupportsTransactions();
         #endregion
+
     }
 }

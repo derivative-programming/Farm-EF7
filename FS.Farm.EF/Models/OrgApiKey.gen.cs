@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace FS.Farm.EF.Models
 {
     public class OrgApiKey
@@ -9,7 +10,9 @@ namespace FS.Farm.EF.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrgApiKeyID { get; set; }
+
         public Guid? Code { get; set; }
+
         public Guid? LastChangeCode { get; set; }
         public string ApiKeyValue { get; set; }
         public string CreatedBy { get; set; }
@@ -21,8 +24,8 @@ namespace FS.Farm.EF.Models
         public int? OrganizationID { get; set; }
         public int? OrgCustomerID { get; set; }
         public Guid OrganizationCodePeek { get; set; }//OrganizationID // not mapped
-        public Guid OrgCustomerCodePeek { get; set; }//OrgCustomerID // not mapped
-        //public Organization Organization { get; set; }  //OrganizationID
+                public Guid OrgCustomerCodePeek { get; set; }//OrgCustomerID // not mapped
+                //public Organization Organization { get; set; }  //OrganizationID
         //public OrgCustomer OrgCustomer { get; set; } //OrgCustomerID
     }
 }

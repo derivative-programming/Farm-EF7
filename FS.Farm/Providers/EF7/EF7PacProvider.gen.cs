@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7PacProvider : FS.Farm.Providers.PacProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 iOut = pacManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 iOut = await pacManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 iOut = pacManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 var maxId = await pacManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -151,11 +162,12 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "PacInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -180,7 +192,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -188,7 +200,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 EF.Models.Pac pac = new EF.Models.Pac();
                 pac.Code = code;
                 pac.LastChangeCode = Guid.NewGuid();
@@ -197,7 +211,9 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
+
                 pac = pacManager.Add(pac);
+
                 iOut = pac.PacID;
             }
             catch (Exception x)
@@ -219,11 +235,12 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "PacInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -248,7 +265,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -256,7 +273,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 EF.Models.Pac pac = new EF.Models.Pac();
                 pac.Code = code;
                 pac.LastChangeCode = Guid.NewGuid();
@@ -265,7 +284,9 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
+
                 pac = await pacManager.AddAsync(pac);
+
                 iOut = pac.PacID;
             }
             catch (Exception x)
@@ -288,12 +309,13 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "PacUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -318,12 +340,14 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 EF.Models.Pac pac = new EF.Models.Pac();
                 pac.PacID = pacID;
                 pac.Code = code;
@@ -332,12 +356,14 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
-                pac.LastChangeCode = lastChangeCode;
+                                pac.LastChangeCode = lastChangeCode;
+
                 bool success = pacManager.Update(pac);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -358,12 +384,13 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "PacUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -388,13 +415,15 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 EF.Models.Pac pac = new EF.Models.Pac();
                 pac.PacID = pacID;
                 pac.Code = code;
@@ -403,12 +432,14 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
-                pac.LastChangeCode = lastChangeCode;
+                                pac.LastChangeCode = lastChangeCode;
+
                 bool success = await pacManager.UpdateAsync(pac);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -429,7 +460,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByIsActive, Boolean isActive,
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPacs";
             Log(procedureName + "::Start");
@@ -439,7 +470,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -464,7 +497,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByIsActive, Boolean isActive,
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPacsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -474,8 +507,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -502,7 +538,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 rdr = BuildDataReader(pacManager.GetAll());
             }
             catch (Exception x)
@@ -525,11 +563,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetPacListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 rdr = BuildDataReader(await pacManager.GetAllAsync());
             }
             catch (Exception x)
@@ -571,9 +613,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 var pac = pacManager.GetById(pacID);
+
                 result = pac.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -615,9 +661,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 var pac = await pacManager.GetByIdAsync(pacID);
+
                 result = pac.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -647,11 +697,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = pacManager.GetById(pacID);
+
                 if(pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -681,11 +736,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = await pacManager.GetByIdAsync(pacID);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -715,11 +775,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = pacManager.DirtyGetById(pacID);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -749,11 +814,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = await pacManager.DirtyGetByIdAsync(pacID);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -783,11 +853,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = pacManager.GetByCode(code);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -817,11 +892,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = await pacManager.GetByCodeAsync(code);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -851,11 +931,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = pacManager.DirtyGetByCode(code);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
             }
             catch (Exception x)
@@ -885,12 +970,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 var pac = await pacManager.DirtyGetByCodeAsync(code);
+
                 if (pac != null)
                     pacs.Add(pac);
+
                 rdr = BuildDataReader(pacs);
+
             }
             catch (Exception x)
             {
@@ -919,8 +1010,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 var pac = pacManager.GetByCode(code);
+
                 result = pac.PacID;
             }
             catch (Exception x)
@@ -951,8 +1045,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 var pac = await pacManager.GetByCodeAsync(code);
+
                 result = pac.PacID;
             }
             catch (Exception x)
@@ -985,16 +1082,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Pac item = dataList[i];
+
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.Code = item.Code;
                     pac.LastChangeCode = Guid.NewGuid();
@@ -1003,6 +1107,7 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1024,9 +1129,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
-                    pacs.Add(pac);
+                                        pacs.Add(pac);
                 }
+
                 pacManager.BulkInsert(pacs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1059,16 +1166,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Pac item = dataList[i];
+
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.Code = item.Code;
                     pac.LastChangeCode = Guid.NewGuid();
@@ -1077,6 +1191,7 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1098,8 +1213,9 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
-                    pacs.Add(pac);
+                                        pacs.Add(pac);
                 }
+
                 await pacManager.BulkInsertAsync(pacs);
                 bulkCount = actionCount;
             }
@@ -1133,15 +1249,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Pac item = dataList[i];
+
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
                     pac.Code = item.Code;
@@ -1150,7 +1273,8 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                    pac.LastChangeCode = item.LastChangeCode;
+                                        pac.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1172,9 +1296,12 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
+
                     pacs.Add(pac);
                 }
+
                 pacManager.BulkUpdate(pacs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1207,15 +1334,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Pac item = dataList[i];
+
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
                     pac.Code = item.Code;
@@ -1224,7 +1358,8 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                    pac.LastChangeCode = item.LastChangeCode;
+                                        pac.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1246,9 +1381,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
-                    pacs.Add(pac);
+                                        pacs.Add(pac);
                 }
+
                 pacManager.BulkUpdate(pacs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1273,20 +1410,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Pac item = dataList[i];
+
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
                     pac.Code = item.Code;
@@ -1295,10 +1440,12 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                    pac.LastChangeCode = item.LastChangeCode;
+                                        pac.LastChangeCode = item.LastChangeCode;
                     pacs.Add(pac);
                 }
+
                 pacManager.BulkDelete(pacs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1323,20 +1470,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 List<EF.Models.Pac> pacs = new List<EF.Models.Pac>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].PacID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Pac item = dataList[i];
+
                     EF.Models.Pac pac = new EF.Models.Pac();
                     pac.PacID = item.PacID;
                     pac.Code = item.Code;
@@ -1345,10 +1500,12 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                    pac.LastChangeCode = item.LastChangeCode;
+                                        pac.LastChangeCode = item.LastChangeCode;
                     pacs.Add(pac);
                 }
+
                 await pacManager.BulkDeleteAsync(pacs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1377,8 +1534,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 pacManager.Delete(pacID);
+
             }
             catch (Exception x)
             {
@@ -1403,8 +1563,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var pacManager = new EF.Managers.PacManager(dbContext);
+
                 await pacManager.DeleteAsync(pacID);
+
             }
             catch (Exception x)
             {
@@ -1427,7 +1590,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1450,7 +1615,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1482,6 +1649,7 @@ namespace FS.Farm.Providers.EF7
             throw new Exception(sException, x);
         }
         #endregion
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1491,6 +1659,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1499,6 +1668,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -1506,8 +1676,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1517,6 +1689,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1525,6 +1698,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -1532,21 +1706,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.Pac> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.Pac).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -1557,7 +1736,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }

@@ -12,6 +12,7 @@ namespace FS.Farm.Reports.Providers
     {
         public abstract IDataReader GeneratePacUserTacListReport(
             SessionContext context,
+
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -20,6 +21,7 @@ namespace FS.Farm.Reports.Providers
             System.Guid contextCode);
         public abstract Task<IDataReader> GeneratePacUserTacListReportAsync(
             SessionContext context,
+
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -28,21 +30,25 @@ namespace FS.Farm.Reports.Providers
             System.Guid contextCode);
         public abstract int GetPacUserTacListReportItemCount(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage,
             ref int pageCount);
         public abstract Task<int> GetPacUserTacListReportItemCountAsync(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode,
            int itemCountPerPage );
         public abstract IDataReader GetPacUserTacListReportSummary(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode);
         public abstract Task<IDataReader> GetPacUserTacListReportSummaryAsync(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode);
     }

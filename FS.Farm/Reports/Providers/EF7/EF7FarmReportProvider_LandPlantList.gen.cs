@@ -10,6 +10,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using FS.Farm.EF.Reports;
 using System.Collections.Generic;
+
 namespace FS.Farm.Reports.Providers.EF7
 {
     partial class EF7FarmReportProvider : FS.Farm.Reports.Providers.FarmReportProvider
@@ -49,12 +50,15 @@ namespace FS.Farm.Reports.Providers.EF7
                 orderByDescending = false;
             }
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
             //Define the parameters
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landPlantList = new EF.Reports.LandPlantList(dbContext);
+
                 List<EF.Reports.LandPlantList.LandPlantListDTO> landPlantListDTOs =
                     await landPlantList.GetAsync(
                             flavorCode,
@@ -79,6 +83,7 @@ namespace FS.Farm.Reports.Providers.EF7
                             itemCountPerPage,
                             orderByColumnName,
                             orderByDescending);
+
                 rdr = BuildDataReader(landPlantListDTOs);
             }
             catch (Exception x)
@@ -93,6 +98,7 @@ namespace FS.Farm.Reports.Providers.EF7
             await LogAsync(context,procedureName + "::End");
             return rdr;
         }
+
         public override IDataReader GenerateLandPlantListReport(
             SessionContext context,
             Guid flavorCode,
@@ -128,11 +134,13 @@ namespace FS.Farm.Reports.Providers.EF7
                 orderByDescending = false;
             }
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
             //Define the parameters
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landPlantList = new EF.Reports.LandPlantList(dbContext);
                 List<EF.Reports.LandPlantList.LandPlantListDTO> landPlantListDTOs =
                     landPlantList.Get(
@@ -158,6 +166,7 @@ namespace FS.Farm.Reports.Providers.EF7
                             itemCountPerPage,
                             orderByColumnName,
                             orderByDescending);
+
                 rdr = BuildDataReader(landPlantListDTOs);
             }
             catch (Exception x)
@@ -172,6 +181,7 @@ namespace FS.Farm.Reports.Providers.EF7
             Log(procedureName + "::End");
             return rdr;
         }
+
         public async override Task<int> GetLandPlantListReportItemCountAsync(
             SessionContext context,
             Guid flavorCode,
@@ -197,11 +207,14 @@ namespace FS.Farm.Reports.Providers.EF7
             string procedureName = "GetLandPlantListReportItemCountAsync";
             await LogAsync(context,procedureName + "::Start");
             IDataReader rdr = null;
+
             int iOut = 0;
+
             EF.FarmDbContext dbContext = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landPlantList = new EF.Reports.LandPlantList(dbContext);
                 iOut = await landPlantList.GetCountAsync(
                             flavorCode,
@@ -235,6 +248,7 @@ namespace FS.Farm.Reports.Providers.EF7
             await LogAsync(context,procedureName + "::End");
             return iOut;
         }
+
         public override int GetLandPlantListReportItemCount(
             SessionContext context,
             Guid flavorCode,
@@ -261,12 +275,16 @@ namespace FS.Farm.Reports.Providers.EF7
             string procedureName = "GetLandPlantListReportItemCountAsync";
             Log(procedureName + "::Start");
             SqlDataReader rdr = null;
+
             int iOut = 0;
+
             EF.FarmDbContext dbContext = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landPlantList = new EF.Reports.LandPlantList(dbContext);
+
                 iOut = landPlantList.GetCount(
                             flavorCode,
                             someIntVal,
@@ -327,6 +345,7 @@ namespace FS.Farm.Reports.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         public override IDataReader GetLandPlantListReportSummary(
             SessionContext context,
             Guid flavorCode,
@@ -355,19 +374,24 @@ namespace FS.Farm.Reports.Providers.EF7
             Log(procedureName + "::End");
             return rdr;
         }
+
         private IDataReader BuildDataReader(List<EF.Reports.LandPlantList.LandPlantListDTO> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Reports.LandPlantList.LandPlantListDTO).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -378,7 +402,9 @@ namespace FS.Farm.Reports.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
     }
 }

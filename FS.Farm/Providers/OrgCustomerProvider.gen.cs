@@ -379,5 +379,6 @@ namespace FS.Farm.Providers
         public abstract Task<IDataReader> GetOrgCustomerList_FetchByOrganizationIDAsync(
             int organizationID,
            SessionContext context);
+
     }
 }

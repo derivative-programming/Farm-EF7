@@ -12,6 +12,7 @@ namespace FS.Farm.Reports.Providers
     {
         public abstract IDataReader GeneratePacUserFlavorListReport(
             SessionContext context,
+
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -20,6 +21,7 @@ namespace FS.Farm.Reports.Providers
             System.Guid contextCode);
         public abstract Task<IDataReader> GeneratePacUserFlavorListReportAsync(
             SessionContext context,
+
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -28,21 +30,25 @@ namespace FS.Farm.Reports.Providers
             System.Guid contextCode);
         public abstract int GetPacUserFlavorListReportItemCount(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage,
             ref int pageCount);
         public abstract Task<int> GetPacUserFlavorListReportItemCountAsync(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode,
            int itemCountPerPage );
         public abstract IDataReader GetPacUserFlavorListReportSummary(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode);
         public abstract Task<IDataReader> GetPacUserFlavorListReportSummaryAsync(
             SessionContext context,
+
             System.Guid userID,
             System.Guid contextCode);
     }

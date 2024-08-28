@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7CustomerRoleProvider : FS.Farm.Providers.CustomerRoleProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 iOut = customerRoleManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 iOut = await customerRoleManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 iOut = customerRoleManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 var maxId = await customerRoleManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -150,17 +161,18 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "CustomerRoleInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -168,7 +180,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                 customerRole.Code = code;
                 customerRole.LastChangeCode = Guid.NewGuid();
@@ -176,7 +190,9 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
+
                 customerRole = customerRoleManager.Add(customerRole);
+
                 iOut = customerRole.CustomerRoleID;
             }
             catch (Exception x)
@@ -197,17 +213,18 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "CustomerRoleInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -215,7 +232,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                 customerRole.Code = code;
                 customerRole.LastChangeCode = Guid.NewGuid();
@@ -223,7 +242,9 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
+
                 customerRole = await customerRoleManager.AddAsync(customerRole);
+
                 iOut = customerRole.CustomerRoleID;
             }
             catch (Exception x)
@@ -245,23 +266,26 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "CustomerRoleUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                 customerRole.CustomerRoleID = customerRoleID;
                 customerRole.Code = code;
@@ -269,12 +293,14 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
-                customerRole.LastChangeCode = lastChangeCode;
+                                customerRole.LastChangeCode = lastChangeCode;
+
                 bool success = customerRoleManager.Update(customerRole);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -294,24 +320,27 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "CustomerRoleUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 customerID,
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                 customerRole.CustomerRoleID = customerRoleID;
                 customerRole.Code = code;
@@ -319,12 +348,14 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
-                customerRole.LastChangeCode = lastChangeCode;
+                                customerRole.LastChangeCode = lastChangeCode;
+
                 bool success = await customerRoleManager.UpdateAsync(customerRole);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -344,7 +375,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByIsPlaceholder, Boolean isPlaceholder,
             bool searchByPlaceholder, Boolean placeholder,
             bool searchByRoleID, Int32 roleID,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomerRoles";
             Log(procedureName + "::Start");
@@ -354,7 +385,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -378,7 +411,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByIsPlaceholder, Boolean isPlaceholder,
                     bool searchByPlaceholder, Boolean placeholder,
                     bool searchByRoleID, Int32 roleID,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomerRolesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -388,8 +421,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -416,7 +452,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 rdr = BuildDataReader(customerRoleManager.GetAll());
             }
             catch (Exception x)
@@ -439,11 +477,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetCustomerRoleListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 rdr = BuildDataReader(await customerRoleManager.GetAllAsync());
             }
             catch (Exception x)
@@ -485,9 +527,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 var customerRole = customerRoleManager.GetById(customerRoleID);
+
                 result = customerRole.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -529,9 +575,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 var customerRole = await customerRoleManager.GetByIdAsync(customerRoleID);
+
                 result = customerRole.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -561,11 +611,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = customerRoleManager.GetById(customerRoleID);
+
                 if(customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -595,11 +650,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = await customerRoleManager.GetByIdAsync(customerRoleID);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -629,11 +689,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = customerRoleManager.DirtyGetById(customerRoleID);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -663,11 +728,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = await customerRoleManager.DirtyGetByIdAsync(customerRoleID);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -697,11 +767,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = customerRoleManager.GetByCode(code);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -731,11 +806,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = await customerRoleManager.GetByCodeAsync(code);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -765,11 +845,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = customerRoleManager.DirtyGetByCode(code);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
             }
             catch (Exception x)
@@ -799,12 +884,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 var customerRole = await customerRoleManager.DirtyGetByCodeAsync(code);
+
                 if (customerRole != null)
                     customerRoles.Add(customerRole);
+
                 rdr = BuildDataReader(customerRoles);
+
             }
             catch (Exception x)
             {
@@ -833,8 +924,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 var customerRole = customerRoleManager.GetByCode(code);
+
                 result = customerRole.CustomerRoleID;
             }
             catch (Exception x)
@@ -865,8 +959,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 var customerRole = await customerRoleManager.GetByCodeAsync(code);
+
                 result = customerRole.CustomerRoleID;
             }
             catch (Exception x)
@@ -899,16 +996,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.CustomerRole item = dataList[i];
+
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.Code = item.Code;
                     customerRole.LastChangeCode = Guid.NewGuid();
@@ -916,14 +1020,17 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
+
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
-                    customerRoles.Add(customerRole);
+                                        customerRoles.Add(customerRole);
                 }
+
                 customerRoleManager.BulkInsert(customerRoles);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -956,16 +1063,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.CustomerRole item = dataList[i];
+
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.Code = item.Code;
                     customerRole.LastChangeCode = Guid.NewGuid();
@@ -973,13 +1087,15 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
+
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
-                    customerRoles.Add(customerRole);
+                                        customerRoles.Add(customerRole);
                 }
+
                 await customerRoleManager.BulkInsertAsync(customerRoles);
                 bulkCount = actionCount;
             }
@@ -1013,15 +1129,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.CustomerRole item = dataList[i];
+
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
                     customerRole.Code = item.Code;
@@ -1029,15 +1152,19 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                    customerRole.LastChangeCode = item.LastChangeCode;
+                                        customerRole.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
+
                     customerRoles.Add(customerRole);
                 }
+
                 customerRoleManager.BulkUpdate(customerRoles);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1070,15 +1197,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.CustomerRole item = dataList[i];
+
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
                     customerRole.Code = item.Code;
@@ -1086,15 +1220,18 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                    customerRole.LastChangeCode = item.LastChangeCode;
+                                        customerRole.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
-                    customerRoles.Add(customerRole);
+                                        customerRoles.Add(customerRole);
                 }
+
                 customerRoleManager.BulkUpdate(customerRoles);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1119,20 +1256,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.CustomerRole item = dataList[i];
+
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
                     customerRole.Code = item.Code;
@@ -1140,10 +1285,12 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                    customerRole.LastChangeCode = item.LastChangeCode;
+                                        customerRole.LastChangeCode = item.LastChangeCode;
                     customerRoles.Add(customerRole);
                 }
+
                 customerRoleManager.BulkDelete(customerRoles);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1168,20 +1315,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 List<EF.Models.CustomerRole> customerRoles = new List<EF.Models.CustomerRole>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerRoleID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.CustomerRole item = dataList[i];
+
                     EF.Models.CustomerRole customerRole = new EF.Models.CustomerRole();
                     customerRole.CustomerRoleID = item.CustomerRoleID;
                     customerRole.Code = item.Code;
@@ -1189,10 +1344,12 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                    customerRole.LastChangeCode = item.LastChangeCode;
+                                        customerRole.LastChangeCode = item.LastChangeCode;
                     customerRoles.Add(customerRole);
                 }
+
                 await customerRoleManager.BulkDeleteAsync(customerRoles);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1221,8 +1378,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 customerRoleManager.Delete(customerRoleID);
+
             }
             catch (Exception x)
             {
@@ -1247,8 +1407,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 await customerRoleManager.DeleteAsync(customerRoleID);
+
             }
             catch (Exception x)
             {
@@ -1271,7 +1434,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1294,7 +1459,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1338,8 +1505,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 rdr = BuildDataReader(customerRoleManager.GetByCustomerID(customerID));
+
             }
             catch (Exception x)
             {
@@ -1367,8 +1537,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 rdr = BuildDataReader(customerRoleManager.GetByRoleID(roleID));
+
             }
             catch (Exception x)
             {
@@ -1396,8 +1569,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 rdr = BuildDataReader(await customerRoleManager.GetByCustomerIDAsync(customerID));
+
             }
             catch (Exception x)
             {
@@ -1425,8 +1601,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerRoleManager = new EF.Managers.CustomerRoleManager(dbContext);
+
                 rdr = BuildDataReader(await customerRoleManager.GetByRoleIDAsync(roleID));
+
             }
             catch (Exception x)
             {
@@ -1442,6 +1621,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1451,6 +1631,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1459,6 +1640,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -1466,8 +1648,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1477,6 +1661,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1485,6 +1670,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -1492,21 +1678,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.CustomerRole> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.CustomerRole).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -1517,7 +1708,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }

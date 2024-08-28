@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace FS.Farm.EF.Models
 {
     public class ErrorLog
@@ -9,7 +10,9 @@ namespace FS.Farm.EF.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ErrorLogID { get; set; }
+
         public Guid? Code { get; set; }
+
         public Guid? LastChangeCode { get; set; }
         public Guid? BrowserCode { get; set; }
         public Guid? ContextCode { get; set; }
@@ -20,6 +23,6 @@ namespace FS.Farm.EF.Models
         public int? PacID { get; set; }
         public string Url { get; set; }
         public Guid PacCodePeek { get; set; }//PacID // not mapped
-        //public Pac Pac { get; set; }  //PacID
+                //public Pac Pac { get; set; }  //PacID
     }
 }

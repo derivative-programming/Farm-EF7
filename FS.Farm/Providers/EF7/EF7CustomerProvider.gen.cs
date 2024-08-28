@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7CustomerProvider : FS.Farm.Providers.CustomerProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 iOut = customerManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 iOut = await customerManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 iOut = customerManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 var maxId = await customerManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -169,11 +180,12 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "CustomerInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
@@ -246,7 +258,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -254,7 +266,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 EF.Models.Customer customer = new EF.Models.Customer();
                 customer.Code = code;
                 customer.LastChangeCode = Guid.NewGuid();
@@ -281,7 +295,9 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
+
                 customer = customerManager.Add(customer);
+
                 iOut = customer.CustomerID;
             }
             catch (Exception x)
@@ -321,11 +337,12 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "CustomerInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
@@ -398,7 +415,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -406,7 +423,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 EF.Models.Customer customer = new EF.Models.Customer();
                 customer.Code = code;
                 customer.LastChangeCode = Guid.NewGuid();
@@ -433,7 +452,9 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
+
                 customer = await customerManager.AddAsync(customer);
+
                 iOut = customer.CustomerID;
             }
             catch (Exception x)
@@ -474,12 +495,13 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "CustomerUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
@@ -552,12 +574,14 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 EF.Models.Customer customer = new EF.Models.Customer();
                 customer.CustomerID = customerID;
                 customer.Code = code;
@@ -584,12 +608,14 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
-                customer.LastChangeCode = lastChangeCode;
+                                customer.LastChangeCode = lastChangeCode;
+
                 bool success = customerManager.Update(customer);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -628,12 +654,13 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "CustomerUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 activeOrganizationID,
             //String email,
@@ -706,13 +733,15 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 EF.Models.Customer customer = new EF.Models.Customer();
                 customer.CustomerID = customerID;
                 customer.Code = code;
@@ -739,12 +768,14 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
-                customer.LastChangeCode = lastChangeCode;
+                                customer.LastChangeCode = lastChangeCode;
+
                 bool success = await customerManager.UpdateAsync(customer);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -783,7 +814,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByTacID, Int32 tacID,
             bool searchByUTCOffsetInMinutes, Int32 uTCOffsetInMinutes,
             bool searchByZip, String zip,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomers";
             Log(procedureName + "::Start");
@@ -793,7 +824,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -836,7 +869,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByTacID, Int32 tacID,
                     bool searchByUTCOffsetInMinutes, Int32 uTCOffsetInMinutes,
                     bool searchByZip, String zip,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomersAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -846,8 +879,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -874,7 +910,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(customerManager.GetAll());
             }
             catch (Exception x)
@@ -897,11 +935,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetCustomerListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(await customerManager.GetAllAsync());
             }
             catch (Exception x)
@@ -943,9 +985,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 var customer = customerManager.GetById(customerID);
+
                 result = customer.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -987,9 +1033,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 var customer = await customerManager.GetByIdAsync(customerID);
+
                 result = customer.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -1019,11 +1069,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = customerManager.GetById(customerID);
+
                 if(customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1053,11 +1108,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = await customerManager.GetByIdAsync(customerID);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1087,11 +1147,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = customerManager.DirtyGetById(customerID);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1121,11 +1186,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = await customerManager.DirtyGetByIdAsync(customerID);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1155,11 +1225,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = customerManager.GetByCode(code);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1189,11 +1264,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = await customerManager.GetByCodeAsync(code);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1223,11 +1303,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = customerManager.DirtyGetByCode(code);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
             }
             catch (Exception x)
@@ -1257,12 +1342,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 var customer = await customerManager.DirtyGetByCodeAsync(code);
+
                 if (customer != null)
                     customers.Add(customer);
+
                 rdr = BuildDataReader(customers);
+
             }
             catch (Exception x)
             {
@@ -1291,8 +1382,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 var customer = customerManager.GetByCode(code);
+
                 result = customer.CustomerID;
             }
             catch (Exception x)
@@ -1323,8 +1417,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 var customer = await customerManager.GetByCodeAsync(code);
+
                 result = customer.CustomerID;
             }
             catch (Exception x)
@@ -1357,16 +1454,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].CustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Customer item = dataList[i];
+
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.Code = item.Code;
                     customer.LastChangeCode = Guid.NewGuid();
@@ -1393,6 +1497,7 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
+
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
                     //String email,
@@ -1459,9 +1564,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
-                    customers.Add(customer);
+                                        customers.Add(customer);
                 }
+
                 customerManager.BulkInsert(customers);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1494,16 +1601,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Customer item = dataList[i];
+
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.Code = item.Code;
                     customer.LastChangeCode = Guid.NewGuid();
@@ -1530,6 +1644,7 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
+
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
                     //String email,
@@ -1596,8 +1711,9 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
-                    customers.Add(customer);
+                                        customers.Add(customer);
                 }
+
                 await customerManager.BulkInsertAsync(customers);
                 bulkCount = actionCount;
             }
@@ -1631,15 +1747,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Customer item = dataList[i];
+
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.CustomerID = item.CustomerID;
                     customer.Code = item.Code;
@@ -1666,7 +1789,8 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                    customer.LastChangeCode = item.LastChangeCode;
+                                        customer.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
                     //String email,
@@ -1733,9 +1857,12 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
+
                     customers.Add(customer);
                 }
+
                 customerManager.BulkUpdate(customers);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1768,15 +1895,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Customer item = dataList[i];
+
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.CustomerID = item.CustomerID;
                     customer.Code = item.Code;
@@ -1803,7 +1937,8 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                    customer.LastChangeCode = item.LastChangeCode;
+                                        customer.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
                     //String email,
@@ -1870,9 +2005,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
-                    customers.Add(customer);
+                                        customers.Add(customer);
                 }
+
                 customerManager.BulkUpdate(customers);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1897,20 +2034,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Customer item = dataList[i];
+
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.CustomerID = item.CustomerID;
                     customer.Code = item.Code;
@@ -1937,10 +2082,12 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                    customer.LastChangeCode = item.LastChangeCode;
+                                        customer.LastChangeCode = item.LastChangeCode;
                     customers.Add(customer);
                 }
+
                 customerManager.BulkDelete(customers);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1965,20 +2112,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 List<EF.Models.Customer> customers = new List<EF.Models.Customer>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].CustomerID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Customer item = dataList[i];
+
                     EF.Models.Customer customer = new EF.Models.Customer();
                     customer.CustomerID = item.CustomerID;
                     customer.Code = item.Code;
@@ -2005,10 +2160,12 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                    customer.LastChangeCode = item.LastChangeCode;
+                                        customer.LastChangeCode = item.LastChangeCode;
                     customers.Add(customer);
                 }
+
                 await customerManager.BulkDeleteAsync(customers);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -2037,8 +2194,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 customerManager.Delete(customerID);
+
             }
             catch (Exception x)
             {
@@ -2063,8 +2223,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 await customerManager.DeleteAsync(customerID);
+
             }
             catch (Exception x)
             {
@@ -2087,7 +2250,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -2110,7 +2275,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -2154,8 +2321,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(customerManager.GetByTacID(tacID));
+
             }
             catch (Exception x)
             {
@@ -2183,8 +2353,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(await customerManager.GetByTacIDAsync(tacID));
+
             }
             catch (Exception x)
             {
@@ -2200,6 +2373,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -2209,6 +2383,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -2217,6 +2392,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -2224,8 +2400,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -2235,6 +2413,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -2243,6 +2422,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -2250,21 +2430,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.Customer> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.Customer).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -2275,8 +2460,11 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
         public override async Task<IDataReader> GetCustomerList_QueryByEmailAsync(
             String email,
            SessionContext context
@@ -2289,8 +2477,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(await customerManager.GetByEmailAsync(email));
+
             }
             catch (Exception x)
             {
@@ -2306,6 +2497,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         public override IDataReader GetCustomerList_QueryByEmail(
             String email,
            SessionContext context
@@ -2318,8 +2510,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(customerManager.GetByEmail(email));
+
             }
             catch (Exception x)
             {
@@ -2347,8 +2542,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(await customerManager.GetByForgotPasswordKeyValueAsync(forgotPasswordKeyValue));
+
             }
             catch (Exception x)
             {
@@ -2364,6 +2562,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         public override IDataReader GetCustomerList_QueryByForgotPasswordKeyValue(
             String forgotPasswordKeyValue,
            SessionContext context
@@ -2376,8 +2575,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var customerManager = new EF.Managers.CustomerManager(dbContext);
+
                 rdr = BuildDataReader(customerManager.GetByForgotPasswordKeyValue(forgotPasswordKeyValue));
+
             }
             catch (Exception x)
             {
@@ -2393,5 +2595,71 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::End");
             return rdr;
         }
+        public override async Task<IDataReader> GetCustomerList_QueryByFSUserCodeValueAsync(
+            Guid fSUserCodeValue,
+           SessionContext context
+            )
+        {
+            Guid procedureName = "GetCustomerList_QueryhByFSUserCodeValueAsync";
+            await LogAsync(context, procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = await BuildDbContextAsync(context);
+
+                var customerManager = new EF.Managers.CustomerManager(dbContext);
+
+                rdr = BuildDataReader(await customerManager.GetByFSUserCodeValueAsync(fSUserCodeValue));
+
+            }
+            catch (Exception x)
+            {
+                await LogAsync(context, x);
+                Guid sException = "Error Executing FS_Farm_Customer_QueryhByFSUserCodeValue: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            await LogAsync(context, procedureName + "::End");
+            return rdr;
+        }
+
+        public override IDataReader GetCustomerList_QueryByFSUserCodeValue(
+            Guid fSUserCodeValue,
+           SessionContext context
+            )
+        {
+            Guid procedureName = "GetCustomerList_QueryhByFSUserCodeValue";
+            Log(procedureName + "::Start");
+            IDataReader rdr = null;
+            EF.FarmDbContext dbContext = null;
+            try
+            {
+                dbContext = BuildDbContext(context);
+
+                var customerManager = new EF.Managers.CustomerManager(dbContext);
+
+                rdr = BuildDataReader(customerManager.GetByFSUserCodeValue(fSUserCodeValue));
+
+            }
+            catch (Exception x)
+            {
+                Log(x);
+                Guid sException = "Error Executing FS_Farm_Customer_QueryhByFSUserCodeValue: \r\n";
+                throw new Exception(sException, x);
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+            Log(procedureName + "::End");
+            return rdr;
+        }
+
     }
 }

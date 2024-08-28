@@ -5,18 +5,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using EFCore.BulkExtensions;
 using System.Data;
 using System.Text.RegularExpressions;
+
 namespace FS.Farm.EF.Managers
 {
 	public partial class OrganizationManager
 	{
 		private readonly FarmDbContext _dbContext;
+
 		public OrganizationManager(FarmDbContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
+
 		public async Task<Organization> AddAsync(Organization organization)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
+
 			if (existingTransaction == null)
 			{
 				using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -25,12 +29,15 @@ namespace FS.Farm.EF.Managers
 					_dbContext.OrganizationSet.Add(organization);
 					await _dbContext.SaveChangesAsync();
 					_dbContext.Entry(organization).State = EntityState.Detached;
+
 					await transaction.CommitAsync();
+
 					return organization;
 				}
 				catch
 				{
 					await transaction.RollbackAsync();
+
 					throw;
 				}
 			}
@@ -39,12 +46,16 @@ namespace FS.Farm.EF.Managers
 				_dbContext.OrganizationSet.Add(organization);
 				await _dbContext.SaveChangesAsync();
 				_dbContext.Entry(organization).State = EntityState.Detached;
+
 				return organization;
+
 			}
 		}
+
         public Organization Add(Organization organization)
         {
             var existingTransaction = _dbContext.Database.CurrentTransaction;
+
             if (existingTransaction == null)
             {
                 using var transaction = _dbContext.Database.BeginTransaction();
@@ -53,12 +64,15 @@ namespace FS.Farm.EF.Managers
                     _dbContext.OrganizationSet.Add(organization);
                     _dbContext.SaveChanges();
                     _dbContext.Entry(organization).State = EntityState.Detached;
+
                     transaction.Commit();
+
                     return organization;
                 }
                 catch
                 {
                     transaction.Rollback();
+
                     throw;
                 }
             }
@@ -67,17 +81,21 @@ namespace FS.Farm.EF.Managers
                 _dbContext.OrganizationSet.Add(organization);
                 _dbContext.SaveChanges();
                 _dbContext.Entry(organization).State = EntityState.Detached;
+
                 return organization;
+
             }
         }
         public async Task<int> GetTotalCountAsync()
 		{
 			return await _dbContext.OrganizationSet.AsNoTracking().CountAsync();
 		}
+
         public int GetTotalCount()
         {
             return _dbContext.OrganizationSet.AsNoTracking().Count();
         }
+
         public async Task<int?> GetMaxIdAsync()
         {
             int? maxId = await _dbContext.OrganizationSet.AsNoTracking().MaxAsync(x => (int?)x.OrganizationID);
@@ -102,47 +120,68 @@ namespace FS.Farm.EF.Managers
                 return maxId.Value;
             }
         }
+
         public async Task<Organization> GetByIdAsync(int id)
 		{
+
 			var organizationsWithCodes = await BuildQuery()
 									.Where(x => x.OrganizationObj.OrganizationID == id)
 									.ToListAsync();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             if (finalOrganizations.Count > 0)
 			{
 				return finalOrganizations[0];
+
             }
+
 			return null;
+
         }
+
         public Organization GetById(int id)
         {
+
             var organizationsWithCodes = BuildQuery()
                                     .Where(x => x.OrganizationObj.OrganizationID == id)
                                     .ToList();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             if (finalOrganizations.Count > 0)
             {
                 return finalOrganizations[0];
+
             }
+
             return null;
+
         }
+
         public async Task<Organization> DirtyGetByIdAsync(int id) //to test
 		{
 			//return await _dbContext.OrganizationSet.AsNoTracking().FirstOrDefaultAsync(x => x.OrganizationID == id);
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
+
 			try
 			{
                 var organizationsWithCodes = await BuildQuery()
                                         .Where(x => x.OrganizationObj.OrganizationID == id)
                                         .ToListAsync();
+
                 List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 await transaction.CommitAsync();
+
                 if (finalOrganizations.Count > 0)
                 {
                     return finalOrganizations[0];
+
                 }
+
                 return null;
             }
 			catch
@@ -152,23 +191,30 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
+
         public Organization DirtyGetById(int id) //to test
         {
             //return await _dbContext.OrganizationSet.AsNoTracking().FirstOrDefaultAsync(x => x.OrganizationID == id);
             // Begin a new transaction with the READ UNCOMMITTED isolation level
             using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+
             try
             {
                 var organizationsWithCodes = BuildQuery()
                                         .Where(x => x.OrganizationObj.OrganizationID == id)
                                         .ToList();
+
                 List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 transaction.Commit();
+
                 if (finalOrganizations.Count > 0)
                 {
                     return finalOrganizations[0];
+
                 }
+
                 return null;
             }
             catch
@@ -182,48 +228,66 @@ namespace FS.Farm.EF.Managers
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+
             var organizationsWithCodes = await BuildQuery()
                                     .Where(x => x.OrganizationObj.Code == code)
                                     .ToListAsync();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             if (finalOrganizations.Count > 0)
             {
                 return finalOrganizations[0];
+
             }
+
             return null;
         }
+
         public Organization GetByCode(Guid code)
         {
             if (code == Guid.Empty)
                 throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+
             var organizationsWithCodes = BuildQuery()
                                     .Where(x => x.OrganizationObj.Code == code)
                                     .ToList();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             if (finalOrganizations.Count > 0)
             {
                 return finalOrganizations[0];
+
             }
+
             return null;
         }
+
         public async Task<Organization> DirtyGetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
+
 			try
 			{
                 var organizationsWithCodes = await BuildQuery()
                                         .Where(x => x.OrganizationObj.Code == code)
                                         .ToListAsync();
+
                 List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 await transaction.CommitAsync();
+
                 if (finalOrganizations.Count > 0)
                 {
                     return finalOrganizations[0];
+
                 }
+
                 return null;
             }
 			catch
@@ -233,24 +297,31 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
+
         public Organization DirtyGetByCode(Guid code)
         {
             if (code == Guid.Empty)
                 throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
             // Begin a new transaction with the READ UNCOMMITTED isolation level
             using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+
             try
             {
                 var organizationsWithCodes = BuildQuery()
                                         .Where(x => x.OrganizationObj.Code == code)
                                         .ToList();
+
                 List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 transaction.Commit();
+
                 if (finalOrganizations.Count > 0)
                 {
                     return finalOrganizations[0];
+
                 }
+
                 return null;
             }
             catch
@@ -260,25 +331,32 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
+
         public async Task<List<Organization>> GetAllAsync()
 		{
             var organizationsWithCodes = await BuildQuery()
                                     .ToListAsync();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             return finalOrganizations;
         }
         public List<Organization> GetAll()
         {
             var organizationsWithCodes = BuildQuery()
                                     .ToList();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             return finalOrganizations;
         }
+
         public async Task<bool> UpdateAsync(Organization organizationToUpdate)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
 			{
+
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
 				try
 				{
@@ -288,17 +366,21 @@ namespace FS.Farm.EF.Managers
 					organizationToUpdate.LastChangeCode = Guid.NewGuid();
 					await _dbContext.SaveChangesAsync();
 					_dbContext.Entry(organizationToUpdate).State = EntityState.Detached;
+
 					await transaction.CommitAsync();
+
 					return true;
 				}
 				catch (DbUpdateConcurrencyException)
 				{
 					await transaction.RollbackAsync();
+
 					return false;
 				}
 			}
 			else
 			{
+
 				try
 				{
 					_dbContext.OrganizationSet.Attach(organizationToUpdate);
@@ -307,6 +389,7 @@ namespace FS.Farm.EF.Managers
 					organizationToUpdate.LastChangeCode = Guid.NewGuid();
 					await _dbContext.SaveChangesAsync();
 					_dbContext.Entry(organizationToUpdate).State = EntityState.Detached;
+
 					return true;
 				}
 				catch (DbUpdateConcurrencyException)
@@ -315,11 +398,13 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
+
         public bool Update(Organization organizationToUpdate)
         {
             var existingTransaction = _dbContext.Database.CurrentTransaction;
             if (existingTransaction == null)
             {
+
                 using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
                 try
                 {
@@ -329,17 +414,21 @@ namespace FS.Farm.EF.Managers
                     organizationToUpdate.LastChangeCode = Guid.NewGuid();
                     _dbContext.SaveChanges();
                     _dbContext.Entry(organizationToUpdate).State = EntityState.Detached;
+
                     transaction.Commit();
+
                     return true;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     transaction.Rollback();
+
                     return false;
                 }
             }
             else
             {
+
                 try
                 {
                     _dbContext.OrganizationSet.Attach(organizationToUpdate);
@@ -348,6 +437,7 @@ namespace FS.Farm.EF.Managers
                     organizationToUpdate.LastChangeCode = Guid.NewGuid();
                     _dbContext.SaveChanges();
                     _dbContext.Entry(organizationToUpdate).State = EntityState.Detached;
+
                     return true;
                 }
                 catch (DbUpdateConcurrencyException)
@@ -366,16 +456,21 @@ namespace FS.Farm.EF.Managers
 				{
 					var organization = await _dbContext.OrganizationSet.FirstOrDefaultAsync(x => x.OrganizationID == id);
 					if (organization == null) return false;
+
 					_dbContext.OrganizationSet.Remove(organization);
 					await _dbContext.SaveChangesAsync();
+
 					await transaction.CommitAsync();
+
 					return true;
 				}
 				catch
 				{
 					await transaction.RollbackAsync();
+
 					throw;
 				}
+
 			}
 			else
 			{
@@ -383,16 +478,20 @@ namespace FS.Farm.EF.Managers
 				{
 					var organization = await _dbContext.OrganizationSet.FirstOrDefaultAsync(x => x.OrganizationID == id);
 					if (organization == null) return false;
+
 					_dbContext.OrganizationSet.Remove(organization);
 					await _dbContext.SaveChangesAsync();
+
 					return true;
 				}
 				catch
 				{
 					throw;
 				}
+
 			}
 		}
+
         public bool Delete(int id)
         {
             var existingTransaction = _dbContext.Database.CurrentTransaction;
@@ -403,16 +502,21 @@ namespace FS.Farm.EF.Managers
                 {
                     var organization = _dbContext.OrganizationSet.FirstOrDefault(x => x.OrganizationID == id);
                     if (organization == null) return false;
+
                     _dbContext.OrganizationSet.Remove(organization);
                     _dbContext.SaveChanges();
+
                     transaction.Commit();
+
                     return true;
                 }
                 catch
                 {
                     transaction.Rollback();
+
                     throw;
                 }
+
             }
             else
             {
@@ -420,16 +524,20 @@ namespace FS.Farm.EF.Managers
                 {
                     var organization = _dbContext.OrganizationSet.FirstOrDefault(x => x.OrganizationID == id);
                     if (organization == null) return false;
+
                     _dbContext.OrganizationSet.Remove(organization);
                     _dbContext.SaveChanges();
+
                     return true;
                 }
                 catch
                 {
                     throw;
                 }
+
             }
         }
+
         public async Task BulkInsertAsync(IEnumerable<Organization> organizations)
 		{
 			var bulkConfig = new BulkConfig
@@ -443,6 +551,7 @@ namespace FS.Farm.EF.Managers
 			foreach (var organization in organizations)
 			{
 				organization.LastChangeCode = Guid.NewGuid();
+
 				var entry = _dbContext.Entry(organization);
 				if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
 				{
@@ -454,13 +563,16 @@ namespace FS.Farm.EF.Managers
 					entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
 				}
 			}
+
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
 			{
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
+
 				try
 				{
 					await _dbContext.BulkInsertAsync(organizations, bulkConfig);
+
 					transaction.Commit();
 				}
 				catch
@@ -468,12 +580,15 @@ namespace FS.Farm.EF.Managers
 					transaction.Rollback();
 					throw;
 				}
+
 			}
 			else
 			{
 				await _dbContext.BulkInsertAsync(organizations, bulkConfig);
+
 			}
 		}
+
         public void BulkInsert(IEnumerable<Organization> organizations)
         {
             var bulkConfig = new BulkConfig
@@ -487,6 +602,7 @@ namespace FS.Farm.EF.Managers
             foreach (var organization in organizations)
             {
                 organization.LastChangeCode = Guid.NewGuid();
+
                 var entry = _dbContext.Entry(organization);
                 if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
                 {
@@ -498,13 +614,16 @@ namespace FS.Farm.EF.Managers
                     entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
                 }
             }
+
             var existingTransaction = _dbContext.Database.CurrentTransaction;
             if (existingTransaction == null)
             {
                 using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+
                 try
                 {
                     _dbContext.BulkInsert(organizations, bulkConfig);
+
                     transaction.Commit();
                 }
                 catch
@@ -512,12 +631,15 @@ namespace FS.Farm.EF.Managers
                     transaction.Rollback();
                     throw;
                 }
+
             }
             else
             {
                 _dbContext.BulkInsert(organizations, bulkConfig);
+
             }
         }
+
         public async Task BulkUpdateAsync(IEnumerable<Organization> updatedOrganizations)
 		{
 			var bulkConfig = new BulkConfig
@@ -528,12 +650,15 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
+
 			var idsToUpdate = updatedOrganizations.Select(x => x.OrganizationID).ToList();
+
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			//var existingTokens = await _dbContext.OrganizationSet.AsNoTracking()
 			//	.Where(p => idsToUpdate.Contains(p.OrganizationID))
 			//	.Select(p => new { p.OrganizationID, p.LastChangeCode })
 			//	.ToDictionaryAsync(x => x.OrganizationID, x => x.LastChangeCode);
+
 			//// Check concurrency conflicts
 			foreach (var updatedOrganization in updatedOrganizations)
 			{
@@ -542,10 +667,12 @@ namespace FS.Farm.EF.Managers
 				//		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
 				//	}
 				//	updatedOrganization.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+
 				//	_dbContext.OrganizationSet.Attach(updatedOrganization);
 				//	_dbContext.Entry(updatedOrganization).State = EntityState.Modified;
 				//	var entry = _dbContext.Entry(updatedOrganization);
 				//	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+
 				//_dbContext.OrganizationSet.Attach(updatedOrganization);
 				//_dbContext.Entry(updatedOrganization).State = EntityState.Modified;
 				//_dbContext.Entry(organizationToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
@@ -553,8 +680,11 @@ namespace FS.Farm.EF.Managers
 				//await _dbContext.SaveChangesAsync();
 				//_dbContext.Entry(organizationToUpdate).State = EntityState.Detached;
 			}
+
 			//TODO concurrency token check
+
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
+
 			if (existingTransaction == null)
 			{
 				using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -575,6 +705,7 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkUpdateAsync(updatedOrganizations, bulkConfig);
 			}
 		}
+
         public void BulkUpdate(IEnumerable<Organization> updatedOrganizations)
         {
             var bulkConfig = new BulkConfig
@@ -585,12 +716,15 @@ namespace FS.Farm.EF.Managers
                 BatchSize = 5000,
                 EnableShadowProperties = true
             };
+
             var idsToUpdate = updatedOrganizations.Select(x => x.OrganizationID).ToList();
+
             // Fetch only IDs and ConcurrencyToken values for existing entities
             //var existingTokens = await _dbContext.OrganizationSet.AsNoTracking()
             //	.Where(p => idsToUpdate.Contains(p.OrganizationID))
             //	.Select(p => new { p.OrganizationID, p.LastChangeCode })
             //	.ToDictionaryAsync(x => x.OrganizationID, x => x.LastChangeCode);
+
             //// Check concurrency conflicts
             foreach (var updatedOrganization in updatedOrganizations)
             {
@@ -599,10 +733,12 @@ namespace FS.Farm.EF.Managers
                 //		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
                 //	}
                 //	updatedOrganization.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+
                 //	_dbContext.OrganizationSet.Attach(updatedOrganization);
                 //	_dbContext.Entry(updatedOrganization).State = EntityState.Modified;
                 //	var entry = _dbContext.Entry(updatedOrganization);
                 //	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+
                 //_dbContext.OrganizationSet.Attach(updatedOrganization);
                 //_dbContext.Entry(updatedOrganization).State = EntityState.Modified;
                 //_dbContext.Entry(organizationToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
@@ -610,8 +746,11 @@ namespace FS.Farm.EF.Managers
                 //await _dbContext.SaveChangesAsync();
                 //_dbContext.Entry(organizationToUpdate).State = EntityState.Detached;
             }
+
             //TODO concurrency token check
+
             var existingTransaction = _dbContext.Database.CurrentTransaction;
+
             if (existingTransaction == null)
             {
                 using var transaction = _dbContext.Database.BeginTransaction();
@@ -634,6 +773,7 @@ namespace FS.Farm.EF.Managers
         }
         public async Task BulkDeleteAsync(IEnumerable<Organization> organizationsToDelete)
 		{
+
 			var bulkConfig = new BulkConfig
 			{
 				//UpdateByProperties = new List<string> { nameof(Organization.OrganizationID), nameof(Organization.LastChangeCode) },
@@ -642,12 +782,15 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
+
 			var idsToUpdate = organizationsToDelete.Select(x => x.OrganizationID).ToList();
+
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			var existingTokens = await _dbContext.OrganizationSet.AsNoTracking()
 				.Where(p => idsToUpdate.Contains(p.OrganizationID))
 				.Select(p => new { p.OrganizationID, p.LastChangeCode })
 				.ToDictionaryAsync(x => x.OrganizationID, x => x.LastChangeCode);
+
 			// Check concurrency conflicts
 			foreach (var updatedOrganization in organizationsToDelete)
 			{
@@ -657,7 +800,9 @@ namespace FS.Farm.EF.Managers
 				}
 				updatedOrganization.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
 			}
+
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
+
 			if (existingTransaction == null)
 			{
 				using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -678,8 +823,10 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkDeleteAsync(organizationsToDelete, bulkConfig);
 			}
 		}
+
         public void BulkDelete(IEnumerable<Organization> organizationsToDelete)
         {
+
             var bulkConfig = new BulkConfig
             {
                 //UpdateByProperties = new List<string> { nameof(Organization.OrganizationID), nameof(Organization.LastChangeCode) },
@@ -688,12 +835,15 @@ namespace FS.Farm.EF.Managers
                 BatchSize = 5000,
                 EnableShadowProperties = true
             };
+
             var idsToUpdate = organizationsToDelete.Select(x => x.OrganizationID).ToList();
+
             // Fetch only IDs and ConcurrencyToken values for existing entities
             var existingTokens = _dbContext.OrganizationSet.AsNoTracking()
                 .Where(p => idsToUpdate.Contains(p.OrganizationID))
                 .Select(p => new { p.OrganizationID, p.LastChangeCode })
                 .ToDictionary(x => x.OrganizationID, x => x.LastChangeCode);
+
             // Check concurrency conflicts
             foreach (var updatedOrganization in organizationsToDelete)
             {
@@ -703,7 +853,9 @@ namespace FS.Farm.EF.Managers
                 }
                 updatedOrganization.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
             }
+
             var existingTransaction = _dbContext.Database.CurrentTransaction;
+
             if (existingTransaction == null)
             {
                 using var transaction = _dbContext.Database.BeginTransaction();
@@ -728,16 +880,18 @@ namespace FS.Farm.EF.Managers
 		{
 			return from organization in _dbContext.OrganizationSet.AsNoTracking()
 				   from tac in _dbContext.TacSet.AsNoTracking().Where(l => l.TacID == organization.TacID).DefaultIfEmpty() //TacID
-				   select new QueryDTO
+																																		   select new QueryDTO
                    {
 					   OrganizationObj = organization,
 					   TacCode = tac.Code, //TacID
-				   };
+											 				   };
         }
+
         public int ClearTestObjects()
         {
             int delCount = 0;
             bool found = true;
+
             try
             {
                 while (found)
@@ -751,6 +905,7 @@ namespace FS.Farm.EF.Managers
                         delCount++;
                     }
                 }
+
                 while (found)
                 {
                     found = false;
@@ -760,6 +915,7 @@ namespace FS.Farm.EF.Managers
                         found = true;
                         Delete(organization.OrganizationID);
                         delCount++;
+
                     }
                 }
             }
@@ -768,10 +924,12 @@ namespace FS.Farm.EF.Managers
             }
             return delCount;
         }
+
         public int ClearTestChildObjects()
         {
             int delCount = 0;
             bool found = true;
+
             try
             {
                 while (found)
@@ -791,13 +949,17 @@ namespace FS.Farm.EF.Managers
             }
             return delCount;
         }
+
         private List<Organization> ProcessMappings(List<QueryDTO> data)
 		{
+
             foreach (var item in data)
             {
                 item.OrganizationObj.TacCodePeek = item.TacCode.Value; //TacID
-            }
+                            }
+
             List<Organization> results = data.Select(r => r.OrganizationObj).ToList();
+
             return results;
         }
         //TacID
@@ -806,7 +968,9 @@ namespace FS.Farm.EF.Managers
             var organizationsWithCodes = await BuildQuery()
                                     .Where(x => x.OrganizationObj.TacID == id)
                                     .ToListAsync();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             return finalOrganizations;
         }
         //TacID
@@ -815,19 +979,24 @@ namespace FS.Farm.EF.Managers
             var organizationsWithCodes = BuildQuery()
                                     .Where(x => x.OrganizationObj.TacID == id)
                                     .ToList();
+
             List<Organization> finalOrganizations = ProcessMappings(organizationsWithCodes);
+
             return finalOrganizations;
         }
+
         private string ToSnakeCase(string input)
         {
             if (string.IsNullOrEmpty(input)) { return input; }
             var startUnderscores = Regex.Match(input, @"^_+");
             return startUnderscores + Regex.Replace(input, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
         }
+
         private class QueryDTO
         {
             public Organization OrganizationObj { get; set; }
             public Guid? TacCode { get; set; } //TacID
         }
+
     }
 }

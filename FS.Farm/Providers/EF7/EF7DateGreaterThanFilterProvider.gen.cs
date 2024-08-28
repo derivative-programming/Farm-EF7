@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7DateGreaterThanFilterProvider : FS.Farm.Providers.DateGreaterThanFilterProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 iOut = dateGreaterThanFilterManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 iOut = await dateGreaterThanFilterManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 iOut = dateGreaterThanFilterManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 var maxId = await dateGreaterThanFilterManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -153,11 +164,12 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
@@ -184,7 +196,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -192,7 +204,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                 dateGreaterThanFilter.Code = code;
                 dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
@@ -203,7 +217,9 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
+
                 dateGreaterThanFilter = dateGreaterThanFilterManager.Add(dateGreaterThanFilter);
+
                 iOut = dateGreaterThanFilter.DateGreaterThanFilterID;
             }
             catch (Exception x)
@@ -227,11 +243,12 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
@@ -258,7 +275,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -266,7 +283,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                 dateGreaterThanFilter.Code = code;
                 dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
@@ -277,7 +296,9 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
+
                 dateGreaterThanFilter = await dateGreaterThanFilterManager.AddAsync(dateGreaterThanFilter);
+
                 iOut = dateGreaterThanFilter.DateGreaterThanFilterID;
             }
             catch (Exception x)
@@ -302,12 +323,13 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
@@ -334,12 +356,14 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                 dateGreaterThanFilter.DateGreaterThanFilterID = dateGreaterThanFilterID;
                 dateGreaterThanFilter.Code = code;
@@ -350,12 +374,14 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
-                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
+                                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
+
                 bool success = dateGreaterThanFilterManager.Update(dateGreaterThanFilter);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -378,12 +404,13 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Int32 dayCount,
             //String description,
@@ -410,13 +437,15 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                 dateGreaterThanFilter.DateGreaterThanFilterID = dateGreaterThanFilterID;
                 dateGreaterThanFilter.Code = code;
@@ -427,12 +456,14 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
-                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
+                                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
+
                 bool success = await dateGreaterThanFilterManager.UpdateAsync(dateGreaterThanFilter);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -455,7 +486,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDateGreaterThanFilters";
             Log(procedureName + "::Start");
@@ -465,7 +496,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -492,7 +525,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDateGreaterThanFiltersAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -502,8 +535,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -530,7 +566,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 rdr = BuildDataReader(dateGreaterThanFilterManager.GetAll());
             }
             catch (Exception x)
@@ -553,11 +591,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetDateGreaterThanFilterListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 rdr = BuildDataReader(await dateGreaterThanFilterManager.GetAllAsync());
             }
             catch (Exception x)
@@ -599,9 +641,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.GetById(dateGreaterThanFilterID);
+
                 result = dateGreaterThanFilter.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -643,9 +689,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.GetByIdAsync(dateGreaterThanFilterID);
+
                 result = dateGreaterThanFilter.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -675,11 +725,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.GetById(dateGreaterThanFilterID);
+
                 if(dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -709,11 +764,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.GetByIdAsync(dateGreaterThanFilterID);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -743,11 +803,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.DirtyGetById(dateGreaterThanFilterID);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -777,11 +842,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.DirtyGetByIdAsync(dateGreaterThanFilterID);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -811,11 +881,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.GetByCode(code);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -845,11 +920,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.GetByCodeAsync(code);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -879,11 +959,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.DirtyGetByCode(code);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
             }
             catch (Exception x)
@@ -913,12 +998,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.DirtyGetByCodeAsync(code);
+
                 if (dateGreaterThanFilter != null)
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
+
                 rdr = BuildDataReader(dateGreaterThanFilters);
+
             }
             catch (Exception x)
             {
@@ -947,8 +1038,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 var dateGreaterThanFilter = dateGreaterThanFilterManager.GetByCode(code);
+
                 result = dateGreaterThanFilter.DateGreaterThanFilterID;
             }
             catch (Exception x)
@@ -979,8 +1073,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 var dateGreaterThanFilter = await dateGreaterThanFilterManager.GetByCodeAsync(code);
+
                 result = dateGreaterThanFilter.DateGreaterThanFilterID;
             }
             catch (Exception x)
@@ -1013,16 +1110,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.DateGreaterThanFilter item = dataList[i];
+
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.Code = item.Code;
                     dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
@@ -1033,6 +1137,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
+
                     bool isEncrypted = false;
                     //Int32 dayCount,
                     //String description,
@@ -1056,9 +1161,11 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
-                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                                        dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
+
                 dateGreaterThanFilterManager.BulkInsert(dateGreaterThanFilters);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1091,16 +1198,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.DateGreaterThanFilter item = dataList[i];
+
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.Code = item.Code;
                     dateGreaterThanFilter.LastChangeCode = Guid.NewGuid();
@@ -1111,6 +1225,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
+
                     bool isEncrypted = false;
                     //Int32 dayCount,
                     //String description,
@@ -1134,8 +1249,9 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
-                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                                        dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
+
                 await dateGreaterThanFilterManager.BulkInsertAsync(dateGreaterThanFilters);
                 bulkCount = actionCount;
             }
@@ -1169,15 +1285,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.DateGreaterThanFilter item = dataList[i];
+
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
                     dateGreaterThanFilter.Code = item.Code;
@@ -1188,7 +1311,8 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 dayCount,
                     //String description,
@@ -1212,9 +1336,12 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
+
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
+
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1247,15 +1374,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.DateGreaterThanFilter item = dataList[i];
+
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
                     dateGreaterThanFilter.Code = item.Code;
@@ -1266,7 +1400,8 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Int32 dayCount,
                     //String description,
@@ -1290,9 +1425,11 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
-                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                                        dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
+
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1317,20 +1454,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.DateGreaterThanFilter item = dataList[i];
+
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
                     dateGreaterThanFilter.Code = item.Code;
@@ -1341,10 +1486,12 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
+
                 dateGreaterThanFilterManager.BulkDelete(dateGreaterThanFilters);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1369,20 +1516,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 List<EF.Models.DateGreaterThanFilter> dateGreaterThanFilters = new List<EF.Models.DateGreaterThanFilter>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].DateGreaterThanFilterID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.DateGreaterThanFilter item = dataList[i];
+
                     EF.Models.DateGreaterThanFilter dateGreaterThanFilter = new EF.Models.DateGreaterThanFilter();
                     dateGreaterThanFilter.DateGreaterThanFilterID = item.DateGreaterThanFilterID;
                     dateGreaterThanFilter.Code = item.Code;
@@ -1393,10 +1548,12 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
+
                 await dateGreaterThanFilterManager.BulkDeleteAsync(dateGreaterThanFilters);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1425,8 +1582,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 dateGreaterThanFilterManager.Delete(dateGreaterThanFilterID);
+
             }
             catch (Exception x)
             {
@@ -1451,8 +1611,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 await dateGreaterThanFilterManager.DeleteAsync(dateGreaterThanFilterID);
+
             }
             catch (Exception x)
             {
@@ -1475,7 +1638,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1498,7 +1663,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1542,8 +1709,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 rdr = BuildDataReader(dateGreaterThanFilterManager.GetByPacID(pacID));
+
             }
             catch (Exception x)
             {
@@ -1571,8 +1741,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var dateGreaterThanFilterManager = new EF.Managers.DateGreaterThanFilterManager(dbContext);
+
                 rdr = BuildDataReader(await dateGreaterThanFilterManager.GetByPacIDAsync(pacID));
+
             }
             catch (Exception x)
             {
@@ -1588,6 +1761,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1597,6 +1771,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1605,6 +1780,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -1612,8 +1788,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1623,6 +1801,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1631,6 +1810,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -1638,21 +1818,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.DateGreaterThanFilter> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.DateGreaterThanFilter).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -1663,7 +1848,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }

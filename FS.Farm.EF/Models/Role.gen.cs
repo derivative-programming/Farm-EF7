@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace FS.Farm.EF.Models
 {
     public class Role
@@ -9,7 +10,9 @@ namespace FS.Farm.EF.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoleID { get; set; }
+
         public Guid? Code { get; set; }
+
         public Guid? LastChangeCode { get; set; }
         public string Description { get; set; }
         public int? DisplayOrder { get; set; }
@@ -18,6 +21,6 @@ namespace FS.Farm.EF.Models
         public string Name { get; set; }
         public int? PacID { get; set; }
         public Guid PacCodePeek { get; set; }//PacID // not mapped
-        //public Pac Pac { get; set; }  //PacID
+                //public Pac Pac { get; set; }  //PacID
     }
 }

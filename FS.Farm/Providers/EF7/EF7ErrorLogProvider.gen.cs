@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7ErrorLogProvider : FS.Farm.Providers.ErrorLogProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 iOut = errorLogManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 iOut = await errorLogManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 iOut = errorLogManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 var maxId = await errorLogManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -154,11 +165,12 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "ErrorLogInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
@@ -183,7 +195,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -191,7 +203,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                 errorLog.Code = code;
                 errorLog.LastChangeCode = Guid.NewGuid();
@@ -203,7 +217,9 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
+
                 errorLog = errorLogManager.Add(errorLog);
+
                 iOut = errorLog.ErrorLogID;
             }
             catch (Exception x)
@@ -228,11 +244,12 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "ErrorLogInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
@@ -257,7 +274,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -265,7 +282,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                 errorLog.Code = code;
                 errorLog.LastChangeCode = Guid.NewGuid();
@@ -277,7 +296,9 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
+
                 errorLog = await errorLogManager.AddAsync(errorLog);
+
                 iOut = errorLog.ErrorLogID;
             }
             catch (Exception x)
@@ -303,12 +324,13 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "ErrorLogUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
@@ -333,12 +355,14 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                 errorLog.ErrorLogID = errorLogID;
                 errorLog.Code = code;
@@ -350,12 +374,14 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
-                errorLog.LastChangeCode = lastChangeCode;
+                                errorLog.LastChangeCode = lastChangeCode;
+
                 bool success = errorLogManager.Update(errorLog);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -379,12 +405,13 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "ErrorLogUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //Guid browserCode,
             //Guid contextCode,
@@ -409,13 +436,15 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                 errorLog.ErrorLogID = errorLogID;
                 errorLog.Code = code;
@@ -427,12 +456,14 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
-                errorLog.LastChangeCode = lastChangeCode;
+                                errorLog.LastChangeCode = lastChangeCode;
+
                 bool success = await errorLogManager.UpdateAsync(errorLog);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -456,7 +487,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByIsResolved, Boolean isResolved,
             bool searchByPacID, Int32 pacID,
             bool searchByUrl, String url,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchErrorLogs";
             Log(procedureName + "::Start");
@@ -466,7 +497,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -494,7 +527,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByIsResolved, Boolean isResolved,
                     bool searchByPacID, Int32 pacID,
                     bool searchByUrl, String url,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchErrorLogsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -504,8 +537,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -532,7 +568,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 rdr = BuildDataReader(errorLogManager.GetAll());
             }
             catch (Exception x)
@@ -555,11 +593,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetErrorLogListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 rdr = BuildDataReader(await errorLogManager.GetAllAsync());
             }
             catch (Exception x)
@@ -601,9 +643,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 var errorLog = errorLogManager.GetById(errorLogID);
+
                 result = errorLog.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -645,9 +691,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 var errorLog = await errorLogManager.GetByIdAsync(errorLogID);
+
                 result = errorLog.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -677,11 +727,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = errorLogManager.GetById(errorLogID);
+
                 if(errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -711,11 +766,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = await errorLogManager.GetByIdAsync(errorLogID);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -745,11 +805,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = errorLogManager.DirtyGetById(errorLogID);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -779,11 +844,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = await errorLogManager.DirtyGetByIdAsync(errorLogID);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -813,11 +883,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = errorLogManager.GetByCode(code);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -847,11 +922,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = await errorLogManager.GetByCodeAsync(code);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -881,11 +961,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = errorLogManager.DirtyGetByCode(code);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
             }
             catch (Exception x)
@@ -915,12 +1000,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 var errorLog = await errorLogManager.DirtyGetByCodeAsync(code);
+
                 if (errorLog != null)
                     errorLogs.Add(errorLog);
+
                 rdr = BuildDataReader(errorLogs);
+
             }
             catch (Exception x)
             {
@@ -949,8 +1040,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 var errorLog = errorLogManager.GetByCode(code);
+
                 result = errorLog.ErrorLogID;
             }
             catch (Exception x)
@@ -981,8 +1075,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 var errorLog = await errorLogManager.GetByCodeAsync(code);
+
                 result = errorLog.ErrorLogID;
             }
             catch (Exception x)
@@ -1015,16 +1112,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.ErrorLog item = dataList[i];
+
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.Code = item.Code;
                     errorLog.LastChangeCode = Guid.NewGuid();
@@ -1036,6 +1140,7 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
+
                     bool isEncrypted = false;
                     //Guid browserCode,
                     //Guid contextCode,
@@ -1058,9 +1163,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
-                    errorLogs.Add(errorLog);
+                                        errorLogs.Add(errorLog);
                 }
+
                 errorLogManager.BulkInsert(errorLogs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1093,16 +1200,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.ErrorLog item = dataList[i];
+
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.Code = item.Code;
                     errorLog.LastChangeCode = Guid.NewGuid();
@@ -1114,6 +1228,7 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
+
                     bool isEncrypted = false;
                     //Guid browserCode,
                     //Guid contextCode,
@@ -1136,8 +1251,9 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
-                    errorLogs.Add(errorLog);
+                                        errorLogs.Add(errorLog);
                 }
+
                 await errorLogManager.BulkInsertAsync(errorLogs);
                 bulkCount = actionCount;
             }
@@ -1171,15 +1287,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.ErrorLog item = dataList[i];
+
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
                     errorLog.Code = item.Code;
@@ -1191,7 +1314,8 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                    errorLog.LastChangeCode = item.LastChangeCode;
+                                        errorLog.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Guid browserCode,
                     //Guid contextCode,
@@ -1214,9 +1338,12 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
+
                     errorLogs.Add(errorLog);
                 }
+
                 errorLogManager.BulkUpdate(errorLogs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1249,15 +1376,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.ErrorLog item = dataList[i];
+
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
                     errorLog.Code = item.Code;
@@ -1269,7 +1403,8 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                    errorLog.LastChangeCode = item.LastChangeCode;
+                                        errorLog.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //Guid browserCode,
                     //Guid contextCode,
@@ -1292,9 +1427,11 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
-                    errorLogs.Add(errorLog);
+                                        errorLogs.Add(errorLog);
                 }
+
                 errorLogManager.BulkUpdate(errorLogs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1319,20 +1456,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.ErrorLog item = dataList[i];
+
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
                     errorLog.Code = item.Code;
@@ -1344,10 +1489,12 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                    errorLog.LastChangeCode = item.LastChangeCode;
+                                        errorLog.LastChangeCode = item.LastChangeCode;
                     errorLogs.Add(errorLog);
                 }
+
                 errorLogManager.BulkDelete(errorLogs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1372,20 +1519,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 List<EF.Models.ErrorLog> errorLogs = new List<EF.Models.ErrorLog>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].ErrorLogID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.ErrorLog item = dataList[i];
+
                     EF.Models.ErrorLog errorLog = new EF.Models.ErrorLog();
                     errorLog.ErrorLogID = item.ErrorLogID;
                     errorLog.Code = item.Code;
@@ -1397,10 +1552,12 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                    errorLog.LastChangeCode = item.LastChangeCode;
+                                        errorLog.LastChangeCode = item.LastChangeCode;
                     errorLogs.Add(errorLog);
                 }
+
                 await errorLogManager.BulkDeleteAsync(errorLogs);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1429,8 +1586,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 errorLogManager.Delete(errorLogID);
+
             }
             catch (Exception x)
             {
@@ -1455,8 +1615,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 await errorLogManager.DeleteAsync(errorLogID);
+
             }
             catch (Exception x)
             {
@@ -1479,7 +1642,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1502,7 +1667,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1546,8 +1713,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 rdr = BuildDataReader(errorLogManager.GetByPacID(pacID));
+
             }
             catch (Exception x)
             {
@@ -1575,8 +1745,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var errorLogManager = new EF.Managers.ErrorLogManager(dbContext);
+
                 rdr = BuildDataReader(await errorLogManager.GetByPacIDAsync(pacID));
+
             }
             catch (Exception x)
             {
@@ -1592,6 +1765,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1601,6 +1775,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1609,6 +1784,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -1616,8 +1792,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1627,6 +1805,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1635,6 +1814,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -1642,21 +1822,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.ErrorLog> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.ErrorLog).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -1667,7 +1852,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }

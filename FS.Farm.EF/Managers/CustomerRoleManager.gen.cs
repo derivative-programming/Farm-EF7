@@ -5,18 +5,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using EFCore.BulkExtensions;
 using System.Data;
 using System.Text.RegularExpressions;
+
 namespace FS.Farm.EF.Managers
 {
 	public partial class CustomerRoleManager
 	{
 		private readonly FarmDbContext _dbContext;
+
 		public CustomerRoleManager(FarmDbContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
+
 		public async Task<CustomerRole> AddAsync(CustomerRole customerRole)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
+
 			if (existingTransaction == null)
 			{
 				using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -25,12 +29,15 @@ namespace FS.Farm.EF.Managers
 					_dbContext.CustomerRoleSet.Add(customerRole);
 					await _dbContext.SaveChangesAsync();
 					_dbContext.Entry(customerRole).State = EntityState.Detached;
+
 					await transaction.CommitAsync();
+
 					return customerRole;
 				}
 				catch
 				{
 					await transaction.RollbackAsync();
+
 					throw;
 				}
 			}
@@ -39,12 +46,16 @@ namespace FS.Farm.EF.Managers
 				_dbContext.CustomerRoleSet.Add(customerRole);
 				await _dbContext.SaveChangesAsync();
 				_dbContext.Entry(customerRole).State = EntityState.Detached;
+
 				return customerRole;
+
 			}
 		}
+
         public CustomerRole Add(CustomerRole customerRole)
         {
             var existingTransaction = _dbContext.Database.CurrentTransaction;
+
             if (existingTransaction == null)
             {
                 using var transaction = _dbContext.Database.BeginTransaction();
@@ -53,12 +64,15 @@ namespace FS.Farm.EF.Managers
                     _dbContext.CustomerRoleSet.Add(customerRole);
                     _dbContext.SaveChanges();
                     _dbContext.Entry(customerRole).State = EntityState.Detached;
+
                     transaction.Commit();
+
                     return customerRole;
                 }
                 catch
                 {
                     transaction.Rollback();
+
                     throw;
                 }
             }
@@ -67,17 +81,21 @@ namespace FS.Farm.EF.Managers
                 _dbContext.CustomerRoleSet.Add(customerRole);
                 _dbContext.SaveChanges();
                 _dbContext.Entry(customerRole).State = EntityState.Detached;
+
                 return customerRole;
+
             }
         }
         public async Task<int> GetTotalCountAsync()
 		{
 			return await _dbContext.CustomerRoleSet.AsNoTracking().CountAsync();
 		}
+
         public int GetTotalCount()
         {
             return _dbContext.CustomerRoleSet.AsNoTracking().Count();
         }
+
         public async Task<int?> GetMaxIdAsync()
         {
             int? maxId = await _dbContext.CustomerRoleSet.AsNoTracking().MaxAsync(x => (int?)x.CustomerRoleID);
@@ -102,47 +120,68 @@ namespace FS.Farm.EF.Managers
                 return maxId.Value;
             }
         }
+
         public async Task<CustomerRole> GetByIdAsync(int id)
 		{
+
 			var customerRolesWithCodes = await BuildQuery()
 									.Where(x => x.CustomerRoleObj.CustomerRoleID == id)
 									.ToListAsync();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             if (finalCustomerRoles.Count > 0)
 			{
 				return finalCustomerRoles[0];
+
             }
+
 			return null;
+
         }
+
         public CustomerRole GetById(int id)
         {
+
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.CustomerRoleID == id)
                                     .ToList();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             if (finalCustomerRoles.Count > 0)
             {
                 return finalCustomerRoles[0];
+
             }
+
             return null;
+
         }
+
         public async Task<CustomerRole> DirtyGetByIdAsync(int id) //to test
 		{
 			//return await _dbContext.CustomerRoleSet.AsNoTracking().FirstOrDefaultAsync(x => x.CustomerRoleID == id);
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
+
 			try
 			{
                 var customerRolesWithCodes = await BuildQuery()
                                         .Where(x => x.CustomerRoleObj.CustomerRoleID == id)
                                         .ToListAsync();
+
                 List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 await transaction.CommitAsync();
+
                 if (finalCustomerRoles.Count > 0)
                 {
                     return finalCustomerRoles[0];
+
                 }
+
                 return null;
             }
 			catch
@@ -152,23 +191,30 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
+
         public CustomerRole DirtyGetById(int id) //to test
         {
             //return await _dbContext.CustomerRoleSet.AsNoTracking().FirstOrDefaultAsync(x => x.CustomerRoleID == id);
             // Begin a new transaction with the READ UNCOMMITTED isolation level
             using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+
             try
             {
                 var customerRolesWithCodes = BuildQuery()
                                         .Where(x => x.CustomerRoleObj.CustomerRoleID == id)
                                         .ToList();
+
                 List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 transaction.Commit();
+
                 if (finalCustomerRoles.Count > 0)
                 {
                     return finalCustomerRoles[0];
+
                 }
+
                 return null;
             }
             catch
@@ -182,48 +228,66 @@ namespace FS.Farm.EF.Managers
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+
             var customerRolesWithCodes = await BuildQuery()
                                     .Where(x => x.CustomerRoleObj.Code == code)
                                     .ToListAsync();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             if (finalCustomerRoles.Count > 0)
             {
                 return finalCustomerRoles[0];
+
             }
+
             return null;
         }
+
         public CustomerRole GetByCode(Guid code)
         {
             if (code == Guid.Empty)
                 throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
+
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.Code == code)
                                     .ToList();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             if (finalCustomerRoles.Count > 0)
             {
                 return finalCustomerRoles[0];
+
             }
+
             return null;
         }
+
         public async Task<CustomerRole> DirtyGetByCodeAsync(Guid code)
 		{
 			if (code == Guid.Empty)
 				throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
 			// Begin a new transaction with the READ UNCOMMITTED isolation level
 			using var transaction = await _dbContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted);
+
 			try
 			{
                 var customerRolesWithCodes = await BuildQuery()
                                         .Where(x => x.CustomerRoleObj.Code == code)
                                         .ToListAsync();
+
                 List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 await transaction.CommitAsync();
+
                 if (finalCustomerRoles.Count > 0)
                 {
                     return finalCustomerRoles[0];
+
                 }
+
                 return null;
             }
 			catch
@@ -233,24 +297,31 @@ namespace FS.Farm.EF.Managers
 				throw; // Re-throw the exception
 			}
 		}
+
         public CustomerRole DirtyGetByCode(Guid code)
         {
             if (code == Guid.Empty)
                 throw new ArgumentException("Code must not be an empty GUID.", nameof(code));
             // Begin a new transaction with the READ UNCOMMITTED isolation level
             using var transaction = _dbContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted);
+
             try
             {
                 var customerRolesWithCodes = BuildQuery()
                                         .Where(x => x.CustomerRoleObj.Code == code)
                                         .ToList();
+
                 List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
                 // Commit transaction (this essentially just ends it since we're only reading data)
                 transaction.Commit();
+
                 if (finalCustomerRoles.Count > 0)
                 {
                     return finalCustomerRoles[0];
+
                 }
+
                 return null;
             }
             catch
@@ -260,25 +331,32 @@ namespace FS.Farm.EF.Managers
                 throw; // Re-throw the exception
             }
         }
+
         public async Task<List<CustomerRole>> GetAllAsync()
 		{
             var customerRolesWithCodes = await BuildQuery()
                                     .ToListAsync();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             return finalCustomerRoles;
         }
         public List<CustomerRole> GetAll()
         {
             var customerRolesWithCodes = BuildQuery()
                                     .ToList();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             return finalCustomerRoles;
         }
+
         public async Task<bool> UpdateAsync(CustomerRole customerRoleToUpdate)
 		{
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
 			{
+
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
 				try
 				{
@@ -288,17 +366,21 @@ namespace FS.Farm.EF.Managers
 					customerRoleToUpdate.LastChangeCode = Guid.NewGuid();
 					await _dbContext.SaveChangesAsync();
 					_dbContext.Entry(customerRoleToUpdate).State = EntityState.Detached;
+
 					await transaction.CommitAsync();
+
 					return true;
 				}
 				catch (DbUpdateConcurrencyException)
 				{
 					await transaction.RollbackAsync();
+
 					return false;
 				}
 			}
 			else
 			{
+
 				try
 				{
 					_dbContext.CustomerRoleSet.Attach(customerRoleToUpdate);
@@ -307,6 +389,7 @@ namespace FS.Farm.EF.Managers
 					customerRoleToUpdate.LastChangeCode = Guid.NewGuid();
 					await _dbContext.SaveChangesAsync();
 					_dbContext.Entry(customerRoleToUpdate).State = EntityState.Detached;
+
 					return true;
 				}
 				catch (DbUpdateConcurrencyException)
@@ -315,11 +398,13 @@ namespace FS.Farm.EF.Managers
 				}
 			}
 		}
+
         public bool Update(CustomerRole customerRoleToUpdate)
         {
             var existingTransaction = _dbContext.Database.CurrentTransaction;
             if (existingTransaction == null)
             {
+
                 using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
                 try
                 {
@@ -329,17 +414,21 @@ namespace FS.Farm.EF.Managers
                     customerRoleToUpdate.LastChangeCode = Guid.NewGuid();
                     _dbContext.SaveChanges();
                     _dbContext.Entry(customerRoleToUpdate).State = EntityState.Detached;
+
                     transaction.Commit();
+
                     return true;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     transaction.Rollback();
+
                     return false;
                 }
             }
             else
             {
+
                 try
                 {
                     _dbContext.CustomerRoleSet.Attach(customerRoleToUpdate);
@@ -348,6 +437,7 @@ namespace FS.Farm.EF.Managers
                     customerRoleToUpdate.LastChangeCode = Guid.NewGuid();
                     _dbContext.SaveChanges();
                     _dbContext.Entry(customerRoleToUpdate).State = EntityState.Detached;
+
                     return true;
                 }
                 catch (DbUpdateConcurrencyException)
@@ -366,16 +456,21 @@ namespace FS.Farm.EF.Managers
 				{
 					var customerRole = await _dbContext.CustomerRoleSet.FirstOrDefaultAsync(x => x.CustomerRoleID == id);
 					if (customerRole == null) return false;
+
 					_dbContext.CustomerRoleSet.Remove(customerRole);
 					await _dbContext.SaveChangesAsync();
+
 					await transaction.CommitAsync();
+
 					return true;
 				}
 				catch
 				{
 					await transaction.RollbackAsync();
+
 					throw;
 				}
+
 			}
 			else
 			{
@@ -383,16 +478,20 @@ namespace FS.Farm.EF.Managers
 				{
 					var customerRole = await _dbContext.CustomerRoleSet.FirstOrDefaultAsync(x => x.CustomerRoleID == id);
 					if (customerRole == null) return false;
+
 					_dbContext.CustomerRoleSet.Remove(customerRole);
 					await _dbContext.SaveChangesAsync();
+
 					return true;
 				}
 				catch
 				{
 					throw;
 				}
+
 			}
 		}
+
         public bool Delete(int id)
         {
             var existingTransaction = _dbContext.Database.CurrentTransaction;
@@ -403,16 +502,21 @@ namespace FS.Farm.EF.Managers
                 {
                     var customerRole = _dbContext.CustomerRoleSet.FirstOrDefault(x => x.CustomerRoleID == id);
                     if (customerRole == null) return false;
+
                     _dbContext.CustomerRoleSet.Remove(customerRole);
                     _dbContext.SaveChanges();
+
                     transaction.Commit();
+
                     return true;
                 }
                 catch
                 {
                     transaction.Rollback();
+
                     throw;
                 }
+
             }
             else
             {
@@ -420,16 +524,20 @@ namespace FS.Farm.EF.Managers
                 {
                     var customerRole = _dbContext.CustomerRoleSet.FirstOrDefault(x => x.CustomerRoleID == id);
                     if (customerRole == null) return false;
+
                     _dbContext.CustomerRoleSet.Remove(customerRole);
                     _dbContext.SaveChanges();
+
                     return true;
                 }
                 catch
                 {
                     throw;
                 }
+
             }
         }
+
         public async Task BulkInsertAsync(IEnumerable<CustomerRole> customerRoles)
 		{
 			var bulkConfig = new BulkConfig
@@ -443,6 +551,7 @@ namespace FS.Farm.EF.Managers
 			foreach (var customerRole in customerRoles)
 			{
 				customerRole.LastChangeCode = Guid.NewGuid();
+
 				var entry = _dbContext.Entry(customerRole);
 				if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
 				{
@@ -454,13 +563,16 @@ namespace FS.Farm.EF.Managers
 					entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
 				}
 			}
+
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
 			if (existingTransaction == null)
 			{
 				using var transaction = existingTransaction ?? await _dbContext.Database.BeginTransactionAsync();
+
 				try
 				{
 					await _dbContext.BulkInsertAsync(customerRoles, bulkConfig);
+
 					transaction.Commit();
 				}
 				catch
@@ -468,12 +580,15 @@ namespace FS.Farm.EF.Managers
 					transaction.Rollback();
 					throw;
 				}
+
 			}
 			else
 			{
 				await _dbContext.BulkInsertAsync(customerRoles, bulkConfig);
+
 			}
 		}
+
         public void BulkInsert(IEnumerable<CustomerRole> customerRoles)
         {
             var bulkConfig = new BulkConfig
@@ -487,6 +602,7 @@ namespace FS.Farm.EF.Managers
             foreach (var customerRole in customerRoles)
             {
                 customerRole.LastChangeCode = Guid.NewGuid();
+
                 var entry = _dbContext.Entry(customerRole);
                 if (entry.State == EntityState.Added || entry.State == EntityState.Detached)
                 {
@@ -498,13 +614,16 @@ namespace FS.Farm.EF.Managers
                     entry.Property("last_updated_utc_date_time").CurrentValue = DateTime.UtcNow;
                 }
             }
+
             var existingTransaction = _dbContext.Database.CurrentTransaction;
             if (existingTransaction == null)
             {
                 using var transaction = existingTransaction ?? _dbContext.Database.BeginTransaction();
+
                 try
                 {
                     _dbContext.BulkInsert(customerRoles, bulkConfig);
+
                     transaction.Commit();
                 }
                 catch
@@ -512,12 +631,15 @@ namespace FS.Farm.EF.Managers
                     transaction.Rollback();
                     throw;
                 }
+
             }
             else
             {
                 _dbContext.BulkInsert(customerRoles, bulkConfig);
+
             }
         }
+
         public async Task BulkUpdateAsync(IEnumerable<CustomerRole> updatedCustomerRoles)
 		{
 			var bulkConfig = new BulkConfig
@@ -528,12 +650,15 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
+
 			var idsToUpdate = updatedCustomerRoles.Select(x => x.CustomerRoleID).ToList();
+
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			//var existingTokens = await _dbContext.CustomerRoleSet.AsNoTracking()
 			//	.Where(p => idsToUpdate.Contains(p.CustomerRoleID))
 			//	.Select(p => new { p.CustomerRoleID, p.LastChangeCode })
 			//	.ToDictionaryAsync(x => x.CustomerRoleID, x => x.LastChangeCode);
+
 			//// Check concurrency conflicts
 			foreach (var updatedCustomerRole in updatedCustomerRoles)
 			{
@@ -542,10 +667,12 @@ namespace FS.Farm.EF.Managers
 				//		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
 				//	}
 				//	updatedCustomerRole.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+
 				//	_dbContext.CustomerRoleSet.Attach(updatedCustomerRole);
 				//	_dbContext.Entry(updatedCustomerRole).State = EntityState.Modified;
 				//	var entry = _dbContext.Entry(updatedCustomerRole);
 				//	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+
 				//_dbContext.CustomerRoleSet.Attach(updatedCustomerRole);
 				//_dbContext.Entry(updatedCustomerRole).State = EntityState.Modified;
 				//_dbContext.Entry(customerRoleToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
@@ -553,8 +680,11 @@ namespace FS.Farm.EF.Managers
 				//await _dbContext.SaveChangesAsync();
 				//_dbContext.Entry(customerRoleToUpdate).State = EntityState.Detached;
 			}
+
 			//TODO concurrency token check
+
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
+
 			if (existingTransaction == null)
 			{
 				using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -575,6 +705,7 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkUpdateAsync(updatedCustomerRoles, bulkConfig);
 			}
 		}
+
         public void BulkUpdate(IEnumerable<CustomerRole> updatedCustomerRoles)
         {
             var bulkConfig = new BulkConfig
@@ -585,12 +716,15 @@ namespace FS.Farm.EF.Managers
                 BatchSize = 5000,
                 EnableShadowProperties = true
             };
+
             var idsToUpdate = updatedCustomerRoles.Select(x => x.CustomerRoleID).ToList();
+
             // Fetch only IDs and ConcurrencyToken values for existing entities
             //var existingTokens = await _dbContext.CustomerRoleSet.AsNoTracking()
             //	.Where(p => idsToUpdate.Contains(p.CustomerRoleID))
             //	.Select(p => new { p.CustomerRoleID, p.LastChangeCode })
             //	.ToDictionaryAsync(x => x.CustomerRoleID, x => x.LastChangeCode);
+
             //// Check concurrency conflicts
             foreach (var updatedCustomerRole in updatedCustomerRoles)
             {
@@ -599,10 +733,12 @@ namespace FS.Farm.EF.Managers
                 //		throw new DbUpdateConcurrencyException("Concurrency conflict detected during bulk update.");
                 //	}
                 //	updatedCustomerRole.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
+
                 //	_dbContext.CustomerRoleSet.Attach(updatedCustomerRole);
                 //	_dbContext.Entry(updatedCustomerRole).State = EntityState.Modified;
                 //	var entry = _dbContext.Entry(updatedCustomerRole);
                 //	entry.Property("LastUpdatedUtcDateTime").CurrentValue = DateTime.UtcNow;
+
                 //_dbContext.CustomerRoleSet.Attach(updatedCustomerRole);
                 //_dbContext.Entry(updatedCustomerRole).State = EntityState.Modified;
                 //_dbContext.Entry(customerRoleToUpdate).Property("LastChangeCode").CurrentValue = Guid.NewGuid();
@@ -610,8 +746,11 @@ namespace FS.Farm.EF.Managers
                 //await _dbContext.SaveChangesAsync();
                 //_dbContext.Entry(customerRoleToUpdate).State = EntityState.Detached;
             }
+
             //TODO concurrency token check
+
             var existingTransaction = _dbContext.Database.CurrentTransaction;
+
             if (existingTransaction == null)
             {
                 using var transaction = _dbContext.Database.BeginTransaction();
@@ -634,6 +773,7 @@ namespace FS.Farm.EF.Managers
         }
         public async Task BulkDeleteAsync(IEnumerable<CustomerRole> customerRolesToDelete)
 		{
+
 			var bulkConfig = new BulkConfig
 			{
 				//UpdateByProperties = new List<string> { nameof(CustomerRole.CustomerRoleID), nameof(CustomerRole.LastChangeCode) },
@@ -642,12 +782,15 @@ namespace FS.Farm.EF.Managers
 				BatchSize = 5000,
 				EnableShadowProperties = true
 			};
+
 			var idsToUpdate = customerRolesToDelete.Select(x => x.CustomerRoleID).ToList();
+
 			// Fetch only IDs and ConcurrencyToken values for existing entities
 			var existingTokens = await _dbContext.CustomerRoleSet.AsNoTracking()
 				.Where(p => idsToUpdate.Contains(p.CustomerRoleID))
 				.Select(p => new { p.CustomerRoleID, p.LastChangeCode })
 				.ToDictionaryAsync(x => x.CustomerRoleID, x => x.LastChangeCode);
+
 			// Check concurrency conflicts
 			foreach (var updatedCustomerRole in customerRolesToDelete)
 			{
@@ -657,7 +800,9 @@ namespace FS.Farm.EF.Managers
 				}
 				updatedCustomerRole.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
 			}
+
 			var existingTransaction = _dbContext.Database.CurrentTransaction;
+
 			if (existingTransaction == null)
 			{
 				using var transaction = await _dbContext.Database.BeginTransactionAsync();
@@ -678,8 +823,10 @@ namespace FS.Farm.EF.Managers
 				await _dbContext.BulkDeleteAsync(customerRolesToDelete, bulkConfig);
 			}
 		}
+
         public void BulkDelete(IEnumerable<CustomerRole> customerRolesToDelete)
         {
+
             var bulkConfig = new BulkConfig
             {
                 //UpdateByProperties = new List<string> { nameof(CustomerRole.CustomerRoleID), nameof(CustomerRole.LastChangeCode) },
@@ -688,12 +835,15 @@ namespace FS.Farm.EF.Managers
                 BatchSize = 5000,
                 EnableShadowProperties = true
             };
+
             var idsToUpdate = customerRolesToDelete.Select(x => x.CustomerRoleID).ToList();
+
             // Fetch only IDs and ConcurrencyToken values for existing entities
             var existingTokens = _dbContext.CustomerRoleSet.AsNoTracking()
                 .Where(p => idsToUpdate.Contains(p.CustomerRoleID))
                 .Select(p => new { p.CustomerRoleID, p.LastChangeCode })
                 .ToDictionary(x => x.CustomerRoleID, x => x.LastChangeCode);
+
             // Check concurrency conflicts
             foreach (var updatedCustomerRole in customerRolesToDelete)
             {
@@ -703,7 +853,9 @@ namespace FS.Farm.EF.Managers
                 }
                 updatedCustomerRole.LastChangeCode = Guid.NewGuid(); // Renew the token for each update.
             }
+
             var existingTransaction = _dbContext.Database.CurrentTransaction;
+
             if (existingTransaction == null)
             {
                 using var transaction = _dbContext.Database.BeginTransaction();
@@ -728,18 +880,20 @@ namespace FS.Farm.EF.Managers
 		{
 			return from customerRole in _dbContext.CustomerRoleSet.AsNoTracking()
 				   from customer in _dbContext.CustomerSet.AsNoTracking().Where(l => l.CustomerID == customerRole.CustomerID).DefaultIfEmpty() //CustomerID
-				   from role in _dbContext.RoleSet.AsNoTracking().Where(f => f.RoleID == customerRole.RoleID).DefaultIfEmpty() //RoleID
+																																		   from role in _dbContext.RoleSet.AsNoTracking().Where(f => f.RoleID == customerRole.RoleID).DefaultIfEmpty() //RoleID
 				   select new QueryDTO
                    {
 					   CustomerRoleObj = customerRole,
 					   CustomerCode = customer.Code, //CustomerID
-					   RoleCode = role.Code, //RoleID
+											 					   RoleCode = role.Code, //RoleID
 				   };
         }
+
         public int ClearTestObjects()
         {
             int delCount = 0;
             bool found = true;
+
             try
             {
                 while (found)
@@ -753,6 +907,7 @@ namespace FS.Farm.EF.Managers
                         delCount++;
                     }
                 }
+
                 while (found)
                 {
                     found = false;
@@ -762,6 +917,7 @@ namespace FS.Farm.EF.Managers
                         found = true;
                         Delete(customerRole.CustomerRoleID);
                         delCount++;
+
                     }
                 }
             }
@@ -770,10 +926,12 @@ namespace FS.Farm.EF.Managers
             }
             return delCount;
         }
+
         public int ClearTestChildObjects()
         {
             int delCount = 0;
             bool found = true;
+
             try
             {
                 while (found)
@@ -793,14 +951,18 @@ namespace FS.Farm.EF.Managers
             }
             return delCount;
         }
+
         private List<CustomerRole> ProcessMappings(List<QueryDTO> data)
 		{
+
             foreach (var item in data)
             {
                 item.CustomerRoleObj.CustomerCodePeek = item.CustomerCode.Value; //CustomerID
                 item.CustomerRoleObj.RoleCodePeek = item.RoleCode.Value; //RoleID
-            }
+                            }
+
             List<CustomerRole> results = data.Select(r => r.CustomerRoleObj).ToList();
+
             return results;
         }
         //CustomerID
@@ -809,7 +971,9 @@ namespace FS.Farm.EF.Managers
             var customerRolesWithCodes = await BuildQuery()
                                     .Where(x => x.CustomerRoleObj.CustomerID == id)
                                     .ToListAsync();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             return finalCustomerRoles;
         }
         //RoleID
@@ -818,7 +982,9 @@ namespace FS.Farm.EF.Managers
             var customerRolesWithCodes = await BuildQuery()
                                     .Where(x => x.CustomerRoleObj.RoleID == id)
                                     .ToListAsync();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             return finalCustomerRoles;
         }
         //CustomerID
@@ -827,7 +993,9 @@ namespace FS.Farm.EF.Managers
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.CustomerID == id)
                                     .ToList();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             return finalCustomerRoles;
         }
         //RoleID
@@ -836,20 +1004,25 @@ namespace FS.Farm.EF.Managers
             var customerRolesWithCodes = BuildQuery()
                                     .Where(x => x.CustomerRoleObj.RoleID == id)
                                     .ToList();
+
             List<CustomerRole> finalCustomerRoles = ProcessMappings(customerRolesWithCodes);
+
             return finalCustomerRoles;
         }
+
         private string ToSnakeCase(string input)
         {
             if (string.IsNullOrEmpty(input)) { return input; }
             var startUnderscores = Regex.Match(input, @"^_+");
             return startUnderscores + Regex.Replace(input, @"([a-z0-9])([A-Z])", "$1_$2").ToLower();
         }
+
         private class QueryDTO
         {
             public CustomerRole CustomerRoleObj { get; set; }
             public Guid? CustomerCode { get; set; } //CustomerID
             public Guid? RoleCode { get; set; } //RoleID
         }
+
     }
 }

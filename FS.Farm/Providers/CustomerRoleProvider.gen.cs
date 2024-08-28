@@ -385,5 +385,6 @@ namespace FS.Farm.Providers
         public abstract Task<IDataReader> GetCustomerRoleList_FetchByRoleIDAsync(
             int roleID,
            SessionContext context);
+
     }
 }

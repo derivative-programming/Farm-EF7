@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using FS.Farm.EF.Models;
 using NetTopologySuite.Index.HPRtree;
 using FS.Farm.Objects;
+
 namespace FS.Farm.Providers.EF7
 {
     partial class EF7LandProvider : FS.Farm.Providers.LandProvider
@@ -44,7 +45,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 iOut = landManager.GetTotalCount();
             }
             catch (Exception x)
@@ -72,8 +75,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 iOut = await landManager.GetTotalCountAsync();
+
             }
             catch (Exception x)
             {
@@ -100,7 +106,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 iOut = landManager.GetMaxId().Value;
             }
             catch (Exception x)
@@ -128,8 +136,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 var maxId = await landManager.GetMaxIdAsync();
+
                 iOut = maxId.Value;
             }
             catch (Exception x)
@@ -152,11 +163,12 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "LandInsert";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -182,7 +194,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -190,7 +202,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 EF.Models.Land land = new EF.Models.Land();
                 land.Code = code;
                 land.LastChangeCode = Guid.NewGuid();
@@ -200,7 +214,9 @@ namespace FS.Farm.Providers.EF7
                 land.LookupEnumName = lookupEnumName;
                 land.Name = name;
                 land.PacID = pacID;
+
                 land = landManager.Add(land);
+
                 iOut = land.LandID;
             }
             catch (Exception x)
@@ -223,11 +239,12 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-            System.Guid code)
+                        System.Guid code)
         {
             string procedureName = "LandInsertAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -253,7 +270,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            SqlDataReader rdr = null;
+                        SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -261,7 +278,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 EF.Models.Land land = new EF.Models.Land();
                 land.Code = code;
                 land.LastChangeCode = Guid.NewGuid();
@@ -271,7 +290,9 @@ namespace FS.Farm.Providers.EF7
                 land.LookupEnumName = lookupEnumName;
                 land.Name = name;
                 land.PacID = pacID;
+
                 land = await landManager.AddAsync(land);
+
                 iOut = land.LandID;
             }
             catch (Exception x)
@@ -295,12 +316,13 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-             Guid lastChangeCode,
+                         Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "LandUpdate";
             Log(procedureName + "::Start");
             Log(procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -326,12 +348,14 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            EF.FarmDbContext dbContext = null;
+                        EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 EF.Models.Land land = new EF.Models.Land();
                 land.LandID = landID;
                 land.Code = code;
@@ -341,12 +365,14 @@ namespace FS.Farm.Providers.EF7
                 land.LookupEnumName = lookupEnumName;
                 land.Name = name;
                 land.PacID = pacID;
-                land.LastChangeCode = lastChangeCode;
+                                land.LastChangeCode = lastChangeCode;
+
                 bool success = landManager.Update(land);
                 if (!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -368,12 +394,13 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-            Guid lastChangeCode,
+                        Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "LandUpdateAsync";
             await LogAsync(context, procedureName + "::Start");
             await LogAsync(context, procedureName + "::code::" + code.ToString());
+
             bool isEncrypted = false;
             //String description,
             isEncrypted = false;
@@ -399,13 +426,15 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-            //Define the parameters
+                        //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 EF.Models.Land land = new EF.Models.Land();
                 land.LandID = landID;
                 land.Code = code;
@@ -415,12 +444,14 @@ namespace FS.Farm.Providers.EF7
                 land.LookupEnumName = lookupEnumName;
                 land.Name = name;
                 land.PacID = pacID;
-                land.LastChangeCode = lastChangeCode;
+                                land.LastChangeCode = lastChangeCode;
+
                 bool success = await landManager.UpdateAsync(land);
                 if(!success)
                 {
                     throw new System.Exception("Your changes will overwrite changes made by another user.");
                 }
+
             }
             catch (Exception x)
             {
@@ -442,7 +473,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
-            bool searchByCode, System.Guid code)
+                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchLands";
             Log(procedureName + "::Start");
@@ -452,7 +483,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 throw new System.Exception("Not implemented");
             }
             catch (Exception x)
@@ -478,7 +511,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
-                    bool searchByCode, System.Guid code)
+                                        bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchLandsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -488,8 +521,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 throw new System.Exception("Not implemented");
+
             }
             catch (Exception x)
             {
@@ -516,7 +552,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 rdr = BuildDataReader(landManager.GetAll());
             }
             catch (Exception x)
@@ -539,11 +577,15 @@ namespace FS.Farm.Providers.EF7
             string procedureName = "GetLandListAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
+
             EF.FarmDbContext dbContext = null;
+
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 rdr = BuildDataReader(await landManager.GetAllAsync());
             }
             catch (Exception x)
@@ -585,9 +627,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 var land = landManager.GetById(landID);
+
                 result = land.Code.Value;
+
                 FS.Common.Caches.StringCache.SetData(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -629,9 +675,13 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 var land = await landManager.GetByIdAsync(landID);
+
                 result = land.Code.Value;
+
                 await FS.Common.Caches.StringCache.SetDataAsync(cacheKey, result.ToString(), DateTime.Now.AddHours(1));
             }
             catch (Exception x)
@@ -661,11 +711,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = landManager.GetById(landID);
+
                 if(land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -695,11 +750,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = await landManager.GetByIdAsync(landID);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -729,11 +789,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = landManager.DirtyGetById(landID);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -763,11 +828,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = await landManager.DirtyGetByIdAsync(landID);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -797,11 +867,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = landManager.GetByCode(code);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -831,11 +906,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = await landManager.GetByCodeAsync(code);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -865,11 +945,16 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = landManager.DirtyGetByCode(code);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
             }
             catch (Exception x)
@@ -899,12 +984,18 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 var land = await landManager.DirtyGetByCodeAsync(code);
+
                 if (land != null)
                     lands.Add(land);
+
                 rdr = BuildDataReader(lands);
+
             }
             catch (Exception x)
             {
@@ -933,8 +1024,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 var land = landManager.GetByCode(code);
+
                 result = land.LandID;
             }
             catch (Exception x)
@@ -965,8 +1059,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 var land = await landManager.GetByCodeAsync(code);
+
                 result = land.LandID;
             }
             catch (Exception x)
@@ -999,16 +1096,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 int actionCount = 0;
+
                 for(int i = 0;i < dataList.Count;i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Land item = dataList[i];
+
                     EF.Models.Land land = new EF.Models.Land();
                     land.Code = item.Code;
                     land.LastChangeCode = Guid.NewGuid();
@@ -1018,6 +1122,7 @@ namespace FS.Farm.Providers.EF7
                     land.LookupEnumName = item.LookupEnumName;
                     land.Name = item.Name;
                     land.PacID = item.PacID;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1040,9 +1145,11 @@ namespace FS.Farm.Providers.EF7
                         land.Name = encryptionServices.Encrypt(land.Name);
                     }
                     //Int32 pacID,
-                    lands.Add(land);
+                                        lands.Add(land);
                 }
+
                 landManager.BulkInsert(lands);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1075,16 +1182,23 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID > 0 ||
                         dataList[i].Code.ToString() == "00000000-0000-0000-0000-000000000000")
                         continue;
+
                     actionCount++;
+
                     Objects.Land item = dataList[i];
+
                     EF.Models.Land land = new EF.Models.Land();
                     land.Code = item.Code;
                     land.LastChangeCode = Guid.NewGuid();
@@ -1094,6 +1208,7 @@ namespace FS.Farm.Providers.EF7
                     land.LookupEnumName = item.LookupEnumName;
                     land.Name = item.Name;
                     land.PacID = item.PacID;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1116,8 +1231,9 @@ namespace FS.Farm.Providers.EF7
                         land.Name = encryptionServices.Encrypt(land.Name);
                     }
                     //Int32 pacID,
-                    lands.Add(land);
+                                        lands.Add(land);
                 }
+
                 await landManager.BulkInsertAsync(lands);
                 bulkCount = actionCount;
             }
@@ -1151,15 +1267,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Land item = dataList[i];
+
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
                     land.Code = item.Code;
@@ -1169,7 +1292,8 @@ namespace FS.Farm.Providers.EF7
                     land.LookupEnumName = item.LookupEnumName;
                     land.Name = item.Name;
                     land.PacID = item.PacID;
-                    land.LastChangeCode = item.LastChangeCode;
+                                        land.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1192,9 +1316,12 @@ namespace FS.Farm.Providers.EF7
                         land.Name = encryptionServices.Encrypt(land.Name);
                     }
                     //Int32 pacID,
+
                     lands.Add(land);
                 }
+
                 landManager.BulkUpdate(lands);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1227,15 +1354,22 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Land item = dataList[i];
+
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
                     land.Code = item.Code;
@@ -1245,7 +1379,8 @@ namespace FS.Farm.Providers.EF7
                     land.LookupEnumName = item.LookupEnumName;
                     land.Name = item.Name;
                     land.PacID = item.PacID;
-                    land.LastChangeCode = item.LastChangeCode;
+                                        land.LastChangeCode = item.LastChangeCode;
+
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1268,9 +1403,11 @@ namespace FS.Farm.Providers.EF7
                         land.Name = encryptionServices.Encrypt(land.Name);
                     }
                     //Int32 pacID,
-                    lands.Add(land);
+                                        lands.Add(land);
                 }
+
                 landManager.BulkUpdate(lands);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1295,20 +1432,28 @@ namespace FS.Farm.Providers.EF7
             Log(procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Land item = dataList[i];
+
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
                     land.Code = item.Code;
@@ -1318,10 +1463,12 @@ namespace FS.Farm.Providers.EF7
                     land.LookupEnumName = item.LookupEnumName;
                     land.Name = item.Name;
                     land.PacID = item.PacID;
-                    land.LastChangeCode = item.LastChangeCode;
+                                        land.LastChangeCode = item.LastChangeCode;
                     lands.Add(land);
                 }
+
                 landManager.BulkDelete(lands);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1346,20 +1493,28 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::Start");
             int bulkCount = 0;
             if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 List<EF.Models.Land> lands = new List<EF.Models.Land>();
+
                 int actionCount = 0;
+
                 for (int i = 0; i < dataList.Count; i++)
                 {
                     if (dataList[i].LandID == 0)
                         continue;
+
                     actionCount++;
+
                     Objects.Land item = dataList[i];
+
                     EF.Models.Land land = new EF.Models.Land();
                     land.LandID = item.LandID;
                     land.Code = item.Code;
@@ -1369,10 +1524,12 @@ namespace FS.Farm.Providers.EF7
                     land.LookupEnumName = item.LookupEnumName;
                     land.Name = item.Name;
                     land.PacID = item.PacID;
-                    land.LastChangeCode = item.LastChangeCode;
+                                        land.LastChangeCode = item.LastChangeCode;
                     lands.Add(land);
                 }
+
                 await landManager.BulkDeleteAsync(lands);
+
                 bulkCount = actionCount;
             }
             catch (Exception x)
@@ -1401,8 +1558,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 landManager.Delete(landID);
+
             }
             catch (Exception x)
             {
@@ -1427,8 +1587,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 await landManager.DeleteAsync(landID);
+
             }
             catch (Exception x)
             {
@@ -1451,7 +1614,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1474,7 +1639,9 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 EF.CurrentRuntime.ClearTestChildObjects(dbContext);
+
             }
             catch (Exception x)
             {
@@ -1518,8 +1685,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = BuildDbContext(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 rdr = BuildDataReader(landManager.GetByPacID(pacID));
+
             }
             catch (Exception x)
             {
@@ -1547,8 +1717,11 @@ namespace FS.Farm.Providers.EF7
             try
             {
                 dbContext = await BuildDbContextAsync(context);
+
                 var landManager = new EF.Managers.LandManager(dbContext);
+
                 rdr = BuildDataReader(await landManager.GetByPacIDAsync(pacID));
+
             }
             catch (Exception x)
             {
@@ -1564,6 +1737,7 @@ namespace FS.Farm.Providers.EF7
             await LogAsync(context, procedureName + "::End");
             return rdr;
         }
+
         private async Task<EF.FarmDbContext> BuildDbContextAsync(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1573,6 +1747,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     await connection.OpenAsync();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1581,6 +1756,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 await dbContext.Database.UseTransactionAsync(context.GetSqlTransaction(_connectionString));
             }
@@ -1588,8 +1764,10 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
+
         private EF.FarmDbContext BuildDbContext(SessionContext context)
         {
             EF.FarmDbContext dbContext = null;
@@ -1599,6 +1777,7 @@ namespace FS.Farm.Providers.EF7
                 if (!context.SqlConnectionExists(_connectionString))
                 {
                     if (_connectionString == null || _connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+
                     connection = new SqlConnection(_connectionString);
                     connection.Open();
                     context.AddConnection(_connectionString, connection, connection.BeginTransaction());
@@ -1607,6 +1786,7 @@ namespace FS.Farm.Providers.EF7
                 {
                     connection = context.GetSqlConnection(_connectionString);
                 }
+
                 dbContext = EF.FarmDbContextFactory.Create(connection);
                 dbContext.Database.UseTransaction(context.GetSqlTransaction(_connectionString));
             }
@@ -1614,21 +1794,26 @@ namespace FS.Farm.Providers.EF7
             {
                 dbContext = EF.FarmDbContextFactory.Create(_connectionString);
             }
+
             return dbContext;
         }
         private IDataReader BuildDataReader(List<EF.Models.Land> data)
         {
             var dataTable = new DataTable();
+
             // Using reflection to create columns based on obj properties
             foreach (var prop in typeof(EF.Models.Land).GetProperties())
             {
                 Type columnType = prop.PropertyType;
+
                 if (columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     columnType = Nullable.GetUnderlyingType(columnType);
                 }
+
                 dataTable.Columns.Add(prop.Name, columnType);
             }
+
             // Populating the DataTable
             foreach (var item in data)
             {
@@ -1639,7 +1824,10 @@ namespace FS.Farm.Providers.EF7
                 }
                 dataTable.Rows.Add(row);
             }
+
             return dataTable.CreateDataReader();
+
         }
+
     }
 }
