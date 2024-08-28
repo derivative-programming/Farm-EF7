@@ -274,6 +274,11 @@ namespace FS.Farm.EF.Reports
             private Guid _updateLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _deleteAsyncButtonLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _detailsLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testFileDownloadLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testConditionalFileDownloadLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _testConditionalAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Guid _conditionalBtnExampleLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
 
             public Guid PlantCode
             {
@@ -411,6 +416,31 @@ namespace FS.Farm.EF.Reports
             {
                 get { return _detailsLinkPlantCode; }
                 set { _detailsLinkPlantCode = value; }
+            }
+            public Guid TestFileDownloadLinkPacCode
+            {
+                get { return _testFileDownloadLinkPacCode; }
+                set { _testFileDownloadLinkPacCode = value; }
+            }
+            public Guid TestConditionalFileDownloadLinkPacCode
+            {
+                get { return _testConditionalFileDownloadLinkPacCode; }
+                set { _testConditionalFileDownloadLinkPacCode = value; }
+            }
+            public Guid TestAsyncFlowReqLinkPacCode
+            {
+                get { return _testAsyncFlowReqLinkPacCode; }
+                set { _testAsyncFlowReqLinkPacCode = value; }
+            }
+            public Guid TestConditionalAsyncFlowReqLinkPacCode
+            {
+                get { return _testConditionalAsyncFlowReqLinkPacCode; }
+                set { _testConditionalAsyncFlowReqLinkPacCode = value; }
+            }
+            public Guid ConditionalBtnExampleLinkPlantCode
+            {
+                get { return _conditionalBtnExampleLinkPlantCode; }
+                set { _conditionalBtnExampleLinkPlantCode = value; }
             }
 
         }

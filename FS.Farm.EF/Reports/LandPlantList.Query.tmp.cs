@@ -105,6 +105,11 @@ namespace FS.Farm.EF.Reports
                 UpdateLinkPlantCode = data.Plant.Code.HasValue ? data.Plant.Code.Value : Guid.Empty,
                 DeleteAsyncButtonLinkPlantCode = data.Plant.Code.HasValue ? data.Plant.Code.Value : Guid.Empty,
                 DetailsLinkPlantCode = data.Plant.Code.HasValue ? data.Plant.Code.Value : Guid.Empty,
+                TestFileDownloadLinkPacCode = data.Pac.Code.HasValue ? data.Pac.Code.Value : Guid.Empty,
+                TestConditionalFileDownloadLinkPacCode = data.Pac.Code.HasValue ? data.Pac.Code.Value : Guid.Empty,
+                TestAsyncFlowReqLinkPacCode = data.Pac.Code.HasValue ? data.Pac.Code.Value : Guid.Empty,
+                TestConditionalAsyncFlowReqLinkPacCode = data.Pac.Code.HasValue ? data.Pac.Code.Value : Guid.Empty,
+                ConditionalBtnExampleLinkPlantCode = data.Plant.Code.HasValue ? data.Plant.Code.Value : Guid.Empty,
             };
         }
 
