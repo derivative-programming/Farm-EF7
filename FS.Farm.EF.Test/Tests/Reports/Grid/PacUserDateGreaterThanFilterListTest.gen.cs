@@ -258,11 +258,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<DateGreaterThanFilter> CreateTestDateGreaterThanFilterAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.DateGreaterThanFilter> CreateTestDateGreaterThanFilterAsync(FarmDbContext dbContext)
         {
             return await DateGreaterThanFilterFactory.CreateAsync(dbContext);
         }
-        private DateGreaterThanFilter CreateTestDateGreaterThanFilter(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.DateGreaterThanFilter CreateTestDateGreaterThanFilter(FarmDbContext dbContext)
         {
             return   DateGreaterThanFilterFactory.Create(dbContext);
         }

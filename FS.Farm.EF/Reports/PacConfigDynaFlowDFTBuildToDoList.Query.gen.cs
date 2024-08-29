@@ -44,7 +44,7 @@ namespace FS.Farm.EF.Reports
         {
             if (contextCode != Guid.Empty) query = query.Where(x => x.pac.Code == contextCode);
 
-            if (isBuildTaskDebugRequiredTriStateFilterCode != null && isBuildTaskDebugRequiredTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow.IsBuildTaskDebugRequired == isBuildTaskDebugRequiredTriStateFilterCode);
+            //if (isBuildTaskDebugRequiredTriStateFilterCode != null && isBuildTaskDebugRequiredTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow.IsBuildTaskDebugRequired == isBuildTaskDebugRequiredTriStateFilterCode);
 
             return query;
         }

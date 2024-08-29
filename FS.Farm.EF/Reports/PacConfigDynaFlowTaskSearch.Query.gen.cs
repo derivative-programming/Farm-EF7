@@ -56,15 +56,15 @@ namespace FS.Farm.EF.Reports
         {
             if (contextCode != Guid.Empty) query = query.Where(x => x.pac.Code == contextCode);
 
-            if (startedDateGreaterThanFilterCode != null && startedDateGreaterThanFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.StartedUTCDateTime == startedDateGreaterThanFilterCode);
+            //if (startedDateGreaterThanFilterCode != null && startedDateGreaterThanFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.StartedUTCDateTime == startedDateGreaterThanFilterCode);
 
             if (!String.IsNullOrEmpty(processorIdentifier)) query = query.Where(x => x.dyna_flow_task.ProcessorIdentifier.Contains(processorIdentifier));
 
-            if (isStartedTriStateFilterCode != null && isStartedTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsStarted == isStartedTriStateFilterCode);
+            //if (isStartedTriStateFilterCode != null && isStartedTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsStarted == isStartedTriStateFilterCode);
 
-            if (isCompletedTriStateFilterCode != null && isCompletedTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsCompleted == isCompletedTriStateFilterCode);
+            //if (isCompletedTriStateFilterCode != null && isCompletedTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsCompleted == isCompletedTriStateFilterCode);
 
-            if (isSuccessfulTriStateFilterCode != null && isSuccessfulTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsSuccessful == isSuccessfulTriStateFilterCode);
+            //if (isSuccessfulTriStateFilterCode != null && isSuccessfulTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsSuccessful == isSuccessfulTriStateFilterCode);
 
             return query;
         }

@@ -258,11 +258,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<DynaFlowType> CreateTestDynaFlowTypeAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.DynaFlowType> CreateTestDynaFlowTypeAsync(FarmDbContext dbContext)
         {
             return await DynaFlowTypeFactory.CreateAsync(dbContext);
         }
-        private DynaFlowType CreateTestDynaFlowType(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.DynaFlowType CreateTestDynaFlowType(FarmDbContext dbContext)
         {
             return   DynaFlowTypeFactory.Create(dbContext);
         }

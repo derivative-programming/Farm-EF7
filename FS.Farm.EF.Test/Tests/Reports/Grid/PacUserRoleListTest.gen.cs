@@ -258,11 +258,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<Role> CreateTestRoleAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.Role> CreateTestRoleAsync(FarmDbContext dbContext)
         {
             return await RoleFactory.CreateAsync(dbContext);
         }
-        private Role CreateTestRole(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.Role CreateTestRole(FarmDbContext dbContext)
         {
             return   RoleFactory.Create(dbContext);
         }

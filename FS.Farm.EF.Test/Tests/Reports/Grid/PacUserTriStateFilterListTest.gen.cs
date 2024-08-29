@@ -258,11 +258,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<TriStateFilter> CreateTestTriStateFilterAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.TriStateFilter> CreateTestTriStateFilterAsync(FarmDbContext dbContext)
         {
             return await TriStateFilterFactory.CreateAsync(dbContext);
         }
-        private TriStateFilter CreateTestTriStateFilter(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.TriStateFilter CreateTestTriStateFilter(FarmDbContext dbContext)
         {
             return   TriStateFilterFactory.Create(dbContext);
         }

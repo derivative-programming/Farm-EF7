@@ -200,7 +200,7 @@ namespace FS.Farm.EF.Reports
             if (GENVALCamelReportParamName != null && GENVALCamelReportParamName != (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) query = query.Where(x => x.GENVALLowerUnderscoredcalculatedTargetLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedTargetObjectName.GENVALPascalcalculatedTargetPropertyName >= GENVALCamelReportParamName);
             	//GENWHEN[DateTime]End
 				//GENWHEN[Guid]Start 
-            if (GENVALCamelReportParamName != null && GENVALCamelReportParamName != Guid.Empty) query = query.Where(x => x.GENVALLowerUnderscoredcalculatedTargetLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedTargetObjectName.GENVALPascalcalculatedTargetPropertyName == GENVALCamelReportParamName);
+            //if (GENVALCamelReportParamName != null && GENVALCamelReportParamName != Guid.Empty) query = query.Where(x => x.GENVALLowerUnderscoredcalculatedTargetLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedTargetObjectName.GENVALPascalcalculatedTargetPropertyName == GENVALCamelReportParamName);
 				//GENWHEN[Guid]End
 				//GENWHEN[String]Start  
             if (!string.IsNullOrEmpty(GENVALCamelReportParamName)) query = query.Where(x => x.GENVALLowerUnderscoredcalculatedTargetLookupObjImplementationObjNameGENVALLowerUnderscoredcalculatedTargetObjectName.GENVALPascalcalculatedTargetPropertyName.Contains(GENVALCamelReportParamName));
@@ -234,7 +234,7 @@ namespace FS.Farm.EF.Reports
             if (GENVALCamelReportParamName != null && GENVALCamelReportParamName != (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) query = query.Where(x => x.GENVALLowerUnderscoredObjectName.GENVALPascalReportParamName >= GENVALCamelReportParamName);
             	//GENWHEN[DateTime]End
 				//GENWHEN[Guid]Start 
-            if (GENVALCamelReportParamName != null && GENVALCamelReportParamName != Guid.Empty) query = query.Where(x => x.GENVALLowerUnderscoredObjectName.GENVALPascalReportParamName == GENVALCamelReportParamName);
+            //if (GENVALCamelReportParamName != null && GENVALCamelReportParamName != Guid.Empty) query = query.Where(x => x.GENVALLowerUnderscoredObjectName.GENVALPascalReportParamName == GENVALCamelReportParamName);
 				//GENWHEN[Guid]End
 				//GENWHEN[String]Start 
 			if (!string.IsNullOrEmpty(GENVALCamelReportParamName)) query = query.Where(x => x.GENVALLowerUnderscoredObjectName.GENVALPascalReportParamName.Contains(GENVALCamelReportParamName));
@@ -281,7 +281,7 @@ namespace FS.Farm.EF.Reports
 				//GENIF[calculatedIsSourceObjectAvailable=false]Start
 						//GENCASE[calculatedCSharpDataType]Start
 						--GENWHEN[String]Start 
-						GENVALLowerUnderscoredReportColumnName = data.GENVALLowerUnderscoredObjectName.GENVALPascalReportColumnName, 
+                        GENVALPascalReportColumnName = data.GENVALLowerUnderscoredObjectName.GENVALPascalReportColumnName, 
 						--GENWHEN[String]End
 						//GENWHEN[Guid]Start 
 						GENVALPascalReportColumnName = data.GENVALLowerUnderscoredObjectName.Code, 
@@ -295,7 +295,7 @@ namespace FS.Farm.EF.Reports
 						//GENIF[calculatedIsConditionalSqlLogicAvailable=true]End
 						//GENWHEN[Boolean]End
 						//GENElseStart  
-						GENVALLowerUnderscoredReportColumnName = data.GENVALLowerUnderscoredObjectName.GENVALPascalReportColumnName.Value, 
+						GENVALPascalReportColumnName = data.GENVALLowerUnderscoredObjectName.GENVALPascalReportColumnName.Value, 
 						//GENElseEnd 
 						//GENCASE[calculatedCSharpDataType]End 
 				//GENIF[calculatedIsSourceObjectAvailable=false]End

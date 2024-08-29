@@ -258,11 +258,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<Land> CreateTestLandAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.Land> CreateTestLandAsync(FarmDbContext dbContext)
         {
             return await LandFactory.CreateAsync(dbContext);
         }
-        private Land CreateTestLand(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.Land CreateTestLand(FarmDbContext dbContext)
         {
             return   LandFactory.Create(dbContext);
         }
