@@ -52,7 +52,7 @@ namespace FS.Farm.EF.Reports
         {
             if (contextCode != Guid.Empty) query = query.Where(x => x.pac.Code == contextCode);
 
-            if (isRunTaskDebugRequiredTriStateFilterCode != null && isRunTaskDebugRequiredTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsRunTaskDebugRequired == isRunTaskDebugRequiredTriStateFilterCode);
+            //if (isRunTaskDebugRequiredTriStateFilterCode != null && isRunTaskDebugRequiredTriStateFilterCode != Guid.Empty) query = query.Where(x => x.dyna_flow_task.IsRunTaskDebugRequired == isRunTaskDebugRequiredTriStateFilterCode);
 
             return query;
         }
@@ -66,7 +66,7 @@ namespace FS.Farm.EF.Reports
 
 					IsRunTaskDebugRequired = data.dyna_flow_task.IsRunTaskDebugRequired.Value,
 
-						run_order = data.pac.RunOrder.Value,
+						RunOrder = data.pac.RunOrder.Value,
 
 					DynaFlowPriorityLevel = data.dyna_flow.PriorityLevel.Value,
 
