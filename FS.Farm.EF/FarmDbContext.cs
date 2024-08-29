@@ -13,6 +13,13 @@ namespace FS.Farm.EF
         public DbSet<Customer> CustomerSet { get; set; }
         public DbSet<CustomerRole> CustomerRoleSet { get; set; }
         public DbSet<DateGreaterThanFilter> DateGreaterThanFilterSet { get; set; }
+        public DbSet<DFMaintenance> DFMaintenanceSet { get; set; }
+        public DbSet<DFTDependency> DFTDependencySet { get; set; }
+        public DbSet<DynaFlow> DynaFlowSet { get; set; }
+        public DbSet<DynaFlowTask> DynaFlowTaskSet { get; set; }
+        public DbSet<DynaFlowTaskType> DynaFlowTaskTypeSet { get; set; }
+        public DbSet<DynaFlowType> DynaFlowTypeSet { get; set; }
+        public DbSet<DynaFlowTypeSchedule> DynaFlowTypeScheduleSet { get; set; } 
         public DbSet<ErrorLog> ErrorLogSet { get; set; }
         public DbSet<Flavor> FlavorSet { get; set; }
         public DbSet<Land> LandSet { get; set; }

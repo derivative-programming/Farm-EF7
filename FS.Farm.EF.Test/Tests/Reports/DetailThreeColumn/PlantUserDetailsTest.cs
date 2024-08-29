@@ -178,11 +178,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.DetailThreeColumn
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<Plant> CreateTestPlantAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.Plant> CreateTestPlantAsync(FarmDbContext dbContext)
         {
             return await Factory.PlantFactory.CreateAsync(dbContext);
         }
-        private Plant CreateTestPlant(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.Plant CreateTestPlant(FarmDbContext dbContext)
         {
             return Factory.PlantFactory.Create(dbContext);
         }

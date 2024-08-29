@@ -178,11 +178,11 @@ namespace FS.Farm.EF.Test.Tests.Reports.DetailTwoColumn
                 Assert.AreEqual(0, result.Count);
             }
         }
-        private async Task<Tac> CreateTestTacAsync(FarmDbContext dbContext)
+        private async Task<FS.Farm.EF.Models.Tac> CreateTestTacAsync(FarmDbContext dbContext)
         {
             return await Factory.TacFactory.CreateAsync(dbContext);
         }
-        private Tac CreateTestTac(FarmDbContext dbContext)
+        private FS.Farm.EF.Models.Tac CreateTestTac(FarmDbContext dbContext)
         {
             return Factory.TacFactory.Create(dbContext);
         }
