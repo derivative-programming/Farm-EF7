@@ -38,6 +38,8 @@ namespace FS.Farm.Objects
         private Guid _SomeUniqueidentifierVal = Guid.Parse("00000000-0000-0000-0000-000000000000");
         private DateTime _SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
         private String _SomeVarCharVal = String.Empty;
+        private String _someImageUrlVal = String.Empty;
+        private Boolean _isImageUrlAvailable = false;
         private System.Guid _FlvrForeignKeyCodePeek;
         private System.Guid _LandCodePeek;
         Guid _LastChangeCode;
@@ -338,6 +340,36 @@ namespace FS.Farm.Objects
                 {
                     this.IsDirty = true;
                     _SomeVarCharVal = value;
+                }
+            }
+        }
+        /// <summary>
+        /// DB Data Type: varchar, size: 50, Plant Image Url Val
+        /// </summary>
+        public String SomeImageUrlVal
+        {
+            get { return _someImageUrlVal; }
+            set
+            {
+                if (_someImageUrlVal != value)
+                {
+                    this.IsDirty = true;
+                    _someImageUrlVal = value;
+                }
+            }
+        }
+        /// <summary>
+        /// DB Data Type: bit, size: , Plant Is Delete Allowed
+        /// </summary>
+        public Boolean IsImageUrlAvailable
+        {
+            get { return _isImageUrlAvailable; }
+            set
+            {
+                if (_isImageUrlAvailable != value)
+                {
+                    this.IsDirty = true;
+                    _isImageUrlAvailable = value;
                 }
             }
         }

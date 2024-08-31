@@ -25,14 +25,44 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<int> GetCountAsync(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -40,14 +70,44 @@ namespace FS.Farm.EF.Reports
         }
 
         public int GetCount(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -55,7 +115,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<List<PlantUserDetailsDTO>> GetAsync(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -67,7 +142,22 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -92,7 +182,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public List<PlantUserDetailsDTO> Get(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -104,7 +209,22 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -131,25 +251,44 @@ namespace FS.Farm.EF.Reports
         public class PlantUserDetailsDTO
         {
             private String _flavorName = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private Boolean _isDeleteAllowed = false;
+            private Boolean _someConditionalBitVal = false;
             private Boolean _isEditAllowed = false;
+            private Boolean _someConditionalBitVal = false;
             private String _otherFlavor = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private Int64 _someBigIntVal = 0;
+            private Int64 _someConditionalBigIntVal = 0;
             private Boolean _someBitVal = false;
+            private Boolean _someConditionalBitVal = false;
             private DateTime _someDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            private DateTime _someConditionalDateVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             private Decimal _someDecimalVal = 0;
+            private Decimal _someConditionalDecimalVal = 0;
             private String _someEmailAddress = String.Empty;
+            private String _someConditionalEmailAddress = String.Empty;
             private Double _someFloatVal = 0;
+            private Double _someConditionalFloatVal = 0;
             private Int32 _someIntVal = 0;
+            private Int32 _someConditionalIntVal = 0;
             private Decimal _someMoneyVal = 0;
+            private Decimal _someConditionalMoneyVal = 0;
             private String _someNVarCharVal = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private String _somePhoneNumber = String.Empty;
+            private String _someConditionalPhoneNumber = String.Empty;
             private String _someTextVal = String.Empty;
+            private String _someConditionalTextVal = String.Empty;
             private Guid _someUniqueidentifierVal = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private DateTime _someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            private DateTime _someConditionalUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             private String _someVarCharVal = String.Empty;
+            private String _someConditionalVarCharVal = String.Empty;
             private String _phoneNumConditionalOnIsEditable = String.Empty;
+            private String _someConditionalVarCharVal = String.Empty;
             private String _nVarCharAsUrl = String.Empty;
+            private String _nVarCharConditionalAsUrl = String.Empty;
             private Guid _updateButtonTextLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _randomPropertyUpdatesLinkPlantCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _backToDashboardLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
@@ -158,80 +297,158 @@ namespace FS.Farm.EF.Reports
             private Guid _testAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _testConditionalAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _conditionalBtnExampleLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private Boolean _isImageUrlAvailable = false;
+            private String _someImageUrlVal = String.Empty;
+            private String _someConditionalImageUrlVal = String.Empty;
             public String FlavorName
             {
                 get { return _flavorName; }
                 set { _flavorName = value; }
+            }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
             }
             public Boolean IsDeleteAllowed
             {
                 get { return _isDeleteAllowed; }
                 set { _isDeleteAllowed = value; }
             }
+            public Boolean SomeConditionalBitVal
+            {
+                get { return _someConditionalBitVal; }
+                set { _someConditionalBitVal = value; }
+            }
             public Boolean IsEditAllowed
             {
                 get { return _isEditAllowed; }
                 set { _isEditAllowed = value; }
+            }
+            public Boolean SomeConditionalBitVal
+            {
+                get { return _someConditionalBitVal; }
+                set { _someConditionalBitVal = value; }
             }
             public String OtherFlavor
             {
                 get { return _otherFlavor; }
                 set { _otherFlavor = value; }
             }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
+            }
             public Int64 SomeBigIntVal
             {
                 get { return _someBigIntVal; }
                 set { _someBigIntVal = value; }
+            }
+            public Int64 SomeConditionalBigIntVal
+            {
+                get { return _someConditionalBigIntVal; }
+                set { _someConditionalBigIntVal = value; }
             }
             public Boolean SomeBitVal
             {
                 get { return _someBitVal; }
                 set { _someBitVal = value; }
             }
+            public Boolean SomeConditionalBitVal
+            {
+                get { return _someConditionalBitVal; }
+                set { _someConditionalBitVal = value; }
+            }
             public DateTime SomeDateVal
             {
                 get { return _someDateVal; }
                 set { _someDateVal = value; }
+            }
+            public DateTime SomeConditionalDateVal
+            {
+                get { return _someConditionalDateVal; }
+                set { _someConditionalDateVal = value; }
             }
             public Decimal SomeDecimalVal
             {
                 get { return _someDecimalVal; }
                 set { _someDecimalVal = value; }
             }
+            public Decimal SomeConditionalDecimalVal
+            {
+                get { return _someConditionalDecimalVal; }
+                set { _someConditionalDecimalVal = value; }
+            }
             public String SomeEmailAddress
             {
                 get { return _someEmailAddress; }
                 set { _someEmailAddress = value; }
+            }
+            public String SomeConditionalEmailAddress
+            {
+                get { return _someConditionalEmailAddress; }
+                set { _someConditionalEmailAddress = value; }
             }
             public Double SomeFloatVal
             {
                 get { return _someFloatVal; }
                 set { _someFloatVal = value; }
             }
+            public Double SomeConditionalFloatVal
+            {
+                get { return _someConditionalFloatVal; }
+                set { _someConditionalFloatVal = value; }
+            }
             public Int32 SomeIntVal
             {
                 get { return _someIntVal; }
                 set { _someIntVal = value; }
+            }
+            public Int32 SomeConditionalIntVal
+            {
+                get { return _someConditionalIntVal; }
+                set { _someConditionalIntVal = value; }
             }
             public Decimal SomeMoneyVal
             {
                 get { return _someMoneyVal; }
                 set { _someMoneyVal = value; }
             }
+            public Decimal SomeConditionalMoneyVal
+            {
+                get { return _someConditionalMoneyVal; }
+                set { _someConditionalMoneyVal = value; }
+            }
             public String SomeNVarCharVal
             {
                 get { return _someNVarCharVal; }
                 set { _someNVarCharVal = value; }
+            }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
             }
             public String SomePhoneNumber
             {
                 get { return _somePhoneNumber; }
                 set { _somePhoneNumber = value; }
             }
+            public String SomeConditionalPhoneNumber
+            {
+                get { return _someConditionalPhoneNumber; }
+                set { _someConditionalPhoneNumber = value; }
+            }
             public String SomeTextVal
             {
                 get { return _someTextVal; }
                 set { _someTextVal = value; }
+            }
+            public String SomeConditionalTextVal
+            {
+                get { return _someConditionalTextVal; }
+                set { _someConditionalTextVal = value; }
             }
             public Guid SomeUniqueidentifierVal
             {
@@ -243,20 +460,40 @@ namespace FS.Farm.EF.Reports
                 get { return _someUTCDateTimeVal; }
                 set { _someUTCDateTimeVal = value; }
             }
+            public DateTime SomeConditionalUTCDateTimeVal
+            {
+                get { return _someConditionalUTCDateTimeVal; }
+                set { _someConditionalUTCDateTimeVal = value; }
+            }
             public String SomeVarCharVal
             {
                 get { return _someVarCharVal; }
                 set { _someVarCharVal = value; }
+            }
+            public String SomeConditionalVarCharVal
+            {
+                get { return _someConditionalVarCharVal; }
+                set { _someConditionalVarCharVal = value; }
             }
             public String PhoneNumConditionalOnIsEditable
             {
                 get { return _phoneNumConditionalOnIsEditable; }
                 set { _phoneNumConditionalOnIsEditable = value; }
             }
+            public String SomeConditionalVarCharVal
+            {
+                get { return _someConditionalVarCharVal; }
+                set { _someConditionalVarCharVal = value; }
+            }
             public String NVarCharAsUrl
             {
                 get { return _nVarCharAsUrl; }
                 set { _nVarCharAsUrl = value; }
+            }
+            public String NVarCharConditionalAsUrl
+            {
+                get { return _nVarCharConditionalAsUrl; }
+                set { _nVarCharConditionalAsUrl = value; }
             }
             public Guid UpdateButtonTextLinkPlantCode
             {
@@ -297,6 +534,21 @@ namespace FS.Farm.EF.Reports
             {
                 get { return _conditionalBtnExampleLinkTacCode; }
                 set { _conditionalBtnExampleLinkTacCode = value; }
+            }
+            public Boolean IsImageUrlAvailable
+            {
+                get { return _isImageUrlAvailable; }
+                set { _isImageUrlAvailable = value; }
+            }
+            public String SomeImageUrlVal
+            {
+                get { return _someImageUrlVal; }
+                set { _someImageUrlVal = value; }
+            }
+            public String SomeConditionalImageUrlVal
+            {
+                get { return _someConditionalImageUrlVal; }
+                set { _someConditionalImageUrlVal = value; }
             }
 
         }

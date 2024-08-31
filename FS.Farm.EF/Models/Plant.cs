@@ -53,6 +53,10 @@ namespace FS.Farm.EF.Models
 
         public int? FlvrForeignKeyID { get; set; }
 
+        public bool? IsImageUrlAvailable { get; set; }
+
+        public string SomeImageUrlVal { get; set; }
+
         //ENDSET 
         public Guid FlvrForeignKeyCodePeek { get; set; }//FlvrForeignKeyID // not mapped 
         public Guid LandCodePeek { get; set; }//LandID // not mapped

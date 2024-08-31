@@ -60,12 +60,14 @@ namespace FS.Farm.EF.Reports
 				SomeTextVal = data.plant.SomeTextVal,
 					SomeUniqueidentifierVal = data.plant.SomeUniqueidentifierVal.Value,
 					SomeUTCDateTimeVal = data.plant.SomeUTCDateTimeVal.Value,
-				SomeVarCharVal = data.plant.SomeVarCharVal,
+                SomeVarCharVal = data.plant.SomeVarCharVal,
 				PhoneNumConditionalOnIsEditable = data.plant.SomePhoneNumber,
 				NVarCharAsUrl = data.plant.SomeNVarCharVal,
 					UpdateButtonTextLinkPlantCode = data.plant.Code.Value,
 					RandomPropertyUpdatesLinkPlantCode = data.plant.Code.Value,
 					BackToDashboardLinkTacCode = data.tac.Code.Value,
+                IsImageUrlAvailable = data.plant.IsImageUrlAvailable.Value,
+                SomeImageUrlVal = data.plant.SomeImageUrlVal,
             };
         }
         private class QueryDTO
@@ -103,6 +105,8 @@ namespace FS.Farm.EF.Reports
 			Plant.SomeVarCharVal as SomeVarCharVal,
 			Plant.SomePhoneNumber as PhoneNumConditionalOnIsEditable,
 			Plant.SomeNVarCharVal as NVarCharAsUrl,
+			Plant.IsImageUrlAvailable as IsImageUrlAvailable,
+			Plant.SomeImageUrlVal as SomeImageUrlVal,
 			Plant.Code as UpdateButtonTextLinkPlantCode,
 			Plant.Code as RandomPropertyUpdatesLinkPlantCode,
 			Tac.Code as BackToDashboardLinkTacCode,

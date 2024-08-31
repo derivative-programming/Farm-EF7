@@ -324,6 +324,8 @@ namespace FS.Farm.Providers
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
             System.Guid code);
         public abstract Task<int> PlantInsertAsync(
             SessionContext context,
@@ -346,6 +348,8 @@ namespace FS.Farm.Providers
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
             System.Guid code);
         public abstract void PlantUpdate(
             SessionContext context,
@@ -369,6 +373,8 @@ namespace FS.Farm.Providers
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
             Guid lastChangeCode,
             System.Guid code);
         public abstract Task PlantUpdateAsync(
@@ -393,6 +399,8 @@ namespace FS.Farm.Providers
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
             Guid lastChangeCode,
             System.Guid code);
         public abstract IDataReader SearchPlants(
@@ -417,6 +425,8 @@ namespace FS.Farm.Providers
             bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
             bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
             bool searchBySomeVarCharVal, String someVarCharVal,
+            bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
+            bool searchBySomeImageUrlVal, String someImageUrlVal,
             bool searchByCode, System.Guid code
             );
         public abstract Task<IDataReader> SearchPlantsAsync(
@@ -441,6 +451,8 @@ namespace FS.Farm.Providers
             bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
             bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
             bool searchBySomeVarCharVal, String someVarCharVal,
+            bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
+            bool searchBySomeImageUrlVal, String someImageUrlVal,
             bool searchByCode, System.Guid code
             );
         public abstract int PlantBulkInsertList(

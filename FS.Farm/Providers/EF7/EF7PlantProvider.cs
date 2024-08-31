@@ -176,6 +176,8 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal, 
             //ENDSET
             System.Guid code)
         {
@@ -214,6 +216,9 @@ namespace FS.Farm.Providers.EF7
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            //Boolean isImageUrlAvailable 
+            //String someImageUrlVal 
+
             isEncrypted = false;
             if (isEncrypted)
             {
@@ -262,6 +267,8 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 //ENDSET
 
                 plant = plantManager.Add(plant);
@@ -301,6 +308,8 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
             //ENDSET
             System.Guid code)
         {
@@ -339,6 +348,8 @@ namespace FS.Farm.Providers.EF7
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            //Boolean isImageUrlAvailable 
+            //String someImageUrlVal 
             isEncrypted = false;
             if (isEncrypted)
             {
@@ -387,6 +398,8 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 //ENDSET
 
                 plant = await plantManager.AddAsync(plant);
@@ -427,7 +440,9 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-            //ENDSET
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
+             //ENDSET
              Guid lastChangeCode,
              System.Guid code)
         {
@@ -466,6 +481,8 @@ namespace FS.Farm.Providers.EF7
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            //Boolean isImageUrlAvailable 
+            //String someImageUrlVal 
             isEncrypted = false;
             if (isEncrypted)
             {
@@ -511,6 +528,8 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 //ENDSET
                 plant.LastChangeCode = lastChangeCode;
 
@@ -554,6 +573,8 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
+            Boolean isImageUrlAvailable,
+            String someImageUrlVal,
             //ENDSET
             Guid lastChangeCode,
             System.Guid code)
@@ -593,6 +614,8 @@ namespace FS.Farm.Providers.EF7
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
             //String someVarCharVal,
+            //Boolean isImageUrlAvailable 
+            //String someImageUrlVal 
             isEncrypted = false;
             if (isEncrypted)
             {
@@ -640,6 +663,8 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 //ENDSET
                 plant.LastChangeCode = lastChangeCode;
 
@@ -683,6 +708,8 @@ namespace FS.Farm.Providers.EF7
             bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
             bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
             bool searchBySomeVarCharVal, String someVarCharVal,
+            bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
+            bool searchBySomeImageUrlVal, String someImageUrlVal,
             //ENDSET
             bool searchByCode, System.Guid code)
         {
@@ -735,6 +762,8 @@ namespace FS.Farm.Providers.EF7
                     bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
                     bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
                     bool searchBySomeVarCharVal, String someVarCharVal,
+                    bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
+                    bool searchBySomeImageUrlVal, String someImageUrlVal,
                     //ENDSET
                     bool searchByCode, System.Guid code)
         {
@@ -1363,6 +1392,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     //ENDSET
 
                     bool isEncrypted = false;
@@ -1394,6 +1425,8 @@ namespace FS.Farm.Providers.EF7
                     //String someTextVal,
                     //Guid someUniqueidentifierVal, 
                     //String someVarCharVal,
+                    //Boolean isImageUrlAvailable 
+                    //String someImageUrlVal 
                     isEncrypted = false;
                     if (isEncrypted)
                     { 
@@ -1484,6 +1517,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     //ENDSET
 
                     bool isEncrypted = false;
@@ -1515,6 +1550,8 @@ namespace FS.Farm.Providers.EF7
                     //String someTextVal,
                     //Guid someUniqueidentifierVal, 
                     //String someVarCharVal,
+                    //Boolean isImageUrlAvailable 
+                    //String someImageUrlVal 
                     isEncrypted = false;
                     if (isEncrypted)
                     {
@@ -1603,6 +1640,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
 
@@ -1636,6 +1675,8 @@ namespace FS.Farm.Providers.EF7
                     //String someTextVal,
                     //Guid someUniqueidentifierVal, 
                     //String someVarCharVal,
+                    //Boolean isImageUrlAvailable 
+                    //String someImageUrlVal 
                     isEncrypted = false;
                     if (isEncrypted)
                     {
@@ -1726,6 +1767,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
 
@@ -1759,6 +1802,8 @@ namespace FS.Farm.Providers.EF7
                     //String someTextVal,
                     //Guid someUniqueidentifierVal, 
                     //String someVarCharVal,
+                    //Boolean isImageUrlAvailable 
+                    //String someImageUrlVal 
                     isEncrypted = false;
                     if (isEncrypted)
                     {
@@ -1846,6 +1891,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
@@ -1921,6 +1968,8 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     //ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);

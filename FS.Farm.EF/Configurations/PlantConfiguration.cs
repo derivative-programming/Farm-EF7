@@ -39,6 +39,8 @@ namespace FS.Farm.EF.Configurations
             //String somePhoneNumber,
             //String someTextVal,
             //Guid someUniqueidentifierVal, 
+            //Boolean isImageUrlAvailable 
+            //String someImageUrlVal  
             //SomeUTCDateTimeVal
             //String someVarCharVal,
             // someDateVal, 
@@ -160,6 +162,8 @@ namespace FS.Farm.EF.Configurations
             {
                 builder.HasIndex(p => p.SomeDateVal);
             }
+            //Boolean isImageUrlAvailable 
+            //String someImageUrlVal  
             //ENDSET
 
             builder.HasIndex(p => p.Code)

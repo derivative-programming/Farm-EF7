@@ -25,14 +25,44 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<int> GetCountAsync(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -40,14 +70,44 @@ namespace FS.Farm.EF.Reports
         }
 
         public int GetCount(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -55,7 +115,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<List<PacUserTacListDTO>> GetAsync(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -67,7 +142,22 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -92,7 +182,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public List<PacUserTacListDTO> Get(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -104,7 +209,22 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -132,11 +252,20 @@ namespace FS.Farm.EF.Reports
         {
             private Guid _tacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private String _tacDescription = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private Int32 _tacDisplayOrder = 0;
+            private Int32 _someConditionalIntVal = 0;
             private Boolean _tacIsActive = false;
+            private Boolean _someConditionalBitVal = false;
             private String _tacLookupEnumName = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private String _tacName = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private String _pacName = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
+            private Boolean _isImageUrlAvailable = false;
+            private String _someImageUrlVal = String.Empty;
+            private String _someConditionalImageUrlVal = String.Empty;
             public Guid TacCode
             {
                 get { return _tacCode; }
@@ -147,30 +276,75 @@ namespace FS.Farm.EF.Reports
                 get { return _tacDescription; }
                 set { _tacDescription = value; }
             }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
+            }
             public Int32 TacDisplayOrder
             {
                 get { return _tacDisplayOrder; }
                 set { _tacDisplayOrder = value; }
+            }
+            public Int32 SomeConditionalIntVal
+            {
+                get { return _someConditionalIntVal; }
+                set { _someConditionalIntVal = value; }
             }
             public Boolean TacIsActive
             {
                 get { return _tacIsActive; }
                 set { _tacIsActive = value; }
             }
+            public Boolean SomeConditionalBitVal
+            {
+                get { return _someConditionalBitVal; }
+                set { _someConditionalBitVal = value; }
+            }
             public String TacLookupEnumName
             {
                 get { return _tacLookupEnumName; }
                 set { _tacLookupEnumName = value; }
+            }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
             }
             public String TacName
             {
                 get { return _tacName; }
                 set { _tacName = value; }
             }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
+            }
             public String PacName
             {
                 get { return _pacName; }
                 set { _pacName = value; }
+            }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
+            }
+            public Boolean IsImageUrlAvailable
+            {
+                get { return _isImageUrlAvailable; }
+                set { _isImageUrlAvailable = value; }
+            }
+            public String SomeImageUrlVal
+            {
+                get { return _someImageUrlVal; }
+                set { _someImageUrlVal = value; }
+            }
+            public String SomeConditionalImageUrlVal
+            {
+                get { return _someConditionalImageUrlVal; }
+                set { _someConditionalImageUrlVal = value; }
             }
 
         }

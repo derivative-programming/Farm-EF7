@@ -25,14 +25,44 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<int> GetCountAsync(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -40,14 +70,44 @@ namespace FS.Farm.EF.Reports
         }
 
         public int GetCount(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -55,7 +115,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<List<PacUserDynaFlowTypeListDTO>> GetAsync(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -67,7 +142,22 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -92,7 +182,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public List<PacUserDynaFlowTypeListDTO> Get(
-
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
+           DateTime? someMinUTCDateTimeVal,
+           DateTime? someMinDateVal,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -104,7 +209,22 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-
+                flavorFilterCode,
+                someFilterIntVal,
+                someFilterBigIntVal,
+                someFilterFloatVal,
+                someFilterBitVal,
+                isFilterEditAllowed,
+                isFilterDeleteAllowed,
+                someFilterDecimalVal,
+                someMinUTCDateTimeVal,
+                someMinDateVal,
+                someFilterMoneyVal,
+                someFilterNVarCharVal,
+                someFilterVarCharVal,
+                someFilterTextVal,
+                someFilterPhoneNumber,
+                someFilterEmailAddress,
                 userID,
                 contextCode);
 
@@ -132,11 +252,20 @@ namespace FS.Farm.EF.Reports
         {
             private Guid _dynaFlowTypeCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private String _dynaFlowTypeDescription = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private Int32 _dynaFlowTypeDisplayOrder = 0;
+            private Int32 _someConditionalIntVal = 0;
             private Boolean _dynaFlowTypeIsActive = false;
+            private Boolean _someConditionalBitVal = false;
             private String _dynaFlowTypeLookupEnumName = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private String _dynaFlowTypeName = String.Empty;
+            private String _someConditionalNVarCharVal = String.Empty;
             private Int32 _dynaFlowTypePriorityLevel = 0;
+            private Int32 _someConditionalIntVal = 0;
+            private Boolean _isImageUrlAvailable = false;
+            private String _someImageUrlVal = String.Empty;
+            private String _someConditionalImageUrlVal = String.Empty;
             public Guid DynaFlowTypeCode
             {
                 get { return _dynaFlowTypeCode; }
@@ -147,30 +276,75 @@ namespace FS.Farm.EF.Reports
                 get { return _dynaFlowTypeDescription; }
                 set { _dynaFlowTypeDescription = value; }
             }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
+            }
             public Int32 DynaFlowTypeDisplayOrder
             {
                 get { return _dynaFlowTypeDisplayOrder; }
                 set { _dynaFlowTypeDisplayOrder = value; }
+            }
+            public Int32 SomeConditionalIntVal
+            {
+                get { return _someConditionalIntVal; }
+                set { _someConditionalIntVal = value; }
             }
             public Boolean DynaFlowTypeIsActive
             {
                 get { return _dynaFlowTypeIsActive; }
                 set { _dynaFlowTypeIsActive = value; }
             }
+            public Boolean SomeConditionalBitVal
+            {
+                get { return _someConditionalBitVal; }
+                set { _someConditionalBitVal = value; }
+            }
             public String DynaFlowTypeLookupEnumName
             {
                 get { return _dynaFlowTypeLookupEnumName; }
                 set { _dynaFlowTypeLookupEnumName = value; }
+            }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
             }
             public String DynaFlowTypeName
             {
                 get { return _dynaFlowTypeName; }
                 set { _dynaFlowTypeName = value; }
             }
+            public String SomeConditionalNVarCharVal
+            {
+                get { return _someConditionalNVarCharVal; }
+                set { _someConditionalNVarCharVal = value; }
+            }
             public Int32 DynaFlowTypePriorityLevel
             {
                 get { return _dynaFlowTypePriorityLevel; }
                 set { _dynaFlowTypePriorityLevel = value; }
+            }
+            public Int32 SomeConditionalIntVal
+            {
+                get { return _someConditionalIntVal; }
+                set { _someConditionalIntVal = value; }
+            }
+            public Boolean IsImageUrlAvailable
+            {
+                get { return _isImageUrlAvailable; }
+                set { _isImageUrlAvailable = value; }
+            }
+            public String SomeImageUrlVal
+            {
+                get { return _someImageUrlVal; }
+                set { _someImageUrlVal = value; }
+            }
+            public String SomeConditionalImageUrlVal
+            {
+                get { return _someConditionalImageUrlVal; }
+                set { _someConditionalImageUrlVal = value; }
             }
 
         }

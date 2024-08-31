@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FS.Farm.EF", "FS.Farm.EF\FS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FS.Farm.EF.Test", "FS.Farm.EF.Test\FS.Farm.EF.Test.csproj", "{520FAA74-5645-4C62-8E16-ED974C1F9D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FS.Farm", "FS.Farm\FS.Farm.csproj", "{4A0DACCF-483C-4BCB-978B-44B6CCBCC3A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FS.Farm", "FS.Farm\FS.Farm.csproj", "{4A0DACCF-483C-4BCB-978B-44B6CCBCC3A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AC87CD3-28A2-4C6D-AF26-8E19CC9BC02B}"
+	ProjectSection(SolutionItems) = preProject
+		gen-model.json = gen-model.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
