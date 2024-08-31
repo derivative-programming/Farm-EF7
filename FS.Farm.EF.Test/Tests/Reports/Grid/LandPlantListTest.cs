@@ -35,22 +35,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = await manager.GetTotalCountAsync();
 
                 var resultCount = await reportGenerator.GetCountAsync(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     plant1.LandCodePeek);
 
@@ -78,22 +78,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = manager.GetTotalCount();
 
                 var resultCount = reportGenerator.GetCount(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     plant1.LandCodePeek);
 
@@ -121,22 +121,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = await manager.GetTotalCountAsync();
 
                 var resultCount = await reportGenerator.GetCountAsync(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     Guid.NewGuid());
 
@@ -165,22 +165,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = manager.GetTotalCount();
 
                 var resultCount = reportGenerator.GetCount(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     Guid.NewGuid());
 
@@ -208,22 +208,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = await manager.GetTotalCountAsync();
 
                 var result = await reportGenerator.GetAsync(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     plant1.LandCodePeek,
                     1,
@@ -256,22 +256,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = manager.GetTotalCount();
 
                 var result = reportGenerator.Get(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     plant1.LandCodePeek,
                     1,
@@ -304,22 +304,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = await manager.GetTotalCountAsync();
 
                 var result = await reportGenerator.GetAsync(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     Guid.NewGuid(),
                     1,
@@ -352,22 +352,22 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 var count = manager.GetTotalCount();
 
                 var result = reportGenerator.Get(
-                    null,   //flavorCode
-                    null,   //someIntVal
-                    null,   //someBigIntVal
-                    null,   //someFloatVal
-                    null,   //someBitVal
-                    null,   //isEditAllowed
-                    null,   //isDeleteAllowed
-                    null,   //someDecimalVal
+                    null,   //flavorFilterCode
+                    null,   //someFilterIntVal
+                    null,   //someFilterBigIntVal
+                    null,   //someFilterFloatVal
+                    null,   //someFilterBitVal
+                    null,   //isFilterEditAllowed
+                    null,   //isFilterDeleteAllowed
+                    null,   //someFilterDecimalVal
                     null,   //someMinUTCDateTimeVal
                     null,   //someMinDateVal
-                    null,   //someMoneyVal
-                    null,   //someNVarCharVal
-                    null,   //someVarCharVal
-                    null,   //someTextVal
-                    null,   //somePhoneNumber
-                    null,   //someEmailAddress
+                    null,   //someFilterMoneyVal
+                    null,   //someFilterNVarCharVal
+                    null,   //someFilterVarCharVal
+                    null,   //someFilterTextVal
+                    null,   //someFilterPhoneNumber
+                    null,   //someFilterEmailAddress
                     Guid.Empty,
                     Guid.NewGuid(),
                     1,
