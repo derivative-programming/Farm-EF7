@@ -158,6 +158,9 @@ namespace FS.Farm.EF.Reports
             private Guid _testAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _testConditionalAsyncFlowReqLinkPacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Guid _conditionalBtnExampleLinkTacCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
+            private String _someImageUrlVal = String.Empty;
+            private Boolean _isImageUrlAvailable = false;
+            private String _someConditionalImageUrlVal = String.Empty;
             public String FlavorName
             {
                 get { return _flavorName; }
@@ -297,6 +300,21 @@ namespace FS.Farm.EF.Reports
             {
                 get { return _conditionalBtnExampleLinkTacCode; }
                 set { _conditionalBtnExampleLinkTacCode = value; }
+            }
+            public String SomeImageUrlVal
+            {
+                get { return _someImageUrlVal; }
+                set { _someImageUrlVal = value; }
+            }
+            public Boolean IsImageUrlAvailable
+            {
+                get { return _isImageUrlAvailable; }
+                set { _isImageUrlAvailable = value; }
+            }
+            public String SomeConditionalImageUrlVal
+            {
+                get { return _someConditionalImageUrlVal; }
+                set { _someConditionalImageUrlVal = value; }
             }
 
         }

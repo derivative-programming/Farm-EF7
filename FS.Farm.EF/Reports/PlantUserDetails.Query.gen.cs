@@ -112,6 +112,12 @@ namespace FS.Farm.EF.Reports
 
 					ConditionalBtnExampleLinkTacCode = data.tac.Code.Value,
 
+				SomeImageUrlVal = data.plant.SomeImageUrlVal,
+
+					IsImageUrlAvailable = data.plant.IsImageUrlAvailable.Value,
+
+				SomeConditionalImageUrlVal = data.plant.SomeImageUrlVal,
+
             };
         }
 
@@ -191,6 +197,12 @@ namespace FS.Farm.EF.Reports
 			Pac.Code as TestConditionalAsyncFlowReqLinkPacCode,
 
 			Tac.Code as ConditionalBtnExampleLinkTacCode,
+
+			Plant.SomeImageUrlVal as SomeImageUrlVal,
+
+			Plant.IsImageUrlAvailable as IsImageUrlAvailable,
+
+			Plant.SomeImageUrlVal as SomeConditionalImageUrlVal,
 
 			ROW_NUMBER() OVER(
 				ORDER BY

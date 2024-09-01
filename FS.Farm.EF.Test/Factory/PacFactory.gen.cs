@@ -19,8 +19,7 @@ namespace FS.Farm.EF.Test.Factory
 
             PacManager pacManager = new PacManager(context);
             var pac = pacManager.GetByCode(code);
-
-            result = Factory.GetCodeLineage(context, pac.CodePeek); //ID
+             
                                                                                 //FlvrForeignKeyID
 
             result.Add("PacCode", pac.Code.Value.ToString());
