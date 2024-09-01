@@ -11,7 +11,25 @@ namespace FS.Farm.EF.Test.Factory
 {
     public static class PlantFactory
     {
-        private static int _counter = 0; 
+        private static int _counter = 0;
+
+
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            PlantManager plantManager = new PlantManager(context);
+            var plant = plantManager.GetByCode(code);
+
+//ENDSET
+            result = LandFactory.GetCodeLineage(context, plant.LandCodePeek); //LandID
+                                                                                //FlvrForeignKeyID
+//ENDSET
+
+            result.Add("PlantCode", plant.Code.Value.ToString());
+
+            return result;
+        }
 
         public static async Task<Plant> CreateAsync(FarmDbContext context)
         {

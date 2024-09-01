@@ -13,6 +13,21 @@ namespace FS.Farm.EF.Test.Factory
     {
         private static int _counter = 0;
 
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            DynaFlowTaskTypeManager dynaFlowTaskTypeManager = new DynaFlowTaskTypeManager(context);
+            var dynaFlowTaskType = dynaFlowTaskTypeManager.GetByCode(code);
+
+            result = PacFactory.GetCodeLineage(context, dynaFlowTaskType.PacCodePeek); //PacID
+                                                                                //FlvrForeignKeyID
+
+            result.Add("DynaFlowTaskTypeCode", dynaFlowTaskType.Code.Value.ToString());
+
+            return result;
+        }
+
         public static async Task<DynaFlowTaskType> CreateAsync(FarmDbContext context)
         {
             _counter++;

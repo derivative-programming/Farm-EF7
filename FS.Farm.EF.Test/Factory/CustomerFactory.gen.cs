@@ -13,6 +13,21 @@ namespace FS.Farm.EF.Test.Factory
     {
         private static int _counter = 0;
 
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            CustomerManager customerManager = new CustomerManager(context);
+            var customer = customerManager.GetByCode(code);
+
+            result = TacFactory.GetCodeLineage(context, customer.TacCodePeek); //TacID
+                                                                                //FlvrForeignKeyID
+
+            result.Add("CustomerCode", customer.Code.Value.ToString());
+
+            return result;
+        }
+
         public static async Task<Customer> CreateAsync(FarmDbContext context)
         {
             _counter++;

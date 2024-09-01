@@ -13,6 +13,21 @@ namespace FS.Farm.EF.Test.Factory
     {
         private static int _counter = 0;
 
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            TriStateFilterManager triStateFilterManager = new TriStateFilterManager(context);
+            var triStateFilter = triStateFilterManager.GetByCode(code);
+
+            result = PacFactory.GetCodeLineage(context, triStateFilter.PacCodePeek); //PacID
+                                                                                //FlvrForeignKeyID
+
+            result.Add("TriStateFilterCode", triStateFilter.Code.Value.ToString());
+
+            return result;
+        }
+
         public static async Task<TriStateFilter> CreateAsync(FarmDbContext context)
         {
             _counter++;

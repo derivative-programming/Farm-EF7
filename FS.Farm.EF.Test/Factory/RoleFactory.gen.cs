@@ -13,6 +13,21 @@ namespace FS.Farm.EF.Test.Factory
     {
         private static int _counter = 0;
 
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            RoleManager roleManager = new RoleManager(context);
+            var role = roleManager.GetByCode(code);
+
+            result = PacFactory.GetCodeLineage(context, role.PacCodePeek); //PacID
+                                                                                //FlvrForeignKeyID
+
+            result.Add("RoleCode", role.Code.Value.ToString());
+
+            return result;
+        }
+
         public static async Task<Role> CreateAsync(FarmDbContext context)
         {
             _counter++;

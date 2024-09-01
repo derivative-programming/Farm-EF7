@@ -13,6 +13,21 @@ namespace FS.Farm.EF.Test.Factory
     {
         private static int _counter = 0;
 
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            DateGreaterThanFilterManager dateGreaterThanFilterManager = new DateGreaterThanFilterManager(context);
+            var dateGreaterThanFilter = dateGreaterThanFilterManager.GetByCode(code);
+
+            result = PacFactory.GetCodeLineage(context, dateGreaterThanFilter.PacCodePeek); //PacID
+                                                                                //FlvrForeignKeyID
+
+            result.Add("DateGreaterThanFilterCode", dateGreaterThanFilter.Code.Value.ToString());
+
+            return result;
+        }
+
         public static async Task<DateGreaterThanFilter> CreateAsync(FarmDbContext context)
         {
             _counter++;

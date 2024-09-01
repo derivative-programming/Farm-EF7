@@ -34,10 +34,12 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = await manager.GetTotalCountAsync();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
+
                 var resultCount = await reportGenerator.GetCountAsync(
 
                     Guid.Empty,
-                    dynaFlowTaskType1.PacCodePeek);
+                    contextCode);
 
                 Assert.AreEqual(1, resultCount);
             }
@@ -62,10 +64,12 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
+
                 var resultCount = reportGenerator.GetCount(
 
                     Guid.Empty,
-                    dynaFlowTaskType1.PacCodePeek);
+                    contextCode);
 
                 Assert.AreEqual(1, resultCount);
             }
@@ -89,6 +93,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 await manager.AddAsync(dynaFlowTaskType1);
 
                 var count = await manager.GetTotalCountAsync();
+
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
 
                 var resultCount = await reportGenerator.GetCountAsync(
 
@@ -118,6 +124,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
+
                 var resultCount = reportGenerator.GetCount(
 
                     Guid.Empty,
@@ -146,10 +154,12 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = await manager.GetTotalCountAsync();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
+
                 var result = await reportGenerator.GetAsync(
 
                     Guid.Empty,
-                    dynaFlowTaskType1.PacCodePeek,
+                    contextCode,
                     1,
                     100,
                     string.Empty,
@@ -179,10 +189,12 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
+
                 var result = reportGenerator.Get(
 
                     Guid.Empty,
-                    dynaFlowTaskType1.PacCodePeek,
+                    contextCode,
                     1,
                     100,
                     string.Empty,
@@ -211,6 +223,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 await manager.AddAsync(dynaFlowTaskType1);
 
                 var count = await manager.GetTotalCountAsync();
+
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
 
                 var result = await reportGenerator.GetAsync(
 
@@ -245,6 +259,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTaskType1);
+
                 var result = reportGenerator.Get(
 
                     Guid.Empty,
@@ -256,6 +272,19 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     );
 
                 Assert.AreEqual(0, result.Count);
+            }
+        }
+        private Guid GetPacCode(FarmDbContext dbContext, FS.Farm.EF.Models.DynaFlowTaskType dynaFlowTaskType)
+        {
+            Dictionary<string,string> lineage = DynaFlowTaskTypeFactory.GetCodeLineage(dbContext, dynaFlowTaskType.Code.Value);
+
+            if(lineage.ContainsKey("PacCode"))
+            {
+                return new Guid(lineage["PacCode"]);
+            }
+            else
+            {
+                return Guid.Empty;
             }
         }
         private async Task<FS.Farm.EF.Models.DynaFlowTaskType> CreateTestDynaFlowTaskTypeAsync(FarmDbContext dbContext)

@@ -13,6 +13,21 @@ namespace FS.Farm.EF.Test.Factory
     {
         private static int _counter = 0;
 
+        public static Dictionary<string, string> GetCodeLineage(FarmDbContext context, Guid code)
+        {
+            Dictionary<string,string> result = new Dictionary<string, string>();
+
+            OrgApiKeyManager orgApiKeyManager = new OrgApiKeyManager(context);
+            var orgApiKey = orgApiKeyManager.GetByCode(code);
+
+            result = OrganizationFactory.GetCodeLineage(context, orgApiKey.OrganizationCodePeek); //OrganizationID
+                                                                                //FlvrForeignKeyID
+
+            result.Add("OrgApiKeyCode", orgApiKey.Code.Value.ToString());
+
+            return result;
+        }
+
         public static async Task<OrgApiKey> CreateAsync(FarmDbContext context)
         {
             _counter++;

@@ -34,6 +34,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = await manager.GetTotalCountAsync();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
+
                 var resultCount = await reportGenerator.GetCountAsync(
                     null,   //startedDateGreaterThanFilterCode
                     null,   //processorIdentifier
@@ -41,7 +43,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //isCompletedTriStateFilterCode
                     null,   //isSuccessfulTriStateFilterCode
                     Guid.Empty,
-                    dynaFlowTask1.PacCodePeek);
+                    contextCode);
 
                 Assert.AreEqual(1, resultCount);
             }
@@ -66,6 +68,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
+
                 var resultCount = reportGenerator.GetCount(
                     null,   //startedDateGreaterThanFilterCode
                     null,   //processorIdentifier
@@ -73,7 +77,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //isCompletedTriStateFilterCode
                     null,   //isSuccessfulTriStateFilterCode
                     Guid.Empty,
-                    dynaFlowTask1.PacCodePeek);
+                    contextCode);
 
                 Assert.AreEqual(1, resultCount);
             }
@@ -97,6 +101,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 await manager.AddAsync(dynaFlowTask1);
 
                 var count = await manager.GetTotalCountAsync();
+
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
 
                 var resultCount = await reportGenerator.GetCountAsync(
                     null,   //startedDateGreaterThanFilterCode
@@ -130,6 +136,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
+
                 var resultCount = reportGenerator.GetCount(
                     null,   //startedDateGreaterThanFilterCode
                     null,   //processorIdentifier
@@ -162,6 +170,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = await manager.GetTotalCountAsync();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
+
                 var result = await reportGenerator.GetAsync(
                     null,   //startedDateGreaterThanFilterCode
                     null,   //processorIdentifier
@@ -169,7 +179,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //isCompletedTriStateFilterCode
                     null,   //isSuccessfulTriStateFilterCode
                     Guid.Empty,
-                    dynaFlowTask1.PacCodePeek,
+                    contextCode,
                     1,
                     100,
                     string.Empty,
@@ -199,6 +209,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
+
                 var result = reportGenerator.Get(
                     null,   //startedDateGreaterThanFilterCode
                     null,   //processorIdentifier
@@ -206,7 +218,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //isCompletedTriStateFilterCode
                     null,   //isSuccessfulTriStateFilterCode
                     Guid.Empty,
-                    dynaFlowTask1.PacCodePeek,
+                    contextCode,
                     1,
                     100,
                     string.Empty,
@@ -235,6 +247,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 await manager.AddAsync(dynaFlowTask1);
 
                 var count = await manager.GetTotalCountAsync();
+
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
 
                 var result = await reportGenerator.GetAsync(
                     null,   //startedDateGreaterThanFilterCode
@@ -273,6 +287,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetPacCode(context, dynaFlowTask1);
+
                 var result = reportGenerator.Get(
                     null,   //startedDateGreaterThanFilterCode
                     null,   //processorIdentifier
@@ -288,6 +304,19 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     );
 
                 Assert.AreEqual(0, result.Count);
+            }
+        }
+        private Guid GetPacCode(FarmDbContext dbContext, FS.Farm.EF.Models.DynaFlowTask dynaFlowTask)
+        {
+            Dictionary<string,string> lineage = DynaFlowTaskFactory.GetCodeLineage(dbContext, dynaFlowTask.Code.Value);
+
+            if(lineage.ContainsKey("PacCode"))
+            {
+                return new Guid(lineage["PacCode"]);
+            }
+            else
+            {
+                return Guid.Empty;
             }
         }
         private async Task<FS.Farm.EF.Models.DynaFlowTask> CreateTestDynaFlowTaskAsync(FarmDbContext dbContext)

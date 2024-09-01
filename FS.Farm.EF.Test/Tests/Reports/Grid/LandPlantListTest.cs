@@ -34,6 +34,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = await manager.GetTotalCountAsync();
 
+                Guid contextCode = GetLandCode(context, plant1);
+
                 var resultCount = await reportGenerator.GetCountAsync(
                     null,   //flavorFilterCode
                     null,   //someFilterIntVal
@@ -52,7 +54,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
                     Guid.Empty,
-                    plant1.LandCodePeek);
+                    contextCode);
 
                 Assert.AreEqual(1, resultCount);
             }
@@ -77,6 +79,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetLandCode(context, plant1);
+
                 var resultCount = reportGenerator.GetCount(
                     null,   //flavorFilterCode
                     null,   //someFilterIntVal
@@ -95,7 +99,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
                     Guid.Empty,
-                    plant1.LandCodePeek);
+                    contextCode);
 
                 Assert.AreEqual(1, resultCount);
             }
@@ -119,6 +123,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 await manager.AddAsync(plant1);
 
                 var count = await manager.GetTotalCountAsync();
+
+                Guid contextCode = GetLandCode(context, plant1);
 
                 var resultCount = await reportGenerator.GetCountAsync(
                     null,   //flavorFilterCode
@@ -164,6 +170,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetLandCode(context, plant1);
+
                 var resultCount = reportGenerator.GetCount(
                     null,   //flavorFilterCode
                     null,   //someFilterIntVal
@@ -207,6 +215,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = await manager.GetTotalCountAsync();
 
+                Guid contextCode = GetLandCode(context, plant1);
+
                 var result = await reportGenerator.GetAsync(
                     null,   //flavorFilterCode
                     null,   //someFilterIntVal
@@ -225,7 +235,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
                     Guid.Empty,
-                    plant1.LandCodePeek,
+                    contextCode,
                     1,
                     100,
                     string.Empty,
@@ -255,6 +265,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetLandCode(context, plant1);
+
                 var result = reportGenerator.Get(
                     null,   //flavorFilterCode
                     null,   //someFilterIntVal
@@ -273,7 +285,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
                     Guid.Empty,
-                    plant1.LandCodePeek,
+                    contextCode,
                     1,
                     100,
                     string.Empty,
@@ -302,6 +314,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                 await manager.AddAsync(plant1);
 
                 var count = await manager.GetTotalCountAsync();
+
+                Guid contextCode = GetLandCode(context, plant1);
 
                 var result = await reportGenerator.GetAsync(
                     null,   //flavorFilterCode
@@ -351,6 +365,8 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
 
                 var count = manager.GetTotalCount();
 
+                Guid contextCode = GetLandCode(context, plant1);
+
                 var result = reportGenerator.Get(
                     null,   //flavorFilterCode
                     null,   //someFilterIntVal
@@ -377,6 +393,19 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     );
 
                 Assert.AreEqual(0, result.Count);
+            }
+        }
+        private Guid GetLandCode(FarmDbContext dbContext, FS.Farm.EF.Models.Plant plant)
+        {
+            Dictionary<string,string> lineage = PlantFactory.GetCodeLineage(dbContext, plant.Code.Value);
+
+            if(lineage.ContainsKey("LandCode"))
+            {
+                return new Guid(lineage["LandCode"]);
+            }
+            else
+            {
+                return Guid.Empty;
             }
         }
         private async Task<FS.Farm.EF.Models.Plant> CreateTestPlantAsync(FarmDbContext dbContext)

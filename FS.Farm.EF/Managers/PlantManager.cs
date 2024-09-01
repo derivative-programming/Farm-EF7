@@ -15,7 +15,7 @@ namespace FS.Farm.EF.Managers
 		public PlantManager(FarmDbContext dbContext)
 		{
 			_dbContext = dbContext;
-		}
+		} 
 
 		public async Task<Plant> AddAsync(Plant plant)
 		{
