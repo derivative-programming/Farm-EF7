@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.TriStateFilterObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<TriStateFilter> results = data.Select(r => r.TriStateFilterObj).ToList();
 

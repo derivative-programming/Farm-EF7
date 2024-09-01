@@ -18,7 +18,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlowType = await DynaFlowTypeFactory.CreateAndSaveAsync(context);//DynaFlowTypeID
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             return new DynaFlowTypeSchedule
             {
                 DynaFlowTypeScheduleID = _counter,
@@ -29,7 +28,7 @@ namespace FS.Farm.EF.Test.Factory
                 LastUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 PacID = pac.PacID,
-                            };
+            };
         }
 
         public static DynaFlowTypeSchedule Create(FarmDbContext context)
@@ -37,7 +36,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlowType = DynaFlowTypeFactory.CreateAndSave(context);//DynaFlowTypeID
             var pac = PacFactory.CreateAndSave(context); //PacID
-
             return new DynaFlowTypeSchedule
             {
                 DynaFlowTypeScheduleID = _counter,
@@ -48,14 +46,13 @@ namespace FS.Farm.EF.Test.Factory
                 LastUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 PacID = pac.PacID,
-                            };
+            };
         }
         public static async Task<DynaFlowTypeSchedule> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var dynaFlowType = await DynaFlowTypeFactory.CreateAndSaveAsync(context);//DynaFlowTypeID
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             DynaFlowTypeSchedule result =  new DynaFlowTypeSchedule
             {
                 DynaFlowTypeScheduleID = _counter,
@@ -66,7 +63,7 @@ namespace FS.Farm.EF.Test.Factory
                 LastUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 PacID = pac.PacID,
-                            };
+            };
 
             DynaFlowTypeScheduleManager dynaFlowTypeScheduleManager = new DynaFlowTypeScheduleManager(context);
             result = await dynaFlowTypeScheduleManager.AddAsync(result);
@@ -78,7 +75,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlowType =   DynaFlowTypeFactory.CreateAndSave(context);//DynaFlowTypeID
             var pac =   PacFactory.CreateAndSave(context); //PacID
-
             DynaFlowTypeSchedule result = new DynaFlowTypeSchedule
             {
                 DynaFlowTypeScheduleID = _counter,
@@ -89,7 +85,7 @@ namespace FS.Farm.EF.Test.Factory
                 LastUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 PacID = pac.PacID,
-                            };
+            };
 
             DynaFlowTypeScheduleManager dynaFlowTypeScheduleManager = new DynaFlowTypeScheduleManager(context);
             result = dynaFlowTypeScheduleManager.Add(result);

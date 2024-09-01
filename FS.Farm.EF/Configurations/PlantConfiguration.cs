@@ -44,7 +44,7 @@ namespace FS.Farm.EF.Configurations
             //SomeUTCDateTimeVal
             //String someVarCharVal,
             // someDateVal, 
-            //ENDSET
+//ENDSET
 
 
             bool isDBColumnIndexed = false;
@@ -164,7 +164,7 @@ namespace FS.Farm.EF.Configurations
             }
             //Boolean isImageUrlAvailable 
             //String someImageUrlVal  
-            //ENDSET
+//ENDSET
 
             builder.HasIndex(p => p.Code)
                 .IsUnique();
@@ -176,7 +176,7 @@ namespace FS.Farm.EF.Configurations
 
             builder.Ignore(p => p.FlvrForeignKeyCodePeek); //FlvrForeignKeyID
             builder.Ignore(p => p.LandCodePeek); //LandID
-            //ENDSET
+//ENDSET
 
             builder.Property<DateTime>("insert_utc_date_time");
             builder.Property<DateTime>("last_updated_utc_date_time");

@@ -163,7 +163,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "RoleInsert";
             Log(procedureName + "::Start");
@@ -194,7 +194,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -214,7 +214,6 @@ namespace FS.Farm.Providers.EF7
                 role.LookupEnumName = lookupEnumName;
                 role.Name = name;
                 role.PacID = pacID;
-
                 role = roleManager.Add(role);
 
                 iOut = role.RoleID;
@@ -239,7 +238,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "RoleInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -270,7 +269,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -290,7 +289,6 @@ namespace FS.Farm.Providers.EF7
                 role.LookupEnumName = lookupEnumName;
                 role.Name = name;
                 role.PacID = pacID;
-
                 role = await roleManager.AddAsync(role);
 
                 iOut = role.RoleID;
@@ -316,7 +314,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "RoleUpdate";
@@ -348,7 +346,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -365,7 +363,7 @@ namespace FS.Farm.Providers.EF7
                 role.LookupEnumName = lookupEnumName;
                 role.Name = name;
                 role.PacID = pacID;
-                                role.LastChangeCode = lastChangeCode;
+                role.LastChangeCode = lastChangeCode;
 
                 bool success = roleManager.Update(role);
                 if (!success)
@@ -394,7 +392,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "RoleUpdateAsync";
@@ -426,7 +424,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -444,7 +442,7 @@ namespace FS.Farm.Providers.EF7
                 role.LookupEnumName = lookupEnumName;
                 role.Name = name;
                 role.PacID = pacID;
-                                role.LastChangeCode = lastChangeCode;
+                role.LastChangeCode = lastChangeCode;
 
                 bool success = await roleManager.UpdateAsync(role);
                 if(!success)
@@ -473,7 +471,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchRoles";
             Log(procedureName + "::Start");
@@ -511,7 +509,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchRolesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1122,7 +1120,6 @@ namespace FS.Farm.Providers.EF7
                     role.LookupEnumName = item.LookupEnumName;
                     role.Name = item.Name;
                     role.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1145,7 +1142,7 @@ namespace FS.Farm.Providers.EF7
                         role.Name = encryptionServices.Encrypt(role.Name);
                     }
                     //Int32 pacID,
-                                        roles.Add(role);
+                    roles.Add(role);
                 }
 
                 roleManager.BulkInsert(roles);
@@ -1208,7 +1205,6 @@ namespace FS.Farm.Providers.EF7
                     role.LookupEnumName = item.LookupEnumName;
                     role.Name = item.Name;
                     role.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1231,7 +1227,7 @@ namespace FS.Farm.Providers.EF7
                         role.Name = encryptionServices.Encrypt(role.Name);
                     }
                     //Int32 pacID,
-                                        roles.Add(role);
+                    roles.Add(role);
                 }
 
                 await roleManager.BulkInsertAsync(roles);
@@ -1292,7 +1288,7 @@ namespace FS.Farm.Providers.EF7
                     role.LookupEnumName = item.LookupEnumName;
                     role.Name = item.Name;
                     role.PacID = item.PacID;
-                                        role.LastChangeCode = item.LastChangeCode;
+                    role.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1379,7 +1375,7 @@ namespace FS.Farm.Providers.EF7
                     role.LookupEnumName = item.LookupEnumName;
                     role.Name = item.Name;
                     role.PacID = item.PacID;
-                                        role.LastChangeCode = item.LastChangeCode;
+                    role.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1403,7 +1399,7 @@ namespace FS.Farm.Providers.EF7
                         role.Name = encryptionServices.Encrypt(role.Name);
                     }
                     //Int32 pacID,
-                                        roles.Add(role);
+                    roles.Add(role);
                 }
 
                 roleManager.BulkUpdate(roles);
@@ -1463,7 +1459,7 @@ namespace FS.Farm.Providers.EF7
                     role.LookupEnumName = item.LookupEnumName;
                     role.Name = item.Name;
                     role.PacID = item.PacID;
-                                        role.LastChangeCode = item.LastChangeCode;
+                    role.LastChangeCode = item.LastChangeCode;
                     roles.Add(role);
                 }
 
@@ -1524,7 +1520,7 @@ namespace FS.Farm.Providers.EF7
                     role.LookupEnumName = item.LookupEnumName;
                     role.Name = item.Name;
                     role.PacID = item.PacID;
-                                        role.LastChangeCode = item.LastChangeCode;
+                    role.LastChangeCode = item.LastChangeCode;
                     roles.Add(role);
                 }
 

@@ -965,7 +965,7 @@ namespace FS.Farm.EF.Managers
             {
                 item.PlantObj.FlvrForeignKeyCodePeek = item.FlvrForeignKeyCode.Value; //FlvrForeignKeyID
                 item.PlantObj.LandCodePeek = item.LandCode.Value; //LandID
-                //ENDSET
+//ENDSET
             }
 
             List<Plant> results = data.Select(r => r.PlantObj).ToList(); 
@@ -1024,7 +1024,7 @@ namespace FS.Farm.EF.Managers
             return finalPlants;
         }
 
-        //ENDSET
+//ENDSET
 
 
         //GENINCLUDEFILE[GENVALNameManager.include.*]

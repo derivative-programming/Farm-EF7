@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.DFMaintenanceObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<DFMaintenance> results = data.Select(r => r.DFMaintenanceObj).ToList();
 

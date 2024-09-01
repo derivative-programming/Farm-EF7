@@ -164,7 +164,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterInsert";
             Log(procedureName + "::Start");
@@ -196,7 +196,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -217,7 +217,6 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
-
                 dateGreaterThanFilter = dateGreaterThanFilterManager.Add(dateGreaterThanFilter);
 
                 iOut = dateGreaterThanFilter.DateGreaterThanFilterID;
@@ -243,7 +242,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -275,7 +274,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -296,7 +295,6 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
-
                 dateGreaterThanFilter = await dateGreaterThanFilterManager.AddAsync(dateGreaterThanFilter);
 
                 iOut = dateGreaterThanFilter.DateGreaterThanFilterID;
@@ -323,7 +321,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterUpdate";
@@ -356,7 +354,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -374,7 +372,7 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
-                                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
+                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
 
                 bool success = dateGreaterThanFilterManager.Update(dateGreaterThanFilter);
                 if (!success)
@@ -404,7 +402,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DateGreaterThanFilterUpdateAsync";
@@ -437,7 +435,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -456,7 +454,7 @@ namespace FS.Farm.Providers.EF7
                 dateGreaterThanFilter.LookupEnumName = lookupEnumName;
                 dateGreaterThanFilter.Name = name;
                 dateGreaterThanFilter.PacID = pacID;
-                                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
+                dateGreaterThanFilter.LastChangeCode = lastChangeCode;
 
                 bool success = await dateGreaterThanFilterManager.UpdateAsync(dateGreaterThanFilter);
                 if(!success)
@@ -486,7 +484,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDateGreaterThanFilters";
             Log(procedureName + "::Start");
@@ -525,7 +523,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDateGreaterThanFiltersAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1137,7 +1135,6 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //Int32 dayCount,
                     //String description,
@@ -1161,7 +1158,7 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
-                                        dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
 
                 dateGreaterThanFilterManager.BulkInsert(dateGreaterThanFilters);
@@ -1225,7 +1222,6 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //Int32 dayCount,
                     //String description,
@@ -1249,7 +1245,7 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
-                                        dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
 
                 await dateGreaterThanFilterManager.BulkInsertAsync(dateGreaterThanFilters);
@@ -1311,7 +1307,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 dayCount,
@@ -1400,7 +1396,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 dayCount,
@@ -1425,7 +1421,7 @@ namespace FS.Farm.Providers.EF7
                         dateGreaterThanFilter.Name = encryptionServices.Encrypt(dateGreaterThanFilter.Name);
                     }
                     //Int32 pacID,
-                                        dateGreaterThanFilters.Add(dateGreaterThanFilter);
+                    dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
 
                 dateGreaterThanFilterManager.BulkUpdate(dateGreaterThanFilters);
@@ -1486,7 +1482,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
 
@@ -1548,7 +1544,7 @@ namespace FS.Farm.Providers.EF7
                     dateGreaterThanFilter.LookupEnumName = item.LookupEnumName;
                     dateGreaterThanFilter.Name = item.Name;
                     dateGreaterThanFilter.PacID = item.PacID;
-                                        dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
+                    dateGreaterThanFilter.LastChangeCode = item.LastChangeCode;
                     dateGreaterThanFilters.Add(dateGreaterThanFilter);
                 }
 

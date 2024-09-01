@@ -17,7 +17,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             return new DynaFlowTaskType
             {
                 DynaFlowTaskTypeID = _counter,
@@ -29,14 +28,13 @@ namespace FS.Farm.EF.Test.Factory
                 MaxRetryCount = 0,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
         }
 
         public static DynaFlowTaskType Create(FarmDbContext context)
         {
             _counter++;
             var pac = PacFactory.CreateAndSave(context); //PacID
-
             return new DynaFlowTaskType
             {
                 DynaFlowTaskTypeID = _counter,
@@ -48,13 +46,12 @@ namespace FS.Farm.EF.Test.Factory
                 MaxRetryCount = 0,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
         }
         public static async Task<DynaFlowTaskType> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             DynaFlowTaskType result =  new DynaFlowTaskType
             {
                 DynaFlowTaskTypeID = _counter,
@@ -66,7 +63,7 @@ namespace FS.Farm.EF.Test.Factory
                 MaxRetryCount = 0,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
 
             DynaFlowTaskTypeManager dynaFlowTaskTypeManager = new DynaFlowTaskTypeManager(context);
             result = await dynaFlowTaskTypeManager.AddAsync(result);
@@ -77,7 +74,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac =   PacFactory.CreateAndSave(context); //PacID
-
             DynaFlowTaskType result = new DynaFlowTaskType
             {
                 DynaFlowTaskTypeID = _counter,
@@ -89,7 +85,7 @@ namespace FS.Farm.EF.Test.Factory
                 MaxRetryCount = 0,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
 
             DynaFlowTaskTypeManager dynaFlowTaskTypeManager = new DynaFlowTaskTypeManager(context);
             result = dynaFlowTaskTypeManager.Add(result);

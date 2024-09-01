@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.DynaFlowTypeObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<DynaFlowType> results = data.Select(r => r.DynaFlowTypeObj).ToList();
 

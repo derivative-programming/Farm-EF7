@@ -160,6 +160,7 @@ namespace FS.Farm.Providers.EF7
             Int32 flvrForeignKeyID,
             Boolean isDeleteAllowed,
             Boolean isEditAllowed,
+            Boolean isImageUrlAvailable,
             Int32 landID,
             String otherFlavor,
             Int64 someBigIntVal,
@@ -168,6 +169,7 @@ namespace FS.Farm.Providers.EF7
             Decimal someDecimalVal,
             String someEmailAddress,
             Double someFloatVal,
+            String someImageUrlVal,
             Int32 someIntVal,
             Decimal someMoneyVal,
             String someNVarCharVal,
@@ -176,7 +178,7 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "PlantInsert";
             Log(procedureName + "::Start");
@@ -186,6 +188,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
+            //Boolean isImageUrlAvailable,
             //Int32 landID,
             //String otherFlavor,
             isEncrypted = false;
@@ -203,6 +206,13 @@ namespace FS.Farm.Providers.EF7
             //Decimal someDecimalVal,
             //String someEmailAddress,
             //Double someFloatVal,
+            //String someImageUrlVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices SomeImageUrlValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someImageUrlVal = SomeImageUrlValEncryptionServices.Encrypt(someImageUrlVal);
+            }
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
@@ -220,13 +230,7 @@ namespace FS.Farm.Providers.EF7
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String someVarCharVal,
-            isEncrypted = false;
-            if (isEncrypted)
-            {
-                FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
-                someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
-            }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -243,6 +247,7 @@ namespace FS.Farm.Providers.EF7
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
                 plant.IsEditAllowed = isEditAllowed;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.LandID = landID;
                 plant.OtherFlavor = otherFlavor;
                 plant.SomeBigIntVal = someBigIntVal;
@@ -251,6 +256,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeDecimalVal = someDecimalVal;
                 plant.SomeEmailAddress = someEmailAddress;
                 plant.SomeFloatVal = (float)someFloatVal;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 plant.SomeIntVal = someIntVal;
                 plant.SomeMoneyVal = someMoneyVal;
                 plant.SomeNVarCharVal = someNVarCharVal;
@@ -259,7 +265,6 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-
                 plant = plantManager.Add(plant);
 
                 iOut = plant.PlantID;
@@ -281,6 +286,7 @@ namespace FS.Farm.Providers.EF7
             Int32 flvrForeignKeyID,
             Boolean isDeleteAllowed,
             Boolean isEditAllowed,
+            Boolean isImageUrlAvailable,
             Int32 landID,
             String otherFlavor,
             Int64 someBigIntVal,
@@ -289,6 +295,7 @@ namespace FS.Farm.Providers.EF7
             Decimal someDecimalVal,
             String someEmailAddress,
             Double someFloatVal,
+            String someImageUrlVal,
             Int32 someIntVal,
             Decimal someMoneyVal,
             String someNVarCharVal,
@@ -297,7 +304,7 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "PlantInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -307,6 +314,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
+            //Boolean isImageUrlAvailable,
             //Int32 landID,
             //String otherFlavor,
             isEncrypted = false;
@@ -324,6 +332,13 @@ namespace FS.Farm.Providers.EF7
             //Decimal someDecimalVal,
             //String someEmailAddress,
             //Double someFloatVal,
+            //String someImageUrlVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices SomeImageUrlValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someImageUrlVal = SomeImageUrlValEncryptionServices.Encrypt(someImageUrlVal);
+            }
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
@@ -341,13 +356,7 @@ namespace FS.Farm.Providers.EF7
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String someVarCharVal,
-            isEncrypted = false;
-            if (isEncrypted)
-            {
-                FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
-                someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
-            }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -364,6 +373,7 @@ namespace FS.Farm.Providers.EF7
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
                 plant.IsEditAllowed = isEditAllowed;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.LandID = landID;
                 plant.OtherFlavor = otherFlavor;
                 plant.SomeBigIntVal = someBigIntVal;
@@ -372,6 +382,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeDecimalVal = someDecimalVal;
                 plant.SomeEmailAddress = someEmailAddress;
                 plant.SomeFloatVal = (float)someFloatVal;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 plant.SomeIntVal = someIntVal;
                 plant.SomeMoneyVal = someMoneyVal;
                 plant.SomeNVarCharVal = someNVarCharVal;
@@ -380,7 +391,6 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-
                 plant = await plantManager.AddAsync(plant);
 
                 iOut = plant.PlantID;
@@ -403,6 +413,7 @@ namespace FS.Farm.Providers.EF7
             Int32 flvrForeignKeyID,
             Boolean isDeleteAllowed,
             Boolean isEditAllowed,
+            Boolean isImageUrlAvailable,
             Int32 landID,
             String otherFlavor,
             Int64 someBigIntVal,
@@ -411,6 +422,7 @@ namespace FS.Farm.Providers.EF7
             Decimal someDecimalVal,
             String someEmailAddress,
             Double someFloatVal,
+            String someImageUrlVal,
             Int32 someIntVal,
             Decimal someMoneyVal,
             String someNVarCharVal,
@@ -419,7 +431,7 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "PlantUpdate";
@@ -430,6 +442,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
+            //Boolean isImageUrlAvailable,
             //Int32 landID,
             //String otherFlavor,
             isEncrypted = false;
@@ -447,6 +460,13 @@ namespace FS.Farm.Providers.EF7
             //Decimal someDecimalVal,
             //String someEmailAddress,
             //Double someFloatVal,
+            //String someImageUrlVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices SomeImageUrlValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someImageUrlVal = SomeImageUrlValEncryptionServices.Encrypt(someImageUrlVal);
+            }
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
@@ -464,13 +484,7 @@ namespace FS.Farm.Providers.EF7
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String someVarCharVal,
-            isEncrypted = false;
-            if (isEncrypted)
-            {
-                FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
-                someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
-            }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -484,6 +498,7 @@ namespace FS.Farm.Providers.EF7
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
                 plant.IsEditAllowed = isEditAllowed;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.LandID = landID;
                 plant.OtherFlavor = otherFlavor;
                 plant.SomeBigIntVal = someBigIntVal;
@@ -492,6 +507,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeDecimalVal = someDecimalVal;
                 plant.SomeEmailAddress = someEmailAddress;
                 plant.SomeFloatVal = (float)someFloatVal;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 plant.SomeIntVal = someIntVal;
                 plant.SomeMoneyVal = someMoneyVal;
                 plant.SomeNVarCharVal = someNVarCharVal;
@@ -500,7 +516,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-                                plant.LastChangeCode = lastChangeCode;
+                plant.LastChangeCode = lastChangeCode;
 
                 bool success = plantManager.Update(plant);
                 if (!success)
@@ -526,6 +542,7 @@ namespace FS.Farm.Providers.EF7
             Int32 flvrForeignKeyID,
             Boolean isDeleteAllowed,
             Boolean isEditAllowed,
+            Boolean isImageUrlAvailable,
             Int32 landID,
             String otherFlavor,
             Int64 someBigIntVal,
@@ -534,6 +551,7 @@ namespace FS.Farm.Providers.EF7
             Decimal someDecimalVal,
             String someEmailAddress,
             Double someFloatVal,
+            String someImageUrlVal,
             Int32 someIntVal,
             Decimal someMoneyVal,
             String someNVarCharVal,
@@ -542,7 +560,7 @@ namespace FS.Farm.Providers.EF7
             Guid someUniqueidentifierVal,
             DateTime someUTCDateTimeVal,
             String someVarCharVal,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "PlantUpdateAsync";
@@ -553,6 +571,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 flvrForeignKeyID,
             //Boolean isDeleteAllowed,
             //Boolean isEditAllowed,
+            //Boolean isImageUrlAvailable,
             //Int32 landID,
             //String otherFlavor,
             isEncrypted = false;
@@ -570,6 +589,13 @@ namespace FS.Farm.Providers.EF7
             //Decimal someDecimalVal,
             //String someEmailAddress,
             //Double someFloatVal,
+            //String someImageUrlVal,
+            isEncrypted = false;
+            if (isEncrypted)
+            {
+                FS.Common.Encryption.EncryptionServices SomeImageUrlValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
+                someImageUrlVal = SomeImageUrlValEncryptionServices.Encrypt(someImageUrlVal);
+            }
             //Int32 someIntVal,
             //Decimal someMoneyVal,
             //String someNVarCharVal,
@@ -587,13 +613,7 @@ namespace FS.Farm.Providers.EF7
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //String someVarCharVal,
-            isEncrypted = false;
-            if (isEncrypted)
-            {
-                FS.Common.Encryption.EncryptionServices SomeVarCharValEncryptionServices = new FS.Common.Encryption.EncryptionServices();
-                someVarCharVal = SomeVarCharValEncryptionServices.Encrypt(someVarCharVal);
-            }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -608,6 +628,7 @@ namespace FS.Farm.Providers.EF7
                 plant.FlvrForeignKeyID = flvrForeignKeyID;
                 plant.IsDeleteAllowed = isDeleteAllowed;
                 plant.IsEditAllowed = isEditAllowed;
+                plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.LandID = landID;
                 plant.OtherFlavor = otherFlavor;
                 plant.SomeBigIntVal = someBigIntVal;
@@ -616,6 +637,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeDecimalVal = someDecimalVal;
                 plant.SomeEmailAddress = someEmailAddress;
                 plant.SomeFloatVal = (float)someFloatVal;
+                plant.SomeImageUrlVal = someImageUrlVal;
                 plant.SomeIntVal = someIntVal;
                 plant.SomeMoneyVal = someMoneyVal;
                 plant.SomeNVarCharVal = someNVarCharVal;
@@ -624,7 +646,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeUniqueidentifierVal = someUniqueidentifierVal;
                 plant.SomeUTCDateTimeVal = someUTCDateTimeVal;
                 plant.SomeVarCharVal = someVarCharVal;
-                                plant.LastChangeCode = lastChangeCode;
+                plant.LastChangeCode = lastChangeCode;
 
                 bool success = await plantManager.UpdateAsync(plant);
                 if(!success)
@@ -650,6 +672,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByFlvrForeignKeyID, Int32 flvrForeignKeyID,
             bool searchByIsDeleteAllowed, Boolean isDeleteAllowed,
             bool searchByIsEditAllowed, Boolean isEditAllowed,
+            bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
             bool searchByLandID, Int32 landID,
             bool searchByOtherFlavor, String otherFlavor,
             bool searchBySomeBigIntVal, Int64 someBigIntVal,
@@ -658,6 +681,7 @@ namespace FS.Farm.Providers.EF7
             bool searchBySomeDecimalVal, Decimal someDecimalVal,
             bool searchBySomeEmailAddress, String someEmailAddress,
             bool searchBySomeFloatVal, Double someFloatVal,
+            bool searchBySomeImageUrlVal, String someImageUrlVal,
             bool searchBySomeIntVal, Int32 someIntVal,
             bool searchBySomeMoneyVal, Decimal someMoneyVal,
             bool searchBySomeNVarCharVal, String someNVarCharVal,
@@ -666,7 +690,7 @@ namespace FS.Farm.Providers.EF7
             bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
             bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
             bool searchBySomeVarCharVal, String someVarCharVal,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlants";
             Log(procedureName + "::Start");
@@ -701,6 +725,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByFlvrForeignKeyID, Int32 flvrForeignKeyID,
                     bool searchByIsDeleteAllowed, Boolean isDeleteAllowed,
                     bool searchByIsEditAllowed, Boolean isEditAllowed,
+                    bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
                     bool searchByLandID, Int32 landID,
                     bool searchByOtherFlavor, String otherFlavor,
                     bool searchBySomeBigIntVal, Int64 someBigIntVal,
@@ -709,6 +734,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchBySomeDecimalVal, Decimal someDecimalVal,
                     bool searchBySomeEmailAddress, String someEmailAddress,
                     bool searchBySomeFloatVal, Double someFloatVal,
+                    bool searchBySomeImageUrlVal, String someImageUrlVal,
                     bool searchBySomeIntVal, Int32 someIntVal,
                     bool searchBySomeMoneyVal, Decimal someMoneyVal,
                     bool searchBySomeNVarCharVal, String someNVarCharVal,
@@ -717,7 +743,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchBySomeUniqueidentifierVal, Guid someUniqueidentifierVal,
                     bool searchBySomeUTCDateTimeVal, DateTime someUTCDateTimeVal,
                     bool searchBySomeVarCharVal, String someVarCharVal,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlantsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1325,6 +1351,7 @@ namespace FS.Farm.Providers.EF7
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.LandID = item.LandID;
                     plant.OtherFlavor = item.OtherFlavor;
                     plant.SomeBigIntVal = item.SomeBigIntVal;
@@ -1333,6 +1360,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeDecimalVal = item.SomeDecimalVal;
                     plant.SomeEmailAddress = item.SomeEmailAddress;
                     plant.SomeFloatVal = (float)item.SomeFloatVal;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     plant.SomeIntVal = item.SomeIntVal;
                     plant.SomeMoneyVal = item.SomeMoneyVal;
                     plant.SomeNVarCharVal = item.SomeNVarCharVal;
@@ -1341,11 +1369,11 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
                     //Boolean isEditAllowed,
+                    //Boolean isImageUrlAvailable,
                     //Int32 landID,
                     //String otherFlavor,
                     isEncrypted = false;
@@ -1362,6 +1390,12 @@ namespace FS.Farm.Providers.EF7
                     //Decimal someDecimalVal,
                     //String someEmailAddress,
                     //Double someFloatVal,
+                    //String someImageUrlVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeImageUrlVal = encryptionServices.Encrypt(plant.SomeImageUrlVal);
+                    }
                     //Int32 someIntVal,
                     //Decimal someMoneyVal,
                     //String someNVarCharVal,
@@ -1378,12 +1412,7 @@ namespace FS.Farm.Providers.EF7
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //String someVarCharVal,
-                    isEncrypted = false;
-                    if (isEncrypted)
-                    {
-                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
-                    }
-                                        plants.Add(plant);
+                    plants.Add(plant);
                 }
 
                 plantManager.BulkInsert(plants);
@@ -1443,6 +1472,7 @@ namespace FS.Farm.Providers.EF7
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.LandID = item.LandID;
                     plant.OtherFlavor = item.OtherFlavor;
                     plant.SomeBigIntVal = item.SomeBigIntVal;
@@ -1451,6 +1481,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeDecimalVal = item.SomeDecimalVal;
                     plant.SomeEmailAddress = item.SomeEmailAddress;
                     plant.SomeFloatVal = (float)item.SomeFloatVal;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     plant.SomeIntVal = item.SomeIntVal;
                     plant.SomeMoneyVal = item.SomeMoneyVal;
                     plant.SomeNVarCharVal = item.SomeNVarCharVal;
@@ -1459,11 +1490,11 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
                     //Boolean isEditAllowed,
+                    //Boolean isImageUrlAvailable,
                     //Int32 landID,
                     //String otherFlavor,
                     isEncrypted = false;
@@ -1480,6 +1511,12 @@ namespace FS.Farm.Providers.EF7
                     //Decimal someDecimalVal,
                     //String someEmailAddress,
                     //Double someFloatVal,
+                    //String someImageUrlVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeImageUrlVal = encryptionServices.Encrypt(plant.SomeImageUrlVal);
+                    }
                     //Int32 someIntVal,
                     //Decimal someMoneyVal,
                     //String someNVarCharVal,
@@ -1496,12 +1533,7 @@ namespace FS.Farm.Providers.EF7
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //String someVarCharVal,
-                    isEncrypted = false;
-                    if (isEncrypted)
-                    {
-                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
-                    }
-                                        plants.Add(plant);
+                    plants.Add(plant);
                 }
 
                 await plantManager.BulkInsertAsync(plants);
@@ -1559,6 +1591,7 @@ namespace FS.Farm.Providers.EF7
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.LandID = item.LandID;
                     plant.OtherFlavor = item.OtherFlavor;
                     plant.SomeBigIntVal = item.SomeBigIntVal;
@@ -1567,6 +1600,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeDecimalVal = item.SomeDecimalVal;
                     plant.SomeEmailAddress = item.SomeEmailAddress;
                     plant.SomeFloatVal = (float)item.SomeFloatVal;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     plant.SomeIntVal = item.SomeIntVal;
                     plant.SomeMoneyVal = item.SomeMoneyVal;
                     plant.SomeNVarCharVal = item.SomeNVarCharVal;
@@ -1575,12 +1609,13 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                                        plant.LastChangeCode = item.LastChangeCode;
+                    plant.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
                     //Boolean isEditAllowed,
+                    //Boolean isImageUrlAvailable,
                     //Int32 landID,
                     //String otherFlavor,
                     isEncrypted = false;
@@ -1597,6 +1632,12 @@ namespace FS.Farm.Providers.EF7
                     //Decimal someDecimalVal,
                     //String someEmailAddress,
                     //Double someFloatVal,
+                    //String someImageUrlVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeImageUrlVal = encryptionServices.Encrypt(plant.SomeImageUrlVal);
+                    }
                     //Int32 someIntVal,
                     //Decimal someMoneyVal,
                     //String someNVarCharVal,
@@ -1613,11 +1654,6 @@ namespace FS.Farm.Providers.EF7
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //String someVarCharVal,
-                    isEncrypted = false;
-                    if (isEncrypted)
-                    {
-                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
-                    }
 
                     plants.Add(plant);
                 }
@@ -1678,6 +1714,7 @@ namespace FS.Farm.Providers.EF7
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.LandID = item.LandID;
                     plant.OtherFlavor = item.OtherFlavor;
                     plant.SomeBigIntVal = item.SomeBigIntVal;
@@ -1686,6 +1723,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeDecimalVal = item.SomeDecimalVal;
                     plant.SomeEmailAddress = item.SomeEmailAddress;
                     plant.SomeFloatVal = (float)item.SomeFloatVal;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     plant.SomeIntVal = item.SomeIntVal;
                     plant.SomeMoneyVal = item.SomeMoneyVal;
                     plant.SomeNVarCharVal = item.SomeNVarCharVal;
@@ -1694,12 +1732,13 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                                        plant.LastChangeCode = item.LastChangeCode;
+                    plant.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
                     //Boolean isDeleteAllowed,
                     //Boolean isEditAllowed,
+                    //Boolean isImageUrlAvailable,
                     //Int32 landID,
                     //String otherFlavor,
                     isEncrypted = false;
@@ -1716,6 +1755,12 @@ namespace FS.Farm.Providers.EF7
                     //Decimal someDecimalVal,
                     //String someEmailAddress,
                     //Double someFloatVal,
+                    //String someImageUrlVal,
+                    isEncrypted = false;
+                    if (isEncrypted)
+                    {
+                        plant.SomeImageUrlVal = encryptionServices.Encrypt(plant.SomeImageUrlVal);
+                    }
                     //Int32 someIntVal,
                     //Decimal someMoneyVal,
                     //String someNVarCharVal,
@@ -1732,12 +1777,7 @@ namespace FS.Farm.Providers.EF7
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //String someVarCharVal,
-                    isEncrypted = false;
-                    if (isEncrypted)
-                    {
-                        plant.SomeVarCharVal = encryptionServices.Encrypt(plant.SomeVarCharVal);
-                    }
-                                        plants.Add(plant);
+                    plants.Add(plant);
                 }
 
                 plantManager.BulkUpdate(plants);
@@ -1794,6 +1834,7 @@ namespace FS.Farm.Providers.EF7
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.LandID = item.LandID;
                     plant.OtherFlavor = item.OtherFlavor;
                     plant.SomeBigIntVal = item.SomeBigIntVal;
@@ -1802,6 +1843,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeDecimalVal = item.SomeDecimalVal;
                     plant.SomeEmailAddress = item.SomeEmailAddress;
                     plant.SomeFloatVal = (float)item.SomeFloatVal;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     plant.SomeIntVal = item.SomeIntVal;
                     plant.SomeMoneyVal = item.SomeMoneyVal;
                     plant.SomeNVarCharVal = item.SomeNVarCharVal;
@@ -1810,7 +1852,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                                        plant.LastChangeCode = item.LastChangeCode;
+                    plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
 
@@ -1868,6 +1910,7 @@ namespace FS.Farm.Providers.EF7
                     plant.FlvrForeignKeyID = item.FlvrForeignKeyID;
                     plant.IsDeleteAllowed = item.IsDeleteAllowed;
                     plant.IsEditAllowed = item.IsEditAllowed;
+                    plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.LandID = item.LandID;
                     plant.OtherFlavor = item.OtherFlavor;
                     plant.SomeBigIntVal = item.SomeBigIntVal;
@@ -1876,6 +1919,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeDecimalVal = item.SomeDecimalVal;
                     plant.SomeEmailAddress = item.SomeEmailAddress;
                     plant.SomeFloatVal = (float)item.SomeFloatVal;
+                    plant.SomeImageUrlVal = item.SomeImageUrlVal;
                     plant.SomeIntVal = item.SomeIntVal;
                     plant.SomeMoneyVal = item.SomeMoneyVal;
                     plant.SomeNVarCharVal = item.SomeNVarCharVal;
@@ -1884,7 +1928,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeUniqueidentifierVal = item.SomeUniqueidentifierVal;
                     plant.SomeUTCDateTimeVal = item.SomeUTCDateTimeVal;
                     plant.SomeVarCharVal = item.SomeVarCharVal;
-                                        plant.LastChangeCode = item.LastChangeCode;
+                    plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
 

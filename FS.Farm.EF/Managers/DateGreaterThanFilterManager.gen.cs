@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.DateGreaterThanFilterObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<DateGreaterThanFilter> results = data.Select(r => r.DateGreaterThanFilterObj).ToList();
 

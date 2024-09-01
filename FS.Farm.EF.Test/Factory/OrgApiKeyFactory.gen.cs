@@ -18,7 +18,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var organization = await OrganizationFactory.CreateAndSaveAsync(context); //OrganizationID
             var orgCustomer = await OrgCustomerFactory.CreateAndSaveAsync(context);//OrgCustomerID
-
             return new OrgApiKey
             {
                 OrgApiKeyID = _counter,
@@ -32,7 +31,7 @@ namespace FS.Farm.EF.Test.Factory
                 Name = String.Empty,
                 OrganizationID = organization.OrganizationID,
                 OrgCustomerID = orgCustomer.OrgCustomerID,
-                            };
+            };
         }
 
         public static OrgApiKey Create(FarmDbContext context)
@@ -40,7 +39,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var organization = OrganizationFactory.CreateAndSave(context); //OrganizationID
             var orgCustomer = OrgCustomerFactory.CreateAndSave(context);//OrgCustomerID
-
             return new OrgApiKey
             {
                 OrgApiKeyID = _counter,
@@ -54,14 +52,13 @@ namespace FS.Farm.EF.Test.Factory
                 Name = String.Empty,
                 OrganizationID = organization.OrganizationID,
                 OrgCustomerID = orgCustomer.OrgCustomerID,
-                            };
+            };
         }
         public static async Task<OrgApiKey> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var organization = await OrganizationFactory.CreateAndSaveAsync(context); //OrganizationID
             var orgCustomer = await OrgCustomerFactory.CreateAndSaveAsync(context);//OrgCustomerID
-
             OrgApiKey result =  new OrgApiKey
             {
                 OrgApiKeyID = _counter,
@@ -75,7 +72,7 @@ namespace FS.Farm.EF.Test.Factory
                 Name = String.Empty,
                 OrganizationID = organization.OrganizationID,
                 OrgCustomerID = orgCustomer.OrgCustomerID,
-                            };
+            };
 
             OrgApiKeyManager orgApiKeyManager = new OrgApiKeyManager(context);
             result = await orgApiKeyManager.AddAsync(result);
@@ -87,7 +84,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var organization =   OrganizationFactory.CreateAndSave(context); //OrganizationID
             var orgCustomer =   OrgCustomerFactory.CreateAndSave(context);//OrgCustomerID
-
             OrgApiKey result = new OrgApiKey
             {
                 OrgApiKeyID = _counter,
@@ -101,7 +97,7 @@ namespace FS.Farm.EF.Test.Factory
                 Name = String.Empty,
                 OrganizationID = organization.OrganizationID,
                 OrgCustomerID = orgCustomer.OrgCustomerID,
-                            };
+            };
 
             OrgApiKeyManager orgApiKeyManager = new OrgApiKeyManager(context);
             result = orgApiKeyManager.Add(result);

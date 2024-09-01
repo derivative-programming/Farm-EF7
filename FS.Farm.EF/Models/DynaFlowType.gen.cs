@@ -22,6 +22,7 @@ namespace FS.Farm.EF.Models
         public int? PacID { get; set; }
         public int? PriorityLevel { get; set; }
         public Guid PacCodePeek { get; set; }//PacID // not mapped
-                //public Pac Pac { get; set; }  //PacID
+
+        //public Pac Pac { get; set; }  //PacID
     }
 }

@@ -37,8 +37,9 @@ namespace FS.Farm.EF.Models
         public int? RetryCount { get; set; }
         public DateTime? StartedUTCDateTime { get; set; }
         public Guid DynaFlowCodePeek { get; set; }//DynaFlowID // not mapped
-                public Guid DynaFlowTaskTypeCodePeek { get; set; }//DynaFlowTaskTypeID // not mapped
-                //public DynaFlow DynaFlow { get; set; }  //DynaFlowID
+
+        public Guid DynaFlowTaskTypeCodePeek { get; set; }//DynaFlowTaskTypeID // not mapped
+        //public DynaFlow DynaFlow { get; set; }  //DynaFlowID
         //public DynaFlowTaskType DynaFlowTaskType { get; set; } //DynaFlowTaskTypeID
     }
 }

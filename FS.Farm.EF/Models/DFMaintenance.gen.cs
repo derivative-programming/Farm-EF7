@@ -24,6 +24,7 @@ namespace FS.Farm.EF.Models
         public DateTime? PausedUTCDateTime { get; set; }
         public string ScheduledDFProcessRequestProcessorIdentifier { get; set; }
         public Guid PacCodePeek { get; set; }//PacID // not mapped
-                //public Pac Pac { get; set; }  //PacID
+
+        //public Pac Pac { get; set; }  //PacID
     }
 }

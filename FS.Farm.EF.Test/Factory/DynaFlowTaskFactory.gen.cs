@@ -18,7 +18,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlow = await DynaFlowFactory.CreateAndSaveAsync(context); //DynaFlowID
             var dynaFlowTaskType = await DynaFlowTaskTypeFactory.CreateAndSaveAsync(context);//DynaFlowTaskTypeID
-
             return new DynaFlowTask
             {
                 DynaFlowTaskID = _counter,
@@ -45,7 +44,7 @@ namespace FS.Farm.EF.Test.Factory
                 ResultValue = String.Empty,
                 RetryCount = 0,
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
-                            };
+            };
         }
 
         public static DynaFlowTask Create(FarmDbContext context)
@@ -53,7 +52,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlow = DynaFlowFactory.CreateAndSave(context); //DynaFlowID
             var dynaFlowTaskType = DynaFlowTaskTypeFactory.CreateAndSave(context);//DynaFlowTaskTypeID
-
             return new DynaFlowTask
             {
                 DynaFlowTaskID = _counter,
@@ -80,14 +78,13 @@ namespace FS.Farm.EF.Test.Factory
                 ResultValue = String.Empty,
                 RetryCount = 0,
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
-                            };
+            };
         }
         public static async Task<DynaFlowTask> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var dynaFlow = await DynaFlowFactory.CreateAndSaveAsync(context); //DynaFlowID
             var dynaFlowTaskType = await DynaFlowTaskTypeFactory.CreateAndSaveAsync(context);//DynaFlowTaskTypeID
-
             DynaFlowTask result =  new DynaFlowTask
             {
                 DynaFlowTaskID = _counter,
@@ -114,7 +111,7 @@ namespace FS.Farm.EF.Test.Factory
                 ResultValue = String.Empty,
                 RetryCount = 0,
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
-                            };
+            };
 
             DynaFlowTaskManager dynaFlowTaskManager = new DynaFlowTaskManager(context);
             result = await dynaFlowTaskManager.AddAsync(result);
@@ -126,7 +123,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlow =   DynaFlowFactory.CreateAndSave(context); //DynaFlowID
             var dynaFlowTaskType =   DynaFlowTaskTypeFactory.CreateAndSave(context);//DynaFlowTaskTypeID
-
             DynaFlowTask result = new DynaFlowTask
             {
                 DynaFlowTaskID = _counter,
@@ -153,7 +149,7 @@ namespace FS.Farm.EF.Test.Factory
                 ResultValue = String.Empty,
                 RetryCount = 0,
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
-                            };
+            };
 
             DynaFlowTaskManager dynaFlowTaskManager = new DynaFlowTaskManager(context);
             result = dynaFlowTaskManager.Add(result);

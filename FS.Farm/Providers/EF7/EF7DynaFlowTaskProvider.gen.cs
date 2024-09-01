@@ -179,7 +179,7 @@ namespace FS.Farm.Providers.EF7
             String resultValue,
             Int32 retryCount,
             DateTime startedUTCDateTime,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTaskInsert";
             Log(procedureName + "::Start");
@@ -250,7 +250,7 @@ namespace FS.Farm.Providers.EF7
             {
                  startedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -286,7 +286,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTask.ResultValue = resultValue;
                 dynaFlowTask.RetryCount = retryCount;
                 dynaFlowTask.StartedUTCDateTime = startedUTCDateTime;
-
                 dynaFlowTask = dynaFlowTaskManager.Add(dynaFlowTask);
 
                 iOut = dynaFlowTask.DynaFlowTaskID;
@@ -327,7 +326,7 @@ namespace FS.Farm.Providers.EF7
             String resultValue,
             Int32 retryCount,
             DateTime startedUTCDateTime,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTaskInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -398,7 +397,7 @@ namespace FS.Farm.Providers.EF7
             {
                  startedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -434,7 +433,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTask.ResultValue = resultValue;
                 dynaFlowTask.RetryCount = retryCount;
                 dynaFlowTask.StartedUTCDateTime = startedUTCDateTime;
-
                 dynaFlowTask = await dynaFlowTaskManager.AddAsync(dynaFlowTask);
 
                 iOut = dynaFlowTask.DynaFlowTaskID;
@@ -476,7 +474,7 @@ namespace FS.Farm.Providers.EF7
             String resultValue,
             Int32 retryCount,
             DateTime startedUTCDateTime,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DynaFlowTaskUpdate";
@@ -548,7 +546,7 @@ namespace FS.Farm.Providers.EF7
             {
                  startedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -581,7 +579,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTask.ResultValue = resultValue;
                 dynaFlowTask.RetryCount = retryCount;
                 dynaFlowTask.StartedUTCDateTime = startedUTCDateTime;
-                                dynaFlowTask.LastChangeCode = lastChangeCode;
+                dynaFlowTask.LastChangeCode = lastChangeCode;
 
                 bool success = dynaFlowTaskManager.Update(dynaFlowTask);
                 if (!success)
@@ -626,7 +624,7 @@ namespace FS.Farm.Providers.EF7
             String resultValue,
             Int32 retryCount,
             DateTime startedUTCDateTime,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DynaFlowTaskUpdateAsync";
@@ -698,7 +696,7 @@ namespace FS.Farm.Providers.EF7
             {
                  startedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -732,7 +730,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTask.ResultValue = resultValue;
                 dynaFlowTask.RetryCount = retryCount;
                 dynaFlowTask.StartedUTCDateTime = startedUTCDateTime;
-                                dynaFlowTask.LastChangeCode = lastChangeCode;
+                dynaFlowTask.LastChangeCode = lastChangeCode;
 
                 bool success = await dynaFlowTaskManager.UpdateAsync(dynaFlowTask);
                 if(!success)
@@ -777,7 +775,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByResultValue, String resultValue,
             bool searchByRetryCount, Int32 retryCount,
             bool searchByStartedUTCDateTime, DateTime startedUTCDateTime,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTasks";
             Log(procedureName + "::Start");
@@ -831,7 +829,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByResultValue, String resultValue,
                     bool searchByRetryCount, Int32 retryCount,
                     bool searchByStartedUTCDateTime, DateTime startedUTCDateTime,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTasksAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1458,7 +1456,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTask.ResultValue = item.ResultValue;
                     dynaFlowTask.RetryCount = item.RetryCount;
                     dynaFlowTask.StartedUTCDateTime = item.StartedUTCDateTime;
-
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlowTask.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
                     {
@@ -1519,7 +1516,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dynaFlowTask.StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                                        dynaFlowTasks.Add(dynaFlowTask);
+                    dynaFlowTasks.Add(dynaFlowTask);
                 }
 
                 dynaFlowTaskManager.BulkInsert(dynaFlowTasks);
@@ -1598,7 +1595,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTask.ResultValue = item.ResultValue;
                     dynaFlowTask.RetryCount = item.RetryCount;
                     dynaFlowTask.StartedUTCDateTime = item.StartedUTCDateTime;
-
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlowTask.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
                     {
@@ -1659,7 +1655,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dynaFlowTask.StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                                        dynaFlowTasks.Add(dynaFlowTask);
+                    dynaFlowTasks.Add(dynaFlowTask);
                 }
 
                 await dynaFlowTaskManager.BulkInsertAsync(dynaFlowTasks);
@@ -1736,7 +1732,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTask.ResultValue = item.ResultValue;
                     dynaFlowTask.RetryCount = item.RetryCount;
                     dynaFlowTask.StartedUTCDateTime = item.StartedUTCDateTime;
-                                        dynaFlowTask.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTask.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlowTask.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -1877,7 +1873,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTask.ResultValue = item.ResultValue;
                     dynaFlowTask.RetryCount = item.RetryCount;
                     dynaFlowTask.StartedUTCDateTime = item.StartedUTCDateTime;
-                                        dynaFlowTask.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTask.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlowTask.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -1939,7 +1935,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dynaFlowTask.StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                                        dynaFlowTasks.Add(dynaFlowTask);
+                    dynaFlowTasks.Add(dynaFlowTask);
                 }
 
                 dynaFlowTaskManager.BulkUpdate(dynaFlowTasks);
@@ -2015,7 +2011,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTask.ResultValue = item.ResultValue;
                     dynaFlowTask.RetryCount = item.RetryCount;
                     dynaFlowTask.StartedUTCDateTime = item.StartedUTCDateTime;
-                                        dynaFlowTask.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTask.LastChangeCode = item.LastChangeCode;
                     dynaFlowTasks.Add(dynaFlowTask);
                 }
 
@@ -2092,7 +2088,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTask.ResultValue = item.ResultValue;
                     dynaFlowTask.RetryCount = item.RetryCount;
                     dynaFlowTask.StartedUTCDateTime = item.StartedUTCDateTime;
-                                        dynaFlowTask.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTask.LastChangeCode = item.LastChangeCode;
                     dynaFlowTasks.Add(dynaFlowTask);
                 }
 

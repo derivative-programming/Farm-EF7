@@ -17,6 +17,7 @@ namespace FS.Farm.EF.Models
         public string Name { get; set; }
         public int? TacID { get; set; }
         public Guid TacCodePeek { get; set; }//TacID // not mapped
-                //public Tac Tac { get; set; }  //TacID
+
+        //public Tac Tac { get; set; }  //TacID
     }
 }

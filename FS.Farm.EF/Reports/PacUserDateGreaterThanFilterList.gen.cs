@@ -25,44 +25,14 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<int> GetCountAsync(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+
                 userID,
                 contextCode);
 
@@ -70,44 +40,14 @@ namespace FS.Farm.EF.Reports
         }
 
         public int GetCount(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+
                 userID,
                 contextCode);
 
@@ -115,22 +55,7 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<List<PacUserDateGreaterThanFilterListDTO>> GetAsync(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -142,22 +67,7 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+
                 userID,
                 contextCode);
 
@@ -182,22 +92,7 @@ namespace FS.Farm.EF.Reports
         }
 
         public List<PacUserDateGreaterThanFilterListDTO> Get(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -209,22 +104,7 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+
                 userID,
                 contextCode);
 
@@ -252,20 +132,11 @@ namespace FS.Farm.EF.Reports
         {
             private Guid _dateGreaterThanFilterCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
             private Int32 _dateGreaterThanFilterDayCount = 0;
-            private Int32 _someConditionalIntVal = 0;
             private String _dateGreaterThanFilterDescription = String.Empty;
-            private String _someConditionalNVarCharVal = String.Empty;
             private Int32 _dateGreaterThanFilterDisplayOrder = 0;
-            private Int32 _someConditionalIntVal = 0;
             private Boolean _dateGreaterThanFilterIsActive = false;
-            private Boolean _someConditionalBitVal = false;
             private String _dateGreaterThanFilterLookupEnumName = String.Empty;
-            private String _someConditionalNVarCharVal = String.Empty;
             private String _dateGreaterThanFilterName = String.Empty;
-            private String _someConditionalNVarCharVal = String.Empty;
-            private Boolean _isImageUrlAvailable = false;
-            private String _someImageUrlVal = String.Empty;
-            private String _someConditionalImageUrlVal = String.Empty;
             public Guid DateGreaterThanFilterCode
             {
                 get { return _dateGreaterThanFilterCode; }
@@ -276,75 +147,30 @@ namespace FS.Farm.EF.Reports
                 get { return _dateGreaterThanFilterDayCount; }
                 set { _dateGreaterThanFilterDayCount = value; }
             }
-            public Int32 SomeConditionalIntVal
-            {
-                get { return _someConditionalIntVal; }
-                set { _someConditionalIntVal = value; }
-            }
             public String DateGreaterThanFilterDescription
             {
                 get { return _dateGreaterThanFilterDescription; }
                 set { _dateGreaterThanFilterDescription = value; }
-            }
-            public String SomeConditionalNVarCharVal
-            {
-                get { return _someConditionalNVarCharVal; }
-                set { _someConditionalNVarCharVal = value; }
             }
             public Int32 DateGreaterThanFilterDisplayOrder
             {
                 get { return _dateGreaterThanFilterDisplayOrder; }
                 set { _dateGreaterThanFilterDisplayOrder = value; }
             }
-            public Int32 SomeConditionalIntVal
-            {
-                get { return _someConditionalIntVal; }
-                set { _someConditionalIntVal = value; }
-            }
             public Boolean DateGreaterThanFilterIsActive
             {
                 get { return _dateGreaterThanFilterIsActive; }
                 set { _dateGreaterThanFilterIsActive = value; }
-            }
-            public Boolean SomeConditionalBitVal
-            {
-                get { return _someConditionalBitVal; }
-                set { _someConditionalBitVal = value; }
             }
             public String DateGreaterThanFilterLookupEnumName
             {
                 get { return _dateGreaterThanFilterLookupEnumName; }
                 set { _dateGreaterThanFilterLookupEnumName = value; }
             }
-            public String SomeConditionalNVarCharVal
-            {
-                get { return _someConditionalNVarCharVal; }
-                set { _someConditionalNVarCharVal = value; }
-            }
             public String DateGreaterThanFilterName
             {
                 get { return _dateGreaterThanFilterName; }
                 set { _dateGreaterThanFilterName = value; }
-            }
-            public String SomeConditionalNVarCharVal
-            {
-                get { return _someConditionalNVarCharVal; }
-                set { _someConditionalNVarCharVal = value; }
-            }
-            public Boolean IsImageUrlAvailable
-            {
-                get { return _isImageUrlAvailable; }
-                set { _isImageUrlAvailable = value; }
-            }
-            public String SomeImageUrlVal
-            {
-                get { return _someImageUrlVal; }
-                set { _someImageUrlVal = value; }
-            }
-            public String SomeConditionalImageUrlVal
-            {
-                get { return _someConditionalImageUrlVal; }
-                set { _someConditionalImageUrlVal = value; }
             }
 
         }

@@ -959,7 +959,7 @@ namespace FS.Farm.EF.Managers
             {
                 item.DynaFlowObj.DynaFlowTypeCodePeek = item.DynaFlowTypeCode.Value; //DynaFlowTypeID
                 item.DynaFlowObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<DynaFlow> results = data.Select(r => r.DynaFlowObj).ToList();
 

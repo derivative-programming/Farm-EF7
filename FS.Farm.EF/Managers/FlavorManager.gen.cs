@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.FlavorObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<Flavor> results = data.Select(r => r.FlavorObj).ToList();
 

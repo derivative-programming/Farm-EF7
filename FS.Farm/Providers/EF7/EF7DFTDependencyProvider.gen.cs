@@ -160,7 +160,7 @@ namespace FS.Farm.Providers.EF7
             Int32 dependencyDFTaskID,
             Int32 dynaFlowTaskID,
             Boolean isPlaceholder,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DFTDependencyInsert";
             Log(procedureName + "::Start");
@@ -170,7 +170,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 dependencyDFTaskID,
             //Int32 dynaFlowTaskID,
             //Boolean isPlaceholder,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -187,7 +187,6 @@ namespace FS.Farm.Providers.EF7
                 dFTDependency.DependencyDFTaskID = dependencyDFTaskID;
                 dFTDependency.DynaFlowTaskID = dynaFlowTaskID;
                 dFTDependency.IsPlaceholder = isPlaceholder;
-
                 dFTDependency = dFTDependencyManager.Add(dFTDependency);
 
                 iOut = dFTDependency.DFTDependencyID;
@@ -209,7 +208,7 @@ namespace FS.Farm.Providers.EF7
             Int32 dependencyDFTaskID,
             Int32 dynaFlowTaskID,
             Boolean isPlaceholder,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DFTDependencyInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -219,7 +218,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 dependencyDFTaskID,
             //Int32 dynaFlowTaskID,
             //Boolean isPlaceholder,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -236,7 +235,6 @@ namespace FS.Farm.Providers.EF7
                 dFTDependency.DependencyDFTaskID = dependencyDFTaskID;
                 dFTDependency.DynaFlowTaskID = dynaFlowTaskID;
                 dFTDependency.IsPlaceholder = isPlaceholder;
-
                 dFTDependency = await dFTDependencyManager.AddAsync(dFTDependency);
 
                 iOut = dFTDependency.DFTDependencyID;
@@ -259,7 +257,7 @@ namespace FS.Farm.Providers.EF7
             Int32 dependencyDFTaskID,
             Int32 dynaFlowTaskID,
             Boolean isPlaceholder,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DFTDependencyUpdate";
@@ -270,7 +268,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 dependencyDFTaskID,
             //Int32 dynaFlowTaskID,
             //Boolean isPlaceholder,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -284,7 +282,7 @@ namespace FS.Farm.Providers.EF7
                 dFTDependency.DependencyDFTaskID = dependencyDFTaskID;
                 dFTDependency.DynaFlowTaskID = dynaFlowTaskID;
                 dFTDependency.IsPlaceholder = isPlaceholder;
-                                dFTDependency.LastChangeCode = lastChangeCode;
+                dFTDependency.LastChangeCode = lastChangeCode;
 
                 bool success = dFTDependencyManager.Update(dFTDependency);
                 if (!success)
@@ -310,7 +308,7 @@ namespace FS.Farm.Providers.EF7
             Int32 dependencyDFTaskID,
             Int32 dynaFlowTaskID,
             Boolean isPlaceholder,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DFTDependencyUpdateAsync";
@@ -321,7 +319,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 dependencyDFTaskID,
             //Int32 dynaFlowTaskID,
             //Boolean isPlaceholder,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -336,7 +334,7 @@ namespace FS.Farm.Providers.EF7
                 dFTDependency.DependencyDFTaskID = dependencyDFTaskID;
                 dFTDependency.DynaFlowTaskID = dynaFlowTaskID;
                 dFTDependency.IsPlaceholder = isPlaceholder;
-                                dFTDependency.LastChangeCode = lastChangeCode;
+                dFTDependency.LastChangeCode = lastChangeCode;
 
                 bool success = await dFTDependencyManager.UpdateAsync(dFTDependency);
                 if(!success)
@@ -362,7 +360,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByDependencyDFTaskID, Int32 dependencyDFTaskID,
             bool searchByDynaFlowTaskID, Int32 dynaFlowTaskID,
             bool searchByIsPlaceholder, Boolean isPlaceholder,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDFTDependencys";
             Log(procedureName + "::Start");
@@ -397,7 +395,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByDependencyDFTaskID, Int32 dependencyDFTaskID,
                     bool searchByDynaFlowTaskID, Int32 dynaFlowTaskID,
                     bool searchByIsPlaceholder, Boolean isPlaceholder,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDFTDependencysAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1005,12 +1003,11 @@ namespace FS.Farm.Providers.EF7
                     dFTDependency.DependencyDFTaskID = item.DependencyDFTaskID;
                     dFTDependency.DynaFlowTaskID = item.DynaFlowTaskID;
                     dFTDependency.IsPlaceholder = item.IsPlaceholder;
-
                     bool isEncrypted = false;
                     //Int32 dependencyDFTaskID,
                     //Int32 dynaFlowTaskID,
                     //Boolean isPlaceholder,
-                                        dFTDependencys.Add(dFTDependency);
+                    dFTDependencys.Add(dFTDependency);
                 }
 
                 dFTDependencyManager.BulkInsert(dFTDependencys);
@@ -1070,12 +1067,11 @@ namespace FS.Farm.Providers.EF7
                     dFTDependency.DependencyDFTaskID = item.DependencyDFTaskID;
                     dFTDependency.DynaFlowTaskID = item.DynaFlowTaskID;
                     dFTDependency.IsPlaceholder = item.IsPlaceholder;
-
                     bool isEncrypted = false;
                     //Int32 dependencyDFTaskID,
                     //Int32 dynaFlowTaskID,
                     //Boolean isPlaceholder,
-                                        dFTDependencys.Add(dFTDependency);
+                    dFTDependencys.Add(dFTDependency);
                 }
 
                 await dFTDependencyManager.BulkInsertAsync(dFTDependencys);
@@ -1133,7 +1129,7 @@ namespace FS.Farm.Providers.EF7
                     dFTDependency.DependencyDFTaskID = item.DependencyDFTaskID;
                     dFTDependency.DynaFlowTaskID = item.DynaFlowTaskID;
                     dFTDependency.IsPlaceholder = item.IsPlaceholder;
-                                        dFTDependency.LastChangeCode = item.LastChangeCode;
+                    dFTDependency.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 dependencyDFTaskID,
@@ -1199,13 +1195,13 @@ namespace FS.Farm.Providers.EF7
                     dFTDependency.DependencyDFTaskID = item.DependencyDFTaskID;
                     dFTDependency.DynaFlowTaskID = item.DynaFlowTaskID;
                     dFTDependency.IsPlaceholder = item.IsPlaceholder;
-                                        dFTDependency.LastChangeCode = item.LastChangeCode;
+                    dFTDependency.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 dependencyDFTaskID,
                     //Int32 dynaFlowTaskID,
                     //Boolean isPlaceholder,
-                                        dFTDependencys.Add(dFTDependency);
+                    dFTDependencys.Add(dFTDependency);
                 }
 
                 dFTDependencyManager.BulkUpdate(dFTDependencys);
@@ -1262,7 +1258,7 @@ namespace FS.Farm.Providers.EF7
                     dFTDependency.DependencyDFTaskID = item.DependencyDFTaskID;
                     dFTDependency.DynaFlowTaskID = item.DynaFlowTaskID;
                     dFTDependency.IsPlaceholder = item.IsPlaceholder;
-                                        dFTDependency.LastChangeCode = item.LastChangeCode;
+                    dFTDependency.LastChangeCode = item.LastChangeCode;
                     dFTDependencys.Add(dFTDependency);
                 }
 
@@ -1320,7 +1316,7 @@ namespace FS.Farm.Providers.EF7
                     dFTDependency.DependencyDFTaskID = item.DependencyDFTaskID;
                     dFTDependency.DynaFlowTaskID = item.DynaFlowTaskID;
                     dFTDependency.IsPlaceholder = item.IsPlaceholder;
-                                        dFTDependency.LastChangeCode = item.LastChangeCode;
+                    dFTDependency.LastChangeCode = item.LastChangeCode;
                     dFTDependencys.Add(dFTDependency);
                 }
 

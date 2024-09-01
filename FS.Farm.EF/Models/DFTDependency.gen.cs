@@ -18,6 +18,7 @@ namespace FS.Farm.EF.Models
         public int? DynaFlowTaskID { get; set; }
         public bool? IsPlaceholder { get; set; }
         public Guid DynaFlowTaskCodePeek { get; set; }//DynaFlowTaskID // not mapped
-                //public DynaFlowTask DynaFlowTask { get; set; }  //DynaFlowTaskID
+
+        //public DynaFlowTask DynaFlowTask { get; set; }  //DynaFlowTaskID
     }
 }

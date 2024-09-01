@@ -164,7 +164,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 priorityLevel,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTypeInsert";
             Log(procedureName + "::Start");
@@ -196,7 +196,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 priorityLevel,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -217,7 +217,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowType.Name = name;
                 dynaFlowType.PacID = pacID;
                 dynaFlowType.PriorityLevel = priorityLevel;
-
                 dynaFlowType = dynaFlowTypeManager.Add(dynaFlowType);
 
                 iOut = dynaFlowType.DynaFlowTypeID;
@@ -243,7 +242,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 priorityLevel,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTypeInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -275,7 +274,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 priorityLevel,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -296,7 +295,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowType.Name = name;
                 dynaFlowType.PacID = pacID;
                 dynaFlowType.PriorityLevel = priorityLevel;
-
                 dynaFlowType = await dynaFlowTypeManager.AddAsync(dynaFlowType);
 
                 iOut = dynaFlowType.DynaFlowTypeID;
@@ -323,7 +321,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 priorityLevel,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DynaFlowTypeUpdate";
@@ -356,7 +354,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 priorityLevel,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -374,7 +372,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowType.Name = name;
                 dynaFlowType.PacID = pacID;
                 dynaFlowType.PriorityLevel = priorityLevel;
-                                dynaFlowType.LastChangeCode = lastChangeCode;
+                dynaFlowType.LastChangeCode = lastChangeCode;
 
                 bool success = dynaFlowTypeManager.Update(dynaFlowType);
                 if (!success)
@@ -404,7 +402,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 priorityLevel,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DynaFlowTypeUpdateAsync";
@@ -437,7 +435,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 priorityLevel,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -456,7 +454,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowType.Name = name;
                 dynaFlowType.PacID = pacID;
                 dynaFlowType.PriorityLevel = priorityLevel;
-                                dynaFlowType.LastChangeCode = lastChangeCode;
+                dynaFlowType.LastChangeCode = lastChangeCode;
 
                 bool success = await dynaFlowTypeManager.UpdateAsync(dynaFlowType);
                 if(!success)
@@ -486,7 +484,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
             bool searchByPriorityLevel, Int32 priorityLevel,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTypes";
             Log(procedureName + "::Start");
@@ -525,7 +523,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
                     bool searchByPriorityLevel, Int32 priorityLevel,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTypesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1137,7 +1135,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowType.Name = item.Name;
                     dynaFlowType.PacID = item.PacID;
                     dynaFlowType.PriorityLevel = item.PriorityLevel;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1161,7 +1158,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 pacID,
                     //Int32 priorityLevel,
-                                        dynaFlowTypes.Add(dynaFlowType);
+                    dynaFlowTypes.Add(dynaFlowType);
                 }
 
                 dynaFlowTypeManager.BulkInsert(dynaFlowTypes);
@@ -1225,7 +1222,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowType.Name = item.Name;
                     dynaFlowType.PacID = item.PacID;
                     dynaFlowType.PriorityLevel = item.PriorityLevel;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1249,7 +1245,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 pacID,
                     //Int32 priorityLevel,
-                                        dynaFlowTypes.Add(dynaFlowType);
+                    dynaFlowTypes.Add(dynaFlowType);
                 }
 
                 await dynaFlowTypeManager.BulkInsertAsync(dynaFlowTypes);
@@ -1311,7 +1307,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowType.Name = item.Name;
                     dynaFlowType.PacID = item.PacID;
                     dynaFlowType.PriorityLevel = item.PriorityLevel;
-                                        dynaFlowType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowType.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1400,7 +1396,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowType.Name = item.Name;
                     dynaFlowType.PacID = item.PacID;
                     dynaFlowType.PriorityLevel = item.PriorityLevel;
-                                        dynaFlowType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowType.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1425,7 +1421,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 pacID,
                     //Int32 priorityLevel,
-                                        dynaFlowTypes.Add(dynaFlowType);
+                    dynaFlowTypes.Add(dynaFlowType);
                 }
 
                 dynaFlowTypeManager.BulkUpdate(dynaFlowTypes);
@@ -1486,7 +1482,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowType.Name = item.Name;
                     dynaFlowType.PacID = item.PacID;
                     dynaFlowType.PriorityLevel = item.PriorityLevel;
-                                        dynaFlowType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowType.LastChangeCode = item.LastChangeCode;
                     dynaFlowTypes.Add(dynaFlowType);
                 }
 
@@ -1548,7 +1544,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowType.Name = item.Name;
                     dynaFlowType.PacID = item.PacID;
                     dynaFlowType.PriorityLevel = item.PriorityLevel;
-                                        dynaFlowType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowType.LastChangeCode = item.LastChangeCode;
                     dynaFlowTypes.Add(dynaFlowType);
                 }
 

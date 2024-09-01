@@ -163,7 +163,7 @@ namespace FS.Farm.Providers.EF7
             DateTime lastUTCDateTime,
             DateTime nextUTCDateTime,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTypeScheduleInsert";
             Log(procedureName + "::Start");
@@ -182,7 +182,7 @@ namespace FS.Farm.Providers.EF7
                  nextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -202,7 +202,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTypeSchedule.LastUTCDateTime = lastUTCDateTime;
                 dynaFlowTypeSchedule.NextUTCDateTime = nextUTCDateTime;
                 dynaFlowTypeSchedule.PacID = pacID;
-
                 dynaFlowTypeSchedule = dynaFlowTypeScheduleManager.Add(dynaFlowTypeSchedule);
 
                 iOut = dynaFlowTypeSchedule.DynaFlowTypeScheduleID;
@@ -227,7 +226,7 @@ namespace FS.Farm.Providers.EF7
             DateTime lastUTCDateTime,
             DateTime nextUTCDateTime,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTypeScheduleInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -246,7 +245,7 @@ namespace FS.Farm.Providers.EF7
                  nextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -266,7 +265,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTypeSchedule.LastUTCDateTime = lastUTCDateTime;
                 dynaFlowTypeSchedule.NextUTCDateTime = nextUTCDateTime;
                 dynaFlowTypeSchedule.PacID = pacID;
-
                 dynaFlowTypeSchedule = await dynaFlowTypeScheduleManager.AddAsync(dynaFlowTypeSchedule);
 
                 iOut = dynaFlowTypeSchedule.DynaFlowTypeScheduleID;
@@ -292,7 +290,7 @@ namespace FS.Farm.Providers.EF7
             DateTime lastUTCDateTime,
             DateTime nextUTCDateTime,
             Int32 pacID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DynaFlowTypeScheduleUpdate";
@@ -312,7 +310,7 @@ namespace FS.Farm.Providers.EF7
                  nextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //Int32 pacID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -329,7 +327,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTypeSchedule.LastUTCDateTime = lastUTCDateTime;
                 dynaFlowTypeSchedule.NextUTCDateTime = nextUTCDateTime;
                 dynaFlowTypeSchedule.PacID = pacID;
-                                dynaFlowTypeSchedule.LastChangeCode = lastChangeCode;
+                dynaFlowTypeSchedule.LastChangeCode = lastChangeCode;
 
                 bool success = dynaFlowTypeScheduleManager.Update(dynaFlowTypeSchedule);
                 if (!success)
@@ -358,7 +356,7 @@ namespace FS.Farm.Providers.EF7
             DateTime lastUTCDateTime,
             DateTime nextUTCDateTime,
             Int32 pacID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DynaFlowTypeScheduleUpdateAsync";
@@ -378,7 +376,7 @@ namespace FS.Farm.Providers.EF7
                  nextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
             //Int32 pacID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -396,7 +394,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTypeSchedule.LastUTCDateTime = lastUTCDateTime;
                 dynaFlowTypeSchedule.NextUTCDateTime = nextUTCDateTime;
                 dynaFlowTypeSchedule.PacID = pacID;
-                                dynaFlowTypeSchedule.LastChangeCode = lastChangeCode;
+                dynaFlowTypeSchedule.LastChangeCode = lastChangeCode;
 
                 bool success = await dynaFlowTypeScheduleManager.UpdateAsync(dynaFlowTypeSchedule);
                 if(!success)
@@ -425,7 +423,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByLastUTCDateTime, DateTime lastUTCDateTime,
             bool searchByNextUTCDateTime, DateTime nextUTCDateTime,
             bool searchByPacID, Int32 pacID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTypeSchedules";
             Log(procedureName + "::Start");
@@ -463,7 +461,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByLastUTCDateTime, DateTime lastUTCDateTime,
                     bool searchByNextUTCDateTime, DateTime nextUTCDateTime,
                     bool searchByPacID, Int32 pacID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTypeSchedulesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1074,7 +1072,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTypeSchedule.LastUTCDateTime = item.LastUTCDateTime;
                     dynaFlowTypeSchedule.NextUTCDateTime = item.NextUTCDateTime;
                     dynaFlowTypeSchedule.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //Int32 dynaFlowTypeID,
                     //Int32 frequencyInHours,
@@ -1088,7 +1085,7 @@ namespace FS.Farm.Providers.EF7
                         dynaFlowTypeSchedule.NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //Int32 pacID,
-                                        dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
+                    dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
                 }
 
                 dynaFlowTypeScheduleManager.BulkInsert(dynaFlowTypeSchedules);
@@ -1151,7 +1148,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTypeSchedule.LastUTCDateTime = item.LastUTCDateTime;
                     dynaFlowTypeSchedule.NextUTCDateTime = item.NextUTCDateTime;
                     dynaFlowTypeSchedule.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //Int32 dynaFlowTypeID,
                     //Int32 frequencyInHours,
@@ -1165,7 +1161,7 @@ namespace FS.Farm.Providers.EF7
                         dynaFlowTypeSchedule.NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //Int32 pacID,
-                                        dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
+                    dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
                 }
 
                 await dynaFlowTypeScheduleManager.BulkInsertAsync(dynaFlowTypeSchedules);
@@ -1226,7 +1222,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTypeSchedule.LastUTCDateTime = item.LastUTCDateTime;
                     dynaFlowTypeSchedule.NextUTCDateTime = item.NextUTCDateTime;
                     dynaFlowTypeSchedule.PacID = item.PacID;
-                                        dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 dynaFlowTypeID,
@@ -1304,7 +1300,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTypeSchedule.LastUTCDateTime = item.LastUTCDateTime;
                     dynaFlowTypeSchedule.NextUTCDateTime = item.NextUTCDateTime;
                     dynaFlowTypeSchedule.PacID = item.PacID;
-                                        dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 dynaFlowTypeID,
@@ -1319,7 +1315,7 @@ namespace FS.Farm.Providers.EF7
                         dynaFlowTypeSchedule.NextUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
                     //Int32 pacID,
-                                        dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
+                    dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
                 }
 
                 dynaFlowTypeScheduleManager.BulkUpdate(dynaFlowTypeSchedules);
@@ -1379,7 +1375,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTypeSchedule.LastUTCDateTime = item.LastUTCDateTime;
                     dynaFlowTypeSchedule.NextUTCDateTime = item.NextUTCDateTime;
                     dynaFlowTypeSchedule.PacID = item.PacID;
-                                        dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
                     dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
                 }
 
@@ -1440,7 +1436,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTypeSchedule.LastUTCDateTime = item.LastUTCDateTime;
                     dynaFlowTypeSchedule.NextUTCDateTime = item.NextUTCDateTime;
                     dynaFlowTypeSchedule.PacID = item.PacID;
-                                        dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTypeSchedule.LastChangeCode = item.LastChangeCode;
                     dynaFlowTypeSchedules.Add(dynaFlowTypeSchedule);
                 }
 

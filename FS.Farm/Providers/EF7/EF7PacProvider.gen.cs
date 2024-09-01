@@ -162,7 +162,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "PacInsert";
             Log(procedureName + "::Start");
@@ -192,7 +192,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -211,7 +211,6 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
-
                 pac = pacManager.Add(pac);
 
                 iOut = pac.PacID;
@@ -235,7 +234,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "PacInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -265,7 +264,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -284,7 +283,6 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
-
                 pac = await pacManager.AddAsync(pac);
 
                 iOut = pac.PacID;
@@ -309,7 +307,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "PacUpdate";
@@ -340,7 +338,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -356,7 +354,7 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
-                                pac.LastChangeCode = lastChangeCode;
+                pac.LastChangeCode = lastChangeCode;
 
                 bool success = pacManager.Update(pac);
                 if (!success)
@@ -384,7 +382,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isActive,
             String lookupEnumName,
             String name,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "PacUpdateAsync";
@@ -415,7 +413,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices NameEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 name = NameEncryptionServices.Encrypt(name);
             }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -432,7 +430,7 @@ namespace FS.Farm.Providers.EF7
                 pac.IsActive = isActive;
                 pac.LookupEnumName = lookupEnumName;
                 pac.Name = name;
-                                pac.LastChangeCode = lastChangeCode;
+                pac.LastChangeCode = lastChangeCode;
 
                 bool success = await pacManager.UpdateAsync(pac);
                 if(!success)
@@ -460,7 +458,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByIsActive, Boolean isActive,
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPacs";
             Log(procedureName + "::Start");
@@ -497,7 +495,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByIsActive, Boolean isActive,
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPacsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1107,7 +1105,6 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1129,7 +1126,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
-                                        pacs.Add(pac);
+                    pacs.Add(pac);
                 }
 
                 pacManager.BulkInsert(pacs);
@@ -1191,7 +1188,6 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1213,7 +1209,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
-                                        pacs.Add(pac);
+                    pacs.Add(pac);
                 }
 
                 await pacManager.BulkInsertAsync(pacs);
@@ -1273,7 +1269,7 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                                        pac.LastChangeCode = item.LastChangeCode;
+                    pac.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1358,7 +1354,7 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                                        pac.LastChangeCode = item.LastChangeCode;
+                    pac.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1381,7 +1377,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         pac.Name = encryptionServices.Encrypt(pac.Name);
                     }
-                                        pacs.Add(pac);
+                    pacs.Add(pac);
                 }
 
                 pacManager.BulkUpdate(pacs);
@@ -1440,7 +1436,7 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                                        pac.LastChangeCode = item.LastChangeCode;
+                    pac.LastChangeCode = item.LastChangeCode;
                     pacs.Add(pac);
                 }
 
@@ -1500,7 +1496,7 @@ namespace FS.Farm.Providers.EF7
                     pac.IsActive = item.IsActive;
                     pac.LookupEnumName = item.LookupEnumName;
                     pac.Name = item.Name;
-                                        pac.LastChangeCode = item.LastChangeCode;
+                    pac.LastChangeCode = item.LastChangeCode;
                     pacs.Add(pac);
                 }
 

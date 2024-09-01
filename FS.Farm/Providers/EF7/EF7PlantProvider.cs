@@ -178,7 +178,7 @@ namespace FS.Farm.Providers.EF7
             String someVarCharVal,
             Boolean isImageUrlAvailable,
             String someImageUrlVal, 
-            //ENDSET
+//ENDSET
             System.Guid code)
         {
             string procedureName = "PlantInsert";
@@ -233,7 +233,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-            //ENDSET
+//ENDSET
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -269,7 +269,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeVarCharVal = someVarCharVal;
                 plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.SomeImageUrlVal = someImageUrlVal;
-                //ENDSET
+//ENDSET
 
                 plant = plantManager.Add(plant);
 
@@ -310,7 +310,7 @@ namespace FS.Farm.Providers.EF7
             String someVarCharVal,
             Boolean isImageUrlAvailable,
             String someImageUrlVal,
-            //ENDSET
+//ENDSET
             System.Guid code)
         {
             string procedureName = "PlantInsertAsync";
@@ -364,7 +364,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-            //ENDSET
+//ENDSET
             SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
@@ -400,7 +400,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeVarCharVal = someVarCharVal;
                 plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.SomeImageUrlVal = someImageUrlVal;
-                //ENDSET
+//ENDSET
 
                 plant = await plantManager.AddAsync(plant);
 
@@ -442,7 +442,7 @@ namespace FS.Farm.Providers.EF7
             String someVarCharVal,
             Boolean isImageUrlAvailable,
             String someImageUrlVal,
-             //ENDSET
+ //ENDSET
              Guid lastChangeCode,
              System.Guid code)
         {
@@ -497,7 +497,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-            //ENDSET
+//ENDSET
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -530,7 +530,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeVarCharVal = someVarCharVal;
                 plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.SomeImageUrlVal = someImageUrlVal;
-                //ENDSET
+//ENDSET
                 plant.LastChangeCode = lastChangeCode;
 
                 bool success = plantManager.Update(plant);
@@ -575,7 +575,7 @@ namespace FS.Farm.Providers.EF7
             String someVarCharVal,
             Boolean isImageUrlAvailable,
             String someImageUrlVal,
-            //ENDSET
+//ENDSET
             Guid lastChangeCode,
             System.Guid code)
         {
@@ -630,7 +630,7 @@ namespace FS.Farm.Providers.EF7
             {
                  someUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             }
-            //ENDSET
+//ENDSET
             //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
@@ -665,7 +665,7 @@ namespace FS.Farm.Providers.EF7
                 plant.SomeVarCharVal = someVarCharVal;
                 plant.IsImageUrlAvailable = isImageUrlAvailable;
                 plant.SomeImageUrlVal = someImageUrlVal;
-                //ENDSET
+//ENDSET
                 plant.LastChangeCode = lastChangeCode;
 
                 bool success = await plantManager.UpdateAsync(plant);
@@ -710,7 +710,7 @@ namespace FS.Farm.Providers.EF7
             bool searchBySomeVarCharVal, String someVarCharVal,
             bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
             bool searchBySomeImageUrlVal, String someImageUrlVal,
-            //ENDSET
+//ENDSET
             bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlants";
@@ -764,7 +764,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchBySomeVarCharVal, String someVarCharVal,
                     bool searchByIsImageUrlAvailable, Boolean isImageUrlAvailable,
                     bool searchBySomeImageUrlVal, String someImageUrlVal,
-                    //ENDSET
+//ENDSET
                     bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchPlantsAsync";
@@ -1394,7 +1394,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.SomeImageUrlVal = item.SomeImageUrlVal;
-                    //ENDSET
+//ENDSET
 
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
@@ -1440,7 +1440,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                    //ENDSET
+//ENDSET
                     plants.Add(plant);
                 }
 
@@ -1519,7 +1519,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.SomeImageUrlVal = item.SomeImageUrlVal;
-                    //ENDSET
+//ENDSET
 
                     bool isEncrypted = false;
                     //Int32 flvrForeignKeyID,
@@ -1565,7 +1565,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                    //ENDSET
+//ENDSET
                     plants.Add(plant);
                 }
 
@@ -1642,7 +1642,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.SomeImageUrlVal = item.SomeImageUrlVal;
-                    //ENDSET
+//ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
 
 
@@ -1690,7 +1690,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                    //ENDSET
+//ENDSET
 
                     plants.Add(plant);
                 }
@@ -1769,7 +1769,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.SomeImageUrlVal = item.SomeImageUrlVal;
-                    //ENDSET
+//ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
 
 
@@ -1817,7 +1817,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         plant.SomeUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
                     }
-                    //ENDSET
+//ENDSET
                     plants.Add(plant);
                 }
 
@@ -1893,7 +1893,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.SomeImageUrlVal = item.SomeImageUrlVal;
-                    //ENDSET
+//ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }
@@ -1970,7 +1970,7 @@ namespace FS.Farm.Providers.EF7
                     plant.SomeVarCharVal = item.SomeVarCharVal;
                     plant.IsImageUrlAvailable = item.IsImageUrlAvailable;
                     plant.SomeImageUrlVal = item.SomeImageUrlVal;
-                    //ENDSET
+//ENDSET
                     plant.LastChangeCode = item.LastChangeCode;
                     plants.Add(plant);
                 }

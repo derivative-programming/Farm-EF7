@@ -17,7 +17,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var dynaFlowTask = await DynaFlowTaskFactory.CreateAndSaveAsync(context); //DynaFlowTaskID
-
             return new DFTDependency
             {
                 DFTDependencyID = _counter,
@@ -25,14 +24,13 @@ namespace FS.Farm.EF.Test.Factory
                 DependencyDFTaskID = 0,
                 DynaFlowTaskID = dynaFlowTask.DynaFlowTaskID,
                 IsPlaceholder = false,
-                            };
+            };
         }
 
         public static DFTDependency Create(FarmDbContext context)
         {
             _counter++;
             var dynaFlowTask = DynaFlowTaskFactory.CreateAndSave(context); //DynaFlowTaskID
-
             return new DFTDependency
             {
                 DFTDependencyID = _counter,
@@ -40,13 +38,12 @@ namespace FS.Farm.EF.Test.Factory
                 DependencyDFTaskID = 0,
                 DynaFlowTaskID = dynaFlowTask.DynaFlowTaskID,
                 IsPlaceholder = false,
-                            };
+            };
         }
         public static async Task<DFTDependency> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var dynaFlowTask = await DynaFlowTaskFactory.CreateAndSaveAsync(context); //DynaFlowTaskID
-
             DFTDependency result =  new DFTDependency
             {
                 DFTDependencyID = _counter,
@@ -54,7 +51,7 @@ namespace FS.Farm.EF.Test.Factory
                 DependencyDFTaskID = 0,
                 DynaFlowTaskID = dynaFlowTask.DynaFlowTaskID,
                 IsPlaceholder = false,
-                            };
+            };
 
             DFTDependencyManager dFTDependencyManager = new DFTDependencyManager(context);
             result = await dFTDependencyManager.AddAsync(result);
@@ -65,7 +62,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var dynaFlowTask =   DynaFlowTaskFactory.CreateAndSave(context); //DynaFlowTaskID
-
             DFTDependency result = new DFTDependency
             {
                 DFTDependencyID = _counter,
@@ -73,7 +69,7 @@ namespace FS.Farm.EF.Test.Factory
                 DependencyDFTaskID = 0,
                 DynaFlowTaskID = dynaFlowTask.DynaFlowTaskID,
                 IsPlaceholder = false,
-                            };
+            };
 
             DFTDependencyManager dFTDependencyManager = new DFTDependencyManager(context);
             result = dFTDependencyManager.Add(result);

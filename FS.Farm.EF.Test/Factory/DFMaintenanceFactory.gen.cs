@@ -17,7 +17,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             return new DFMaintenance
             {
                 DFMaintenanceID = _counter,
@@ -31,14 +30,13 @@ namespace FS.Farm.EF.Test.Factory
                 PausedByUsername = String.Empty,
                 PausedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 ScheduledDFProcessRequestProcessorIdentifier = String.Empty,
-                            };
+            };
         }
 
         public static DFMaintenance Create(FarmDbContext context)
         {
             _counter++;
             var pac = PacFactory.CreateAndSave(context); //PacID
-
             return new DFMaintenance
             {
                 DFMaintenanceID = _counter,
@@ -52,13 +50,12 @@ namespace FS.Farm.EF.Test.Factory
                 PausedByUsername = String.Empty,
                 PausedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 ScheduledDFProcessRequestProcessorIdentifier = String.Empty,
-                            };
+            };
         }
         public static async Task<DFMaintenance> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             DFMaintenance result =  new DFMaintenance
             {
                 DFMaintenanceID = _counter,
@@ -72,7 +69,7 @@ namespace FS.Farm.EF.Test.Factory
                 PausedByUsername = String.Empty,
                 PausedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 ScheduledDFProcessRequestProcessorIdentifier = String.Empty,
-                            };
+            };
 
             DFMaintenanceManager dFMaintenanceManager = new DFMaintenanceManager(context);
             result = await dFMaintenanceManager.AddAsync(result);
@@ -83,7 +80,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac =   PacFactory.CreateAndSave(context); //PacID
-
             DFMaintenance result = new DFMaintenance
             {
                 DFMaintenanceID = _counter,
@@ -97,7 +93,7 @@ namespace FS.Farm.EF.Test.Factory
                 PausedByUsername = String.Empty,
                 PausedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 ScheduledDFProcessRequestProcessorIdentifier = String.Empty,
-                            };
+            };
 
             DFMaintenanceManager dFMaintenanceManager = new DFMaintenanceManager(context);
             result = dFMaintenanceManager.Add(result);

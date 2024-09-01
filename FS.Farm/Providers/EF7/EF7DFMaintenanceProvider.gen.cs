@@ -166,7 +166,7 @@ namespace FS.Farm.Providers.EF7
             String pausedByUsername,
             DateTime pausedUTCDateTime,
             String scheduledDFProcessRequestProcessorIdentifier,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DFMaintenanceInsert";
             Log(procedureName + "::Start");
@@ -203,7 +203,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ScheduledDFProcessRequestProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 scheduledDFProcessRequestProcessorIdentifier = ScheduledDFProcessRequestProcessorIdentifierEncryptionServices.Encrypt(scheduledDFProcessRequestProcessorIdentifier);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -226,7 +226,6 @@ namespace FS.Farm.Providers.EF7
                 dFMaintenance.PausedByUsername = pausedByUsername;
                 dFMaintenance.PausedUTCDateTime = pausedUTCDateTime;
                 dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = scheduledDFProcessRequestProcessorIdentifier;
-
                 dFMaintenance = dFMaintenanceManager.Add(dFMaintenance);
 
                 iOut = dFMaintenance.DFMaintenanceID;
@@ -254,7 +253,7 @@ namespace FS.Farm.Providers.EF7
             String pausedByUsername,
             DateTime pausedUTCDateTime,
             String scheduledDFProcessRequestProcessorIdentifier,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DFMaintenanceInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -291,7 +290,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ScheduledDFProcessRequestProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 scheduledDFProcessRequestProcessorIdentifier = ScheduledDFProcessRequestProcessorIdentifierEncryptionServices.Encrypt(scheduledDFProcessRequestProcessorIdentifier);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -314,7 +313,6 @@ namespace FS.Farm.Providers.EF7
                 dFMaintenance.PausedByUsername = pausedByUsername;
                 dFMaintenance.PausedUTCDateTime = pausedUTCDateTime;
                 dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = scheduledDFProcessRequestProcessorIdentifier;
-
                 dFMaintenance = await dFMaintenanceManager.AddAsync(dFMaintenance);
 
                 iOut = dFMaintenance.DFMaintenanceID;
@@ -343,7 +341,7 @@ namespace FS.Farm.Providers.EF7
             String pausedByUsername,
             DateTime pausedUTCDateTime,
             String scheduledDFProcessRequestProcessorIdentifier,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DFMaintenanceUpdate";
@@ -381,7 +379,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ScheduledDFProcessRequestProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 scheduledDFProcessRequestProcessorIdentifier = ScheduledDFProcessRequestProcessorIdentifierEncryptionServices.Encrypt(scheduledDFProcessRequestProcessorIdentifier);
             }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -401,7 +399,7 @@ namespace FS.Farm.Providers.EF7
                 dFMaintenance.PausedByUsername = pausedByUsername;
                 dFMaintenance.PausedUTCDateTime = pausedUTCDateTime;
                 dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = scheduledDFProcessRequestProcessorIdentifier;
-                                dFMaintenance.LastChangeCode = lastChangeCode;
+                dFMaintenance.LastChangeCode = lastChangeCode;
 
                 bool success = dFMaintenanceManager.Update(dFMaintenance);
                 if (!success)
@@ -433,7 +431,7 @@ namespace FS.Farm.Providers.EF7
             String pausedByUsername,
             DateTime pausedUTCDateTime,
             String scheduledDFProcessRequestProcessorIdentifier,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DFMaintenanceUpdateAsync";
@@ -471,7 +469,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ScheduledDFProcessRequestProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 scheduledDFProcessRequestProcessorIdentifier = ScheduledDFProcessRequestProcessorIdentifierEncryptionServices.Encrypt(scheduledDFProcessRequestProcessorIdentifier);
             }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -492,7 +490,7 @@ namespace FS.Farm.Providers.EF7
                 dFMaintenance.PausedByUsername = pausedByUsername;
                 dFMaintenance.PausedUTCDateTime = pausedUTCDateTime;
                 dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = scheduledDFProcessRequestProcessorIdentifier;
-                                dFMaintenance.LastChangeCode = lastChangeCode;
+                dFMaintenance.LastChangeCode = lastChangeCode;
 
                 bool success = await dFMaintenanceManager.UpdateAsync(dFMaintenance);
                 if(!success)
@@ -524,7 +522,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByPausedByUsername, String pausedByUsername,
             bool searchByPausedUTCDateTime, DateTime pausedUTCDateTime,
             bool searchByScheduledDFProcessRequestProcessorIdentifier, String scheduledDFProcessRequestProcessorIdentifier,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDFMaintenances";
             Log(procedureName + "::Start");
@@ -565,7 +563,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByPausedByUsername, String pausedByUsername,
                     bool searchByPausedUTCDateTime, DateTime pausedUTCDateTime,
                     bool searchByScheduledDFProcessRequestProcessorIdentifier, String scheduledDFProcessRequestProcessorIdentifier,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDFMaintenancesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1179,7 +1177,6 @@ namespace FS.Farm.Providers.EF7
                     dFMaintenance.PausedByUsername = item.PausedByUsername;
                     dFMaintenance.PausedUTCDateTime = item.PausedUTCDateTime;
                     dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = item.ScheduledDFProcessRequestProcessorIdentifier;
-
                     bool isEncrypted = false;
                     //Boolean isPaused,
                     //Boolean isScheduledDFProcessRequestCompleted,
@@ -1209,7 +1206,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = encryptionServices.Encrypt(dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier);
                     }
-                                        dFMaintenances.Add(dFMaintenance);
+                    dFMaintenances.Add(dFMaintenance);
                 }
 
                 dFMaintenanceManager.BulkInsert(dFMaintenances);
@@ -1275,7 +1272,6 @@ namespace FS.Farm.Providers.EF7
                     dFMaintenance.PausedByUsername = item.PausedByUsername;
                     dFMaintenance.PausedUTCDateTime = item.PausedUTCDateTime;
                     dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = item.ScheduledDFProcessRequestProcessorIdentifier;
-
                     bool isEncrypted = false;
                     //Boolean isPaused,
                     //Boolean isScheduledDFProcessRequestCompleted,
@@ -1305,7 +1301,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = encryptionServices.Encrypt(dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier);
                     }
-                                        dFMaintenances.Add(dFMaintenance);
+                    dFMaintenances.Add(dFMaintenance);
                 }
 
                 await dFMaintenanceManager.BulkInsertAsync(dFMaintenances);
@@ -1369,7 +1365,7 @@ namespace FS.Farm.Providers.EF7
                     dFMaintenance.PausedByUsername = item.PausedByUsername;
                     dFMaintenance.PausedUTCDateTime = item.PausedUTCDateTime;
                     dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = item.ScheduledDFProcessRequestProcessorIdentifier;
-                                        dFMaintenance.LastChangeCode = item.LastChangeCode;
+                    dFMaintenance.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Boolean isPaused,
@@ -1466,7 +1462,7 @@ namespace FS.Farm.Providers.EF7
                     dFMaintenance.PausedByUsername = item.PausedByUsername;
                     dFMaintenance.PausedUTCDateTime = item.PausedUTCDateTime;
                     dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = item.ScheduledDFProcessRequestProcessorIdentifier;
-                                        dFMaintenance.LastChangeCode = item.LastChangeCode;
+                    dFMaintenance.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Boolean isPaused,
@@ -1497,7 +1493,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = encryptionServices.Encrypt(dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier);
                     }
-                                        dFMaintenances.Add(dFMaintenance);
+                    dFMaintenances.Add(dFMaintenance);
                 }
 
                 dFMaintenanceManager.BulkUpdate(dFMaintenances);
@@ -1560,7 +1556,7 @@ namespace FS.Farm.Providers.EF7
                     dFMaintenance.PausedByUsername = item.PausedByUsername;
                     dFMaintenance.PausedUTCDateTime = item.PausedUTCDateTime;
                     dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = item.ScheduledDFProcessRequestProcessorIdentifier;
-                                        dFMaintenance.LastChangeCode = item.LastChangeCode;
+                    dFMaintenance.LastChangeCode = item.LastChangeCode;
                     dFMaintenances.Add(dFMaintenance);
                 }
 
@@ -1624,7 +1620,7 @@ namespace FS.Farm.Providers.EF7
                     dFMaintenance.PausedByUsername = item.PausedByUsername;
                     dFMaintenance.PausedUTCDateTime = item.PausedUTCDateTime;
                     dFMaintenance.ScheduledDFProcessRequestProcessorIdentifier = item.ScheduledDFProcessRequestProcessorIdentifier;
-                                        dFMaintenance.LastChangeCode = item.LastChangeCode;
+                    dFMaintenance.LastChangeCode = item.LastChangeCode;
                     dFMaintenances.Add(dFMaintenance);
                 }
 

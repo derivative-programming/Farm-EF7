@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
 
-                            }
+            }
 
             List<Pac> results = data.Select(r => r.PacObj).ToList();
 

@@ -20,9 +20,10 @@ namespace FS.Farm.EF.Models
         public DateTime? LastUTCDateTime { get; set; }
         public DateTime? NextUTCDateTime { get; set; }
         public int? PacID { get; set; }
-                public Guid DynaFlowTypeCodePeek { get; set; }//DynaFlowTypeID // not mapped
+        public Guid DynaFlowTypeCodePeek { get; set; }//DynaFlowTypeID // not mapped
         public Guid PacCodePeek { get; set; }//PacID // not mapped
+
         //public DynaFlowType DynaFlowType { get; set; } //DynaFlowTypeID
-                //public Pac Pac { get; set; }  //PacID
+        //public Pac Pac { get; set; }  //PacID
     }
 }

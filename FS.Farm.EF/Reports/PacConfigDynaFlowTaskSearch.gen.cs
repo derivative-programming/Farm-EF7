@@ -25,44 +25,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<int> GetCountAsync(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+           Guid? startedDateGreaterThanFilterCode,
+           String processorIdentifier,
+           Guid? isStartedTriStateFilterCode,
+           Guid? isCompletedTriStateFilterCode,
+           Guid? isSuccessfulTriStateFilterCode,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+                startedDateGreaterThanFilterCode,
+                processorIdentifier,
+                isStartedTriStateFilterCode,
+                isCompletedTriStateFilterCode,
+                isSuccessfulTriStateFilterCode,
                 userID,
                 contextCode);
 
@@ -70,44 +48,22 @@ namespace FS.Farm.EF.Reports
         }
 
         public int GetCount(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+           Guid? startedDateGreaterThanFilterCode,
+           String processorIdentifier,
+           Guid? isStartedTriStateFilterCode,
+           Guid? isCompletedTriStateFilterCode,
+           Guid? isSuccessfulTriStateFilterCode,
            System.Guid userID,
            System.Guid contextCode)
         {
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+                startedDateGreaterThanFilterCode,
+                processorIdentifier,
+                isStartedTriStateFilterCode,
+                isCompletedTriStateFilterCode,
+                isSuccessfulTriStateFilterCode,
                 userID,
                 contextCode);
 
@@ -115,22 +71,11 @@ namespace FS.Farm.EF.Reports
         }
 
         public async Task<List<PacConfigDynaFlowTaskSearchDTO>> GetAsync(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+           Guid? startedDateGreaterThanFilterCode,
+           String processorIdentifier,
+           Guid? isStartedTriStateFilterCode,
+           Guid? isCompletedTriStateFilterCode,
+           Guid? isSuccessfulTriStateFilterCode,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -142,22 +87,11 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+                startedDateGreaterThanFilterCode,
+                processorIdentifier,
+                isStartedTriStateFilterCode,
+                isCompletedTriStateFilterCode,
+                isSuccessfulTriStateFilterCode,
                 userID,
                 contextCode);
 
@@ -182,22 +116,11 @@ namespace FS.Farm.EF.Reports
         }
 
         public List<PacConfigDynaFlowTaskSearchDTO> Get(
-           Guid? flavorFilterCode,
-           Int32? someFilterIntVal,
-           Int64? someFilterBigIntVal,
-           Double? someFilterFloatVal,
-           Boolean? someFilterBitVal,
-           Boolean? isFilterEditAllowed,
-           Boolean? isFilterDeleteAllowed,
-           Decimal? someFilterDecimalVal,
-           DateTime? someMinUTCDateTimeVal,
-           DateTime? someMinDateVal,
-           Decimal? someFilterMoneyVal,
-           String someFilterNVarCharVal,
-           String someFilterVarCharVal,
-           String someFilterTextVal,
-           String someFilterPhoneNumber,
-           String someFilterEmailAddress,
+           Guid? startedDateGreaterThanFilterCode,
+           String processorIdentifier,
+           Guid? isStartedTriStateFilterCode,
+           Guid? isCompletedTriStateFilterCode,
+           Guid? isSuccessfulTriStateFilterCode,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -209,22 +132,11 @@ namespace FS.Farm.EF.Reports
             var query = BuildQuery();
 
             query = ApplyFilters(query,
-                flavorFilterCode,
-                someFilterIntVal,
-                someFilterBigIntVal,
-                someFilterFloatVal,
-                someFilterBitVal,
-                isFilterEditAllowed,
-                isFilterDeleteAllowed,
-                someFilterDecimalVal,
-                someMinUTCDateTimeVal,
-                someMinDateVal,
-                someFilterMoneyVal,
-                someFilterNVarCharVal,
-                someFilterVarCharVal,
-                someFilterTextVal,
-                someFilterPhoneNumber,
-                someFilterEmailAddress,
+                startedDateGreaterThanFilterCode,
+                processorIdentifier,
+                isStartedTriStateFilterCode,
+                isCompletedTriStateFilterCode,
+                isSuccessfulTriStateFilterCode,
                 userID,
                 contextCode);
 
@@ -251,88 +163,40 @@ namespace FS.Farm.EF.Reports
         public class PacConfigDynaFlowTaskSearchDTO
         {
             private DateTime _startedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
-            private DateTime _someConditionalUTCDateTimeVal = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
             private String _processorIdentifier = String.Empty;
-            private String _someConditionalNVarCharVal = String.Empty;
             private Boolean _isStarted = false;
-            private Boolean _someConditionalBitVal = false;
             private Boolean _isCompleted = false;
-            private Boolean _someConditionalBitVal = false;
             private Boolean _isSuccessful = false;
-            private Boolean _someConditionalBitVal = false;
             private Guid _dynaFlowTaskCode = Guid.Parse("00000000-0000-0000-0000-000000000000");
-            private Boolean _isImageUrlAvailable = false;
-            private String _someImageUrlVal = String.Empty;
-            private String _someConditionalImageUrlVal = String.Empty;
             public DateTime StartedUTCDateTime
             {
                 get { return _startedUTCDateTime; }
                 set { _startedUTCDateTime = value; }
-            }
-            public DateTime SomeConditionalUTCDateTimeVal
-            {
-                get { return _someConditionalUTCDateTimeVal; }
-                set { _someConditionalUTCDateTimeVal = value; }
             }
             public String ProcessorIdentifier
             {
                 get { return _processorIdentifier; }
                 set { _processorIdentifier = value; }
             }
-            public String SomeConditionalNVarCharVal
-            {
-                get { return _someConditionalNVarCharVal; }
-                set { _someConditionalNVarCharVal = value; }
-            }
             public Boolean IsStarted
             {
                 get { return _isStarted; }
                 set { _isStarted = value; }
-            }
-            public Boolean SomeConditionalBitVal
-            {
-                get { return _someConditionalBitVal; }
-                set { _someConditionalBitVal = value; }
             }
             public Boolean IsCompleted
             {
                 get { return _isCompleted; }
                 set { _isCompleted = value; }
             }
-            public Boolean SomeConditionalBitVal
-            {
-                get { return _someConditionalBitVal; }
-                set { _someConditionalBitVal = value; }
-            }
             public Boolean IsSuccessful
             {
                 get { return _isSuccessful; }
                 set { _isSuccessful = value; }
             }
-            public Boolean SomeConditionalBitVal
-            {
-                get { return _someConditionalBitVal; }
-                set { _someConditionalBitVal = value; }
-            }
             public Guid DynaFlowTaskCode
             {
                 get { return _dynaFlowTaskCode; }
                 set { _dynaFlowTaskCode = value; }
-            }
-            public Boolean IsImageUrlAvailable
-            {
-                get { return _isImageUrlAvailable; }
-                set { _isImageUrlAvailable = value; }
-            }
-            public String SomeImageUrlVal
-            {
-                get { return _someImageUrlVal; }
-                set { _someImageUrlVal = value; }
-            }
-            public String SomeConditionalImageUrlVal
-            {
-                get { return _someConditionalImageUrlVal; }
-                set { _someConditionalImageUrlVal = value; }
             }
 
         }

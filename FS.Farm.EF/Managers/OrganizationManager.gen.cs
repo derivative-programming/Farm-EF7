@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.OrganizationObj.TacCodePeek = item.TacCode.Value; //TacID
-                            }
+            }
 
             List<Organization> results = data.Select(r => r.OrganizationObj).ToList();
 

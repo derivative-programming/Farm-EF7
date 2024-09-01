@@ -40,9 +40,10 @@ namespace FS.Farm.EF.Models
         public DateTime? StartedUTCDateTime { get; set; }
         public Guid? SubjectCode { get; set; }
         public string TaskCreationProcessorIdentifier { get; set; }
-                public Guid DynaFlowTypeCodePeek { get; set; }//DynaFlowTypeID // not mapped
+        public Guid DynaFlowTypeCodePeek { get; set; }//DynaFlowTypeID // not mapped
         public Guid PacCodePeek { get; set; }//PacID // not mapped
+
         //public DynaFlowType DynaFlowType { get; set; } //DynaFlowTypeID
-                //public Pac Pac { get; set; }  //PacID
+        //public Pac Pac { get; set; }  //PacID
     }
 }

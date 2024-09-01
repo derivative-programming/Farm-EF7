@@ -164,7 +164,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 stateIntValue,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "TriStateFilterInsert";
             Log(procedureName + "::Start");
@@ -196,7 +196,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 stateIntValue,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -217,7 +217,6 @@ namespace FS.Farm.Providers.EF7
                 triStateFilter.Name = name;
                 triStateFilter.PacID = pacID;
                 triStateFilter.StateIntValue = stateIntValue;
-
                 triStateFilter = triStateFilterManager.Add(triStateFilter);
 
                 iOut = triStateFilter.TriStateFilterID;
@@ -243,7 +242,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 stateIntValue,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "TriStateFilterInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -275,7 +274,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 stateIntValue,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -296,7 +295,6 @@ namespace FS.Farm.Providers.EF7
                 triStateFilter.Name = name;
                 triStateFilter.PacID = pacID;
                 triStateFilter.StateIntValue = stateIntValue;
-
                 triStateFilter = await triStateFilterManager.AddAsync(triStateFilter);
 
                 iOut = triStateFilter.TriStateFilterID;
@@ -323,7 +321,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 stateIntValue,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "TriStateFilterUpdate";
@@ -356,7 +354,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 stateIntValue,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -374,7 +372,7 @@ namespace FS.Farm.Providers.EF7
                 triStateFilter.Name = name;
                 triStateFilter.PacID = pacID;
                 triStateFilter.StateIntValue = stateIntValue;
-                                triStateFilter.LastChangeCode = lastChangeCode;
+                triStateFilter.LastChangeCode = lastChangeCode;
 
                 bool success = triStateFilterManager.Update(triStateFilter);
                 if (!success)
@@ -404,7 +402,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 pacID,
             Int32 stateIntValue,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "TriStateFilterUpdateAsync";
@@ -437,7 +435,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 pacID,
             //Int32 stateIntValue,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -456,7 +454,7 @@ namespace FS.Farm.Providers.EF7
                 triStateFilter.Name = name;
                 triStateFilter.PacID = pacID;
                 triStateFilter.StateIntValue = stateIntValue;
-                                triStateFilter.LastChangeCode = lastChangeCode;
+                triStateFilter.LastChangeCode = lastChangeCode;
 
                 bool success = await triStateFilterManager.UpdateAsync(triStateFilter);
                 if(!success)
@@ -486,7 +484,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
             bool searchByStateIntValue, Int32 stateIntValue,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchTriStateFilters";
             Log(procedureName + "::Start");
@@ -525,7 +523,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
                     bool searchByStateIntValue, Int32 stateIntValue,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchTriStateFiltersAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1137,7 +1135,6 @@ namespace FS.Farm.Providers.EF7
                     triStateFilter.Name = item.Name;
                     triStateFilter.PacID = item.PacID;
                     triStateFilter.StateIntValue = item.StateIntValue;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1161,7 +1158,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 pacID,
                     //Int32 stateIntValue,
-                                        triStateFilters.Add(triStateFilter);
+                    triStateFilters.Add(triStateFilter);
                 }
 
                 triStateFilterManager.BulkInsert(triStateFilters);
@@ -1225,7 +1222,6 @@ namespace FS.Farm.Providers.EF7
                     triStateFilter.Name = item.Name;
                     triStateFilter.PacID = item.PacID;
                     triStateFilter.StateIntValue = item.StateIntValue;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1249,7 +1245,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 pacID,
                     //Int32 stateIntValue,
-                                        triStateFilters.Add(triStateFilter);
+                    triStateFilters.Add(triStateFilter);
                 }
 
                 await triStateFilterManager.BulkInsertAsync(triStateFilters);
@@ -1311,7 +1307,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilter.Name = item.Name;
                     triStateFilter.PacID = item.PacID;
                     triStateFilter.StateIntValue = item.StateIntValue;
-                                        triStateFilter.LastChangeCode = item.LastChangeCode;
+                    triStateFilter.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1400,7 +1396,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilter.Name = item.Name;
                     triStateFilter.PacID = item.PacID;
                     triStateFilter.StateIntValue = item.StateIntValue;
-                                        triStateFilter.LastChangeCode = item.LastChangeCode;
+                    triStateFilter.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1425,7 +1421,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 pacID,
                     //Int32 stateIntValue,
-                                        triStateFilters.Add(triStateFilter);
+                    triStateFilters.Add(triStateFilter);
                 }
 
                 triStateFilterManager.BulkUpdate(triStateFilters);
@@ -1486,7 +1482,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilter.Name = item.Name;
                     triStateFilter.PacID = item.PacID;
                     triStateFilter.StateIntValue = item.StateIntValue;
-                                        triStateFilter.LastChangeCode = item.LastChangeCode;
+                    triStateFilter.LastChangeCode = item.LastChangeCode;
                     triStateFilters.Add(triStateFilter);
                 }
 
@@ -1548,7 +1544,7 @@ namespace FS.Farm.Providers.EF7
                     triStateFilter.Name = item.Name;
                     triStateFilter.PacID = item.PacID;
                     triStateFilter.StateIntValue = item.StateIntValue;
-                                        triStateFilter.LastChangeCode = item.LastChangeCode;
+                    triStateFilter.LastChangeCode = item.LastChangeCode;
                     triStateFilters.Add(triStateFilter);
                 }
 

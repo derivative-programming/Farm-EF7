@@ -57,11 +57,11 @@ namespace FS.Farm.EF.Models
 
         public string SomeImageUrlVal { get; set; }
 
-        //ENDSET 
+//ENDSET 
         public Guid FlvrForeignKeyCodePeek { get; set; }//FlvrForeignKeyID // not mapped 
         public Guid LandCodePeek { get; set; }//LandID // not mapped
 
-        //ENDSET
+//ENDSET
         //public Land Land { get; set; }  //LandID
         //public Flavor FlvrForeignKey { get; set; } //FlvrForeignKeyID
     }

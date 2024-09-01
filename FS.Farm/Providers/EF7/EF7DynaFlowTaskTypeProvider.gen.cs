@@ -164,7 +164,7 @@ namespace FS.Farm.Providers.EF7
             Int32 maxRetryCount,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTaskTypeInsert";
             Log(procedureName + "::Start");
@@ -196,7 +196,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -217,7 +217,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTaskType.MaxRetryCount = maxRetryCount;
                 dynaFlowTaskType.Name = name;
                 dynaFlowTaskType.PacID = pacID;
-
                 dynaFlowTaskType = dynaFlowTaskTypeManager.Add(dynaFlowTaskType);
 
                 iOut = dynaFlowTaskType.DynaFlowTaskTypeID;
@@ -243,7 +242,7 @@ namespace FS.Farm.Providers.EF7
             Int32 maxRetryCount,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowTaskTypeInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -275,7 +274,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -296,7 +295,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTaskType.MaxRetryCount = maxRetryCount;
                 dynaFlowTaskType.Name = name;
                 dynaFlowTaskType.PacID = pacID;
-
                 dynaFlowTaskType = await dynaFlowTaskTypeManager.AddAsync(dynaFlowTaskType);
 
                 iOut = dynaFlowTaskType.DynaFlowTaskTypeID;
@@ -323,7 +321,7 @@ namespace FS.Farm.Providers.EF7
             Int32 maxRetryCount,
             String name,
             Int32 pacID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DynaFlowTaskTypeUpdate";
@@ -356,7 +354,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -374,7 +372,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTaskType.MaxRetryCount = maxRetryCount;
                 dynaFlowTaskType.Name = name;
                 dynaFlowTaskType.PacID = pacID;
-                                dynaFlowTaskType.LastChangeCode = lastChangeCode;
+                dynaFlowTaskType.LastChangeCode = lastChangeCode;
 
                 bool success = dynaFlowTaskTypeManager.Update(dynaFlowTaskType);
                 if (!success)
@@ -404,7 +402,7 @@ namespace FS.Farm.Providers.EF7
             Int32 maxRetryCount,
             String name,
             Int32 pacID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DynaFlowTaskTypeUpdateAsync";
@@ -437,7 +435,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -456,7 +454,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlowTaskType.MaxRetryCount = maxRetryCount;
                 dynaFlowTaskType.Name = name;
                 dynaFlowTaskType.PacID = pacID;
-                                dynaFlowTaskType.LastChangeCode = lastChangeCode;
+                dynaFlowTaskType.LastChangeCode = lastChangeCode;
 
                 bool success = await dynaFlowTaskTypeManager.UpdateAsync(dynaFlowTaskType);
                 if(!success)
@@ -486,7 +484,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByMaxRetryCount, Int32 maxRetryCount,
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTaskTypes";
             Log(procedureName + "::Start");
@@ -525,7 +523,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByMaxRetryCount, Int32 maxRetryCount,
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowTaskTypesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1137,7 +1135,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTaskType.MaxRetryCount = item.MaxRetryCount;
                     dynaFlowTaskType.Name = item.Name;
                     dynaFlowTaskType.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1161,7 +1158,7 @@ namespace FS.Farm.Providers.EF7
                         dynaFlowTaskType.Name = encryptionServices.Encrypt(dynaFlowTaskType.Name);
                     }
                     //Int32 pacID,
-                                        dynaFlowTaskTypes.Add(dynaFlowTaskType);
+                    dynaFlowTaskTypes.Add(dynaFlowTaskType);
                 }
 
                 dynaFlowTaskTypeManager.BulkInsert(dynaFlowTaskTypes);
@@ -1225,7 +1222,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTaskType.MaxRetryCount = item.MaxRetryCount;
                     dynaFlowTaskType.Name = item.Name;
                     dynaFlowTaskType.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1249,7 +1245,7 @@ namespace FS.Farm.Providers.EF7
                         dynaFlowTaskType.Name = encryptionServices.Encrypt(dynaFlowTaskType.Name);
                     }
                     //Int32 pacID,
-                                        dynaFlowTaskTypes.Add(dynaFlowTaskType);
+                    dynaFlowTaskTypes.Add(dynaFlowTaskType);
                 }
 
                 await dynaFlowTaskTypeManager.BulkInsertAsync(dynaFlowTaskTypes);
@@ -1311,7 +1307,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTaskType.MaxRetryCount = item.MaxRetryCount;
                     dynaFlowTaskType.Name = item.Name;
                     dynaFlowTaskType.PacID = item.PacID;
-                                        dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1400,7 +1396,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTaskType.MaxRetryCount = item.MaxRetryCount;
                     dynaFlowTaskType.Name = item.Name;
                     dynaFlowTaskType.PacID = item.PacID;
-                                        dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1425,7 +1421,7 @@ namespace FS.Farm.Providers.EF7
                         dynaFlowTaskType.Name = encryptionServices.Encrypt(dynaFlowTaskType.Name);
                     }
                     //Int32 pacID,
-                                        dynaFlowTaskTypes.Add(dynaFlowTaskType);
+                    dynaFlowTaskTypes.Add(dynaFlowTaskType);
                 }
 
                 dynaFlowTaskTypeManager.BulkUpdate(dynaFlowTaskTypes);
@@ -1486,7 +1482,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTaskType.MaxRetryCount = item.MaxRetryCount;
                     dynaFlowTaskType.Name = item.Name;
                     dynaFlowTaskType.PacID = item.PacID;
-                                        dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
                     dynaFlowTaskTypes.Add(dynaFlowTaskType);
                 }
 
@@ -1548,7 +1544,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlowTaskType.MaxRetryCount = item.MaxRetryCount;
                     dynaFlowTaskType.Name = item.Name;
                     dynaFlowTaskType.PacID = item.PacID;
-                                        dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
+                    dynaFlowTaskType.LastChangeCode = item.LastChangeCode;
                     dynaFlowTaskTypes.Add(dynaFlowTaskType);
                 }
 

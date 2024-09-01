@@ -159,7 +159,7 @@ namespace FS.Farm.Providers.EF7
             SessionContext context,
             String name,
             Int32 tacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "OrganizationInsert";
             Log(procedureName + "::Start");
@@ -174,7 +174,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 tacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -190,7 +190,6 @@ namespace FS.Farm.Providers.EF7
                 organization.LastChangeCode = Guid.NewGuid();
                 organization.Name = name;
                 organization.TacID = tacID;
-
                 organization = organizationManager.Add(organization);
 
                 iOut = organization.OrganizationID;
@@ -211,7 +210,7 @@ namespace FS.Farm.Providers.EF7
             SessionContext context,
             String name,
             Int32 tacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "OrganizationInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -226,7 +225,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 tacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -242,7 +241,6 @@ namespace FS.Farm.Providers.EF7
                 organization.LastChangeCode = Guid.NewGuid();
                 organization.Name = name;
                 organization.TacID = tacID;
-
                 organization = await organizationManager.AddAsync(organization);
 
                 iOut = organization.OrganizationID;
@@ -264,7 +262,7 @@ namespace FS.Farm.Providers.EF7
             int organizationID,
             String name,
             Int32 tacID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "OrganizationUpdate";
@@ -280,7 +278,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 tacID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -293,7 +291,7 @@ namespace FS.Farm.Providers.EF7
                 organization.Code = code;
                 organization.Name = name;
                 organization.TacID = tacID;
-                                organization.LastChangeCode = lastChangeCode;
+                organization.LastChangeCode = lastChangeCode;
 
                 bool success = organizationManager.Update(organization);
                 if (!success)
@@ -318,7 +316,7 @@ namespace FS.Farm.Providers.EF7
             int organizationID,
             String name,
             Int32 tacID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "OrganizationUpdateAsync";
@@ -334,7 +332,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 tacID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -348,7 +346,7 @@ namespace FS.Farm.Providers.EF7
                 organization.Code = code;
                 organization.Name = name;
                 organization.TacID = tacID;
-                                organization.LastChangeCode = lastChangeCode;
+                organization.LastChangeCode = lastChangeCode;
 
                 bool success = await organizationManager.UpdateAsync(organization);
                 if(!success)
@@ -373,7 +371,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByOrganizationID, int organizationID,
             bool searchByName, String name,
             bool searchByTacID, Int32 tacID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrganizations";
             Log(procedureName + "::Start");
@@ -407,7 +405,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByOrganizationID, int organizationID,
                     bool searchByName, String name,
                     bool searchByTacID, Int32 tacID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrganizationsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1014,7 +1012,6 @@ namespace FS.Farm.Providers.EF7
                     organization.LastChangeCode = Guid.NewGuid();
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
-
                     bool isEncrypted = false;
                     //String name,
                     isEncrypted = false;
@@ -1023,7 +1020,7 @@ namespace FS.Farm.Providers.EF7
                         organization.Name = encryptionServices.Encrypt(organization.Name);
                     }
                     //Int32 tacID,
-                                        organizations.Add(organization);
+                    organizations.Add(organization);
                 }
 
                 organizationManager.BulkInsert(organizations);
@@ -1082,7 +1079,6 @@ namespace FS.Farm.Providers.EF7
                     organization.LastChangeCode = Guid.NewGuid();
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
-
                     bool isEncrypted = false;
                     //String name,
                     isEncrypted = false;
@@ -1091,7 +1087,7 @@ namespace FS.Farm.Providers.EF7
                         organization.Name = encryptionServices.Encrypt(organization.Name);
                     }
                     //Int32 tacID,
-                                        organizations.Add(organization);
+                    organizations.Add(organization);
                 }
 
                 await organizationManager.BulkInsertAsync(organizations);
@@ -1148,7 +1144,7 @@ namespace FS.Farm.Providers.EF7
                     organization.Code = item.Code;
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
-                                        organization.LastChangeCode = item.LastChangeCode;
+                    organization.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String name,
@@ -1217,7 +1213,7 @@ namespace FS.Farm.Providers.EF7
                     organization.Code = item.Code;
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
-                                        organization.LastChangeCode = item.LastChangeCode;
+                    organization.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String name,
@@ -1227,7 +1223,7 @@ namespace FS.Farm.Providers.EF7
                         organization.Name = encryptionServices.Encrypt(organization.Name);
                     }
                     //Int32 tacID,
-                                        organizations.Add(organization);
+                    organizations.Add(organization);
                 }
 
                 organizationManager.BulkUpdate(organizations);
@@ -1283,7 +1279,7 @@ namespace FS.Farm.Providers.EF7
                     organization.Code = item.Code;
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
-                                        organization.LastChangeCode = item.LastChangeCode;
+                    organization.LastChangeCode = item.LastChangeCode;
                     organizations.Add(organization);
                 }
 
@@ -1340,7 +1336,7 @@ namespace FS.Farm.Providers.EF7
                     organization.Code = item.Code;
                     organization.Name = item.Name;
                     organization.TacID = item.TacID;
-                                        organization.LastChangeCode = item.LastChangeCode;
+                    organization.LastChangeCode = item.LastChangeCode;
                     organizations.Add(organization);
                 }
 

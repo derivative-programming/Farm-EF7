@@ -26,7 +26,7 @@ namespace FS.Farm.EF.Test.Factory
                 IsActive = false,
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
-                            };
+            };
         }
 
         public static Pac Create(FarmDbContext context)
@@ -42,7 +42,7 @@ namespace FS.Farm.EF.Test.Factory
                 IsActive = false,
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
-                            };
+            };
         }
         public static async Task<Pac> CreateAndSaveAsync(FarmDbContext context)
         {
@@ -57,7 +57,7 @@ namespace FS.Farm.EF.Test.Factory
                 IsActive = false,
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
-                            };
+            };
 
             PacManager pacManager = new PacManager(context);
             result = await pacManager.AddAsync(result);
@@ -77,7 +77,7 @@ namespace FS.Farm.EF.Test.Factory
                 IsActive = false,
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
-                            };
+            };
 
             PacManager pacManager = new PacManager(context);
             result = pacManager.Add(result);

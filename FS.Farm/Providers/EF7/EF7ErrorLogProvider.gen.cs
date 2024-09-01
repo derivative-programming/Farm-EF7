@@ -165,7 +165,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "ErrorLogInsert";
             Log(procedureName + "::Start");
@@ -195,7 +195,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -217,7 +217,6 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
-
                 errorLog = errorLogManager.Add(errorLog);
 
                 iOut = errorLog.ErrorLogID;
@@ -244,7 +243,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "ErrorLogInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -274,7 +273,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -296,7 +295,6 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
-
                 errorLog = await errorLogManager.AddAsync(errorLog);
 
                 iOut = errorLog.ErrorLogID;
@@ -324,7 +322,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "ErrorLogUpdate";
@@ -355,7 +353,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -374,7 +372,7 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
-                                errorLog.LastChangeCode = lastChangeCode;
+                errorLog.LastChangeCode = lastChangeCode;
 
                 bool success = errorLogManager.Update(errorLog);
                 if (!success)
@@ -405,7 +403,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isResolved,
             Int32 pacID,
             String url,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "ErrorLogUpdateAsync";
@@ -436,7 +434,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices UrlEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 url = UrlEncryptionServices.Encrypt(url);
             }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -456,7 +454,7 @@ namespace FS.Farm.Providers.EF7
                 errorLog.IsResolved = isResolved;
                 errorLog.PacID = pacID;
                 errorLog.Url = url;
-                                errorLog.LastChangeCode = lastChangeCode;
+                errorLog.LastChangeCode = lastChangeCode;
 
                 bool success = await errorLogManager.UpdateAsync(errorLog);
                 if(!success)
@@ -487,7 +485,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByIsResolved, Boolean isResolved,
             bool searchByPacID, Int32 pacID,
             bool searchByUrl, String url,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchErrorLogs";
             Log(procedureName + "::Start");
@@ -527,7 +525,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByIsResolved, Boolean isResolved,
                     bool searchByPacID, Int32 pacID,
                     bool searchByUrl, String url,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchErrorLogsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1140,7 +1138,6 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-
                     bool isEncrypted = false;
                     //Guid browserCode,
                     //Guid contextCode,
@@ -1163,7 +1160,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
-                                        errorLogs.Add(errorLog);
+                    errorLogs.Add(errorLog);
                 }
 
                 errorLogManager.BulkInsert(errorLogs);
@@ -1228,7 +1225,6 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-
                     bool isEncrypted = false;
                     //Guid browserCode,
                     //Guid contextCode,
@@ -1251,7 +1247,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
-                                        errorLogs.Add(errorLog);
+                    errorLogs.Add(errorLog);
                 }
 
                 await errorLogManager.BulkInsertAsync(errorLogs);
@@ -1314,7 +1310,7 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                                        errorLog.LastChangeCode = item.LastChangeCode;
+                    errorLog.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Guid browserCode,
@@ -1403,7 +1399,7 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                                        errorLog.LastChangeCode = item.LastChangeCode;
+                    errorLog.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Guid browserCode,
@@ -1427,7 +1423,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         errorLog.Url = encryptionServices.Encrypt(errorLog.Url);
                     }
-                                        errorLogs.Add(errorLog);
+                    errorLogs.Add(errorLog);
                 }
 
                 errorLogManager.BulkUpdate(errorLogs);
@@ -1489,7 +1485,7 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                                        errorLog.LastChangeCode = item.LastChangeCode;
+                    errorLog.LastChangeCode = item.LastChangeCode;
                     errorLogs.Add(errorLog);
                 }
 
@@ -1552,7 +1548,7 @@ namespace FS.Farm.Providers.EF7
                     errorLog.IsResolved = item.IsResolved;
                     errorLog.PacID = item.PacID;
                     errorLog.Url = item.Url;
-                                        errorLog.LastChangeCode = item.LastChangeCode;
+                    errorLog.LastChangeCode = item.LastChangeCode;
                     errorLogs.Add(errorLog);
                 }
 

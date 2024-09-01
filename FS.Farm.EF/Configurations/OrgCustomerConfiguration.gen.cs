@@ -21,7 +21,6 @@ namespace FS.Farm.EF.Configurations
             builder.HasOne<Organization>() //OrganizationID
                 .WithMany()
                 .HasForeignKey(p => p.OrganizationID);
-
             bool isDBColumnIndexed = false;
             //CustomerID
             isDBColumnIndexed = false;
@@ -40,24 +39,6 @@ namespace FS.Farm.EF.Configurations
             if(isDBColumnIndexed)
             {
                 builder.HasIndex(p => p.OrganizationID);
-            }
-
-            builder.HasIndex(p => p.Code)
-                .IsUnique();
-
-            builder.Property(p => p.LastChangeCode)
-                .IsConcurrencyToken()
-                .HasColumnName(ToSnakeCase(nameof(OrgCustomer.LastChangeCode)));
-            builder.Ignore(p => p.CustomerCodePeek); //CustomerID
-            builder.Ignore(p => p.OrganizationCodePeek); //OrganizationID
-
-            builder.Property<DateTime>("insert_utc_date_time");
-            builder.Property<DateTime>("last_updated_utc_date_time");
-
-            // Loop through all the properties to set snake_case column names
-            foreach (var property in builder.Metadata.GetProperties())
-            {
-                builder.Property(property.Name).HasColumnName(ToSnakeCase(property.Name));
             }
         }
 

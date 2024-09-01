@@ -161,7 +161,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "CustomerRoleInsert";
             Log(procedureName + "::Start");
@@ -172,7 +172,7 @@ namespace FS.Farm.Providers.EF7
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -190,7 +190,6 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
-
                 customerRole = customerRoleManager.Add(customerRole);
 
                 iOut = customerRole.CustomerRoleID;
@@ -213,7 +212,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "CustomerRoleInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -224,7 +223,7 @@ namespace FS.Farm.Providers.EF7
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -242,7 +241,6 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
-
                 customerRole = await customerRoleManager.AddAsync(customerRole);
 
                 iOut = customerRole.CustomerRoleID;
@@ -266,7 +264,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "CustomerRoleUpdate";
@@ -278,7 +276,7 @@ namespace FS.Farm.Providers.EF7
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -293,7 +291,7 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
-                                customerRole.LastChangeCode = lastChangeCode;
+                customerRole.LastChangeCode = lastChangeCode;
 
                 bool success = customerRoleManager.Update(customerRole);
                 if (!success)
@@ -320,7 +318,7 @@ namespace FS.Farm.Providers.EF7
             Boolean isPlaceholder,
             Boolean placeholder,
             Int32 roleID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "CustomerRoleUpdateAsync";
@@ -332,7 +330,7 @@ namespace FS.Farm.Providers.EF7
             //Boolean isPlaceholder,
             //Boolean placeholder,
             //Int32 roleID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -348,7 +346,7 @@ namespace FS.Farm.Providers.EF7
                 customerRole.IsPlaceholder = isPlaceholder;
                 customerRole.Placeholder = placeholder;
                 customerRole.RoleID = roleID;
-                                customerRole.LastChangeCode = lastChangeCode;
+                customerRole.LastChangeCode = lastChangeCode;
 
                 bool success = await customerRoleManager.UpdateAsync(customerRole);
                 if(!success)
@@ -375,7 +373,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByIsPlaceholder, Boolean isPlaceholder,
             bool searchByPlaceholder, Boolean placeholder,
             bool searchByRoleID, Int32 roleID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomerRoles";
             Log(procedureName + "::Start");
@@ -411,7 +409,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByIsPlaceholder, Boolean isPlaceholder,
                     bool searchByPlaceholder, Boolean placeholder,
                     bool searchByRoleID, Int32 roleID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomerRolesAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1020,13 +1018,12 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
-                                        customerRoles.Add(customerRole);
+                    customerRoles.Add(customerRole);
                 }
 
                 customerRoleManager.BulkInsert(customerRoles);
@@ -1087,13 +1084,12 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
-                                        customerRoles.Add(customerRole);
+                    customerRoles.Add(customerRole);
                 }
 
                 await customerRoleManager.BulkInsertAsync(customerRoles);
@@ -1152,7 +1148,7 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                                        customerRole.LastChangeCode = item.LastChangeCode;
+                    customerRole.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 customerID,
@@ -1220,14 +1216,14 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                                        customerRole.LastChangeCode = item.LastChangeCode;
+                    customerRole.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //Boolean isPlaceholder,
                     //Boolean placeholder,
                     //Int32 roleID,
-                                        customerRoles.Add(customerRole);
+                    customerRoles.Add(customerRole);
                 }
 
                 customerRoleManager.BulkUpdate(customerRoles);
@@ -1285,7 +1281,7 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                                        customerRole.LastChangeCode = item.LastChangeCode;
+                    customerRole.LastChangeCode = item.LastChangeCode;
                     customerRoles.Add(customerRole);
                 }
 
@@ -1344,7 +1340,7 @@ namespace FS.Farm.Providers.EF7
                     customerRole.IsPlaceholder = item.IsPlaceholder;
                     customerRole.Placeholder = item.Placeholder;
                     customerRole.RoleID = item.RoleID;
-                                        customerRole.LastChangeCode = item.LastChangeCode;
+                    customerRole.LastChangeCode = item.LastChangeCode;
                     customerRoles.Add(customerRole);
                 }
 

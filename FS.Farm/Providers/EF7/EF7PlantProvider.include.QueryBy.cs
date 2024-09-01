@@ -22,7 +22,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            string procedureName = "GetPlantList_QueryhByGENVALPropNameAsync";
+            var procedureName = "GetPlantList_QueryByGENVALPropNameAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -38,7 +38,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 await LogAsync(context, x);
-                string sException = "Error Executing FS_Farm_Plant_QueryhByGENVALPropName: \r\n";
+                var sException = "Error Executing FS_Farm_Plant_QueryByGENVALPropName: \r\n";
                 throw new Exception(sException, x);
             }
             finally
@@ -57,7 +57,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            string procedureName = "GetPlantList_QueryhByGENVALPropName";
+            var procedureName = "GetPlantList_QueryByGENVALPropName";
             Log(procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -73,7 +73,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 Log(x);
-                string sException = "Error Executing FS_Farm_Plant_QueryhByGENVALPropName: \r\n";
+                var sException = "Error Executing FS_Farm_Plant_QueryByGENVALPropName: \r\n";
                 throw new Exception(sException, x);
             }
             finally

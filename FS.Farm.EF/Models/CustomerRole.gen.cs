@@ -19,8 +19,9 @@ namespace FS.Farm.EF.Models
         public bool? Placeholder { get; set; }
         public int? RoleID { get; set; }
         public Guid CustomerCodePeek { get; set; }//CustomerID // not mapped
-                public Guid RoleCodePeek { get; set; }//RoleID // not mapped
-                //public Customer Customer { get; set; }  //CustomerID
+
+        public Guid RoleCodePeek { get; set; }//RoleID // not mapped
+        //public Customer Customer { get; set; }  //CustomerID
         //public Role Role { get; set; } //RoleID
     }
 }

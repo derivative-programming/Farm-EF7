@@ -17,7 +17,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var tac = await TacFactory.CreateAndSaveAsync(context); //TacID
-
             return new Customer
             {
                 CustomerID = _counter,
@@ -45,14 +44,13 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-                            };
+            };
         }
 
         public static Customer Create(FarmDbContext context)
         {
             _counter++;
             var tac = TacFactory.CreateAndSave(context); //TacID
-
             return new Customer
             {
                 CustomerID = _counter,
@@ -80,13 +78,12 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-                            };
+            };
         }
         public static async Task<Customer> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var tac = await TacFactory.CreateAndSaveAsync(context); //TacID
-
             Customer result =  new Customer
             {
                 CustomerID = _counter,
@@ -114,7 +111,7 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-                            };
+            };
 
             CustomerManager customerManager = new CustomerManager(context);
             result = await customerManager.AddAsync(result);
@@ -125,7 +122,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var tac =   TacFactory.CreateAndSave(context); //TacID
-
             Customer result = new Customer
             {
                 CustomerID = _counter,
@@ -153,7 +149,7 @@ namespace FS.Farm.EF.Test.Factory
                 TacID = tac.TacID,
                 UTCOffsetInMinutes = 0,
                 Zip = String.Empty,
-                            };
+            };
 
             CustomerManager customerManager = new CustomerManager(context);
             result = customerManager.Add(result);

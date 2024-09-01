@@ -166,7 +166,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "OrgApiKeyInsert";
             Log(procedureName + "::Start");
@@ -206,7 +206,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -229,7 +229,6 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
-
                 orgApiKey = orgApiKeyManager.Add(orgApiKey);
 
                 iOut = orgApiKey.OrgApiKeyID;
@@ -257,7 +256,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "OrgApiKeyInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -297,7 +296,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -320,7 +319,6 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
-
                 orgApiKey = await orgApiKeyManager.AddAsync(orgApiKey);
 
                 iOut = orgApiKey.OrgApiKeyID;
@@ -349,7 +347,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "OrgApiKeyUpdate";
@@ -390,7 +388,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -410,7 +408,7 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
-                                orgApiKey.LastChangeCode = lastChangeCode;
+                orgApiKey.LastChangeCode = lastChangeCode;
 
                 bool success = orgApiKeyManager.Update(orgApiKey);
                 if (!success)
@@ -442,7 +440,7 @@ namespace FS.Farm.Providers.EF7
             String name,
             Int32 organizationID,
             Int32 orgCustomerID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "OrgApiKeyUpdateAsync";
@@ -483,7 +481,7 @@ namespace FS.Farm.Providers.EF7
             }
             //Int32 organizationID,
             //Int32 orgCustomerID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -504,7 +502,7 @@ namespace FS.Farm.Providers.EF7
                 orgApiKey.Name = name;
                 orgApiKey.OrganizationID = organizationID;
                 orgApiKey.OrgCustomerID = orgCustomerID;
-                                orgApiKey.LastChangeCode = lastChangeCode;
+                orgApiKey.LastChangeCode = lastChangeCode;
 
                 bool success = await orgApiKeyManager.UpdateAsync(orgApiKey);
                 if(!success)
@@ -536,7 +534,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByName, String name,
             bool searchByOrganizationID, Int32 organizationID,
             bool searchByOrgCustomerID, Int32 orgCustomerID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrgApiKeys";
             Log(procedureName + "::Start");
@@ -577,7 +575,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByName, String name,
                     bool searchByOrganizationID, Int32 organizationID,
                     bool searchByOrgCustomerID, Int32 orgCustomerID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrgApiKeysAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1191,7 +1189,6 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-
                     bool isEncrypted = false;
                     //String apiKeyValue,
                     isEncrypted = false;
@@ -1223,7 +1220,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
-                                        orgApiKeys.Add(orgApiKey);
+                    orgApiKeys.Add(orgApiKey);
                 }
 
                 orgApiKeyManager.BulkInsert(orgApiKeys);
@@ -1289,7 +1286,6 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-
                     bool isEncrypted = false;
                     //String apiKeyValue,
                     isEncrypted = false;
@@ -1321,7 +1317,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
-                                        orgApiKeys.Add(orgApiKey);
+                    orgApiKeys.Add(orgApiKey);
                 }
 
                 await orgApiKeyManager.BulkInsertAsync(orgApiKeys);
@@ -1385,7 +1381,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                                        orgApiKey.LastChangeCode = item.LastChangeCode;
+                    orgApiKey.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String apiKeyValue,
@@ -1484,7 +1480,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                                        orgApiKey.LastChangeCode = item.LastChangeCode;
+                    orgApiKey.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String apiKeyValue,
@@ -1517,7 +1513,7 @@ namespace FS.Farm.Providers.EF7
                     }
                     //Int32 organizationID,
                     //Int32 orgCustomerID,
-                                        orgApiKeys.Add(orgApiKey);
+                    orgApiKeys.Add(orgApiKey);
                 }
 
                 orgApiKeyManager.BulkUpdate(orgApiKeys);
@@ -1580,7 +1576,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                                        orgApiKey.LastChangeCode = item.LastChangeCode;
+                    orgApiKey.LastChangeCode = item.LastChangeCode;
                     orgApiKeys.Add(orgApiKey);
                 }
 
@@ -1644,7 +1640,7 @@ namespace FS.Farm.Providers.EF7
                     orgApiKey.Name = item.Name;
                     orgApiKey.OrganizationID = item.OrganizationID;
                     orgApiKey.OrgCustomerID = item.OrgCustomerID;
-                                        orgApiKey.LastChangeCode = item.LastChangeCode;
+                    orgApiKey.LastChangeCode = item.LastChangeCode;
                     orgApiKeys.Add(orgApiKey);
                 }
 

@@ -183,7 +183,7 @@ namespace FS.Farm.Providers.EF7
             DateTime startedUTCDateTime,
             Guid subjectCode,
             String taskCreationProcessorIdentifier,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowInsert";
             Log(procedureName + "::Start");
@@ -252,7 +252,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices TaskCreationProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 taskCreationProcessorIdentifier = TaskCreationProcessorIdentifierEncryptionServices.Encrypt(taskCreationProcessorIdentifier);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -292,7 +292,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlow.StartedUTCDateTime = startedUTCDateTime;
                 dynaFlow.SubjectCode = subjectCode;
                 dynaFlow.TaskCreationProcessorIdentifier = taskCreationProcessorIdentifier;
-
                 dynaFlow = dynaFlowManager.Add(dynaFlow);
 
                 iOut = dynaFlow.DynaFlowID;
@@ -337,7 +336,7 @@ namespace FS.Farm.Providers.EF7
             DateTime startedUTCDateTime,
             Guid subjectCode,
             String taskCreationProcessorIdentifier,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "DynaFlowInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -406,7 +405,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices TaskCreationProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 taskCreationProcessorIdentifier = TaskCreationProcessorIdentifierEncryptionServices.Encrypt(taskCreationProcessorIdentifier);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -446,7 +445,6 @@ namespace FS.Farm.Providers.EF7
                 dynaFlow.StartedUTCDateTime = startedUTCDateTime;
                 dynaFlow.SubjectCode = subjectCode;
                 dynaFlow.TaskCreationProcessorIdentifier = taskCreationProcessorIdentifier;
-
                 dynaFlow = await dynaFlowManager.AddAsync(dynaFlow);
 
                 iOut = dynaFlow.DynaFlowID;
@@ -492,7 +490,7 @@ namespace FS.Farm.Providers.EF7
             DateTime startedUTCDateTime,
             Guid subjectCode,
             String taskCreationProcessorIdentifier,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "DynaFlowUpdate";
@@ -562,7 +560,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices TaskCreationProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 taskCreationProcessorIdentifier = TaskCreationProcessorIdentifierEncryptionServices.Encrypt(taskCreationProcessorIdentifier);
             }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -599,7 +597,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlow.StartedUTCDateTime = startedUTCDateTime;
                 dynaFlow.SubjectCode = subjectCode;
                 dynaFlow.TaskCreationProcessorIdentifier = taskCreationProcessorIdentifier;
-                                dynaFlow.LastChangeCode = lastChangeCode;
+                dynaFlow.LastChangeCode = lastChangeCode;
 
                 bool success = dynaFlowManager.Update(dynaFlow);
                 if (!success)
@@ -648,7 +646,7 @@ namespace FS.Farm.Providers.EF7
             DateTime startedUTCDateTime,
             Guid subjectCode,
             String taskCreationProcessorIdentifier,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "DynaFlowUpdateAsync";
@@ -718,7 +716,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices TaskCreationProcessorIdentifierEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 taskCreationProcessorIdentifier = TaskCreationProcessorIdentifierEncryptionServices.Encrypt(taskCreationProcessorIdentifier);
             }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -756,7 +754,7 @@ namespace FS.Farm.Providers.EF7
                 dynaFlow.StartedUTCDateTime = startedUTCDateTime;
                 dynaFlow.SubjectCode = subjectCode;
                 dynaFlow.TaskCreationProcessorIdentifier = taskCreationProcessorIdentifier;
-                                dynaFlow.LastChangeCode = lastChangeCode;
+                dynaFlow.LastChangeCode = lastChangeCode;
 
                 bool success = await dynaFlowManager.UpdateAsync(dynaFlow);
                 if(!success)
@@ -805,7 +803,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByStartedUTCDateTime, DateTime startedUTCDateTime,
             bool searchBySubjectCode, Guid subjectCode,
             bool searchByTaskCreationProcessorIdentifier, String taskCreationProcessorIdentifier,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlows";
             Log(procedureName + "::Start");
@@ -863,7 +861,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByStartedUTCDateTime, DateTime startedUTCDateTime,
                     bool searchBySubjectCode, Guid subjectCode,
                     bool searchByTaskCreationProcessorIdentifier, String taskCreationProcessorIdentifier,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchDynaFlowsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1494,7 +1492,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlow.StartedUTCDateTime = item.StartedUTCDateTime;
                     dynaFlow.SubjectCode = item.SubjectCode;
                     dynaFlow.TaskCreationProcessorIdentifier = item.TaskCreationProcessorIdentifier;
-
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlow.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
                     {
@@ -1554,7 +1551,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dynaFlow.TaskCreationProcessorIdentifier = encryptionServices.Encrypt(dynaFlow.TaskCreationProcessorIdentifier);
                     }
-                                        dynaFlows.Add(dynaFlow);
+                    dynaFlows.Add(dynaFlow);
                 }
 
                 dynaFlowManager.BulkInsert(dynaFlows);
@@ -1637,7 +1634,6 @@ namespace FS.Farm.Providers.EF7
                     dynaFlow.StartedUTCDateTime = item.StartedUTCDateTime;
                     dynaFlow.SubjectCode = item.SubjectCode;
                     dynaFlow.TaskCreationProcessorIdentifier = item.TaskCreationProcessorIdentifier;
-
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlow.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
                     {
@@ -1697,7 +1693,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dynaFlow.TaskCreationProcessorIdentifier = encryptionServices.Encrypt(dynaFlow.TaskCreationProcessorIdentifier);
                     }
-                                        dynaFlows.Add(dynaFlow);
+                    dynaFlows.Add(dynaFlow);
                 }
 
                 await dynaFlowManager.BulkInsertAsync(dynaFlows);
@@ -1778,7 +1774,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlow.StartedUTCDateTime = item.StartedUTCDateTime;
                     dynaFlow.SubjectCode = item.SubjectCode;
                     dynaFlow.TaskCreationProcessorIdentifier = item.TaskCreationProcessorIdentifier;
-                                        dynaFlow.LastChangeCode = item.LastChangeCode;
+                    dynaFlow.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlow.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -1922,7 +1918,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlow.StartedUTCDateTime = item.StartedUTCDateTime;
                     dynaFlow.SubjectCode = item.SubjectCode;
                     dynaFlow.TaskCreationProcessorIdentifier = item.TaskCreationProcessorIdentifier;
-                                        dynaFlow.LastChangeCode = item.LastChangeCode;
+                    dynaFlow.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     if (System.Convert.ToDateTime(dynaFlow.CompletedUTCDateTime) < (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue)
@@ -1983,7 +1979,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         dynaFlow.TaskCreationProcessorIdentifier = encryptionServices.Encrypt(dynaFlow.TaskCreationProcessorIdentifier);
                     }
-                                        dynaFlows.Add(dynaFlow);
+                    dynaFlows.Add(dynaFlow);
                 }
 
                 dynaFlowManager.BulkUpdate(dynaFlows);
@@ -2063,7 +2059,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlow.StartedUTCDateTime = item.StartedUTCDateTime;
                     dynaFlow.SubjectCode = item.SubjectCode;
                     dynaFlow.TaskCreationProcessorIdentifier = item.TaskCreationProcessorIdentifier;
-                                        dynaFlow.LastChangeCode = item.LastChangeCode;
+                    dynaFlow.LastChangeCode = item.LastChangeCode;
                     dynaFlows.Add(dynaFlow);
                 }
 
@@ -2144,7 +2140,7 @@ namespace FS.Farm.Providers.EF7
                     dynaFlow.StartedUTCDateTime = item.StartedUTCDateTime;
                     dynaFlow.SubjectCode = item.SubjectCode;
                     dynaFlow.TaskCreationProcessorIdentifier = item.TaskCreationProcessorIdentifier;
-                                        dynaFlow.LastChangeCode = item.LastChangeCode;
+                    dynaFlow.LastChangeCode = item.LastChangeCode;
                     dynaFlows.Add(dynaFlow);
                 }
 

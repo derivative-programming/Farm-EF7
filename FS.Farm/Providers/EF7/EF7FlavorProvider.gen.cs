@@ -163,7 +163,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "FlavorInsert";
             Log(procedureName + "::Start");
@@ -194,7 +194,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -214,7 +214,6 @@ namespace FS.Farm.Providers.EF7
                 flavor.LookupEnumName = lookupEnumName;
                 flavor.Name = name;
                 flavor.PacID = pacID;
-
                 flavor = flavorManager.Add(flavor);
 
                 iOut = flavor.FlavorID;
@@ -239,7 +238,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "FlavorInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -270,7 +269,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -290,7 +289,6 @@ namespace FS.Farm.Providers.EF7
                 flavor.LookupEnumName = lookupEnumName;
                 flavor.Name = name;
                 flavor.PacID = pacID;
-
                 flavor = await flavorManager.AddAsync(flavor);
 
                 iOut = flavor.FlavorID;
@@ -316,7 +314,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "FlavorUpdate";
@@ -348,7 +346,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -365,7 +363,7 @@ namespace FS.Farm.Providers.EF7
                 flavor.LookupEnumName = lookupEnumName;
                 flavor.Name = name;
                 flavor.PacID = pacID;
-                                flavor.LastChangeCode = lastChangeCode;
+                flavor.LastChangeCode = lastChangeCode;
 
                 bool success = flavorManager.Update(flavor);
                 if (!success)
@@ -394,7 +392,7 @@ namespace FS.Farm.Providers.EF7
             String lookupEnumName,
             String name,
             Int32 pacID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "FlavorUpdateAsync";
@@ -426,7 +424,7 @@ namespace FS.Farm.Providers.EF7
                 name = NameEncryptionServices.Encrypt(name);
             }
             //Int32 pacID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -444,7 +442,7 @@ namespace FS.Farm.Providers.EF7
                 flavor.LookupEnumName = lookupEnumName;
                 flavor.Name = name;
                 flavor.PacID = pacID;
-                                flavor.LastChangeCode = lastChangeCode;
+                flavor.LastChangeCode = lastChangeCode;
 
                 bool success = await flavorManager.UpdateAsync(flavor);
                 if(!success)
@@ -473,7 +471,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByLookupEnumName, String lookupEnumName,
             bool searchByName, String name,
             bool searchByPacID, Int32 pacID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchFlavors";
             Log(procedureName + "::Start");
@@ -511,7 +509,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByLookupEnumName, String lookupEnumName,
                     bool searchByName, String name,
                     bool searchByPacID, Int32 pacID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchFlavorsAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1122,7 +1120,6 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1145,7 +1142,7 @@ namespace FS.Farm.Providers.EF7
                         flavor.Name = encryptionServices.Encrypt(flavor.Name);
                     }
                     //Int32 pacID,
-                                        flavors.Add(flavor);
+                    flavors.Add(flavor);
                 }
 
                 flavorManager.BulkInsert(flavors);
@@ -1208,7 +1205,6 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
-
                     bool isEncrypted = false;
                     //String description,
                     isEncrypted = false;
@@ -1231,7 +1227,7 @@ namespace FS.Farm.Providers.EF7
                         flavor.Name = encryptionServices.Encrypt(flavor.Name);
                     }
                     //Int32 pacID,
-                                        flavors.Add(flavor);
+                    flavors.Add(flavor);
                 }
 
                 await flavorManager.BulkInsertAsync(flavors);
@@ -1292,7 +1288,7 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
-                                        flavor.LastChangeCode = item.LastChangeCode;
+                    flavor.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1379,7 +1375,7 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
-                                        flavor.LastChangeCode = item.LastChangeCode;
+                    flavor.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //String description,
@@ -1403,7 +1399,7 @@ namespace FS.Farm.Providers.EF7
                         flavor.Name = encryptionServices.Encrypt(flavor.Name);
                     }
                     //Int32 pacID,
-                                        flavors.Add(flavor);
+                    flavors.Add(flavor);
                 }
 
                 flavorManager.BulkUpdate(flavors);
@@ -1463,7 +1459,7 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
-                                        flavor.LastChangeCode = item.LastChangeCode;
+                    flavor.LastChangeCode = item.LastChangeCode;
                     flavors.Add(flavor);
                 }
 
@@ -1524,7 +1520,7 @@ namespace FS.Farm.Providers.EF7
                     flavor.LookupEnumName = item.LookupEnumName;
                     flavor.Name = item.Name;
                     flavor.PacID = item.PacID;
-                                        flavor.LastChangeCode = item.LastChangeCode;
+                    flavor.LastChangeCode = item.LastChangeCode;
                     flavors.Add(flavor);
                 }
 

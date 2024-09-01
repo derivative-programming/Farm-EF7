@@ -18,7 +18,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlowType = await DynaFlowTypeFactory.CreateAndSaveAsync(context);//DynaFlowTypeID
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             return new DynaFlow
             {
                 DynaFlowID = _counter,
@@ -49,7 +48,7 @@ namespace FS.Farm.EF.Test.Factory
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 SubjectCode = Guid.NewGuid(),
                 TaskCreationProcessorIdentifier = String.Empty,
-                            };
+            };
         }
 
         public static DynaFlow Create(FarmDbContext context)
@@ -57,7 +56,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlowType = DynaFlowTypeFactory.CreateAndSave(context);//DynaFlowTypeID
             var pac = PacFactory.CreateAndSave(context); //PacID
-
             return new DynaFlow
             {
                 DynaFlowID = _counter,
@@ -88,14 +86,13 @@ namespace FS.Farm.EF.Test.Factory
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 SubjectCode = Guid.NewGuid(),
                 TaskCreationProcessorIdentifier = String.Empty,
-                            };
+            };
         }
         public static async Task<DynaFlow> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var dynaFlowType = await DynaFlowTypeFactory.CreateAndSaveAsync(context);//DynaFlowTypeID
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             DynaFlow result =  new DynaFlow
             {
                 DynaFlowID = _counter,
@@ -126,7 +123,7 @@ namespace FS.Farm.EF.Test.Factory
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 SubjectCode = Guid.NewGuid(),
                 TaskCreationProcessorIdentifier = String.Empty,
-                            };
+            };
 
             DynaFlowManager dynaFlowManager = new DynaFlowManager(context);
             result = await dynaFlowManager.AddAsync(result);
@@ -138,7 +135,6 @@ namespace FS.Farm.EF.Test.Factory
             _counter++;
             var dynaFlowType =   DynaFlowTypeFactory.CreateAndSave(context);//DynaFlowTypeID
             var pac =   PacFactory.CreateAndSave(context); //PacID
-
             DynaFlow result = new DynaFlow
             {
                 DynaFlowID = _counter,
@@ -169,7 +165,7 @@ namespace FS.Farm.EF.Test.Factory
                 StartedUTCDateTime = (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue,
                 SubjectCode = Guid.NewGuid(),
                 TaskCreationProcessorIdentifier = String.Empty,
-                            };
+            };
 
             DynaFlowManager dynaFlowManager = new DynaFlowManager(context);
             result = dynaFlowManager.Add(result);

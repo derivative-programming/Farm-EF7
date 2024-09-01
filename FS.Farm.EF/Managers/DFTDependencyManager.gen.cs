@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.DFTDependencyObj.DynaFlowTaskCodePeek = item.DynaFlowTaskCode.Value; //DynaFlowTaskID
-                            }
+            }
 
             List<DFTDependency> results = data.Select(r => r.DFTDependencyObj).ToList();
 

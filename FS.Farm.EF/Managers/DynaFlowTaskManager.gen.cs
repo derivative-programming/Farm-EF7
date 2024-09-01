@@ -959,7 +959,7 @@ namespace FS.Farm.EF.Managers
             {
                 item.DynaFlowTaskObj.DynaFlowCodePeek = item.DynaFlowCode.Value; //DynaFlowID
                 item.DynaFlowTaskObj.DynaFlowTaskTypeCodePeek = item.DynaFlowTaskTypeCode.Value; //DynaFlowTaskTypeID
-                            }
+            }
 
             List<DynaFlowTask> results = data.Select(r => r.DynaFlowTaskObj).ToList();
 

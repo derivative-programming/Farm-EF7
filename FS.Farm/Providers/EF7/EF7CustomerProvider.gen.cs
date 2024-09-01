@@ -180,7 +180,7 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "CustomerInsert";
             Log(procedureName + "::Start");
@@ -258,7 +258,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -295,7 +295,6 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
-
                 customer = customerManager.Add(customer);
 
                 iOut = customer.CustomerID;
@@ -337,7 +336,7 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "CustomerInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -415,7 +414,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -452,7 +451,6 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
-
                 customer = await customerManager.AddAsync(customer);
 
                 iOut = customer.CustomerID;
@@ -495,7 +493,7 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "CustomerUpdate";
@@ -574,7 +572,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -608,7 +606,7 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
-                                customer.LastChangeCode = lastChangeCode;
+                customer.LastChangeCode = lastChangeCode;
 
                 bool success = customerManager.Update(customer);
                 if (!success)
@@ -654,7 +652,7 @@ namespace FS.Farm.Providers.EF7
             Int32 tacID,
             Int32 uTCOffsetInMinutes,
             String zip,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "CustomerUpdateAsync";
@@ -733,7 +731,7 @@ namespace FS.Farm.Providers.EF7
                 FS.Common.Encryption.EncryptionServices ZipEncryptionServices = new FS.Common.Encryption.EncryptionServices();
                 zip = ZipEncryptionServices.Encrypt(zip);
             }
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -768,7 +766,7 @@ namespace FS.Farm.Providers.EF7
                 customer.TacID = tacID;
                 customer.UTCOffsetInMinutes = uTCOffsetInMinutes;
                 customer.Zip = zip;
-                                customer.LastChangeCode = lastChangeCode;
+                customer.LastChangeCode = lastChangeCode;
 
                 bool success = await customerManager.UpdateAsync(customer);
                 if(!success)
@@ -814,7 +812,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByTacID, Int32 tacID,
             bool searchByUTCOffsetInMinutes, Int32 uTCOffsetInMinutes,
             bool searchByZip, String zip,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomers";
             Log(procedureName + "::Start");
@@ -869,7 +867,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByTacID, Int32 tacID,
                     bool searchByUTCOffsetInMinutes, Int32 uTCOffsetInMinutes,
                     bool searchByZip, String zip,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchCustomersAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1497,7 +1495,6 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
                     //String email,
@@ -1564,7 +1561,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
-                                        customers.Add(customer);
+                    customers.Add(customer);
                 }
 
                 customerManager.BulkInsert(customers);
@@ -1644,7 +1641,6 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
                     //String email,
@@ -1711,7 +1707,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
-                                        customers.Add(customer);
+                    customers.Add(customer);
                 }
 
                 await customerManager.BulkInsertAsync(customers);
@@ -1789,7 +1785,7 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                                        customer.LastChangeCode = item.LastChangeCode;
+                    customer.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
@@ -1937,7 +1933,7 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                                        customer.LastChangeCode = item.LastChangeCode;
+                    customer.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 activeOrganizationID,
@@ -2005,7 +2001,7 @@ namespace FS.Farm.Providers.EF7
                     {
                         customer.Zip = encryptionServices.Encrypt(customer.Zip);
                     }
-                                        customers.Add(customer);
+                    customers.Add(customer);
                 }
 
                 customerManager.BulkUpdate(customers);
@@ -2082,7 +2078,7 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                                        customer.LastChangeCode = item.LastChangeCode;
+                    customer.LastChangeCode = item.LastChangeCode;
                     customers.Add(customer);
                 }
 
@@ -2160,7 +2156,7 @@ namespace FS.Farm.Providers.EF7
                     customer.TacID = item.TacID;
                     customer.UTCOffsetInMinutes = item.UTCOffsetInMinutes;
                     customer.Zip = item.Zip;
-                                        customer.LastChangeCode = item.LastChangeCode;
+                    customer.LastChangeCode = item.LastChangeCode;
                     customers.Add(customer);
                 }
 
@@ -2470,7 +2466,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            String procedureName = "GetCustomerList_QueryhByEmailAsync";
+            var procedureName = "GetCustomerList_QueryByEmailAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -2486,7 +2482,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 await LogAsync(context, x);
-                String sException = "Error Executing FS_Farm_Customer_QueryhByEmail: \r\n";
+                var sException = "Error Executing FS_Farm_Customer_QueryByEmail: \r\n";
                 throw new Exception(sException, x);
             }
             finally
@@ -2503,7 +2499,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            String procedureName = "GetCustomerList_QueryhByEmail";
+            var procedureName = "GetCustomerList_QueryByEmail";
             Log(procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -2519,7 +2515,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 Log(x);
-                String sException = "Error Executing FS_Farm_Customer_QueryhByEmail: \r\n";
+                var sException = "Error Executing FS_Farm_Customer_QueryByEmail: \r\n";
                 throw new Exception(sException, x);
             }
             finally
@@ -2535,7 +2531,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            String procedureName = "GetCustomerList_QueryhByForgotPasswordKeyValueAsync";
+            var procedureName = "GetCustomerList_QueryByForgotPasswordKeyValueAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -2551,7 +2547,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 await LogAsync(context, x);
-                String sException = "Error Executing FS_Farm_Customer_QueryhByForgotPasswordKeyValue: \r\n";
+                var sException = "Error Executing FS_Farm_Customer_QueryByForgotPasswordKeyValue: \r\n";
                 throw new Exception(sException, x);
             }
             finally
@@ -2568,7 +2564,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            String procedureName = "GetCustomerList_QueryhByForgotPasswordKeyValue";
+            var procedureName = "GetCustomerList_QueryByForgotPasswordKeyValue";
             Log(procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -2584,7 +2580,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 Log(x);
-                String sException = "Error Executing FS_Farm_Customer_QueryhByForgotPasswordKeyValue: \r\n";
+                var sException = "Error Executing FS_Farm_Customer_QueryByForgotPasswordKeyValue: \r\n";
                 throw new Exception(sException, x);
             }
             finally
@@ -2600,7 +2596,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            Guid procedureName = "GetCustomerList_QueryhByFSUserCodeValueAsync";
+            var procedureName = "GetCustomerList_QueryByFSUserCodeValueAsync";
             await LogAsync(context, procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -2616,7 +2612,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 await LogAsync(context, x);
-                Guid sException = "Error Executing FS_Farm_Customer_QueryhByFSUserCodeValue: \r\n";
+                var sException = "Error Executing FS_Farm_Customer_QueryByFSUserCodeValue: \r\n";
                 throw new Exception(sException, x);
             }
             finally
@@ -2633,7 +2629,7 @@ namespace FS.Farm.Providers.EF7
            SessionContext context
             )
         {
-            Guid procedureName = "GetCustomerList_QueryhByFSUserCodeValue";
+            var procedureName = "GetCustomerList_QueryByFSUserCodeValue";
             Log(procedureName + "::Start");
             IDataReader rdr = null;
             EF.FarmDbContext dbContext = null;
@@ -2649,7 +2645,7 @@ namespace FS.Farm.Providers.EF7
             catch (Exception x)
             {
                 Log(x);
-                Guid sException = "Error Executing FS_Farm_Customer_QueryhByFSUserCodeValue: \r\n";
+                var sException = "Error Executing FS_Farm_Customer_QueryByFSUserCodeValue: \r\n";
                 throw new Exception(sException, x);
             }
             finally

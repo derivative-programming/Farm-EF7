@@ -160,7 +160,7 @@ namespace FS.Farm.Providers.EF7
             Int32 customerID,
             String email,
             Int32 organizationID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "OrgCustomerInsert";
             Log(procedureName + "::Start");
@@ -170,7 +170,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -187,7 +187,6 @@ namespace FS.Farm.Providers.EF7
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
-
                 orgCustomer = orgCustomerManager.Add(orgCustomer);
 
                 iOut = orgCustomer.OrgCustomerID;
@@ -209,7 +208,7 @@ namespace FS.Farm.Providers.EF7
             Int32 customerID,
             String email,
             Int32 organizationID,
-                        System.Guid code)
+            System.Guid code)
         {
             string procedureName = "OrgCustomerInsertAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -219,7 +218,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
-                        SqlDataReader rdr = null;
+            SqlDataReader rdr = null;
             //Define the parameters
             int iOut = 0;
             EF.FarmDbContext dbContext = null;
@@ -236,7 +235,6 @@ namespace FS.Farm.Providers.EF7
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
-
                 orgCustomer = await orgCustomerManager.AddAsync(orgCustomer);
 
                 iOut = orgCustomer.OrgCustomerID;
@@ -259,7 +257,7 @@ namespace FS.Farm.Providers.EF7
             Int32 customerID,
             String email,
             Int32 organizationID,
-                         Guid lastChangeCode,
+              Guid lastChangeCode,
              System.Guid code)
         {
             string procedureName = "OrgCustomerUpdate";
@@ -270,7 +268,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
-                        EF.FarmDbContext dbContext = null;
+            EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
             {
@@ -284,7 +282,7 @@ namespace FS.Farm.Providers.EF7
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
-                                orgCustomer.LastChangeCode = lastChangeCode;
+                orgCustomer.LastChangeCode = lastChangeCode;
 
                 bool success = orgCustomerManager.Update(orgCustomer);
                 if (!success)
@@ -310,7 +308,7 @@ namespace FS.Farm.Providers.EF7
             Int32 customerID,
             String email,
             Int32 organizationID,
-                        Guid lastChangeCode,
+            Guid lastChangeCode,
             System.Guid code)
         {
             string procedureName = "OrgCustomerUpdateAsync";
@@ -321,7 +319,7 @@ namespace FS.Farm.Providers.EF7
             //Int32 customerID,
             //String email,
             //Int32 organizationID,
-                        //Define the parameters
+            //Define the parameters
             EF.FarmDbContext dbContext = null;
             SqlConnection connection = null;
             try
@@ -336,7 +334,7 @@ namespace FS.Farm.Providers.EF7
                 orgCustomer.CustomerID = customerID;
                 orgCustomer.Email = email;
                 orgCustomer.OrganizationID = organizationID;
-                                orgCustomer.LastChangeCode = lastChangeCode;
+                orgCustomer.LastChangeCode = lastChangeCode;
 
                 bool success = await orgCustomerManager.UpdateAsync(orgCustomer);
                 if(!success)
@@ -362,7 +360,7 @@ namespace FS.Farm.Providers.EF7
             bool searchByCustomerID, Int32 customerID,
             bool searchByEmail, String email,
             bool searchByOrganizationID, Int32 organizationID,
-                        bool searchByCode, System.Guid code)
+            bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrgCustomers";
             Log(procedureName + "::Start");
@@ -397,7 +395,7 @@ namespace FS.Farm.Providers.EF7
                     bool searchByCustomerID, Int32 customerID,
                     bool searchByEmail, String email,
                     bool searchByOrganizationID, Int32 organizationID,
-                                        bool searchByCode, System.Guid code)
+                    bool searchByCode, System.Guid code)
         {
             string procedureName = "SearchOrgCustomersAsync";
             await LogAsync(context, procedureName + "::Start");
@@ -1005,12 +1003,11 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
-
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //String email,
                     //Int32 organizationID,
-                                        orgCustomers.Add(orgCustomer);
+                    orgCustomers.Add(orgCustomer);
                 }
 
                 orgCustomerManager.BulkInsert(orgCustomers);
@@ -1070,12 +1067,11 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
-
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //String email,
                     //Int32 organizationID,
-                                        orgCustomers.Add(orgCustomer);
+                    orgCustomers.Add(orgCustomer);
                 }
 
                 await orgCustomerManager.BulkInsertAsync(orgCustomers);
@@ -1133,7 +1129,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
-                                        orgCustomer.LastChangeCode = item.LastChangeCode;
+                    orgCustomer.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 customerID,
@@ -1199,13 +1195,13 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
-                                        orgCustomer.LastChangeCode = item.LastChangeCode;
+                    orgCustomer.LastChangeCode = item.LastChangeCode;
 
                     bool isEncrypted = false;
                     //Int32 customerID,
                     //String email,
                     //Int32 organizationID,
-                                        orgCustomers.Add(orgCustomer);
+                    orgCustomers.Add(orgCustomer);
                 }
 
                 orgCustomerManager.BulkUpdate(orgCustomers);
@@ -1262,7 +1258,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
-                                        orgCustomer.LastChangeCode = item.LastChangeCode;
+                    orgCustomer.LastChangeCode = item.LastChangeCode;
                     orgCustomers.Add(orgCustomer);
                 }
 
@@ -1320,7 +1316,7 @@ namespace FS.Farm.Providers.EF7
                     orgCustomer.CustomerID = item.CustomerID;
                     orgCustomer.Email = item.Email;
                     orgCustomer.OrganizationID = item.OrganizationID;
-                                        orgCustomer.LastChangeCode = item.LastChangeCode;
+                    orgCustomer.LastChangeCode = item.LastChangeCode;
                     orgCustomers.Add(orgCustomer);
                 }
 

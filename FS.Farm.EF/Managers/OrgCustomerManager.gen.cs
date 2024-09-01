@@ -959,7 +959,7 @@ namespace FS.Farm.EF.Managers
             {
                 item.OrgCustomerObj.CustomerCodePeek = item.CustomerCode.Value; //CustomerID
                 item.OrgCustomerObj.OrganizationCodePeek = item.OrganizationCode.Value; //OrganizationID
-                            }
+            }
 
             List<OrgCustomer> results = data.Select(r => r.OrgCustomerObj).ToList();
 

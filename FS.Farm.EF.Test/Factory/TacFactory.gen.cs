@@ -17,7 +17,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             return new Tac
             {
                 TacID = _counter,
@@ -28,14 +27,13 @@ namespace FS.Farm.EF.Test.Factory
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
         }
 
         public static Tac Create(FarmDbContext context)
         {
             _counter++;
             var pac = PacFactory.CreateAndSave(context); //PacID
-
             return new Tac
             {
                 TacID = _counter,
@@ -46,13 +44,12 @@ namespace FS.Farm.EF.Test.Factory
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
         }
         public static async Task<Tac> CreateAndSaveAsync(FarmDbContext context)
         {
             _counter++;
             var pac = await PacFactory.CreateAndSaveAsync(context); //PacID
-
             Tac result =  new Tac
             {
                 TacID = _counter,
@@ -63,7 +60,7 @@ namespace FS.Farm.EF.Test.Factory
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
 
             TacManager tacManager = new TacManager(context);
             result = await tacManager.AddAsync(result);
@@ -74,7 +71,6 @@ namespace FS.Farm.EF.Test.Factory
         {
             _counter++;
             var pac =   PacFactory.CreateAndSave(context); //PacID
-
             Tac result = new Tac
             {
                 TacID = _counter,
@@ -85,7 +81,7 @@ namespace FS.Farm.EF.Test.Factory
                 LookupEnumName = String.Empty,
                 Name = String.Empty,
                 PacID = pac.PacID,
-                            };
+            };
 
             TacManager tacManager = new TacManager(context);
             result = tacManager.Add(result);

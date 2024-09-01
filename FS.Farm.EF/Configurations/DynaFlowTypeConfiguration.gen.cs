@@ -23,7 +23,6 @@ namespace FS.Farm.EF.Configurations
                 .WithMany()
                 .HasForeignKey(p => p.PacID);
             //Int32 priorityLevel,
-
             bool isDBColumnIndexed = false;
             //String description,
             isDBColumnIndexed = false;
@@ -66,23 +65,6 @@ namespace FS.Farm.EF.Configurations
             if (isDBColumnIndexed)
             {
                 builder.HasIndex(p => p.PriorityLevel);
-            }
-
-            builder.HasIndex(p => p.Code)
-                .IsUnique();
-
-            builder.Property(p => p.LastChangeCode)
-                .IsConcurrencyToken()
-                .HasColumnName(ToSnakeCase(nameof(DynaFlowType.LastChangeCode)));
-            builder.Ignore(p => p.PacCodePeek); //PacID
-
-            builder.Property<DateTime>("insert_utc_date_time");
-            builder.Property<DateTime>("last_updated_utc_date_time");
-
-            // Loop through all the properties to set snake_case column names
-            foreach (var property in builder.Metadata.GetProperties())
-            {
-                builder.Property(property.Name).HasColumnName(ToSnakeCase(property.Name));
             }
         }
 

@@ -65,9 +65,7 @@ namespace FS.Farm.EF.Reports
 				NVarCharAsUrl = data.plant.SomeNVarCharVal,
 					UpdateButtonTextLinkPlantCode = data.plant.Code.Value,
 					RandomPropertyUpdatesLinkPlantCode = data.plant.Code.Value,
-					BackToDashboardLinkTacCode = data.tac.Code.Value,
-                IsImageUrlAvailable = data.plant.IsImageUrlAvailable.Value,
-                SomeImageUrlVal = data.plant.SomeImageUrlVal,
+					BackToDashboardLinkTacCode = data.tac.Code.Value, 
             };
         }
         private class QueryDTO

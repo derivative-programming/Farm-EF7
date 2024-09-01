@@ -959,7 +959,7 @@ namespace FS.Farm.EF.Managers
             {
                 item.DynaFlowTypeScheduleObj.DynaFlowTypeCodePeek = item.DynaFlowTypeCode.Value; //DynaFlowTypeID
                 item.DynaFlowTypeScheduleObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<DynaFlowTypeSchedule> results = data.Select(r => r.DynaFlowTypeScheduleObj).ToList();
 

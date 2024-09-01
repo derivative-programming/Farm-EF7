@@ -956,7 +956,7 @@ namespace FS.Farm.EF.Managers
             foreach (var item in data)
             {
                 item.ErrorLogObj.PacCodePeek = item.PacCode.Value; //PacID
-                            }
+            }
 
             List<ErrorLog> results = data.Select(r => r.ErrorLogObj).ToList();
 
