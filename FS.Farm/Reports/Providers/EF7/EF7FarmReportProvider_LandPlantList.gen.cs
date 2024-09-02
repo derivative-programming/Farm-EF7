@@ -33,6 +33,7 @@ namespace FS.Farm.Reports.Providers.EF7
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
+            Guid someFilterUniqueIdentifier,
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -77,6 +78,7 @@ namespace FS.Farm.Reports.Providers.EF7
                             someFilterTextVal,
                             someFilterPhoneNumber,
                             someFilterEmailAddress,
+                            someFilterUniqueIdentifier,
                             userID,
                             contextCode,
                             pageNumber,
@@ -117,6 +119,7 @@ namespace FS.Farm.Reports.Providers.EF7
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
+            Guid someFilterUniqueIdentifier,
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -160,6 +163,7 @@ namespace FS.Farm.Reports.Providers.EF7
                             someFilterTextVal,
                             someFilterPhoneNumber,
                             someFilterEmailAddress,
+                            someFilterUniqueIdentifier,
                             userID,
                             contextCode,
                             pageNumber,
@@ -200,6 +204,7 @@ namespace FS.Farm.Reports.Providers.EF7
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage)
@@ -233,6 +238,7 @@ namespace FS.Farm.Reports.Providers.EF7
                             someFilterTextVal,
                             someFilterPhoneNumber,
                             someFilterEmailAddress,
+                            someFilterUniqueIdentifier,
                             userID,
                             contextCode);
             }
@@ -267,6 +273,7 @@ namespace FS.Farm.Reports.Providers.EF7
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage,
@@ -302,6 +309,7 @@ namespace FS.Farm.Reports.Providers.EF7
                             someFilterTextVal,
                             someFilterPhoneNumber,
                             someFilterEmailAddress,
+                            someFilterUniqueIdentifier,
                             userID,
                             contextCode);
             }
@@ -335,6 +343,7 @@ namespace FS.Farm.Reports.Providers.EF7
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode)
         {
@@ -364,6 +373,7 @@ namespace FS.Farm.Reports.Providers.EF7
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode)
         {

@@ -28,7 +28,7 @@ namespace FS.Farm.Reports.Providers
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
-            String someFilterUniqueIdentifier,
+            Guid someFilterUniqueIdentifier,
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -53,7 +53,7 @@ namespace FS.Farm.Reports.Providers
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
-            String someFilterUniqueIdentifier,
+            Guid someFilterUniqueIdentifier,
             int pageNumber,
             int itemCountPerPage,
             string orderByColumnName,
@@ -78,7 +78,7 @@ namespace FS.Farm.Reports.Providers
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
-            String someFilterUniqueIdentifier,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode,
             int itemCountPerPage,
@@ -101,7 +101,7 @@ namespace FS.Farm.Reports.Providers
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
-            String someFilterUniqueIdentifier,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode,
            int itemCountPerPage );
@@ -123,7 +123,7 @@ namespace FS.Farm.Reports.Providers
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
-            String someFilterUniqueIdentifier,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode);
         public abstract Task<IDataReader> GetLandPlantListReportSummaryAsync(
@@ -144,7 +144,7 @@ namespace FS.Farm.Reports.Providers
             String someFilterTextVal,
             String someFilterPhoneNumber,
             String someFilterEmailAddress,
-            String someFilterUniqueIdentifier,
+            Guid someFilterUniqueIdentifier,
             System.Guid userID,
             System.Guid contextCode);
     }

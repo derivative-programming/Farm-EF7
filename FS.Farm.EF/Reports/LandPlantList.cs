@@ -41,7 +41,7 @@ namespace FS.Farm.EF.Reports
            String someFilterTextVal,
            String someFilterPhoneNumber,
            String someFilterEmailAddress,
-           String someFilterUniqueIdentifier,
+           Guid? someFilterUniqueIdentifier,
            System.Guid userID,
            System.Guid contextCode)
         {  
@@ -88,7 +88,7 @@ namespace FS.Farm.EF.Reports
            String someFilterTextVal,
            String someFilterPhoneNumber,
            String someFilterEmailAddress,
-           String someFilterUniqueIdentifier,
+           Guid? someFilterUniqueIdentifier,
            System.Guid userID,
            System.Guid contextCode)
         {
@@ -135,7 +135,7 @@ namespace FS.Farm.EF.Reports
            String someFilterTextVal,
            String someFilterPhoneNumber,
            String someFilterEmailAddress,
-           String someFilterUniqueIdentifier,
+           Guid? someFilterUniqueIdentifier,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
@@ -205,7 +205,7 @@ namespace FS.Farm.EF.Reports
            String someFilterTextVal,
            String someFilterPhoneNumber,
            String someFilterEmailAddress,
-           String someFilterUniqueIdentifier,
+           Guid? someFilterUniqueIdentifier,
            System.Guid userID,
            System.Guid contextCode,
             int pageNumber,
