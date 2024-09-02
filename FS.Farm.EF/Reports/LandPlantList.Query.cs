@@ -184,6 +184,7 @@ namespace FS.Farm.EF.Reports
            String someFilterTextVal,
            String someFilterPhoneNumber,
            String someFilterEmailAddress,
+           String someFilterUniqueIdentifier,
            System.Guid userID,
            System.Guid contextCode
            )

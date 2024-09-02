@@ -36,43 +36,44 @@ namespace FS.Farm.EF.Reports
 
         private IQueryable<QueryDTO> ApplyFilters(
             IQueryable<QueryDTO> query,
-           Guid? flavorCode,
-           Int32? someIntVal,
-           Int64? someBigIntVal,
-           Double? someFloatVal,
-           Boolean? someBitVal,
-           Boolean? isEditAllowed,
-           Boolean? isDeleteAllowed,
-           Decimal? someDecimalVal,
+           Guid? flavorFilterCode,
+           Int32? someFilterIntVal,
+           Int64? someFilterBigIntVal,
+           Double? someFilterFloatVal,
+           Boolean? someFilterBitVal,
+           Boolean? isFilterEditAllowed,
+           Boolean? isFilterDeleteAllowed,
+           Decimal? someFilterDecimalVal,
            DateTime? someMinUTCDateTimeVal,
            DateTime? someMinDateVal,
-           Decimal? someMoneyVal,
-           String someNVarCharVal,
-           String someVarCharVal,
-           String someTextVal,
-           String somePhoneNumber,
-           String someEmailAddress,
+           Decimal? someFilterMoneyVal,
+           String someFilterNVarCharVal,
+           String someFilterVarCharVal,
+           String someFilterTextVal,
+           String someFilterPhoneNumber,
+           String someFilterEmailAddress,
+           String someFilterUniqueIdentifier,
            System.Guid userID,
            System.Guid contextCode
            )
         {
             if (contextCode != Guid.Empty) query = query.Where(x => x.Land.Code == contextCode);
-            if (flavorCode != null && flavorCode != Guid.Empty) query = query.Where(x => x.Flavor.Code == flavorCode);
-            if (someIntVal != null) query = query.Where(x => x.Plant.SomeIntVal == someIntVal);
-            if (someBigIntVal != null) query = query.Where(x => x.Plant.SomeBigIntVal == someBigIntVal);
-            if (someFloatVal != null) query = query.Where(x => x.Plant.SomeFloatVal == someFloatVal);
-            if (someBitVal != null) query = query.Where(x => x.Plant.SomeBitVal == someBitVal);
-            if (isEditAllowed != null) query = query.Where(x => x.Plant.IsEditAllowed == isEditAllowed);
-            if (isDeleteAllowed != null) query = query.Where(x => x.Plant.IsDeleteAllowed == isDeleteAllowed);
-            if (someDecimalVal != null && someDecimalVal != null) query = query.Where(x => x.Plant.SomeDecimalVal == someDecimalVal);
+            if (flavorFilterCode != null && flavorFilterCode != Guid.Empty) query = query.Where(x => x.Flavor.Code == flavorFilterCode);
+            if (someFilterIntVal != null) query = query.Where(x => x.Plant.SomeIntVal == someFilterIntVal);
+            if (someFilterBigIntVal != null) query = query.Where(x => x.Plant.SomeBigIntVal == someFilterBigIntVal);
+            if (someFilterFloatVal != null) query = query.Where(x => x.Plant.SomeFloatVal == someFilterFloatVal);
+            if (someFilterBitVal != null) query = query.Where(x => x.Plant.SomeBitVal == someFilterBitVal);
+            if (isFilterEditAllowed != null) query = query.Where(x => x.Plant.IsEditAllowed == isFilterEditAllowed);
+            if (isFilterDeleteAllowed != null) query = query.Where(x => x.Plant.IsDeleteAllowed == isFilterDeleteAllowed);
+            if (someFilterDecimalVal != null && someFilterDecimalVal != null) query = query.Where(x => x.Plant.SomeDecimalVal == someFilterDecimalVal);
             if (someMinUTCDateTimeVal != null && someMinUTCDateTimeVal != (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) query = query.Where(x => x.Plant.SomeUTCDateTimeVal >= someMinUTCDateTimeVal);
             if (someMinDateVal != null && someMinDateVal != (System.DateTime)System.Data.SqlTypes.SqlDateTime.MinValue) query = query.Where(x => x.Plant.SomeDateVal >= someMinDateVal);
-            if (someMoneyVal != null) query = query.Where(x => x.Plant.SomeMoneyVal == someMoneyVal);
-            if (!string.IsNullOrEmpty(someNVarCharVal)) query = query.Where(x => x.Plant.SomeNVarCharVal.Contains(someNVarCharVal));
-            if (!string.IsNullOrEmpty(someVarCharVal)) query = query.Where(x => x.Plant.SomeVarCharVal.Contains(someVarCharVal));
-            if (!string.IsNullOrEmpty(someTextVal)) query = query.Where(x => x.Plant.SomeTextVal.Contains(someTextVal));
-            if (!string.IsNullOrEmpty(somePhoneNumber)) query = query.Where(x => x.Plant.SomePhoneNumber.Contains(somePhoneNumber));
-            if (!string.IsNullOrEmpty(someEmailAddress)) query = query.Where(x => x.Plant.SomeEmailAddress.Contains(someEmailAddress));
+            if (someFilterMoneyVal != null) query = query.Where(x => x.Plant.SomeMoneyVal == someFilterMoneyVal);
+            if (!string.IsNullOrEmpty(someFilterNVarCharVal)) query = query.Where(x => x.Plant.SomeNVarCharVal.Contains(someFilterNVarCharVal));
+            if (!string.IsNullOrEmpty(someFilterVarCharVal)) query = query.Where(x => x.Plant.SomeVarCharVal.Contains(someFilterVarCharVal));
+            if (!string.IsNullOrEmpty(someFilterTextVal)) query = query.Where(x => x.Plant.SomeTextVal.Contains(someFilterTextVal));
+            if (!string.IsNullOrEmpty(someFilterPhoneNumber)) query = query.Where(x => x.Plant.SomePhoneNumber.Contains(someFilterPhoneNumber));
+            if (!string.IsNullOrEmpty(someFilterEmailAddress)) query = query.Where(x => x.Plant.SomeEmailAddress.Contains(someFilterEmailAddress));
 
             return query;
         }

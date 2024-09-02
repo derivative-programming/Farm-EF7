@@ -53,6 +53,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     contextCode);
 
@@ -98,6 +99,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     contextCode);
 
@@ -143,6 +145,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     Guid.NewGuid());
 
@@ -189,6 +192,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     Guid.NewGuid());
 
@@ -234,6 +238,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     contextCode,
                     1,
@@ -284,6 +289,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     contextCode,
                     1,
@@ -334,6 +340,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     Guid.NewGuid(),
                     1,
@@ -384,6 +391,7 @@ namespace FS.Farm.EF.Test.Tests.Reports.Grid
                     null,   //someFilterTextVal
                     null,   //someFilterPhoneNumber
                     null,   //someFilterEmailAddress
+                    null,   //someFilterUniqueIdentifier
                     Guid.Empty,
                     Guid.NewGuid(),
                     1,
